@@ -1,0 +1,61 @@
+{% include 'Public/header.html' %}
+<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css" />
+<style>
+    .frame_form .input {
+     height: 18px;
+     }
+    .frame_form td.aui_footer{
+        position: absolute;
+        bottom: 0;
+        right: 20px;
+    }
+</style>
+<form id="myform" method="post" action="/admin/add_originalform/" frame="true" refresh="true">
+        {% csrf_token %}
+		<table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
+			<tr>
+				<th width="160">分类名称</th>
+				<td>
+					<input type="text" id="sort_name" class="input fl" name="sort_name"  size="25"  validate="maxlength:20,required:true"/>
+				    <em style="color: red;font-weight: bold;display: inline-block;margin-top: 5px;margin-left: 10px;">必填</em>
+                </td>
+			</tr>
+            <tr>
+				<th width="160">分类排序</th>
+				<td>
+					<input type="text" id="priority" class="input fl" name="priority"  size="25" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"  validate="maxlength:20,required:true"/>
+				    <em style="color: red;font-weight: bold;display: inline-block;margin-top: 5px;margin-left: 10px;">必填(只能输入数字)</em>
+                </td>
+			</tr>
+			<tr>
+				<th width="160">分类状态</th>
+				<td>
+                    <div class="radio" id="radio">
+						<input type="radio" name="state" id="Radios1" value="1" checked> 开启
+						<input type="radio" name="state" id="Radios2"  value="0">关闭
+                    </div>
+				</td>
+			</tr>
+            <tr>
+                <td colspan="2" class="aui_footer">
+                    <div class="aui_buttons" style="">
+                        <button id="add" class="aui_state_highlight" type="submit">添加</button>
+                        <button id="close" type="button">关闭</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+	</form>
+<script src="/static/js/jquery.js"></script>
+<script>
+    $("#close").click(function () {
+            window.parent.hideform();
+    });
+
+    $("#add").click(function () {
+         window.parent.hideform();
+         window.parent.tip("添加成功");
+     });
+
+
+</script>

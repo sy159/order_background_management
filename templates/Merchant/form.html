@@ -1,0 +1,148 @@
+<link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
+{% include 'Public/header.html' %}
+<form id="myform" method="post" action="/admin/w/" frame="true" refresh="true">
+        {% csrf_token %}
+		<input type="hidden" name="shop_id" value="{{ shop_dict.shop_id }}"/>
+		<table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
+			<tr>
+				<th width="160">商户名称</th>
+				<td>
+					<input type="text" id="shop_name" class="input fl" name="name" value="{{ shop_dict.shop_name }}" size="25" placeholder="商户的公司名或..." validate="maxlength:20,required:true"/>
+				</td>
+			</tr>
+			<tr>
+				<th width="160">打包费是否抽成</th>
+				<td>
+                    <div class="radio" id="radio1">
+                        {% if shop_dict.packing_commission == 1 %}
+						<input type="radio" name="Radios" id="Radios1" value="1" checked> 开启
+						<input type="radio" name="Radios" id="Radios2"  value="0">关闭
+                        {% else %}
+                        <input type="radio" name="Radios" id="Radios1" value="1"> 开启
+						<input type="radio" name="Radios" id="Radios2"  value="0" checked>关闭
+                        {% endif %}
+{#                        {{ shop_dict.packing_commission }}#}
+                    </div>
+				</td>
+			</tr>
+			<tr>
+				<th width="160">联系电话</th>
+				<td>
+					<input type="text" id="phone_number" class="input fl" name="phone" value="{{ shop_dict.phone_number }}" size="25" placeholder="联系人的电话" validate="required:true" tips="多个电话号码以空格分开"/>
+				</td>
+			</tr>
+			<tr>
+				<th width="160">所在区域</th>
+
+				<td id="choose_cityarea" province_id="" city_id="" area_id="" circle_id="-1">
+					<select id="choose_province_hide" name="province_idss">
+						<option id="province">{{ region_dict.province_name }}</option>
+					</select>
+					<select id="choose_city_hide" name="city_idss">
+						<option id="city">{{ region_dict.city_name }}</option>
+					</select>
+					<select id="choose_areass" name="area_id">
+						<option id="area">{{ region_dict.area_name }}</option>
+					</select>
+					<select id="choose_region" name="region_id">
+						<option id="region">{{ region_dict.region_name }}</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th width="160">商户状态</th>
+				<td>
+                    <div class="radio" id="radio2">
+                        {% if shop_dict.status == 1 %}
+						<input type="radio" name="options" id="opt1" value="1" checked> 开启
+						<input type="radio" name="options" id="opt0" value="0">关闭
+						<input type="radio" name="options" id="opt2" value="2">禁用
+                            {% elif shop_dict.status == 0 %}
+                            <input type="radio" name="options" id="opt1" value="1" > 开启
+						<input type="radio" name="options" id="opt0" value="0" checked>关闭
+						<input type="radio" name="options" id="opt2" value="2">禁用
+                            {% else %}
+                            <input type="radio" name="options" id="opt1" value="1" > 开启
+						<input type="radio" name="options" id="opt0" value="0" >关闭
+						<input type="radio" name="options" id="opt2" value="2" checked>禁用
+                        {% endif %}
+                    </div>
+				</td>
+			</tr>
+			<tr>
+				<th width="160">抽成设置</th>
+				<td>
+				<a href="javascript:void(0);" onclick="window.top.artiframe()" style="color:blue">设置商家抽成比例</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			</tr>
+			<tr>
+				<th width="160">商家权限设置</th>
+                <td><a href="javascript:void(0);" onclick="window.top.artiframe();" style="color:blue">设置商家使用权限</a></td>
+			</tr>
+			<tr>
+				<th width="160">权限分组</th>
+				<td>
+
+					<select name="authority_group_id" tips="权限分组">
+						<option value="0">不选</option>
+					</select>
+				</td>
+			</tr>
+            <tr>
+                <td colspan="2" class="aui_footer">
+                    <div class="aui_buttons" style="">
+                        <button id="edit" class="aui_state_highlight" type="submit">编辑</button>
+                        <button id="close" type="button">关闭</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+	</form>
+<script src="/static/js/jquery.js"></script>
+<script>
+    $("#close").click(function () {
+            window.parent.hideform();
+    });
+    $("#edit").click(function () {
+         window.parent.hideform();
+         window.parent.tip("编辑成功");
+     });
+
+
+	 var province="<option selected>"+$("#province").html()+"</option>",
+         city="<option selected>"+$("#city").html()+"</option>",
+         area="<option selected>"+$("#area").html()+"</option>",
+         region="<option selected>"+$("#region").html()+"</option>";
+        var num,nums,numss;
+       $.getJSON("/admin/region_info/",function (data) {
+            $.each(data.data[0], function (i, e) {
+                province += "<option value=" + "\"" + e.province_id + "\"" + ">" + e.province_name + "</option>";
+            });
+            $("#choose_province_hide").html(province);
+            $("#choose_province_hide").change(function () {
+                num = parseInt($("#choose_province_hide option:selected").val());
+                city = "<option>请选择市</option>"
+                $.each(data.data[1][num], function (i, e) {
+                    city += "<option value=" + "\"" + e.city_id + "\"" + ">" + e.city_name + "</option>";
+                });
+                $("#choose_city_hide").html(city);
+            });
+            $("#choose_city_hide").change(function () {
+                nums = parseInt($("#choose_city_hide option:selected").val());
+                area = "<option>请选择区</option>"
+                $.each(data.data[2][nums], function (i, e) {
+                    area += "<option value=" + "\"" + e.area_id + "\"" + ">" + e.area_name + "</option>";
+                });
+                $("#choose_areass").html(area);
+            });
+             $("#choose_areass").change(function () {
+                numss = parseInt($("#choose_areass option:selected").val());
+                region = "<option>请选择地方</option>"
+                $.each(data.data[3][numss], function (i, e) {
+                    region += "<option value=" + "\"" + e.region_id + "\"" + ">" + e.region_name + "</option>";
+                });
+                $("#choose_region").html(region);
+            });
+       });
+
+</script>

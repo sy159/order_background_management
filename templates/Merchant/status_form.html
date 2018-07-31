@@ -1,0 +1,320 @@
+{% include 'Public/header.html' %}
+<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css" />
+<style>
+     form img{
+        width: 80px;
+        height: 80px;
+    }
+    .zoomify { cursor: pointer; cursor: -webkit-zoom-in; cursor: zoom-in; }
+    .zoomify.zoomed { cursor: -webkit-zoom-out; cursor: zoom-out; padding: 0; margin: 0; border: none; border-radius: 0; box-shadow: none; position: relative; z-index: 1501; }
+    .zoomify-shadow { position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; display: block; z-index: 1500; background: rgba(0, 0, 0 , .3); opacity: 0; }
+    .zoomify-shadow.zoomed { opacity: 1; cursor: pointer; cursor: -webkit-zoom-out; cursor: zoom-out; }
+    .ul_img{
+        display: flex;
+    }
+</style>
+<script type="text/javascript">
+    $(function() {
+        $('img').zoomify();
+    });
+</script>
+<form id="myform" method="post" action="/admin/status_form/" frame="true" refresh="true">
+        {% csrf_token %}
+		<input type="hidden" name="shop_id" value="{{ data.shop_id }}"/>
+		<table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
+			<tr>
+				<th width="160">店铺名称</th>
+				<td>
+					<span id="shop_name">{{ data.shop_name }}</span>
+				</td>
+			</tr>
+			<tr>
+				<th width="160">店铺logo</th>
+				<td>
+                     <ul class="ul_img">
+                        {% for i in  data.shop_logo %}
+                            <li><img src="http://college.cqgynet.com/static/shop_images/{{ i }}"></li>
+                        {% endfor %}
+                    </ul>
+				</td>
+			</tr>
+			<tr>
+				<th width="160">所属大学</th>
+				<td>
+					<span id="university_id">{{ data.university_name }}</span>
+				</td>
+			</tr>
+            <tr>
+				<th width="160">所属校区</th>
+				<td>
+					<span id="campus_id">{{ data.campus_name }}</span>
+				</td>
+			</tr>
+            <tr>
+				<th width="160">运营区域</th>
+				<td>
+					<span id="region_id">{{ data.region_name }}</span>
+				</td>
+			</tr>
+            <tr>
+				<th width="160">联系电话</th>
+				<td>
+					<span id="phone_number">{{ data.phone_number }}</span>
+				</td>
+			</tr>
+            <tr>
+				<th width="160">店长电话</th>
+				<td>
+					<span id="phone_number">{{ data.manager_phone }}</span>
+				</td>
+			</tr>
+            <tr>
+				<th width="160">店铺类型</th>
+				<td>
+					<span id="shop_type">{{ data.shop_type }}</span>
+				</td>
+			</tr>
+			<tr>
+				<th width="160">所在区域</th>
+				<td>
+					<span id="choose_cityarea">{{ data.in_area }}</span>
+				</td>
+			</tr>
+			<tr>
+				<th width="160">详细地址</th>
+				<td>
+                    <span  id="address">{{ data.address }}</span>
+				</td>
+			</tr>
+            <tr>
+				<th width="160">营业执照</th>
+				<td>
+                     <ul class="ul_img">
+                        {% for i in  data.business_license %}
+                            {% if i == "" %}
+                            {% else %}
+                            <li><img src="http://college.cqgynet.com/static/shop_images/{{ i }}"></li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+				</td>
+			</tr>
+            <tr>
+				<th width="160">餐饮许可证</th>
+				<td>
+                     <ul class="ul_img">
+                        {% for i in  data.catering_license %}
+                            <li><img src="http://college.cqgynet.com/static/shop_images/{{ i }}"></li>
+                        {% endfor %}
+                    </ul>
+				</td>
+			</tr>
+            <tr>
+				<th width="160">银行账号</th>
+				<td>
+                    <span  id="address">{{ data.bank_account }}</span>
+				</td>
+			</tr>
+            <tr>
+				<th width="160">支付宝收款账号</th>
+				<td>
+                    <span  id="address">{{ data.alipay_account }}</span>
+				</td>
+			</tr>
+            <tr>
+				<th width="160">店铺场景照片</th>
+				<td>
+                     <ul class="ul_img">
+                        {% for i in  data.shop_photos %}
+                            {% if i == "" %}
+                            {% else %}
+                            <li><img src="http://college.cqgynet.com/static/shop_images/{{ i }}"></li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+				</td>
+			</tr>
+            <tr>
+				<th width="160">店长账号</th>
+				<td>
+                    <span  id="address">{{ data.manage_name }}</span>
+				</td>
+			</tr>
+            <tr>
+				<th width="160">审核状态</th>
+				<td>
+                     <span  id="auth">审核通过</span>
+				</td>
+			</tr>
+            <tr>
+                <td colspan="2" class="aui_footer">
+                    <div class="aui_buttons" style="">
+                        <button id="close" type="button">关闭</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+	</form>
+<script src="/static/js/jquery.js"></script>
+<script>
+    $("#close").click(function () {
+            window.parent.hideform();
+    });
+    ;(function($){
+
+	// initialization
+	Zoomify = function (element, options) {
+		var that = this;
+		this._zooming = false;
+		this._zoomed  = false;
+		this._timeout = null;
+		this.$shadow  = null;
+		this.$image   = $(element).addClass('zoomify');
+		this.options  = $.extend({}, Zoomify.DEFAULTS, this.$image.data(), options);
+		this.$image.on('click', function () { that.zoom(); });
+		$(window).on('resize', function () { that.reposition(); });
+		$(document).on('scroll', function () { that.reposition(); });
+	};
+	Zoomify.DEFAULTS = {
+		duration: 200,
+		easing:   'linear',
+		scale:    0.9
+	};
+
+	// css utilities
+	Zoomify.prototype.transition = function ($element, value) {
+		$element.css({
+			'-webkit-transition': value,
+			'-moz-transition': value,
+			'-ms-transition': value,
+			'-o-transition': value,
+			'transition': value
+		});
+	};
+
+	Zoomify.prototype.addTransition = function ($element) {
+		this.transition($element, 'all ' + this.options.duration + 'ms ' + this.options.easing);
+	};
+	Zoomify.prototype.removeTransition = function ($element, callback) {
+		var that = this;
+
+		clearTimeout(this._timeout);
+		this._timeout = setTimeout(function () {
+			that.transition($element, '');
+			if ($.isFunction(callback)) callback.call(that);
+		}, this.options.duration);
+	};
+	Zoomify.prototype.transform = function (value) {
+		this.$image.css({
+			'-webkit-transform': value,
+			'-moz-transform': value,
+			'-ms-transform': value,
+			'-o-transform': value,
+			'transform': value
+		});
+	};
+	Zoomify.prototype.transformScaleAndTranslate = function (scale, translateX, translateY, callback) {
+		this.addTransition(this.$image);
+		this.transform('scale(' + scale + ') translate(' + translateX + 'px, ' + translateY + 'px)');
+		this.removeTransition(this.$image, callback);
+	};
+
+	// zooming functions
+	Zoomify.prototype.zoom = function () {
+		if (this._zooming) return;
+
+		if (this._zoomed) this.zoomOut();
+		else this.zoomIn();
+	};
+	Zoomify.prototype.zoomIn = function () {
+		var that      = this,
+			transform = this.$image.css('transform');
+
+		this.transition(this.$image, 'none');
+		this.transform('none');
+
+		var offset     = this.$image.offset(),
+			width      = this.$image.outerWidth(),
+			height     = this.$image.outerHeight(),
+			nWidth     = this.$image[0].naturalWidth || +Infinity,
+			nHeight    = this.$image[0].naturalHeight || +Infinity,
+			wWidth     = $(window).width(),
+			wHeight    = $(window).height(),
+			scaleX     = Math.min(nWidth, wWidth * this.options.scale) / width,
+			scaleY     = Math.min(nHeight, wHeight * this.options.scale) / height,
+			scale      = Math.min(scaleX, scaleY),
+			translateX = (-offset.left + (wWidth - width) / 2) / scale,
+			translateY = (-offset.top + (wHeight - height) / 2 + $(document).scrollTop()) / scale;
+
+		this.transform(transform);
+
+		this._zooming = true;
+		this.$image.addClass('zoomed').trigger('zoom-in.zoomify');
+		setTimeout(function () {
+			that.addShadow();
+			that.transformScaleAndTranslate(scale, translateX, translateY, function () {
+				that._zooming = false;
+				that.$image.trigger('zoom-in-complete.zoomify');
+			});
+			that._zoomed = true;
+		});
+	};
+	Zoomify.prototype.zoomOut = function () {
+		var that = this;
+
+		this._zooming = true;
+		this.$image.trigger('zoom-out.zoomify');
+		this.transformScaleAndTranslate(1, 0, 0, function () {
+			that._zooming = false;
+			that.$image.removeClass('zoomed').trigger('zoom-out-complete.zoomify');
+		});
+		this.removeShadow();
+		this._zoomed = false;
+	};
+
+	// page listener callbacks
+	Zoomify.prototype.reposition = function () {
+		if (this._zoomed) {
+			this.transition(this.$image, 'none');
+			this.zoomIn();
+		}
+	};
+
+	// shadow background
+	Zoomify.prototype.addShadow = function () {
+		var that = this;
+		if (this._zoomed) return;
+
+		if (that.$shadow) that.$shadow.remove();
+		this.$shadow = $('<div class="zoomify-shadow"></div>');
+		$('body').append(this.$shadow);
+		this.addTransition(this.$shadow);
+		this.$shadow.on('click', function () { that.zoomOut(); })
+
+		setTimeout(function () { that.$shadow.addClass('zoomed'); }, 10);
+	};
+	Zoomify.prototype.removeShadow = function () {
+		var that = this;
+		if (!this.$shadow) return;
+
+		this.addTransition(this.$shadow);
+		this.$shadow.removeClass('zoomed');
+		this.$image.one('zoom-out-complete.zoomify', function () {
+			if (that.$shadow) that.$shadow.remove();
+			that.$shadow = null;
+		});
+	};
+
+	// plugin definition
+	$.fn.zoomify = function (option) {
+		return this.each(function () {
+			var $this   = $(this),
+				zoomify = $this.data('zoomify');
+
+			if (!zoomify) $this.data('zoomify', (zoomify = new Zoomify(this, typeof option == 'object' && option)));
+			if (typeof option == 'string' && ['zoom', 'zoomIn', 'zoomOut', 'reposition'].indexOf(option) >= 0) zoomify[option]();
+		});
+	};
+
+})(jQuery);
+</script>

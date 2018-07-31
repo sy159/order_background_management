@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>后台登录 - 橙子校园</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css"/>
+</head>
+<body>
+<div id="login">
+    <h1>橙子校园 - 后台登录</h1>
+    <form method="post" id="form" action="/admin/login/">
+        {% csrf_token %}
+        <p>
+            <label>用户名：</label>
+            <input class="text-input" type="text" name="account" id="account" />
+        </p>
+        <p>
+            <label>密码：</label>
+            <input class="text-input" type="password" name="pwd" id="pwd"/>
+        </p>
+        <p>
+            <label>验证码：</label>
+            <input class="text-input" type="text" name="verifycode" id="yzm"/>
+        </p>
+         <p style="color: red">
+            {{ error_msg }}
+        </p>
+        <p class="btn_p">
+            <input class="button" type="submit" value="登录后台" style="float:left">
+            <a href="javascript:void(0)" class="scan_login">扫码登录</a>
+        </p>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+{% include 'Public/header.html' %}
+<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css" />
+<style>
+    .frame_form td.aui_footer{
+        position: absolute;
+        bottom: 0;
+        right: 20px;
+    }
+</style>
+<form id="myform" method="post" action="/admin/edit_childform/" frame="true" refresh="true">
+        {% csrf_token %}
+        <input type="hidden" name="sort_id" value="{{ data.sort_id }}"/>
+		<table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
+			<tr>
+				<th width="160">分类名称</th>
+				<td>
+					<input type="text" value="{{ data.sort_name }}" id="sort_name" class="input fl" name="sort_name"  size="25"  validate="maxlength:20,required:true"/>
+				</td>
+			</tr>
+			<tr>
+				<th width="160">分类排序</th>
+				<td>
+                    <input type="text" value="{{ data.priority }}" id="priority" class="input fl" name="priority"  size="25" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"  validate="maxlength:20,required:true"/>
+				     <em style="color: red;font-weight: bold;display: inline-block;margin-top: 5px;margin-left: 10px;">(只能输入数字)</em>
+                </td>
+			</tr>
+			<tr>
+				<th width="160">分类状态</th>
+				<td>
+					<div class="radio" id="radio">
+                        {% if data.state == 1 %}
+						<input type="radio" name="state" id="Radios1" value="1" checked> 开启
+						<input type="radio" name="state" id="Radios2"  value="0">关闭
+                            {% else %}
+                            <input type="radio" name="state" id="Radios1" value="1" > 开启
+						<input type="radio" name="state" id="Radios2"  value="0" checked>关闭
+                        {% endif %}
+                    </div>
+				</td>
+			</tr>
+            <tr>
+                <td colspan="2" class="aui_footer">
+                    <div class="aui_buttons" style="">
+                        <button id="edit" class="aui_state_highlight" type="submit">编辑</button>
+                        <button id="close" type="button">关闭</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+	</form>
+<script src="/static/js/jquery.js"></script>
+<script>
+    $("#close").click(function () {
+            window.parent.hideform();
+    });
+     $("#edit").click(function () {
+         window.parent.hideform();
+         window.parent.tip("编辑成功");
+     });
+
+
+</script>

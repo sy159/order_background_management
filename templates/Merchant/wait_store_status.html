@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站后台管理 Powered by pigcms.com</title>
+    <style>
+        #tab-menu{
+            list-style: none;
+            display: flex;
+        }
+    ul.pages{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    ol, ul {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    </style>
+</head>
+{% include 'Public/header.html' %}
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul id="tab-menu">
+            <a  href="/admin/wait_store/" id="status_0">待审核列表</a>|
+            <a  href="/admin/wait_store2/" id="status_2" class="on"> 已审核列表</a>|
+            <a  href="/admin/wait_store3/" id="status_1"> 未通过审核列表</a>
+        </ul>
+    </div>
+    <table class="search_table" width="100%">
+        <tr>
+            <td style="width:50%;">
+                <form action="/admin/wait_store2/" method="get">
+                    {% csrf_token %}
+                    {% if filter_content == None %}
+                         筛选: <input type="text" name="filter_content" class="input-text" value=""/>
+                    {% else %}
+                    筛选: <input type="text" name="filter_content" class="input-text" value="{{ filter_content }}"/>
+                    {% endif %}
+                <input type="submit" value="查询" class="button"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <div class="tab-box">
+        <form name="myform" id="myform" action="" method="post">
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>店铺名称</th>
+                        <th>联系电话</th>
+                        <th>最后编辑时间</th>
+                        <th>店铺审核</th>
+                        <th>快店资质审核状态</th>
+                        <th class="textcenter">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                            {% for i in data %}
+                           <tr>
+                            <td>{{ i.shop_id }}</td>
+                            <td>{{ i.shop_name }}</td>
+                            <td>{{ i.phone_number }}</td>
+                            <td>{{ i.update_time|date:"Y-m-d H:i:s" }}</td>
+                               {% if i.status == 1 %}
+                            <td><font color="green">开启</font></td>
+                                   {% elif i.status == 0 %}
+                            <td><font color="green">关闭</font></td>
+                                   {% else %}
+                                   <td><font color="green">禁用</font></td>
+                               {% endif %}
+                            <td><font color="green">审核通过</font></td>
+
+                            <td class="textcenter">
+                                <a href="javascript:void(0);" class="edit_row">查看</a>
+                            </td>
+                           </tr>
+                        {% endfor %}
+                        </tbody>
+                <tfoot id="tfoot">
+                            <tr>
+                                <td class="textcenter pagebar" colspan="12">
+                                    <ul class="pages">
+                                        <li id="first_page"><a href='/admin/wait_store2/?p=1&filter_content={{ filter_content }}'>首页</a></li>
+                                        {% if  get_page  == '1' %}
+                                            <li><a href='#'>&lt;上一页</a></li>
+                                        {% else %}
+                                            <li><a href='/admin/wait_store2/?p={{ get_page |add:-1}}&filter_content={{ filter_content }}'>&lt;上一页</a></li>
+
+                                        {% endif %}
+                                        {% if  get_page  >=  page_total  %}
+                                            <li><a href='#'>下一页&gt;</a></li>
+                                        {% else %}
+                                            <li><a href='/admin/wait_store2/?p={{ get_page |add:1}}&filter_content={{ filter_content }}'>下一页&gt;</a></li>
+                                        {% endif %}
+                                        <li><a href='/admin/wait_store2/?p={{ page_total }}&filter_content={{ filter_content }}'>尾页></a></li>
+                                        <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+            </table>
+        </div>
+    </form>
+  </div>
+</div>
+</body>
+<script>
+
+
+    $("#tbody").on('click','a',function () {
+        var clsn=this.className;
+        var td=$(this).parent().siblings()[0];
+        var shop_id=$(td).html();
+        if(clsn=='edit_row'){
+            // 调用父页面的方法
+              window.parent.showform();
+              window.parent.change_data("查看店铺信息","/admin/status_form/",shop_id);
+        }
+    });
+    // 编辑弹窗关闭
+    parent.window.hideform();
+</script>
+</html>

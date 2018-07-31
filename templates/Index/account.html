@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站后台管理 Powered by pigcms.com</title>
+    {% include 'Public/header.html' %}
+</head>
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul class="tbody">
+            <a href="/admin/account_list/" class="on">账号列表</a>|
+            <a href="javascript:void(0);" class="add_row">添加管理员</a>|
+            <a href="/admin/authority_group/" >权限套餐</a>
+        </ul>
+    </div>
+    <table class="search_table" width="100%">
+        <tr>
+            <td style="width:50%;">
+                <form action="/admin.php?g=System&c=Index&a=account" method="get">
+                    <input type="hidden" name="c" value="Index"/>
+                    <input type="hidden" name="a" value="account"/>
+                    筛选:
+                    <div id="choose_pca" province_idss="" city_idss="" area_id="" style="display:inline"></div>
+                    <input type="text" name="keyword" class="input-text" value=""/>
+                    <select name="searchtype">
+                        <option value="realname" >管理员姓名</option>
+                        <option value="account" >管理员帐号</option>
+                        <option value="phone" >联系电话</option>
+                        <option value="admin_id" >管理员编号</option>
+                    </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="submit" value="查询" class="button"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <form name="myform" id="myform" action="" method="post">
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <colgroup><col> <col> <col> <col><col><col><col><col><col><col width="240" align="center"> </colgroup>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>帐号</th>
+                        <th>级别</th>
+                        <th>区域</th>
+                        <th>微信昵称</th>
+                        <th>姓名</th>
+                        <th>电话</th>
+                        <th>Email</th>
+                        <th>QQ</th>
+                        <th>最后登录时间</th>
+                        <th class="textcenter">登录次数</th>
+                        <th class="textcenter">状态</th>
+                        <th class="textcenter">操作</th>
+                    </tr>
+                </thead>
+                <tbody  class="tbody">
+
+                {% for i in data %}
+                    <tr>
+                    <td>{{ i.id }}</td>
+                    <td>{{ i.account }}</td>
+                    {% if i.level == 0 %}
+                        <td>平台管理员</td>
+                        {% elif i.level == 1 %}
+                        <td>区域主管</td>
+                        {% else %}
+                        <td>普通管理员</td>
+                    {% endif %}
+                    <td>{{ i.open_admin_region }}</td>
+                    <td class="nickname">
+                        <a href="https://www.cqjdxyq.top/index.php?g=Index&c=Recognition&a=see_tmp_qrcode&qrcode_id=3890000001&img=1" data-id="1" class="see_qrcode" id="qr_1" style="color:green">绑定微信号</a>
+                    </td>
+                    <td>{{ i.realname }}</td>
+                    <td>{{ i.phone }}</td>
+                    <td>{{ i.email }}</td>
+                    <td>{{ i.qq }}</td>
+                    <td>{{  i.last_time|date:"Y-m-d H:i:s" }}</td>
+                    <td class="textcenter">{{ i.login_count }}</td>
+                    <td class="textcenter"><span style="color:green">{{ i.status }}</span></td>
+                     <td class="textcenter">
+                        <a href="javascript:void(0);" class="edit_row">编辑</a> |
+                        <a href="javascript:void(0);" class="dist_authority">分配权限</a>
+                        | <a href="javascript:void(0);" class="delete_row">删除</a>
+                         <a class="label label-warning cancel" title="取消微信绑定" data-id="4" style="display:none;color:red" >取消绑定</a>
+                    </td>
+                    </tr>
+                {% endfor %}
+
+                <tr>
+                    <td class="textcenter pagebar" colspan="13"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="/static/js/del_edit_post_get.js"></script>
+<script type="text/javascript">
+    $(".tbody").on('click','a',function () {
+        var clsn=this.className;
+        var td=$(this).parent().siblings()[0];
+        var sort_id=$(td).html();
+        if(clsn=='edit_row'){
+            // 调用父页面的方法
+            window.parent.showform();
+            window.parent.change_data("编辑管理账号信息","/admin/edit_accountinfo/",sort_id);
+        }else if(clsn=='add_row'){
+             window.parent.showform();
+             window.parent.add_data("添加管理员账号","/admin/add_account/");
+        }else if(clsn=='delete_row'){
+            function callback() { }
+                if(confirm("你确定要删除吗？")){
+                   $.deleteJSON("/admin/edit_accountinfo/?account_id="+sort_id,"delete",callback)
+                }else{
+                    return false;
+                }
+         }else if(clsn=='dist_authority'){
+            window.parent.authorityform_open();
+        }
+    });
+
+
+
+    var test;
+    $(document).ready(function(){
+        $('.see_qrcode').live('click', function(){
+            test = art.dialog.open($(this).attr('href'),{
+                init: function(){
+                    var iframe = this.iframe.contentWindow;
+                    window.top.art.dialog.data('iframe_handle',iframe);
+                },
+                id: 'handle',
+                title:'扫描二维码绑定微信号',
+                padding: 0,
+                width: 430,
+                height: 433,
+                lock: true,
+                resize: false,
+                background:'black',
+                button: null,
+                fixed: false,
+                close: function(){clearInterval(t);},
+                left: '50%',
+                top: '38.2%',
+                opacity:'0.4'
+            });
+            var id = $(this).attr('data-id'), obj = $(this);
+            var t = window.setInterval(function(){
+                $.get("/admin.php?g=System&c=Index&a=check_account", {id:id},  function(result){
+                    if (result.error_code == 0) {
+                        test.close();
+                        clearInterval(t);
+                        obj.parent('td').html(result.nickname).siblings('td').children('.cancel').show();
+                    }
+                }, 'json');
+            },3000);
+            return false;
+        });
+
+        $('.cancel').click(function(){
+            var id = $(this).attr('data-id'), obj = $(this);
+            obj.attr('disabled', true);
+            $.get("/admin.php?g=System&c=Index&a=cancel_account", {id:id}, function(result){
+                obj.attr('disabled', false);
+                if (result.error_code == 1) {
+                    alert(result.msg);
+                } else {
+                    var qrcode_id = 3890000000 + id;
+                    obj.hide().parent('td').siblings('.nickname').html('<a href="https://www.cqjdxyq.top/index.php?g=Index&c=Recognition&a=see_tmp_qrcode&qrcode_id=' + qrcode_id + '&img=1" data-id="' + id + '" class="see_qrcode" style="color:green">绑定微信号</a>');
+                }
+            }, 'json');
+        });
+    });
+</script>
+</body>
+
+</html>

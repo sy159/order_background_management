@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站后台管理 Powered by pigcms.com</title>
+    <style>
+        ul.pages{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ol, ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+    {% include 'Public/header.html' %}
+</head>
+
+<body width="100%" >
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul class="tbody">
+            <a href="/admin/category_list/" class="on">分类列表</a>|
+            <a href="javascript:;" class="add_row">添加主分类</a>
+        </ul>
+    </div>
+    <form name="myform" id="myform" action="" method="post">
+    {% csrf_token %}
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <colgroup>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col width="180" align="center"/>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>排序</th>
+                        <th>编号</th>
+                        <th>名称</th>
+                        <th>查看子分类</th>
+                        <th>状态</th>
+                        <th class="textcenter">操作</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                {% for i in data %}
+                    <tr>
+                        <td>{{ i.priority }}</td>
+                        <td>{{ i.sort_id }}</td>
+                        <td id="title">{{ i.sort_name }}</td>
+                        <td id="look"><a href="/admin/check_childlist/?sort_id={{ i.sort_id }}&name={{ i.sort_name }}">查看子分类</a></td>
+                        <td><font color="green">{{ i.status }}</font></td>
+                        <td class="textcenter">
+                            <a href="javascript:;" class="edit_row">编辑</a> |
+                            <a href="javascript:;" class="delete_row" >删除</a>
+                        </td>
+                    </tr>
+                     {% endfor %}
+                </tbody>
+               <tfoot id="tfoot">
+                            <tr>
+                                <td class="textcenter pagebar" colspan="12">
+                                    <ul class="pages">
+                                        <li id="first_page"><a href='/admin/category_list/?p=1'>首页</a></li>
+                                        {% if  get_page  == '1' %}
+                                            <li><a href='#'>&lt;上一页</a></li>
+                                        {% else %}
+                                            <li><a href='/admin/category_list/?p={{ get_page |add:-1}}'>&lt;上一页</a></li>
+
+                                        {% endif %}
+                                        {% if  get_page  >=  page_total  %}
+                                            <li><a href='#'>下一页&gt;</a></li>
+                                        {% else %}
+                                            <li><a href='/admin/category_list/?p={{ get_page |add:1}}'>下一页&gt;</a></li>
+                                        {% endif %}
+                                        <li><a href='/admin/category_list/?p={{ page_total }}'>尾页></a></li>
+                                        <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+            </table>
+        </div>
+    </form>
+</div>
+</body>
+<script src="/static/js/del_edit_post_get.js"></script>
+<script>
+  $(".tbody").on('click','a',function () {
+        var clsn=this.className;
+        console.log(clsn);
+        var td=$(this).parent().siblings()[1];
+        var sort_id=$(td).html();
+        if(clsn=='edit_row'){
+            // 调用父页面的方法
+            window.parent.showform();
+             window.parent.change_data("编辑分类信息","/admin/edit_originalform/",sort_id);
+        }else if(clsn=='add_row'){
+             window.parent.showform();
+             window.parent.add_data("添加主分类","/admin/add_originalform/");
+        }else if(clsn=='delete_row'){
+            function callback() {
+            }
+                if(confirm("你确定要删除吗？")){
+                   $.deleteJSON("/admin/edit_originalform/?sort_id="+sort_id,"delete",callback)
+                }else{
+                    return false;
+                }
+            }
+
+    });
+</script>
+
+</html>

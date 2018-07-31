@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>后台管理 - 橙子校园</title>
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/bind_account.css" rel="stylesheet" type="text/css">
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/excanvas.compiled.js"></script>
+    <script src="/static/js/jquery.qrcode.min.js"></script>
+</head>
+<body onload="init()">
+    <section id="getintouch" class="bounceIn animated">
+        <div class="container" style="border-bottom: 0;">
+            <h1>
+                <span>绑定账号</span>
+            </h1>
+        </div>
+        <div class="container">
+            <form class="contact" action="/admin/bind_account/" method="post" id="form">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-sm-12 text-left">
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <label class="text-left">
+                                    一、打开身份验证器
+                                </label>
+                                <p>没有安装身份验证器？扫码下方二维码下载或者<a href="">点我下载</a></p>
+                                <img src="/static/images/timg.jpg" style="width: 150px;height: 150px;">
+
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <label class="text-left">
+                                    二、打开身份验证器，添加账号
+                                </label>
+                                <p>请使用身份验证器扫描二维码,不能扫描？那就使用APP手动输入吧</p>
+                                <div class="col-sm-3">
+                                    <div id="qrcode"></div>
+                                </div>
+                                <div class="col-sm-4" style="margin-top: 50px;">
+                                        <p >
+                                            账号：<span id="account">{{ account }}</span>
+                                            <input name="account" hidden value="{{ account }}"/>
+                                        </p>
+                                        <p>
+                                            秘钥：<span id="key">{{ key }}</span>
+                                            <input name="key" hidden value="{{ key }}"/>
+                                        </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <label class="text-left">
+                                    三、提交校验码
+                                </label>
+                                <p>请输入验证器生成的校验码</p>
+                                <input type="text" name="check_code" id="check_code" placeholder="">
+                                <em style="color: red">{{ erro }}</em>
+                            </div>
+
+                        </div>
+                        <div class="row  clearfix">
+                            <div class="col-sm-12">
+                                <input type="submit" name="submit" id="submit" class="submit" value="提交">
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </section>
+</body>
+ <script type="text/javascript">
+            function generateQRCode(rendermethod, picwidth, picheight, url) {
+                $("#qrcode").qrcode({
+                    render: rendermethod, // 渲染方式有table方式（IE兼容）和canvas方式
+                    width: picwidth, //宽度
+                    height:picheight, //高度
+                    text: utf16to8(url), //内容
+                    typeNumber:-1,//计算模式
+                    correctLevel:2,//二维码纠错级别
+                    background:"#ffffff",//背景颜色
+                    foreground:"#000000"  //二维码颜色
+                });
+            }
+            var account=$("#account").html();
+            var key=$("#key").html();
+            var url='otpauth://totp/'+account+'?secret='+key;
+            function init(){
+                generateQRCode("table",150, 150, url);
+            }
+
+            //中文编码格式转换
+            function utf16to8(str) {
+                var out, i, len, c;
+                out = "";
+                len = str.length;
+                for (i = 0; i < len; i++) {
+                    c = str.charCodeAt(i);
+                    if ((c >= 0x0001) && (c <= 0x007F)) {
+                        out += str.charAt(i);
+                    } else if (c > 0x07FF) {
+                        out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+                        out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));
+                        out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+                    } else {
+                        out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));
+                        out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+                    }
+                }
+                return out;
+            }
+
+        </script>
+</html>
