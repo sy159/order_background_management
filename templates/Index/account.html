@@ -81,7 +81,7 @@
                     <td class="textcenter"><span style="color:green">{{ i.status }}</span></td>
                      <td class="textcenter">
                         <a href="javascript:void(0);" class="edit_row">编辑</a> |
-                        <a href="javascript:void(0);" class="dist_authority">分配权限</a>
+                        <a href="javascript:void(0);" class="dist_authority">编辑权限</a>
                         | <a href="javascript:void(0);" class="delete_row">删除</a>
                          <a class="label label-warning cancel" title="取消微信绑定" data-id="4" style="display:none;color:red" >取消绑定</a>
                     </td>
@@ -106,6 +106,7 @@
             // 调用父页面的方法
             window.parent.showform();
             window.parent.change_data("编辑管理账号信息","/admin/edit_accountinfo/",sort_id);
+
         }else if(clsn=='add_row'){
              window.parent.showform();
              window.parent.add_data("添加管理员账号","/admin/add_account/");
@@ -117,7 +118,9 @@
                     return false;
                 }
          }else if(clsn=='dist_authority'){
-            window.parent.authorityform_open();
+            window.parent.showform();
+            window.parent.change_data("编辑管理员权限","/admin/edit_authorityform/",sort_id)
+
         }
     });
 

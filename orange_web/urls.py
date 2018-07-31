@@ -23,8 +23,6 @@ urlpatterns = [
     path('admin/bind_account/', views.bind_account),#两步验证,绑定用户
     path('admin/index/', views.index),#主页面
 
-#改了东西
-
     #商户管理
     path('admin/shop_list/', views.shop_list),#商户列表
     path('admin/shop_edit/', views.shop_edit),#商户编辑
@@ -51,6 +49,7 @@ urlpatterns = [
     path('admin/add_account/', views.add_account),#添加管理员
     path('admin/permissions/', views.permissions),#权限api
     path('admin/account_unique/', views.account_unique),#账号唯一性
+    path('admin/edit_authorityform/', views.edit_authorityform),#编辑管理员权限弹框
 
 
 ]

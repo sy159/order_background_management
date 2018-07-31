@@ -1011,6 +1011,8 @@ def add_account(request):
         operate_region = obj.open_admin_region
         return render(request, 'Index/add_accountform.html',{'level':operate_level,'region_id':operate_region})
     elif request.method=='POST':
+        get_operator=request.session.get('user')
+        operator_obj=models.Admin.objects.filter(account=get_operator).first()
         get_account=request.POST.get('account')
         get_pwd=request.POST.get('pwd')
         get_realname=request.POST.get('realname')
@@ -1022,7 +1024,7 @@ def add_account(request):
         if get_region:
             get_region=get_region
         else:
-            if get_level==2:
+            if get_level=='2':
                 operate_name = request.session.get('user')
                 obj = models.Admin.objects.filter(account=operate_name).first()
                 get_region=obj.open_admin_region
@@ -1043,6 +1045,7 @@ def add_account(request):
                 son_list.append(j.id)
             parent_dict[i]=son_list
             data_list.append(parent_dict)
+        if not data_list:data_list=json.loads(operator_obj.menus)
         data_list=json.dumps(data_list)
         models.Admin.objects.create(account=get_account,pwd=get_pwd,realname=get_realname,phone=get_phone,email=get_email,qq=get_qq,login_count=0,status=1,level=get_level,open_admin_region=get_region,menus=data_list,last_time=timezone.now())
         return HttpResponse(2)
@@ -1080,34 +1083,53 @@ def account_unique(request):
         return JsonResponse({'state':0})
 
 
-
 def edit_accountinfo(request):
     if request.method=='GET':
         get_parent=request.session.get('user')
         parent_obj=models.Admin.objects.filter(account=get_parent).first()
         get_admin_id=request.GET.get('shop_id')
         obj=models.Admin.objects.filter(id=get_admin_id).first()
-        obj_region=models.Region.objects.filter(region_id=obj.open_admin_region)
-        province_obj=models.AddresLibrary.objects.filter(id=obj_region.province_id)
-        city_obj=models.AddresLibrary.objects.filter(id=obj_region.city_id)
-        area_obj=models.AddresLibrary.objects.filter(id=obj_region.area_id)
-        data={
-            'account': obj.account,
-            'realname': obj.realname,
-            'phone': obj.phone,
-            'email': obj.email,
-            'qq': obj.qq,
-            'last_ip': obj.last_ip,
-            'last_time': obj.last_time,
-            'login_count': obj.login_count,
-            'status': obj.status,
-            'level': obj.level,
-            'nickname': obj.nickname,
-            'province_name': province_obj.site_name,
-            'city_name': city_obj.site_name,
-            'area_name': area_obj.site_name,
-            'region_name': obj_region.region_name,
-        }
+        if obj.open_admin_region:
+            obj_region = models.Region.objects.filter(region_id=obj.open_admin_region).first()
+            province_obj = models.AddresLibrary.objects.filter(id=obj_region.province_id).first()
+            city_obj = models.AddresLibrary.objects.filter(id=obj_region.city_id).first()
+            area_obj = models.AddresLibrary.objects.filter(id=obj_region.area_id).first()
+            data = {
+                'account': obj.account,
+                'realname': obj.realname,
+                'phone': obj.phone,
+                'email': obj.email,
+                'qq': obj.qq,
+                'last_ip': obj.last_ip,
+                'last_time': obj.last_time,
+                'login_count': obj.login_count,
+                'status': obj.status,
+                'level': obj.level,
+                'nickname': obj.nickname,
+                'province_name': province_obj.site_name,
+                'city_name': city_obj.site_name,
+                'area_name': area_obj.site_name,
+                'region_name': obj_region.region_name,
+            }
+        else:
+            data = {
+                'account': obj.account,
+                'realname': obj.realname,
+                'phone': obj.phone,
+                'email': obj.email,
+                'qq': obj.qq,
+                'last_ip': obj.last_ip,
+                'last_time': obj.last_time,
+                'login_count': obj.login_count,
+                'status': obj.status,
+                'level': obj.level,
+                'nickname': obj.nickname,
+                'province_name': '',
+                'city_name':'',
+                'area_name': '',
+                'region_name':'',
+            }
+
         return render(request, 'Index/edit_accountinfo.html',{'data':data,'parent_level':parent_obj.level})
     elif request.method=='POST':
         get_account = request.POST.get('account')
@@ -1118,15 +1140,14 @@ def edit_accountinfo(request):
         get_qq = request.POST.get('qq')
         get_level = request.POST.get('level')
         get_region = request.POST.get('region_id')
-        if get_region:
+        if get_level==0:
+            get_region=0
+        elif get_level==1:
             get_region = get_region
         else:
-            if get_level == 2:
-                operate_name = request.session.get('user')
-                obj = models.Admin.objects.filter(account=operate_name).first()
-                get_region = obj.open_admin_region
-            else:
-                get_region = 0
+            operate_name = request.session.get('user')
+            obj = models.Admin.objects.filter(account=operate_name).first()
+            get_region = obj.open_admin_region
         if get_pwd:
             models.Admin.objects.filter(account=get_account).update(pwd=get_pwd,realname=get_realname,phone=get_phone,email=get_email,qq=get_qq,level=get_level,open_admin_region=get_region)
         else:
@@ -1137,6 +1158,22 @@ def edit_accountinfo(request):
         models.Admin.objects.filter(id=get_id).delete()
         return HttpResponse(0)
 
+
+def edit_authorityform(request):
+    get_id=request.GET.get('shop_id')
+    obj=models.Admin.objects.filter(id=get_id).first()
+    obj_list=[]
+    for i in json.loads(obj.menus):
+        for key,val in i.items():
+            obj_list.append(key)
+            for j in val:
+                obj_list.append(j)
+    data_list=[]
+    for i in obj_list:
+        permission_name=models.Menu.objects.filter(id=i).values_list('field_function_name')[0][0]
+        data_list.append(permission_name)
+    print(data_list)
+    return render(request, 'Index/edit_authorityform.html',{'data':data_list})
 
 def test(request):
     return render(request,'Merchant/form.html')

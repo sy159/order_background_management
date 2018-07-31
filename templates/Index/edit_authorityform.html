@@ -1,0 +1,66 @@
+<link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
+<style>
+    .table_form {
+        border:none;
+    }
+</style>
+<form style="width: 100%;height: 100%;" method="post" id="myform1" action="" frame="true" refresh="true" data-call_fun="1">
+    <table cellpadding="0" cellspacing="0" class="table_form" width="100%">
+
+        <tbody id="tbody">
+
+        <tr>
+
+            <td><label><input type="checkbox" id="all" class="all"> 全选</label></td>
+             <th></th>
+        </tr>
+        <tr style="position: absolute;bottom: 0;right: 0;">
+            <td colspan="2" class="aui_footer">
+                <div class="aui_buttons" style="">
+                    <button id="edit_authority" class="aui_state_highlight" type="submit">编辑</button>
+                    <button id="close_authority" type="button">关闭</button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+<script src="/static/js/jquery.js"></script>
+<script>
+    $("#close_authority").click(function () {
+            window.parent.hideform();
+    });
+
+    $("#edit_authority").click(function () {
+         window.parent.hideform();
+         window.parent.tip("编辑成功");
+     });
+     //修饰登录的管理员得权限
+      var str="",str1="",str2="",n=0;
+    $.ajax({
+        url:"/admin/permissions/",
+        type:"get",
+        success:function(msg){
+            msg.forEach(function (el){
+                str="<tr id='father_menu'></tr>"
+                $("#tbody").prepend(str);
+                for (var key in el) {
+                    str2=" <th width='100px'><label><input type='checkbox' class='menu_"+n+" father_menu' value='"+n+"' name='"+key+"' checked=''>"+key+"</label></th><td>"
+                    el[key].forEach(function (i) {
+                        str2 += " <label><input type='checkbox' class='child_menu_"+n+" child_menu' value='' name='"+i+"' data-fid='"+n+"' checked=''>" + i + "</label>\n"
+                    });
+                    str2+="</td>";
+
+                }
+                $("#father_menu").html(str2);
+                n++;
+            });
+            $('input[type="checkbox"]').attr('checked',false);
+        },
+        error:function(xhr,textstatus,thrown){
+        }
+    });
+
+
+</script>
