@@ -15,7 +15,6 @@
         var selected_module="",selected_action="",selected_url="";
 
     </script>
-
 </head>
 <body style="background:#E2E9EA;overflow:hidden;">
 <div id="Main_content" >
@@ -137,6 +136,7 @@
     </div>
     <div style="clear:both;"></div>
 </div>
+{#公用模板#}
 <div id="aui_state_lock" style="display: none;position: fixed;width: 811px;left: 50%;top: 50%;transform:translateX(-50%) translateY(-50%);z-index: 2023;" class="aui_state_lock aui_state_focus">
     <div class="aui_outer">
         <table class="aui_border">
@@ -164,13 +164,14 @@
                                 <td class="aui_icon" style="display: none;">
                                     <div class="aui_iconBg" style="/* background: none; */"></div>
                                 </td>
-                                <td class="aui_main" style="width: 800px; height: 375px; visibility: visible;">
+                                <td class="aui_main" style="width: 800px; height:440px; visibility: visible;">
                                     <div class="aui_content aui_state_full" style="padding: 0px;">
                                         <div class="aui_loading" style="display: none;">
                                             <span>loading..</span>
                                         </div>
-                                        <iframe id="iframe_form" src="" name="Openedit" frameborder="0" allowtransparency="true"
-                                                style="width: 100%; height: 100%; border: 0px none;"></iframe>
+                                        <iframe onload="callChild()" id="iframe_form" src="" name="Openedit" frameborder="0" allowtransparency="true"style="width: 100%; height: 100%; border: 0px none;"></iframe>
+                                        <input type="hidden" value="" id="get_a">
+                                        <input type="hidden" value="" id="get_url">
                                     </div>
                                 </td>
                             </tr>
@@ -189,7 +190,46 @@
         </table>
     </div>
 </div>
+{#图片放大#}
+<div id="bigimg" style="display: none;position: fixed;width: 600px;left: 50%;top: 50%;transform:translateX(-50%) translateY(-50%);z-index: 2023;" class="aui_state_lock aui_state_focus">
+    <div class="aui_outer" id="aui_outer">
+        <table class="aui_border">
+            <tbody>
+                <tr>
+                <td class="aui_nw"></td>
+                <td class="aui_n"></td>
+                <td class="aui_ne"></td>
+            </tr>
+                <tr>
+                    <td class="aui_w"></td>
+                    <td class="aui_c">
+                        <table class="aui_dialog">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" class="aui_header">
+                                        <div class="aui_titleBar">
+                                            <div class="aui_title" style="cursor: move;"></div>
+                                            <a class="aui_close"   href="javascript:/*artDialog*/;">×</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td id="aui_main" class="aui_main" style="width: 600px; height:400px; visibility: visible;">
+                                        <div id="aui_content" class="aui_content aui_state_full" style="padding: 0px;">
 
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td class="aui_e"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{#遮罩层#}
 <div id="backup" style="display: none; width: 100%; height: 100%; position: fixed; z-index: 2022; top: 0px; left: 0px; overflow: hidden;">
     <div style="height: 100%; background: black; opacity: 0.4;">
     </div>
@@ -202,8 +242,19 @@
        display: flex;
        border-bottom: 1px solid #eee;
     }
+   .aui_title1{
+    height: 29px;
+    line-height: 29px;
+    padding: 0 25px 0 0;
+    _padding: 0;
+    text-indent: 5px;
+    font-weight: 700;
+    font-size: 14px;
+    color: #000;
+}
 
 </style>
+{#权限弹框#}
 <div id="authorityform" style="display: none;position: fixed;width: 711px;left: 50%;top: 50%;transform: translate(-50%, -50%);z-index: 2023;" class="aui_state_lock aui_state_focus">
 	  <div class="aui_outer">
 		<table class="aui_border">
@@ -222,7 +273,7 @@
 							<tr>
 								<td colspan="2" class="aui_header">
 									<div class="aui_titleBar">
-										<div class="aui_title" style="cursor: move;">设置管理员使用权限</div>
+										<div class="aui_title1" style="cursor: move;">设置管理员使用权限</div>
 										<a class="aui_close2" id="aui_close" style="background-position: 0 -72px;background-image: url(/static/css/artdialog/skins/mydialog/bg_css3.png);top: 4px;right: 4px;width: 20px;height: 20px;background-repeat: no-repeat;display:block;position: absolute;"
                                            href="javascript:/*artDialog*/;"></a>
 									</div>
@@ -244,7 +295,7 @@
 													<tbody id="body">
 
 													<tr>
-														<td><label><input type="checkbox" id="all" class="all"> 全选</label></td>
+														<td><label><input type="checkbox" id="all" class="all" checked> 全选</label></td>
 													</tr>
 													<tr style="position: absolute;bottom: 0;right: 0;">
 														<td colspan="2" class="aui_footer">
@@ -275,12 +326,11 @@
 			</tbody>
 		</table>
 	  </div>
-</div>
-
+</div>#}
 <script type="text/javascript" src="/static/js/index.js"></script>
 <script type="text/javascript" src="/static/js/del_edit_post_get.js"></script>
+<script src="/static/js/set_authority.js"></script>
 <script type="text/javascript">
-         // 修改编辑成功后调用此函数
            function tip(tip){
                art.dialog({
                    width: 200,
@@ -291,29 +341,46 @@
                    time: 2,
                    content: tip
                });
-           }
+           } // 修改编辑成功后调用此函数
         // 编辑弹窗关闭函数（由子页面引用）
            $(".aui_close").click(function () {
             $("#aui_state_lock").css('display','none');
             $("#backup").css('display','none');
-        });
+            $("#bigimg").css('display','none');
+        });//关闭弹窗
            function hideform(){
             $("#aui_state_lock").css('display','none');
             $("#backup").css('display','none');
-        }
-        // 编辑弹窗显示函数（由子页面引用）
+        }//关闭弹窗
            function showform(){
                 $("#aui_state_lock").css('display','block');
                 $("#backup").css('display','block');
-            }
+            } // 编辑弹窗显示函数（由子页面引用）
            function change_data(title,src,shop_id){
             $(".aui_title").html(title);
             $("#iframe_form").attr("src",src+"?shop_id="+shop_id);
-    }
+          }//弹框
            function add_data(title,src){
             $(".aui_title").html(title);
             $("#iframe_form").attr("src",src);
-           }
+           }//弹框
+           function add_url(url,shopid){
+               $("#get_a").val(url)
+               $("#get_url").val(shopid)
+           }//接收来自子页面的数据
+           function callChild() {
+               if($("#get_a").val()==""){
+                   return false;
+               }else {
+                    Openedit.window.childFunction($("#get_a").val(),$("#get_url").val());
+               }
+
+             /*
+              child 为iframe的name属性值，
+              不能为id，因为在FireFox下id不能获取iframe对象
+             */
+         }//调用子页面的方法，把数据传过去
+
             $("#right_open").click(function(){
                 $("#HelpBox").css('right','0px');
                 $("#HelpBox").css('width',"200px");
@@ -340,7 +407,7 @@
                             for (var key in el) {
                                  str2=" <th width='100px'><label><input type='checkbox' class='menu_"+n+" father_menu' value='"+n+"' name='"+key+"' checked=''>"+key+"</label></th><td>"
                                el[key].forEach(function (i) {
-                                    str2 += " <label><input type='checkbox' class='child_menu_"+n+" child_menu' value='' name='"+i+"' data-fid='"+n+"' checked=''>" + i + "</label>\n"
+                                    str2 += " <label><input type='checkbox' class='child_menu child_menu_"+n+"' value='' name='"+i+"' data-fid='"+n+"' checked=''>" + i + "</label>\n"
                                });
                                  str2+="</td>";
 
@@ -361,49 +428,6 @@
                 }
              });
 
-            //权限勾选
-         $("#body").on('click','input',function () {
-             var clsn=this.className;
-             if(clsn=='all'){
-                 if ($('.all').prop("checked")) {
-                     $('.father_menu, .child_menu').prop('checked', true);
-                 } else {
-                     $('.father_menu, .child_menu').prop('checked', false);
-                 }
-             }else if(clsn=='father_menu'){
-                 var fid = $(this).val();
-                 alert(1);
-                 if ($(this).prop("checked")) {
-                     $('.child_menu_' + fid).prop('checked', true);
-                 } else {
-                     $('.child_menu_' + fid).prop('checked', false);
-                 }
-                 var flen=$('.father_menu').length;
-                 var i=0;
-                 $('.father_menu').each(function () {
-                     if ($(this).prop('checked')) {
-                         i++;
-                     }
-                 });
-                 if(flen==i){
-                     $("#all").prop('checked',true);
-                 }
-             }else if(clsn=='child_menu'){
-                 var fid = $(this).attr('data-fid');
-                 if ($(this).prop("checked")) {
-                     $('.menu_' + fid).prop('checked', true);
-                 } else {
-                     var flag = false;
-                     $('.child_menu_' + fid).each(function(){
-                         if ($(this).prop('checked')) {
-                             flag = true;
-                         }
-                     });
-                     $('.menu_' + fid).prop('checked', flag);
-                 }
-             }
-
-         });
           //权限提交
          var data;
           $("#myform1").submit(function (e) {
@@ -413,7 +437,12 @@
               var childWindow = $("#iframe_form")[0].contentWindow; //表示获取了嵌入在iframe中的子页面的window对象。  []将JQuery对象转成DOM对象，用DOM对象的contentWindow获取子页面window对象。
                childWindow.subFunction(data);
           });
-
+          //点击小图显示大图函数
+          function showbigimg(lable) {
+                $("#bigimg").css('display','block');
+                $("#backup").css('display','block');
+                $("#aui_content").html(lable);
+          }
 
 
 

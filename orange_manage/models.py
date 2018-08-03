@@ -58,6 +58,19 @@ class Admin(models.Model):
         db_table = 'admin'
 
 
+class AppMenu(models.Model):
+    region_id = models.IntegerField()
+    title = models.CharField(max_length=255)
+    img = models.CharField(max_length=255)
+    url = models.CharField(max_length=255)
+    state = models.IntegerField()
+    priority = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'app_menu'
+
+
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=80)
 
@@ -122,6 +135,22 @@ class AuthUserUserPermissions(models.Model):
         managed = False
         db_table = 'auth_user_user_permissions'
         unique_together = (('user', 'permission'),)
+
+
+class Banner(models.Model):
+    region_id = models.IntegerField()
+    title = models.CharField(max_length=255)
+    img = models.CharField(max_length=255)
+    url = models.CharField(max_length=255)
+    state = models.IntegerField()
+    start = models.DateTimeField(blank=True, null=True)
+    end = models.DateTimeField(blank=True, null=True)
+    has_prescription = models.IntegerField(blank=True, null=True)
+    priority = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'banner'
 
 
 class Campus(models.Model):
@@ -234,10 +263,34 @@ class Distributor(models.Model):
     register_time = models.DateTimeField(blank=True, null=True)
     last_login = models.DateTimeField(blank=True, null=True)
     is_part_time = models.CharField(max_length=1)
+    balance = models.FloatField(blank=True, null=True)
+    bank_name = models.CharField(max_length=255, blank=True, null=True)
+    bank_account = models.CharField(max_length=255, blank=True, null=True)
+    account_holder = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'distributor'
+
+
+class DistributorTransaction(models.Model):
+    transaction_id = models.AutoField(primary_key=True)
+    shop_id = models.IntegerField(blank=True, null=True)
+    shop_name = models.CharField(max_length=255, blank=True, null=True)
+    distributor_id = models.IntegerField()
+    distributor_name = models.CharField(max_length=255)
+    amount = models.FloatField()
+    time = models.DateTimeField()
+    pay_mode = models.IntegerField()
+    order_id = models.CharField(max_length=255, blank=True, null=True)
+    title = models.CharField(max_length=255)
+    in_or_out = models.IntegerField()
+    campus_id = models.IntegerField(blank=True, null=True)
+    balance = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'distributor_transaction'
 
 
 class DjangoContentType(models.Model):
@@ -277,13 +330,18 @@ class Goods(models.Model):
     shop_id = models.IntegerField()
     image = models.CharField(max_length=255, blank=True, null=True)
     pack_cost = models.DecimalField(max_digits=10, decimal_places=2)
+    unit = models.CharField(max_length=255, blank=True, null=True)
+    unit_price = models.FloatField(blank=True, null=True)
+    original_price = models.FloatField(blank=True, null=True)
+    stock = models.IntegerField(blank=True, null=True)
     classify_id = models.IntegerField()
     status = models.IntegerField()
     privilege = models.IntegerField()
     platform_classify_id = models.IntegerField(blank=True, null=True)
     purchasing_limitation = models.PositiveIntegerField(blank=True, null=True)
-    default_spec_id = models.IntegerField(blank=True, null=True)
     salves_amount = models.PositiveIntegerField(blank=True, null=True)
+    total_salves_amount = models.IntegerField(blank=True, null=True)
+    product_code = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -427,12 +485,14 @@ class Orders(models.Model):
     user_name = models.CharField(max_length=255, blank=True, null=True)
     user_phone_number = models.CharField(max_length=255, blank=True, null=True)
     user_address = models.CharField(max_length=255, blank=True, null=True)
+    user_gender = models.IntegerField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
     latitude = models.FloatField(blank=True, null=True)
     address_type = models.IntegerField(blank=True, null=True)
     goods_amount = models.IntegerField(blank=True, null=True)
     final_price = models.FloatField(blank=True, null=True)
     trade_no = models.CharField(max_length=255, blank=True, null=True)
+    last_up_time = models.BigIntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -513,8 +573,7 @@ class Shop(models.Model):
     shop_id = models.AutoField(primary_key=True)
     shop_name = models.CharField(max_length=255)
     shop_logo = models.CharField(max_length=255)
-    university_id = models.IntegerField()
-    campus_id = models.IntegerField()
+    campus_id = models.IntegerField(blank=True, null=True)
     region_id = models.IntegerField(blank=True, null=True)
     phone_number = models.CharField(max_length=255)
     shop_type = models.IntegerField()
@@ -673,7 +732,6 @@ class Specification(models.Model):
     salves_amount = models.PositiveIntegerField(blank=True, null=True)
     spec = models.CharField(max_length=1000, blank=True, null=True)
     product_code = models.CharField(max_length=255, blank=True, null=True)
-    is_default_spec = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -755,6 +813,8 @@ class User(models.Model):
     balance = models.FloatField(blank=True, null=True)
     accumulative_consumption = models.FloatField(blank=True, null=True)
     payment_password = models.CharField(max_length=255, blank=True, null=True)
+    integral = models.IntegerField()
+    last_ip = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
         managed = False

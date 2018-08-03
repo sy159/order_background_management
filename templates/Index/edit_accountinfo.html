@@ -25,6 +25,20 @@
 					<input type="text" name="pwd" id="pwd" class="input fl" size="25"  validate="maxlength:20,required:true" />
 				</td>
 			</tr>
+            <tr>
+                <th width="160">状态</th>
+                <td>
+                    <div class="radio" id="status">
+                        {% if data.status == 1 %}
+						<input type="radio" name="status" id="status1" value="1" checked>开启
+                        <input type="radio" name="status" id="status2" value="0">关闭
+                        {% else %}
+                        <input type="radio" name="status" id="status1" value="1">开启
+                        <input type="radio" name="status" id="status2" value="0" checked>关闭
+                        {% endif %}
+				    </div>
+                </td>
+            </tr>
 			<tr>
 				<th width="160">真实姓名</th>
 				<td>

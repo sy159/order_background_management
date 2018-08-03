@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站后台管理 Powered by pigcms.com</title>
+    {% include 'Public/header.html' %}
+    <style>
+        ul.pages{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ol, ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul class="tbody" style="margin-bottom: 0px;">
+            <a href="/admin/adver_management/">广告分类列表</a>|
+            <a href="" class="on">{{ parent_title }}列表</a>|
+            <a href="javascript:void(0);" class="add_row">添加广告</a>
+        </ul>
+    </div>
+    <form name="myform" id="myform" action="" method="post">
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <input type="hidden" id="parent_id" name="parent_id" value="{{ parent_id }}">
+                <colgroup>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col width="180" align="center"/>
+                    <col width="180" align="center"/>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>名称</th>
+                        <th>作用</th>
+                        <th>图片(以下为强制小图，点击图片查看大图)</th>
+                        <th class="textcenter">最后操作时间</th>
+                        <th>状态</th>
+                        <th class="textcenter">操作</th>
+                    </tr>
+                </thead>
+                <tbody  class="tbody">
+                {% for i in data %}
+                <tr>
+                    <td>{{ i.id }}</td>
+                    <td>{{ i.title }}</td>
+                    <td>{{ i.url }}</td>
+                    <td>
+                        <img src="{{ i.img }}" style="width:300px;height:80px;" class="view_msg"/>
+                    </td>
+                    <td class="textcenter">2018-08-01 10:45:48</td>
+                    <td>
+                        {% if i.state == 1 %}
+                        <font color="red">开启</font></td>
+                            {% else %}
+                        <font color="red">关闭</font></td>
+
+                    {% endif %}
+                    <td class="textcenter">
+                        <a href="javascript:void(0);" class="edit_row">编辑</a> |
+                        <a href="javascript:void(0);" class="delete_row" parameter="id=40">删除</a>
+                    </td>
+                </tr>
+                {% endfor  %}
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+<script src="/static/js/del_edit_post_get.js"></script>
+<script>
+    $(".tbody").on('click','a,img',function () {
+        var clsn=this.className;
+        console.log(clsn);
+        var td=$(this).parent().siblings()[0];
+        var adver_id=$(td).html();
+        var parent_id=$("#parent_id").val();
+        if(clsn=='edit_row'){
+            // 调用父页面的方法
+            window.parent.showform();
+            window.parent.add_data("编辑广告信息","/admin/adver_edit/?parent_id="+parent_id+"&adver_id="+adver_id);
+           // window.parent.change_data("编辑广告信息","/admin/adver_edit/",parent_id);
+        }else if(clsn=='add_row'){
+             window.parent.showform();
+             window.parent.add_data("添加广告","/admin/adver_add/?parent_id="+parent_id);
+        }else if(clsn=='delete_row'){
+            function callback() {}
+                if(confirm("你确定要删除吗？")){
+                   $.deleteJSON("/admin/adver_list/?parent_id="+parent_id+"&adver_id="+adver_id,"delete",callback)
+                }else{
+                    return false;
+                }
+            }else if(clsn=='view_msg'){
+            var src=$(this).attr("src");
+            window.parent.showbigimg("<img src="+src+" style=\"width:600px;height:400px;\">");
+        }  //点击图片放大
+    });
+
+
+</script>
+</body>
+</html>

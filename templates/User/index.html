@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>后台管理 - 橙子校园</title>
+    {% include 'Public/header.html' %}
+    <style>
+    ul.pages{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    ol, ul {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+</style>
+</head>
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul>
+            <a href="" class="on">用户列表</a>
+        </ul>
+    </div>
+    <table class="search_table" width="100%">
+        <tr>
+            <td>
+                <form action="/admin/user_list/" method="get">
+                    <input type="hidden" name="c" value="User"/>
+                    <input type="hidden" name="a" value="index"/>
+                    筛选: <input type="text" name="keyword" class="input-text" value=""/>
+                    <select name="searchtype">
+                        <option value="user_id" >用户ID</option>
+                        <option value="nickname" >昵称</option>
+                        <option value="phone_number" >手机号</option>
+                    </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <font color="#000">注册日期筛选：</font>
+                    <input type="text" class="input-text" name="begin_time" style="width:120px;" id="d4311"  value="" onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"/>
+                    <input type="text" class="input-text" name="end_time" style="width:120px;" id="d4311" value="" onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"/>
+
+                    状态:
+                    <select name="status">
+                        <option value="2" >全部</option>
+                        <option value="1" >正常</option>
+                        <option value="0" >禁用</option>
+                    </select>
+                    <input type="submit" style="margin-right:20px;" value="查询" class="button"/>
+                    用户总余额：987.71元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    正常用户总余额：987.15元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    禁止用户总余额：0.06元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    用户总积分：1469905个
+                </form>
+
+            </td>
+        </tr>
+    </table>
+    <form name="myform" id="myform" action="" method="post">
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <colgroup>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col width="180" align="center"/>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th><a href="" style="color:blue;">ID</a></th>
+                        <th>昵称</th>
+                        <th>手机号</th>
+                        <th><a href="" style="color:blue;">最后登录时间</a></th>
+                        <th>最后登录地址</th>
+                        <th class="textcenter"><a href="" style="color:blue;">余额</a></th>
+                        <th class="textcenter"><a href="" style="color:blue;">积分</a></th>
+                        <th class="textcenter">状态</th>
+                        <th class="textcenter">推广用户</th>
+                        <th class="textcenter">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for i in data %}
+                    <tr>
+                        <td>{{ i.user_id }}</td>
+                        <td>{{ i.nickname }}</td>
+                        <td>{{ i.phone_number }}</td>
+                        <td>{{ i.last_login|date:'Y-m-d h:i:s' }}</td>
+                        <td>{{ i.last_ip }}</td>
+                        <td class="textcenter">￥{{ i.balance }}</td>
+                        <td class="textcenter">{{ i.integral }}</td>
+                        {% if i.status == 1 %}
+                        <td class="textcenter"><font color="green">正常</font></td>
+                            {% else %}
+                            <td class="textcenter"><font color="green">禁用</font></td>
+                        {% endif %}
+                        <td class="textcenter"><a href="">推广用户</a></td>
+                        <td class="textcenter"><a href="javascript:void(0);">编辑</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot id="tfoot" >
+                    <tr>
+                        <td class="textcenter pagebar" colspan="12">
+                            <ul class="pages">
+                                <li><a href='/admin/user_list/?p=1'>首页</a></li>
+                                {% if  get_page  == '1' %}
+                                    <li><a href='#'>&lt;上一页</a></li>
+                                {% else %}
+                                <li><a href='/admin/user_list/?p={{ get_page |add:-1}}&s=1'>&lt;上一页</a></li>
+
+                                {% endif %}
+                            {% if  get_page  >=  page_total  %}
+                                <li><a href='#'>下一页&gt;</a></li>
+                                {% else %}
+                                <li><a href='/admin/user_list/?p={{ get_page |add:1}}&s=1'>下一页&gt;</a></li>
+                            {% endif %}
+                                <li><a href='/admin/user_list/?p={{ page_total }}'>尾页></a></li>
+                                <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </form>
+</div>
+</body>
+<script type="text/javascript">
+
+</script>
+</html>

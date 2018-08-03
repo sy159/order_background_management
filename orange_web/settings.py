@@ -47,7 +47,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',#允许跨域
     'django.middleware.common.CommonMiddleware',
-    'orange_manage.all_middleware.login_judge.Login_session',#判断是否登陆
+    'orange_manage.middleware.Login_session',#判断是否登陆
     # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -83,10 +83,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'test',  # 数据库名字
-        'HOST': '127.0.0.1',  # 数据库地址
+        'HOST': '120.77.42.209',  # 数据库地址
         'PORT': 3306,  # 端口号
         'USER': 'root',  # 用户名
-        'PASSWORD': '123456',  # 密码
+        'PASSWORD': 'luoyang111',  # 密码
     }
 }
 

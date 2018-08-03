@@ -9,6 +9,12 @@
         bottom: 0;
         right: 20px;
     }
+     .high{ color: red; }
+    .position{
+        display: inline-block;
+        padding-top: 8px;
+        padding-left: 5px;
+    }
 </style>
 <form id="myform" method="post" action="/admin/add_originalform/" frame="true" refresh="true">
         {% csrf_token %}
@@ -17,14 +23,14 @@
 				<th width="160">分类名称</th>
 				<td>
 					<input type="text" id="sort_name" class="input fl" name="sort_name"  size="25"  validate="maxlength:20,required:true"/>
-				    <em style="color: red;font-weight: bold;display: inline-block;margin-top: 5px;margin-left: 10px;">必填</em>
+				     <strong class='high position'>*</strong>
                 </td>
 			</tr>
             <tr>
 				<th width="160">分类排序</th>
 				<td>
 					<input type="text" id="priority" class="input fl" name="priority"  size="25" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"  validate="maxlength:20,required:true"/>
-				    <em style="color: red;font-weight: bold;display: inline-block;margin-top: 5px;margin-left: 10px;">必填(只能输入数字)</em>
+                    <strong class='high position account'>*(只能输入数字)</strong>
                 </td>
 			</tr>
 			<tr>
@@ -32,7 +38,7 @@
 				<td>
                     <div class="radio" id="radio">
 						<input type="radio" name="state" id="Radios1" value="1" checked> 开启
-						<input type="radio" name="state" id="Radios2"  value="0">关闭
+						<input type="radio" name="state" id="Radios2"  value="0">关闭 <strong class='high position'>*</strong>
                     </div>
 				</td>
 			</tr>

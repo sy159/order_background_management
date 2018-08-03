@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title></title>
+    <meta http-equiv="MSThemeCompatible" content="Yes">
+    {% include 'Public/public.html' %}
+    <style>
+        .norightborder{
+            text-align: center;
+        }
+
+        ul.pages{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ol, ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+    </style>
+</head>
+<body style="background:#fff;padding:20px 20px;">
+<div style="background:#fefbe4;border:1px solid #f3ecb9;color:#993300;padding:10px;margin-bottom:5px;">
+        使用方法：点击对应内容后面的“选中”即可。
+    <a href="/admin/adver_add/">点击这里返回模块选择</a>
+</div>
+<form method="get"  action="/admin/goods/">
+    <input type="text" name="keyword" class="input-text">
+    <input type="hidden" name="shop_id" value="{{ shop_id }}" class="input-text">
+    <input type="hidden" name="stores" value="{{ stores }}" class="input-text">
+    <input type="submit" value="查询" class="button">
+</form>
+
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+    <thead>
+        <tr>
+            <th>商品</th>
+            <th style=" width:100px;text-align: center;">操作</th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+    {% for i in data %}
+        <tr>
+            <td>{{ i.goods_name }}</td>
+            <td style="display: none">{{ i.goods_id }}</td>
+            <td class="norightborder">
+                <a href="###" class="choose_store">选中</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div class="selectedSort">
+    <b>您当前选择的是：</b>
+    <i id="selectedSort">{{ stores }}</i>
+    <button type="button" value="" class="tijiao">提交</button>
+    <input type="hidden" value="{{ flag }}" id="flag">
+    <input type="hidden" value="{{ parent_id }}" id="parent_id">
+    <input type="hidden" value="{{ adver_id }}" id="adver_id">
+</div>
+<div class="footactions" style="padding-left:10px">
+    <div class="pages">
+        <ul class="pages">
+
+            <li><a href='/admin/goods/?p=1&shop_id={{ shop_id }}'>首页</a></li>
+            {% if  get_page  == '1' %}
+                <li><a href='#'>&lt;上一页</a></li>
+            {% else %}
+                <li><a href='/admin/goods/?p={{ get_page |add:-1}}&shop_id={{ shop_id }}'>&lt;上一页</a></li>
+
+            {% endif %}
+            {% if  get_page  >=  page_total  %}
+                <li><a href='#'>下一页&gt;</a></li>
+            {% else %}
+                <li><a href='/admin/goods/?p={{ get_page |add:1}}&shop_id={{ shop_id }}'>下一页&gt;</a></li>
+            {% endif %}
+            <li><a href='/admin/goods/?p={{ page_total }}&shop_id={{ shop_id }}'>尾页></a></li>
+            <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
+        </ul>
+    </div>
+</div>
+<script>
+     var goodsid;
+     $("#tbody").on('click','a',function () {
+        var clsn=this.className;
+        var name=$(this).parent().siblings()[0];
+        var result=$(name).html();
+        var goods_id=$(this).parent().siblings()[1];
+        goodsid=$(goods_id).html();
+        $("#selectedSort").append("&nbsp;&nbsp"+result);
+    });
+      $(".tijiao").click(function () {
+        window.parent.showform();
+         if($("#flag").val()=='edit'){
+            window.parent.add_data("编辑广告信息","/admin/adver_edit/?parent_id="+$("#parent_id").val()+"&adver_id="+$("#adver_id").val());
+        }else if($("#flag").val()=='add'){
+            window.parent.add_data("添加广告","/admin/adver_add/?parent_id="+$("#parent_id").val());
+        }
+        window.parent.add_url( $("#selectedSort").html(),"goods_id="+goodsid);
+    });
+</script>
+
+
+</body>
+</html>

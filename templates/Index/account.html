@@ -11,7 +11,7 @@
         <ul class="tbody">
             <a href="/admin/account_list/" class="on">账号列表</a>|
             <a href="javascript:void(0);" class="add_row">添加管理员</a>|
-            <a href="/admin/authority_group/" >权限套餐</a>
+
         </ul>
     </div>
     <table class="search_table" width="100%">
@@ -78,7 +78,11 @@
                     <td>{{ i.qq }}</td>
                     <td>{{  i.last_time|date:"Y-m-d H:i:s" }}</td>
                     <td class="textcenter">{{ i.login_count }}</td>
-                    <td class="textcenter"><span style="color:green">{{ i.status }}</span></td>
+                    {% if i.status == 1 %}
+                    <td class="textcenter"><span style="color:green">开启</span></td>
+                    {% else %}
+                        <td class="textcenter"><span style="color:green">关闭</span></td>
+                    {% endif %}
                      <td class="textcenter">
                         <a href="javascript:void(0);" class="edit_row">编辑</a> |
                         <a href="javascript:void(0);" class="dist_authority">编辑权限</a>
@@ -120,7 +124,6 @@
          }else if(clsn=='dist_authority'){
             window.parent.showform();
             window.parent.change_data("编辑管理员权限","/admin/edit_authorityform/",sort_id)
-
         }
     });
 

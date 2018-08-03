@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站后台管理 Powered by pigcms.com</title>
+    {% include 'Public/header.html' %}
+    <style>
+        .auibuttons{
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<form id="myform" method="post" action="" enctype="multipart/form-data">
+    <input type="hidden" name="cat_id" value=""/>
+    <table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
+    <input type="hidden" id="parent_id" name="parent_id" value="{{ parent_id }}">
+    <input type="hidden" id="adver_id" name="adver_id" value="{{ data.adver_id }}">
+        <tr>
+            <th width="80">链接功能</th>
+            <td>
+                 <select id="url_type" style="height: 35px;vertical-align: middle;">
+                     <option id="choose" name="" value="0" selected>请选择对应功能</option>
+                     <option id="store" name="function" value="1" >店铺或商品</option>
+                     <option id="store_list" name="function" value="2">店铺列表</option>
+                     <option id="web" name="function" value="3">web链接</option>
+                 </select>
+                <input type="text" value="" class="input" name="url" id="url" style="width:200px;display:none" placeholder="请填写链接地址" validate="maxlength:200,required:true,url:true"/>
+                <input type="hidden" name="get_url" id="get_url" value="">
+                <!--<a href="#modal-table" class="btn btn-sm btn-success" onclick="addLink()" data-toggle="modal">从功能库选择</a>-->
+            </td>
+        </tr>
+        <tr>
+            <th width="80">广告名称</th>
+            <td><input type="text" class="input fl" value="{{ data.title }}" name="name" size="20" validate="maxlength:20,required:true"/></td>
+        </tr>
+         <tr>
+            <th width="80">广告现图</th>
+            <td><img src="{{ data.img }}" style="width:300px;height:80px;" class="view_msg"></td>
+        </tr>
+        <tr>
+            <th width="80">广告图片</th>
+            <td><input type="file" id="pic"  accept="image/png,image/jpeg,image/gif" class="input fl" name="pic" style="width:200px;" validate="required:true"/></td>
+            <td><input  type="hidden" id="pic1"  value=""   name="img" style="width:200px;"/></td>
+        </tr>
+
+        <tr>
+            <th width="80">广告排序</th>
+            <td><input type="text" class="input fl" name="sort" style="width:80px;" value="{{ data.priority }}" validate="maxlength:10,required:true,number:true"/></td>
+        </tr>
+        <tr>
+            <th width="80">广告状态</th>
+            <td>
+                {% if data.state == 1 %}
+                <label><input type="radio" name="status" value="1" checked="checked" />启用</label>
+               <label><input type="radio" name="status" value="0" />关闭</label>
+                    {% else %}
+                    <label><input type="radio" name="status" value="1"  />启用</label>
+               <label><input type="radio" name="status" value="0" checked="checked"/>关闭</label>
+                {% endif %}
+            </td>
+        </tr>
+        <tr class="auifooter" style="position: absolute;right: 0;bottom: 0;">
+            <td colspan="2" class="aui_footer">
+                <div class="aui_buttons">
+                    <button id="edit" class="aui_state_highlight" type="submit">编辑</button>
+                    <button id="close" type="button">关闭</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>
+<script>
+   var parent_id=$("#parent_id").val();
+   var adver_id=$("#adver_id").val();
+
+    $("#url_type").change(function () {
+       var val=$(this).find("option:selected").val();
+        if(val == 2 || val == 3){
+            $("#url").val("");
+            $("#url").show();
+        }else{
+            $("#url").hide();
+            if(val == 1){
+                window.parent.showform();
+                window.parent.add_data("选择商店或者商品","/admin/stores/?flag=edit&adver_id="+adver_id+"&parent_id="+parent_id);
+            }
+        }
+    });
+    function childFunction(a,url) {
+        $("#url").show();
+        $("#url").val(a);
+        $("#get_url").val(url);
+    }//接收来自父页面传过来的数据
+    $("#close").click(function () {
+		 window.parent.hideform();
+     });
+     $("#edit").click(function () {
+         window.parent.hideform();
+         window.parent.tip("编辑成功");
+     });
+      $("#pic").change(function () {
+        var tmpPath = $("#pic").val();
+        tmpPath=tmpPath.split(".")[1];
+         var new_name=get_file_name(2);
+        $("#pic1").val(new_name+Date.parse(new Date())+"."+tmpPath)
+     });//点击上传图片生成随机图片名
+     function get_file_name(len) {
+            let new_file_name = 'A';
+            let chars = "1234567890qwertyuiopasdfghjklzxcvbnm";
+            for (i = 0; i < len; i++) {
+                new_file_name += chars[parseInt(Math.random() * chars.length)];
+            }
+            return new_file_name;
+        }//生成随机数
+
+</script>
+</body>
+</html>

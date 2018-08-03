@@ -7,18 +7,17 @@
 </style>
 <form style="width: 100%;height: 100%;" method="post" id="myform1" action="" frame="true" refresh="true" data-call_fun="1">
     <table cellpadding="0" cellspacing="0" class="table_form" width="100%">
-
-        <tbody id="tbody">
-
+        <input type="hidden" id="accountid" name="data" value="{{ id }}">
+        <input type="hidden" id="hidedata" name="data" value="{{ data }}">
+        <tbody id="body">
         <tr>
-
-            <td><label><input type="checkbox" id="all" class="all"> 全选</label></td>
+            <td><label><input type="checkbox" id="all" class="all" checked> 全选</label></td>
              <th></th>
         </tr>
         <tr style="position: absolute;bottom: 0;right: 0;">
             <td colspan="2" class="aui_footer">
                 <div class="aui_buttons" style="">
-                    <button id="edit_authority" class="aui_state_highlight" type="submit">编辑</button>
+                    <button id="edit_authority" class="aui_state_highlight" type="button">编辑</button>
                     <button id="close_authority" type="button">关闭</button>
                 </div>
             </td>
@@ -27,6 +26,7 @@
     </table>
 </form>
 <script src="/static/js/jquery.js"></script>
+<script src="/static/js/set_authority.js"></script>
 <script>
     $("#close_authority").click(function () {
             window.parent.hideform();
@@ -44,11 +44,11 @@
         success:function(msg){
             msg.forEach(function (el){
                 str="<tr id='father_menu'></tr>"
-                $("#tbody").prepend(str);
+                $("#body").prepend(str);
                 for (var key in el) {
-                    str2=" <th width='100px'><label><input type='checkbox' class='menu_"+n+" father_menu' value='"+n+"' name='"+key+"' checked=''>"+key+"</label></th><td>"
+                    str2=" <th width='100px'><label><input  type='checkbox' class='menu_"+n+" father_menu auth' value='"+n+"' name='"+key+"' checked=''>"+key+"</label></th><td>"
                     el[key].forEach(function (i) {
-                        str2 += " <label><input type='checkbox' class='child_menu_"+n+" child_menu' value='' name='"+i+"' data-fid='"+n+"' checked=''>" + i + "</label>\n"
+                        str2 += " <label><input type='checkbox' class='child_menu_"+n+" child_menu auth' value='' name='"+i+"' data-fid='"+n+"' checked=''>" + i + "</label>\n"
                     });
                     str2+="</td>";
 
@@ -57,10 +57,31 @@
                 n++;
             });
             $('input[type="checkbox"]').attr('checked',false);
+            //获取隐藏域的val，string转换为array（根据后台数据使前台的复选框被选中）
+            var hidedata=$("#hidedata").val().split(",");
+            hidedata[0]=hidedata[0].split('[')[1];
+            var a=hidedata[hidedata.length-1];
+            hidedata[hidedata.length-1]=a.split(']')[0];
+            hidedata.forEach(function (el) {
+                $('input[name='+el+']').prop('checked',true);
+            });
         },
         error:function(xhr,textstatus,thrown){
         }
     });
+    //提交复选框的数据给后台
+    $('#edit_authority').click(function(){
+        var authority = [];//定义一个空数组
+        $("input[type='checkbox']:checked").each(function(i){//把所有被选中的复选框的值存入数组
+            authority[i]=$(this).attr("name");
+        });
+
+        //用Ajax传递参数
+        $.post('/admin/edit_authorityform/',{gmx:JSON.stringify(authority),id:$("#accountid").val()},function(json){
+
+        },'json')
+    })
+
 
 
 </script>

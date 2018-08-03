@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站后台管理 Powered by pigcms.com</title>
+   {% include 'Public/header.html' %}
+</head>
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul>
+            <a href="" class="on">广告分类列表</a>|
+        </ul>
+    </div>
+    <form name="myform" id="myform" action="" method="post">
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <colgroup><col> <col> <col><col>  <col width="180" align="center"> </colgroup>
+                <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>名称</th>
+                    <th>列表</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>APP 首页轮播图</td>
+                        <td><a href="/admin/adver_list/?id=1">列表</a></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>APP 首页菜单</td>
+                        <td><a href="/admin/adver_list/?id=2">列表</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+</body>
+</html>
