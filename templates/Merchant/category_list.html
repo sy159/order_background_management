@@ -17,7 +17,7 @@
     {% include 'Public/header.html' %}
 </head>
 
-<body width="100%" >
+<body>
 <div class="mainbox">
     <div id="nav" class="mainnav_title">
         <ul class="tbody">
@@ -63,7 +63,7 @@
                     </tr>
                      {% endfor %}
                 </tbody>
-               <tfoot id="tfoot">
+                 <tfoot id="tfoot">
                             <tr>
                                 <td class="textcenter pagebar" colspan="12">
                                     <ul class="pages">
@@ -98,12 +98,21 @@
         var td=$(this).parent().siblings()[1];
         var sort_id=$(td).html();
         if(clsn=='edit_row'){
-            // 调用父页面的方法
-            window.parent.showform();
-             window.parent.change_data("编辑分类信息","/admin/edit_originalform/",sort_id);
+           art.dialog.open('/admin/edit_originalform/?shop_id='+sort_id,{
+                title: '编辑分类信息',
+                lock: true,
+                modal:true,
+                width:800,
+                height:400
+            });
         }else if(clsn=='add_row'){
-             window.parent.showform();
-             window.parent.add_data("添加主分类","/admin/add_originalform/");
+            art.dialog.open('/admin/add_originalform/',{
+                title: '添加主分类',
+                lock: true,
+                modal:true,
+                width:800,
+                height:400
+            });
         }else if(clsn=='delete_row'){
             function callback() {
             }

@@ -234,102 +234,9 @@
     <div style="height: 100%; background: black; opacity: 0.4;">
     </div>
 </div>
-<style>
-    .table_form tbody td, .table_form tbody th {
-    border-bottom:none;
-     }
-     .table_form tbody tr {
-       display: flex;
-       border-bottom: 1px solid #eee;
-    }
-   .aui_title1{
-    height: 29px;
-    line-height: 29px;
-    padding: 0 25px 0 0;
-    _padding: 0;
-    text-indent: 5px;
-    font-weight: 700;
-    font-size: 14px;
-    color: #000;
-}
 
-</style>
-{#权限弹框#}
-<div id="authorityform" style="display: none;position: fixed;width: 711px;left: 50%;top: 50%;transform: translate(-50%, -50%);z-index: 2023;" class="aui_state_lock aui_state_focus">
-	  <div class="aui_outer">
-		<table class="aui_border">
-			<tbody>
-			<tr>
-				<td class="aui_nw"></td>
-				<td class="aui_n"></td>
-				<td class="aui_ne"></td>
-			</tr>
-			<tr>
-				<td class="aui_w"></td>
-				<td class="aui_c">
-					<div class="aui_inner">
-						<table class="aui_dialog">
-							<tbody>
-							<tr>
-								<td colspan="2" class="aui_header">
-									<div class="aui_titleBar">
-										<div class="aui_title1" style="cursor: move;">设置管理员使用权限</div>
-										<a class="aui_close2" id="aui_close" style="background-position: 0 -72px;background-image: url(/static/css/artdialog/skins/mydialog/bg_css3.png);top: 4px;right: 4px;width: 20px;height: 20px;background-repeat: no-repeat;display:block;position: absolute;"
-                                           href="javascript:/*artDialog*/;"></a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="aui_icon" style="display: none;">
-									<div class="aui_iconBg" style="/* background: none; */"></div>
-								</td>
-								<td class="aui_main" style="width: 700px; height: 500px; visibility: visible;">
-									<div class="aui_content aui_state_full" style="padding: 0px;">
-										<div class="aui_loading" style="display: none;">
-											<span>loading..</span>
-										</div>
-										<div style="width: 700px; height: 500px; border: 0px none;overflow: hidden;overflow-y: auto">
-											<form style="width: 100%;height: 100%;" method="post" id="myform1" action="" frame="true" refresh="true" data-call_fun="1">
-												<table cellpadding="0" cellspacing="0" class="table_form" width="100%">
-{#													<input type="hidden" name="admin_id" value="9">#}
-													<tbody id="body">
-
-													<tr>
-														<td><label><input type="checkbox" id="all" class="all" checked> 全选</label></td>
-													</tr>
-													<tr style="position: absolute;bottom: 0;right: 0;">
-														<td colspan="2" class="aui_footer">
-															<div class="aui_buttons" style="">
-																<button id="edit_authority" class="aui_state_highlight" type="submit">编辑</button>
-																<button id="close_authority" type="button">关闭</button>
-															</div>
-														</td>
-													</tr>
-													</tbody>
-												</table>
-											</form>
-										</div>
-									</div>
-								</td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
-				</td>
-				<td class="aui_e"></td>
-			</tr>
-			<tr>
-				<td class="aui_sw"></td>
-				<td class="aui_s"></td>
-				<td class="aui_se" style="cursor: auto;"></td>
-			</tr>
-			</tbody>
-		</table>
-	  </div>
-</div>#}
 <script type="text/javascript" src="/static/js/index.js"></script>
 <script type="text/javascript" src="/static/js/del_edit_post_get.js"></script>
-<script src="/static/js/set_authority.js"></script>
 <script type="text/javascript">
            function tip(tip){
                art.dialog({
@@ -374,7 +281,6 @@
                }else {
                     Openedit.window.childFunction($("#get_a").val(),$("#get_url").val());
                }
-
              /*
               child 为iframe的name属性值，
               不能为id，因为在FireFox下id不能获取iframe对象
@@ -395,48 +301,6 @@
                 $("#right_close").hide();
                 $('#MainBox').css('margin-right','0px');
             });
-         //添加管理员中设置管理员使用权限弹框
-           var str="",str1="",str2="",n=0;
-           $.ajax({
-                    url:"/admin/permissions/",
-                    type:"get",
-                    success:function(msg){
-                        msg.forEach(function (el){
-                             str="<tr id='father_menu'></tr>"
-                             $("#body").prepend(str);
-                            for (var key in el) {
-                                 str2=" <th width='100px'><label><input type='checkbox' class='menu_"+n+" father_menu' value='"+n+"' name='"+key+"' checked=''>"+key+"</label></th><td>"
-                               el[key].forEach(function (i) {
-                                    str2 += " <label><input type='checkbox' class='child_menu child_menu_"+n+"' value='' name='"+i+"' data-fid='"+n+"' checked=''>" + i + "</label>\n"
-                               });
-                                 str2+="</td>";
-
-                            }
-                            $("#father_menu").html(str2);
-                            n++;
-                        });
-                    },
-                    error:function(xhr,textstatus,thrown){
-                    }
-                });
-            function authorityform_open() {
-                $("#authorityform").show();
-            }
-             $("#close_authority,#aui_close").click(function (){
-                 if($("#authorityform").css("display")=="block"){
-                    $("#authorityform").hide();
-                }
-             });
-
-          //权限提交
-         var data;
-          $("#myform1").submit(function (e) {
-              e.preventDefault();
-               data=$(this).serializeArray();
-               $("#authorityform").hide();
-              var childWindow = $("#iframe_form")[0].contentWindow; //表示获取了嵌入在iframe中的子页面的window对象。  []将JQuery对象转成DOM对象，用DOM对象的contentWindow获取子页面window对象。
-               childWindow.subFunction(data);
-          });
           //点击小图显示大图函数
           function showbigimg(lable) {
                 $("#bigimg").css('display','block');

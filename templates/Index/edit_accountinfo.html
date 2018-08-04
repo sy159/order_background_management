@@ -5,11 +5,25 @@
 	<title>Title</title>
 	<link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
 	<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
-	<script src="/static/js/jquery.js"></script>
+	{% include 'Public/header.html' %}
+    <style>
+		.aui_buttons {
+			padding: 4px 0 0 0;
+		}
+		.btn{
+            position:fixed;
+            width: 100%;
+            bottom: 0;
+            right: 0;
+		}
+        form{
+           margin-bottom: 50px;
+        }
+    </style>
 </head>
 <body>
 
-<form id="myform" method="post" action="/admin/edit_accountinfo/" frame="true" refresh="true">
+<form id="myform" method="post" action="" frame="true" refresh="true">
 		<!--<input type="hidden" name="account_id" value=""/>-->
 		<table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
 			<tr>
@@ -117,19 +131,18 @@
 					</select>
 				</td>
 			</tr>
-			<tr>
-				<td colspan="2" class="aui_footer">
-					<div class="aui_buttons" style="">
-						<button id="edit" class="aui_state_highlight" type="submit">编辑</button>
-						<button id="close" type="button">关闭</button>
-					</div>
-				</td>
-			</tr>
         </table>
+        <div class="btn">
+            <td colspan="2" class="aui_footer">
+                <div class="aui_buttons">
+                    <button id="edit" class="aui_state_highlight" type="submit">编辑</button>
+                    <button id="close" type="button">关闭</button>
+                </div>
+            </td>
+        </div>
 	</form>
-
 <script>
-      //选择省、市、区函数
+
       function choose() {
                  $("#choose_province_hide").html(province);
                  $("#choose_province_hide").change(function () {
@@ -156,8 +169,8 @@
                      });
                      $("#choose_region").html(region);
                  });
-      }
-     //区域下拉框根据管理员等级显示与隐藏
+      }//选择省、市、区函数
+
      var level=parseInt($('input:radio[name="level"]:checked').val());
       if(level == 1){
          $("#choose_reg").css("display","table-row");
@@ -176,8 +189,8 @@
 
          }else{
              $("#choose_reg").css("display","none");
-         }
-     //编辑管理员等级
+         }//包装区域 ---区域下拉框根据管理员等级显示与隐藏
+
      $('input[type="radio"]').click(function () {
          var level=parseInt($('input:radio[name="level"]:checked').val());
          if(level==0){
@@ -224,21 +237,45 @@
                  });
          });
          }
-     });
-    /*关闭弹出框*/
-    $(".aui_close,#close_authority").click(function (){
-        if($("#authorityform").css("display")=="block"){
-            $("#authorityform").hide();
-        }
-    });
+     });//选择区域
 
      $("#close").click(function () {
-		 window.parent.hideform();
-     });
-     $("#edit").click(function () {
-         window.parent.hideform();
-         window.parent.tip("编辑成功");
-     });
+		 art.dialog.close();
+     });//关闭对话框
+
+     $("#myform").submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url:"/admin/edit_accountinfo/",
+            type:"post",
+            dataType:"json",
+            data:$("#myform").serialize(),
+            success:function(msg){
+                console.log(1)
+                if(msg==1){
+                    result("编辑成功","succeed");
+                    var win = art.dialog.open.origin;
+                    win.location.reload();
+                }else{
+                    result("编辑失败","error");
+                }
+            },
+            error:function(xhr,textstatus,thrown){
+            }
+        });
+    });//表单提交
+     function result(title,flag) {
+        art.dialog({
+            content: title,
+            //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+            icon: flag,
+            fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+            time: 3,//如果有cancel方法的话会调用cancel方法
+        });
+        var time = setInterval(function() {
+            art.dialog.close()
+        }, 2000);
+    }
 
 </script>
 </body>

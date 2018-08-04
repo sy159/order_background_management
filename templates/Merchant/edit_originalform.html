@@ -12,8 +12,17 @@
         padding-top: 8px;
         padding-left: 5px;
     }
+     .aui_buttons {
+			padding: 4px 0 0 0;
+		}
+    .btn{
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        right: 0;
+    }
 </style>
-<form id="myform" method="post" action="/admin/edit_originalform/" frame="true" refresh="true">
+<form id="myform" method="post" action="" frame="true" refresh="true">
         {% csrf_token %}
         <input type="hidden" name="sort_id" value="{{ data.sort_id }}"/>
 		<table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
@@ -44,24 +53,52 @@
                     </div>
 				</td>
 			</tr>
-            <tr>
-                <td colspan="2" class="aui_footer">
-                    <div class="aui_buttons" style="">
-                        <button id="edit" class="aui_state_highlight" type="submit">编辑</button>
-                        <button id="close" type="button">关闭</button>
-                    </div>
-                </td>
-            </tr>
         </table>
+        <div class="btn">
+			<td colspan="2" class="aui_footer">
+				<div class="aui_buttons">
+					<button id="edit" class="aui_state_highlight" type="submit">编辑</button>
+					<button id="close" type="button">关闭</button>
+				</div>
+			</td>
+		</div>
 	</form>
-<script src="/static/js/jquery.js"></script>
+
 <script>
     $("#close").click(function () {
-            window.parent.hideform();
-    });
-     $("#edit").click(function () {
-         window.parent.hideform();
-         window.parent.tip("编辑成功");
-     });
+         art.dialog.close();
+    });//关闭对话框
+    $("#myform").submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url:"/admin/edit_originalform/",
+            type:"post",
+            dataType:"json",
+            data:$("#myform").serialize(),
+            success:function(msg){
+                if(msg==1){
+                    result("编辑成功","succeed");
+                    var win = art.dialog.open.origin;
+                    win.location.reload();
+                }else{
+                    result("编辑失败","error");
+                }
+            },
+            error:function(xhr,textstatus,thrown){
+            }
+        });
+    });//编辑主分类表单提交
+    function result(title,flag) {
+        art.dialog({
+            content: title,
+            //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+            icon: flag,
+            fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+            time: 3,//如果有cancel方法的话会调用cancel方法
+        });
+        var time = setInterval(function() {
+            art.dialog.close()
+        }, 2000);
+    }
 
 </script>

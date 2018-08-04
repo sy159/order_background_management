@@ -209,6 +209,7 @@ def shop_list(request):
             page_total = len(data_obj) // int(get_pagesize) + 1
         else:
             page_total = len(data_obj) // int(get_pagesize)
+        if not filter_content:filter_content=''
         status_all={
             'province_name':province_name,
             'city_name':city_name,
@@ -216,6 +217,7 @@ def shop_list(request):
             'searchtype':searchtype,
             'filter_content':filter_content,
             'get_status':get_status,
+            'get_status_len':len(get_status),
             'get_searchorder':get_searchorder,
         }
         return render(request, 'Merchant/index.html',{'data': data_list,'get_page':get_page, 'page_total': str(page_total),'all_money': all_money,'status_info':status_all})
@@ -290,7 +292,7 @@ def shop_edit(request):
             status=get_status,
             region_id=get_region_id,
         )
-        return HttpResponse('修改成功')
+        return HttpResponse(1)
 
 
 def store_form(request):
@@ -817,8 +819,7 @@ def edit_childform(request):
         get_priority=request.POST.get('priority')
         get_state=request.POST.get('state')
         models.ShopSort.objects.filter(sort_id=get_sort_id).update(sort_name=get_sort_name,priority=get_priority,state=get_state,parent_id=parent_obj.parent_id)
-        url='/admin/check_childlist/?sort_id='+str(parent_obj.parent_id)+"&name="+obj.sort_name
-        return redirect(url)
+        return HttpResponse(1)
     elif request.method=='DELETE':
         get_sort_id=request.GET.get('sort_id')
         models.ShopSort.objects.filter(sort_id=get_sort_id).delete()

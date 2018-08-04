@@ -133,6 +133,10 @@ def add_account(request):
         return HttpResponse(1)
 
 
+def set_authority(request):
+    return  render(request,'Index/set_authority.html')
+
+
 def permissions(request):
     '''
     显示能够赋予权限
@@ -161,7 +165,7 @@ def edit_accountinfo(request):
     if request.method == 'GET':
         get_parent = request.session.get('user')
         parent_obj = models.Admin.objects.filter(account=get_parent).first()
-        get_admin_id = request.GET.get('shop_id')
+        get_admin_id = request.GET.get('account_id')
         obj = models.Admin.objects.filter(id=get_admin_id).first()
         if obj.open_admin_region:
             obj_region = models.Region.objects.filter(region_id=obj.open_admin_region).first()
@@ -208,6 +212,9 @@ def edit_accountinfo(request):
     elif request.method == 'POST':
         get_account = request.POST.get('account')
         get_pwd = request.POST.get('pwd')
+        hash_key = hashlib.sha256()
+        hash_key.update(get_pwd.encode())
+        get_pwd = hash_key.hexdigest()
         get_realname = request.POST.get('realname')
         get_phone = request.POST.get('phone')
         get_email = request.POST.get('email')
@@ -231,7 +238,7 @@ def edit_accountinfo(request):
             models.Admin.objects.filter(account=get_account).update(realname=get_realname, phone=get_phone,
                                                                     email=get_email, qq=get_qq, status=get_status,
                                                                     level=get_level, open_admin_region=get_region)
-        return redirect('/admin/account_list/')
+        return HttpResponse(1)
     elif request.method == 'DELETE':
         get_id = request.GET.get('account_id')
         models.Admin.objects.filter(id=get_id).delete()
@@ -240,7 +247,7 @@ def edit_accountinfo(request):
 
 def edit_authorityform(request):
     if request.method == 'GET':
-        get_id = request.GET.get('shop_id')
+        get_id = request.GET.get('account_id')
         obj = models.Admin.objects.filter(id=get_id).first()
         obj_list = []
         for i in json.loads(obj.menus):

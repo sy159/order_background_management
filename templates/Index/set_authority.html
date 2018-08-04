@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
+    {% include 'Public/header.html' %}
+    <style>
+    .table_form tbody td, .table_form tbody th {
+    border-bottom:none;
+     }
+     .table_form tbody tr {
+       display: flex;
+       border-bottom: 1px solid #eee;
+    }
+    .table_form {
+       border: none;
+    }
+</style>
+</head>
+<body>
+<form style="width: 100%;height: 100%;" method="post" id="myform1" action="" frame="true" refresh="true" data-call_fun="1">
+    <table cellpadding="0" cellspacing="0" class="table_form" width="100%">
+        <tbody id="body">
+        <tr>
+            <td><label><input type="checkbox" id="all" class="all" checked> 全选</label></td>
+        </tr>
+        <tr style="position: absolute;bottom: 0;right: 0;">
+            <td colspan="2" class="aui_footer">
+                <div class="aui_buttons" style="">
+                    <button id="edit_authority" class="aui_state_highlight" type="submit">编辑</button>
+                    <button id="close_authority" type="button">关闭</button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+<script src="/static/js/set_authority.js"></script>
+<script>
+    //添加管理员中设置管理员使用权限弹框
+    var str="",str1="",str2="",n=0;
+    $.ajax({
+        url:"/admin/permissions/",
+        type:"get",
+        success:function(msg){
+            msg.forEach(function (el){
+                str="<tr id='father_menu'></tr>"
+                $("#body").prepend(str);
+                for (var key in el) {
+                    str2=" <th width='100px'><label><input type='checkbox' class='menu_"+n+" father_menu' value='"+n+"' name='"+key+"' checked=''>"+key+"</label></th><td>"
+                    el[key].forEach(function (i) {
+                        str2 += " <label><input type='checkbox' class='child_menu child_menu_"+n+"' value='' name='"+i+"' data-fid='"+n+"' checked=''>" + i + "</label>\n"
+                    });
+                    str2+="</td>";
+
+                }
+                $("#father_menu").html(str2);
+                n++;
+            });
+        },
+        error:function(xhr,textstatus,thrown){
+        }
+    });
+    //权限提交
+     var data;
+          $("#myform1").submit(function (e) {
+              e.preventDefault();
+               data=$(this).serializeArray();
+               art.dialog.data('data',data);//返回数据
+               art.dialog.close();
+          });
+     //关闭弹窗
+      $("#close_authority").click(function () {
+          data=$("#myform1").serializeArray();
+          art.dialog.data('data',data);//返回数据
+          art.dialog.close();
+      });
+</script>
+</body>
+</html>

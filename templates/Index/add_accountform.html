@@ -27,12 +27,12 @@
     </style>
 </head>
 <body>
-<form id="myform" method="post"  onSubmit="return confirm();" action="/admin/add_account/" frame="true" refresh="true">
+<form id="myform" method="post"   action="" frame="true" refresh="true">
 		<table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
 			<tr>
 				<th width="160">账号</th>
 				<td>
-                    <input  type="text" id="account" class="input fl" name="account" value="" size="25"  validate="maxlength:20,required:true"/>
+                    <input  type="text"  id="account" class="input fl" name="account" value="" size="25"  validate="maxlength:20,required:true"/>
 				     <input id="recept" type="hidden" value="{{ state }}">
                      <strong class='high position account'>*</strong>
                 </td>
@@ -127,14 +127,6 @@
 					</select>
 				</td>
 			</tr>
-{#			<tr>#}
-{#				<td colspan="2" class="aui_footer">#}
-{#					<div class="aui_buttons" style="">#}
-{#						<button id="edit" class="aui_state_highlight" type="submit">添加</button>#}
-{#						<button id="close" type="button">关闭</button>#}
-{#					</div>#}
-{#				</td>#}
-{#			</tr>#}
         </table>
         <div class="btn">
             <td colspan="2" class="aui_footer">
@@ -146,14 +138,29 @@
         </div>
 </form>
 <script>
-    /*打开弹出框*/
+
     $("#set_authority").click(function (){
-        window.parent.authorityform_open();
-    });
+        art.dialog.open('/admin/set_authority/',{
+            title: '设置管理员使用权限',
+            lock: true,
+            modal:true,
+            width:800,
+            height:400,
+            close:function () {
+                var data=art.dialog.data('data');
+                    var arr=[];
+                    data.forEach(function (el) {
+                        arr.push(el.name);
+                    });
+                    $("#recpt_authoritydata").val(arr);
+            }
+        });
+    }); /*打开设置权限对话框*/
+
      $("#close").click(function () {
-		 window.parent.hideform();
-     });
-      //区域下拉框根据管理员等级显示与隐藏
+		art.dialog.close();
+     });//关闭对话框
+
      $("#radio").click(function () {
          var val=parseInt($('input:radio[name="level"]:checked').val());
          if(val == 1){
@@ -193,21 +200,16 @@
          }else{
              $("#choose_reg").css("display","none");
          }
-     });
-      var arr=[];
-      function subFunction(data) {
-         data.forEach(function (el) {
-             arr.push(el.name);
-         });
-         $("#recpt_authoritydata").val(arr);
-     }//接收父级传来的权限数据
-     //表单验证提交(含判断账号唯一性)
-    function confirm()
-    {
-        if($("#account").val().length == 0){
-           $(".account").html("账号不能为空!")
-           return false;
-        }else{
+     }); //区域下拉框根据管理员等级显示与隐藏
+
+    $("#myform").submit(function (e) {
+        e.preventDefault();
+        confirm();
+        function confirm(){
+            if($("#account").val().length == 0){
+                   $(".account").html("账号不能为空!")
+                   return false;
+            }else{
              var username = $("#account").val();
             $.ajax({
                 url : "/admin/account_unique/", //后台查询验证的方法
@@ -220,59 +222,90 @@
                     if (msg.state==1) {
                         // 账号已经存在
                         $(".account").html("抱歉，" + username + "已存在，请更换！")
+                        $(".account").focus()
+                         return false;
                     } else {
                         // 账号不存在
                         $(".account").html( "恭喜，" + username + " 可以添加！")
-                    }
-                }
-            });
-            if($("#pwd").val().length == 0)
-            {
-                $(".pwd").html("密码不能为空！")
-                return false;
-            }else{
-                $(".pwd").html(" ")
-                if($("#realname").val().length == 0)
-                {
-                    $(".realname").html("真实姓名不能为空！")
-                    $("#realname").focus();
-                    return false;
-                }else{
-                    $(".realname").html(" ")
-                    if($("#phone").val().length == 0)
-                    {
-                        $(".phone").html("电话不能为空！")
-                        return false;
-                    }else {
-                        $(".phone").html(" ")
-                        if($("#email").val().length == 0)
+                        if($("#pwd").val().length == 0)
                         {
-                            $(".email").html("EMAILL不能为空！")
+                            $(".pwd").html("密码不能为空！")
                             return false;
                         }else{
-                            $(".email").html(" ")
-                            if($("#qq").val().length == 0){
-                                $(".qq").html("QQ不能为空！")
+                            $(".pwd").html(" ")
+                            if($("#realname").val().length == 0)
+                            {
+                                $(".realname").html("真实姓名不能为空！")
+                                $("#realname").focus();
                                 return false;
                             }else{
-                                $(".qq").html("")
-                                if($("#recpt_authoritydata").val().length == 0){
-                                    $(".authority").html("请选择权限！")
+                                $(".realname").html(" ")
+                                if($("#phone").val().length == 0)
+                                {
+                                    $(".phone").html("电话不能为空！")
                                     return false;
-                                }else{
-                                    $(".authority").html("")
-                                    window.parent.hideform();
-                                    window.parent.tip("添加成功");
-                                    return true;
+                                }else {
+                                    $(".phone").html(" ")
+                                    if($("#email").val().length == 0)
+                                    {
+                                        $(".email").html("EMAILL不能为空！")
+                                        return false;
+                                    }else{
+                                        $(".email").html(" ")
+                                        if($("#qq").val().length == 0){
+                                            $(".qq").html("QQ不能为空！")
+                                            return false;
+                                        }else{
+                                            $(".qq").html("")
+                                            if($("#recpt_authoritydata").val().length == 0){
+                                                $(".authority").html("请选择权限！")
+                                                return false;
+                                            }else{
+                                                $(".authority").html("");
+                                                return true;
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
+                    $.ajax({
+                        url:"/admin/add_account/",
+                        type:"post",
+                        dataType:"json",
+                        data: $("#myform").serialize(),
+                        success:function(msg){
+                            if(msg==1){
+                                result("添加成功","succeed");
+                                var win = art.dialog.open.origin;
+                                win.location.reload();
+                            }else{
+                                result("添加失败","error");
+                            }
+                        },
+                        error:function(xhr,textstatus,thrown){
+                        }
+                    });
                 }
-            }
+            });
         }
+    }//表单验证提交(含判断账号唯一性)
+    });//表单验证提交
 
+     function result(title,flag) {
+        art.dialog({
+            content: title,
+            //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+            icon: flag,
+            fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+            time: 3,//如果有cancel方法的话会调用cancel方法
+        });
+        var time = setInterval(function() {
+            art.dialog.close()
+        }, 2000);
     }
+
 
 </script>
 </body>

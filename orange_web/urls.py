@@ -52,6 +52,7 @@ urlpatterns = [
     path('admin/add_account/', basic_info.add_account),#添加管理员
     path('admin/permissions/', basic_info.permissions),#权限api
     path('admin/edit_authorityform/', basic_info.edit_authorityform),#编辑管理员权限弹框
+    path('admin/set_authority/', basic_info.set_authority),#设置管理员权限弹框
 
     #系统设置
     path('admin/adver_management/', system_setting.adver_management),#广告管理

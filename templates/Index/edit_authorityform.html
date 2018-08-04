@@ -1,42 +1,55 @@
-<link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
-<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
-<style>
-    .table_form {
-        border:none;
-    }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
+    {% include 'Public/header.html' %}
+    <style>
+        .table_form {
+            border: none;
+        }
+        	.aui_buttons {
+			padding: 4px 0 0 0;
+		}
+		.btn{
+            position:fixed;
+            width: 100%;
+            bottom: 0;
+            right: 0;
+		}
+    </style>
+</head>
+<body>
 <form style="width: 100%;height: 100%;" method="post" id="myform1" action="" frame="true" refresh="true" data-call_fun="1">
     <table cellpadding="0" cellspacing="0" class="table_form" width="100%">
         <input type="hidden" id="accountid" name="data" value="{{ id }}">
         <input type="hidden" id="hidedata" name="data" value="{{ data }}">
         <tbody id="body">
-        <tr>
-            <td><label><input type="checkbox" id="all" class="all" checked> 全选</label></td>
-             <th></th>
-        </tr>
-        <tr style="position: absolute;bottom: 0;right: 0;">
-            <td colspan="2" class="aui_footer">
-                <div class="aui_buttons" style="">
-                    <button id="edit_authority" class="aui_state_highlight" type="button">编辑</button>
-                    <button id="close_authority" type="button">关闭</button>
-                </div>
-            </td>
-        </tr>
+
+            <tr>
+                <td><label><input type="checkbox" id="all" class="all" checked> 全选</label></td>
+                 <th></th>
+            </tr>
         </tbody>
     </table>
+    <div class="btn">
+        <td colspan="2" class="aui_footer">
+            <div class="aui_buttons">
+                <button id="edit_authority" class="aui_state_highlight" type="submit">编辑</button>
+                <button id="close_authority" type="button">关闭</button>
+            </div>
+        </td>
+    </div>
 </form>
-<script src="/static/js/jquery.js"></script>
+</body>
 <script src="/static/js/set_authority.js"></script>
 <script>
     $("#close_authority").click(function () {
-            window.parent.hideform();
-    });
+            art.dialog.close();
+    });//关闭对话框
 
-    $("#edit_authority").click(function () {
-         window.parent.hideform();
-         window.parent.tip("编辑成功");
-     });
-     //修饰登录的管理员得权限
+
       var str="",str1="",str2="",n=0;
     $.ajax({
         url:"/admin/permissions/",
@@ -68,19 +81,47 @@
         },
         error:function(xhr,textstatus,thrown){
         }
-    });
-    //提交复选框的数据给后台
-    $('#edit_authority').click(function(){
+    });//修饰登录的管理员的权限
+
+
+    $("#myform1").submit(function (e) {
+        e.preventDefault();
         var authority = [];//定义一个空数组
         $("input[type='checkbox']:checked").each(function(i){//把所有被选中的复选框的值存入数组
             authority[i]=$(this).attr("name");
         });
+        $.ajax({
+            url:"/admin/edit_authorityform/",
+            type:"post",
+            dataType:"json",
+            data:{gmx:JSON.stringify(authority),id:$("#accountid").val()},
+            success:function(msg){
+                console.log(msg)
+                if(msg==1){
+                    result("编辑成功","succeed");
+                    var win = art.dialog.open.origin;
+                    win.location.reload();
+                }else{
+                    result("编辑失败","error");
+                }
+            },
+            error:function(xhr,textstatus,thrown){
+            }
+        });
+    });//提交复选框的数据给后台
+     function result(title,flag) {
+        art.dialog({
+            content: title,
+            //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+            icon: flag,
+            fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+            time: 3,//如果有cancel方法的话会调用cancel方法
+        });
+        var time = setInterval(function() {
+            art.dialog.close()
+        }, 2000);
+    }
 
-        //用Ajax传递参数
-        $.post('/admin/edit_authorityform/',{gmx:JSON.stringify(authority),id:$("#accountid").val()},function(json){
-
-        },'json')
-    })
 
 
 
