@@ -3,9 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
-	<link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
 	<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
-	<script src="/static/js/jquery.js"></script>
+    {% include 'Public/header.html' %}
     <style>
           .high{ color: red; }
          .position{
@@ -13,10 +12,21 @@
             padding-top: 15px;
             padding-left: 5px;
         }
+		.aui_buttons {
+			padding: 4px 0 0 0;
+		}
+		.btn{
+            position:fixed;
+            width: 100%;
+            bottom: 0;
+            right: 0;
+		}
+        form{
+           margin-bottom: 50px;
+        }
     </style>
 </head>
 <body>
-
 <form id="myform" method="post"  onSubmit="return confirm();" action="/admin/add_account/" frame="true" refresh="true">
 		<table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
 			<tr>
@@ -117,18 +127,24 @@
 					</select>
 				</td>
 			</tr>
-			<tr>
-				<td colspan="2" class="aui_footer">
-					<div class="aui_buttons" style="">
-						<button id="edit" class="aui_state_highlight" type="submit">添加</button>
-						<button id="close" type="button">关闭</button>
-					</div>
-				</td>
-			</tr>
+{#			<tr>#}
+{#				<td colspan="2" class="aui_footer">#}
+{#					<div class="aui_buttons" style="">#}
+{#						<button id="edit" class="aui_state_highlight" type="submit">添加</button>#}
+{#						<button id="close" type="button">关闭</button>#}
+{#					</div>#}
+{#				</td>#}
+{#			</tr>#}
         </table>
+        <div class="btn">
+            <td colspan="2" class="aui_footer">
+                <div class="aui_buttons">
+                    <button id="edit" class="aui_state_highlight" type="submit">添加</button>
+                    <button id="close" type="button">关闭</button>
+                </div>
+            </td>
+        </div>
 </form>
-
-
 <script>
     /*打开弹出框*/
     $("#set_authority").click(function (){
@@ -180,7 +196,6 @@
      });
       var arr=[];
       function subFunction(data) {
-         console.log(data);
          data.forEach(function (el) {
              arr.push(el.name);
          });

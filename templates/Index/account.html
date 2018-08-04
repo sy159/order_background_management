@@ -11,7 +11,6 @@
         <ul class="tbody">
             <a href="/admin/account_list/" class="on">账号列表</a>|
             <a href="javascript:void(0);" class="add_row">添加管理员</a>|
-
         </ul>
     </div>
     <table class="search_table" width="100%">
@@ -104,6 +103,7 @@
 <script type="text/javascript">
     $(".tbody").on('click','a',function () {
         var clsn=this.className;
+        console.log(clsn);
         var td=$(this).parent().siblings()[0];
         var sort_id=$(td).html();
         if(clsn=='edit_row'){

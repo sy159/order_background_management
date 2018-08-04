@@ -11,8 +11,7 @@ def shop_list(request):
     商户列表
     '''
     get_pagesize = 15
-    all_money_obj = models.Shop.objects.values('money').annotate(all_money=Sum('money'))
-    all_money = all_money_obj[0]['all_money']
+    all_money = models.Shop.objects.values('money').aggregate(all_money=Sum('money'))['all_money']
     get_operator=request.session.get('user')
     obj=models.Admin.objects.filter(account=get_operator).first()
     if request.method=='GET':

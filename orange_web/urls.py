@@ -62,7 +62,8 @@ urlpatterns = [
     path('admin/adver_edit/', system_setting.adver_edit),#编辑广告信息
 
     #用户管理
-    path('admin/user_list/', users.user_list),  # 编辑广告信息
+    path('admin/user_list/', users.user_list),  # 广告信息列表
+    path('admin/user_edit/', users.user_edit),  # 编辑广告信息
 
 ]
 

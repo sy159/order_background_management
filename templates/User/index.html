@@ -5,15 +5,15 @@
     <title>后台管理 - 橙子校园</title>
     {% include 'Public/header.html' %}
     <style>
-    ul.pages{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    ol, ul {
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
+        ul.pages{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ol, ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
 </style>
 </head>
 <body>
@@ -29,27 +29,46 @@
                 <form action="/admin/user_list/" method="get">
                     <input type="hidden" name="c" value="User"/>
                     <input type="hidden" name="a" value="index"/>
-                    筛选: <input type="text" name="keyword" class="input-text" value=""/>
+                    筛选: <input type="text" name="keyword" class="input-text" value="{{ search_data.keyword}}"/>
                     <select name="searchtype">
-                        <option value="user_id" >用户ID</option>
+                         {% if search_data.searchtype == 'user_id' %}
+                        <option value="user_id" selected>用户ID</option>
                         <option value="nickname" >昵称</option>
                         <option value="phone_number" >手机号</option>
+                        {% elif search_data.searchtype == 'nickname' %}
+                         <option value="user_id">用户ID</option>
+                        <option value="nickname" selected>昵称</option>
+                        <option value="phone_number" >手机号</option>
+                        {% else %}
+                         <option value="user_id">用户ID</option>
+                        <option value="nickname">昵称</option>
+                        <option value="phone_number" selected>手机号</option>
+                        {% endif %}
                     </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <font color="#000">注册日期筛选：</font>
-                    <input type="text" class="input-text" name="begin_time" style="width:120px;" id="d4311"  value="" onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"/>
-                    <input type="text" class="input-text" name="end_time" style="width:120px;" id="d4311" value="" onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"/>
+                    <input type="text" class="input-text" name="begin_time" style="width:120px;" id="d4311"  value="{{ search_data.begin_time}}" onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"/>
+                    <input type="text" class="input-text" name="end_time" style="width:120px;" id="d4311" value="{{ search_data.end_time}}" onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"/>
 
                     状态:
                     <select name="status">
-                        <option value="2" >全部</option>
+                        {% if search_data.status == "2" %}
+                        <option value="2" selected>全部</option>
                         <option value="1" >正常</option>
                         <option value="0" >禁用</option>
+                        {% elif search_data.status == '1' %}
+                        <option value="2">全部</option>
+                        <option value="1" selected>正常</option>
+                        <option value="0" >禁用</option>
+                        {% else %}
+                        <option value="2">全部</option>
+                        <option value="1">正常</option>
+                        <option value="0" selected>禁用</option>
+                        {% endif %}
                     </select>
                     <input type="submit" style="margin-right:20px;" value="查询" class="button"/>
-                    用户总余额：987.71元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    正常用户总余额：987.15元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    禁止用户总余额：0.06元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    用户总积分：1469905个
+                    用户总余额：{{ money_data.all_money }}元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    禁止用户总余额：{{ money_data.disable_money }}元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    用户总积分：{{ money_data.all_integral }}个
                 </form>
 
             </td>
@@ -84,7 +103,7 @@
                         <th class="textcenter">操作</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbody">
                 {% for i in data %}
                     <tr>
                         <td>{{ i.user_id }}</td>
@@ -100,7 +119,7 @@
                             <td class="textcenter"><font color="green">禁用</font></td>
                         {% endif %}
                         <td class="textcenter"><a href="">推广用户</a></td>
-                        <td class="textcenter"><a href="javascript:void(0);">编辑</a></td>
+                        <td class="textcenter"><a  class="edit" href="javascript:void(0);">编辑</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -108,19 +127,19 @@
                     <tr>
                         <td class="textcenter pagebar" colspan="12">
                             <ul class="pages">
-                                <li><a href='/admin/user_list/?p=1'>首页</a></li>
+                                <li><a href='/admin/user_list/?p=1&keyword={{ search_data.keyword}}&begin_time={{ search_data.begin_time}}&end_time={{ search_data.end_time}}&status={{ search_data.status }}&searchtype={{ search_data.searchtype }}'>首页</a></li>
                                 {% if  get_page  == '1' %}
                                     <li><a href='#'>&lt;上一页</a></li>
                                 {% else %}
-                                <li><a href='/admin/user_list/?p={{ get_page |add:-1}}&s=1'>&lt;上一页</a></li>
+                                <li><a href='/admin/user_list/?p={{ get_page |add:-1}}&keyword={{ search_data.keyword}}&begin_time={{ search_data.begin_time}}&end_time={{ search_data.end_time}}&status={{ search_data.status }}&searchtype={{ search_data.searchtype }}'>&lt;上一页</a></li>
 
                                 {% endif %}
                             {% if  get_page  >=  page_total  %}
                                 <li><a href='#'>下一页&gt;</a></li>
                                 {% else %}
-                                <li><a href='/admin/user_list/?p={{ get_page |add:1}}&s=1'>下一页&gt;</a></li>
+                                <li><a href='/admin/user_list/?p={{ get_page |add:1}}&keyword={{ search_data.keyword}}&begin_time={{ search_data.begin_time}}&end_time={{ search_data.end_time}}&status={{ search_data.status }}&searchtype={{ search_data.searchtype }}'>下一页&gt;</a></li>
                             {% endif %}
-                                <li><a href='/admin/user_list/?p={{ page_total }}'>尾页></a></li>
+                                <li><a href='/admin/user_list/?p={{ page_total }}&keyword={{ search_data.keyword}}&begin_time={{ search_data.begin_time}}&end_time={{ search_data.end_time}}&status={{ search_data.status }}&searchtype={{ search_data.searchtype }}'>尾页></a></li>
                                 <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
                             </ul>
                         </td>
@@ -132,6 +151,18 @@
 </div>
 </body>
 <script type="text/javascript">
+    $("#tbody").on('click','a',function () {
+           var userid=$(this).parent().siblings()[0];
+           userid=$(userid).text();
+            art.dialog.open('/admin/user_edit/?userid='+userid,{
+                title: '编辑用户信息',
+                lock: true,
+                modal:true,
+                width:800,
+                height:400
+            });
+    });
+
 
 </script>
 </html>

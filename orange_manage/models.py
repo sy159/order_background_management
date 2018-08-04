@@ -34,7 +34,7 @@ class Address(models.Model):
 
 class Admin(models.Model):
     account = models.CharField(max_length=20)
-    pwd = models.CharField(max_length=32)
+    pwd = models.CharField(max_length=255)
     realname = models.CharField(max_length=20)
     phone = models.CharField(max_length=20)
     email = models.CharField(max_length=20)
@@ -331,8 +331,8 @@ class Goods(models.Model):
     image = models.CharField(max_length=255, blank=True, null=True)
     pack_cost = models.DecimalField(max_digits=10, decimal_places=2)
     unit = models.CharField(max_length=255, blank=True, null=True)
-    unit_price = models.FloatField(blank=True, null=True)
-    original_price = models.FloatField(blank=True, null=True)
+    unit_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    original_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     stock = models.IntegerField(blank=True, null=True)
     classify_id = models.IntegerField()
     status = models.IntegerField()
@@ -482,6 +482,7 @@ class Orders(models.Model):
     pay_mode = models.IntegerField(blank=True, null=True)
     pay_amount = models.FloatField(blank=True, null=True)
     unfinished_reason = models.CharField(max_length=255, blank=True, null=True)
+    campus_id = models.IntegerField(blank=True, null=True)
     user_name = models.CharField(max_length=255, blank=True, null=True)
     user_phone_number = models.CharField(max_length=255, blank=True, null=True)
     user_address = models.CharField(max_length=255, blank=True, null=True)
@@ -815,6 +816,7 @@ class User(models.Model):
     payment_password = models.CharField(max_length=255, blank=True, null=True)
     integral = models.IntegerField()
     last_ip = models.CharField(max_length=20, blank=True, null=True)
+    qq = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         managed = False

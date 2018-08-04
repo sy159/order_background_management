@@ -130,7 +130,16 @@ div.titlev{float:none; background:#FBFAF8; border:1px solid #d4d4d4; padding-top
 .table-list tbody td{text-align:left;}
 .table-list .textcenter {text-align: center;}
 .table-list tbody td , .table-list .btn{border-bottom: #eee 1px solid;}
-.btn{background:#f6f6f6; padding:6px 12px; height:30px;line-height:30px}
+.btn{
+	background:#f6f6f6;
+	padding:6px 12px;
+	height:30px;
+	line-height:30px;
+	position: absolute;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+}
 .table-list tr:hover , .table-list table tbody tr:hover{ background:#fbffe4}
 .nHover tr:hover , .nHover tr:hover td{ background:none}
 .table-list .input-text-c{ padding:0; height:18px}

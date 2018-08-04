@@ -24,10 +24,7 @@ $.postJSON = function(url,data,callback){
     $.ajax({
         url:url,
         type:"post",
-        contentType:"application/json",
-        dataType:"json",
         data:data,
-        timeout:60000,
         success:function(msg){
             callback(msg);
         },
