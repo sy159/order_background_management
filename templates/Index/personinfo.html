@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站后台管理 Powered by pigcms.com</title>
+     {% include 'Public/header.html' %}
+    <style>
+        .btn{
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <a href="" class="on">修改资料</a>
+    </div>
+    <form method="post" id="myform" action="" refresh="true">
+        <input type="hidden" class="input-text" name="system_menu" value=""/>
+
+        <table cellpadding="0" cellspacing="0" class="table_form" width="100%">
+            <tr>
+                <th  width="120">帐号：</th>
+                <td>{{ data.account }}</td>
+            </tr>
+            <tr>
+                <th>新密码：</th>
+                <td><input type="password" class="input-text"  name="new_pass" id="password" validate="required:true,minlength:5,maxlength:20"/></td>
+            </tr>
+            <tr>
+                <th  width="120">真实姓名：</th>
+                <td><input type="text" class="input-text"  name="realname" value="{{ data.realname }}" validate="required:true" /></td>
+            </tr>
+            <tr>
+                <th>邮箱：</th>
+                <td><input type="text" class="input-text"  name="email" value="{{ data.email }}" validate="required:true,email:true,minlength:1,maxlength:40" /></td>
+            </tr>
+            <tr>
+                <th>Q Q：</th>
+                <td><input type="text" class="input-text"  name="qq" value="{{ data.qq }}" validate="required:true,qq:true" /></td>
+            </tr>
+            <tr>
+                <th>手机号码：</th>
+                <td><input type="text" class="input-text"  name="phone" value="{{ data.phone }}"  validate="required:true,mobile:true" /></td>
+            </tr>
+        </table>
+        <div class="btn">
+            <input TYPE="submit" id="submit" name="dosubmit" value="修改" class="button" />
+            <input type="reset" value="取消" class="button"  />
+
+        </div>
+    </form>
+</div>
+</body>
+<script type="text/javascript">
+      $("#myform").submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url:"/admin/edit_personinfo/",
+            type:"post",
+            dataType:"json",
+            data:$("#myform").serialize(),
+            success:function(msg){
+                if(msg==1){
+                    result("修改成功","succeed");
+                }else{
+                    result("修改失败","error");
+                }
+            },
+            error:function(xhr,textstatus,thrown){
+            }
+        });
+    });//表单提交
+   function result(title,flag) {
+        art.dialog({
+            content: title,
+            //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+            icon: flag,
+            fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+            time: 3,//如果有cancel方法的话会调用cancel方法
+        });
+        var time = setInterval(function() {
+            art.dialog.close()
+        }, 2000);
+    }
+</script>
+</html>

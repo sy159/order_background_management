@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站后台管理 Powered by pigcms.com</title>
+    {% include 'Public/header.html' %}
+    <style>
+        ul.pages{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ol, ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul>
+            <a href="" class="on">订单列表</a>
+        </ul>
+    </div>
+    <table class="search_table" width="100%">
+        <tr>
+            <td>
+                <form action="" method="get">
+                    搜索: <input type="text" name="keyword" id="keyword" class="input-text" value="{{ search_data.keyword }}"/>
+                    <select name="searchtype" id="searchtype">
+                        {% if search_data.searchtype == 'order_id'  %}
+                        <option value="order_id" selected>订单编号</option>
+{#                        <option value="orderid" >订单流水号</option>#}
+{#                        <option value="third_id" >第三方支付流水号</option>#}
+{#                        <option value="s_name" >店铺名称</option>#}
+{#                        TODO#}
+                        <option value="user_name" >客户名称</option>
+                        <option value="user_phone_number" >客户电话</option>
+                            {% elif search_data.searchtype == 'user_name' %}
+                            <option value="order_id" >订单编号</option>
+                        <option value="user_name" selected>客户名称</option>
+                        <option value="user_phone_number" >客户电话</option>
+                            {% elif search_data.searchtype == 'user_phone_number' %}
+                            <option value="order_id" >订单编号</option>
+                        <option value="user_name" >客户名称</option>
+                        <option value="user_phone_number" selected>客户电话</option>
+                            {% else %}
+                            <option value="order_id" >订单编号</option>
+                        <option value="user_name" >客户名称</option>
+                        <option value="user_phone_number">客户电话</option>
+                        {% endif %}
+                    </select>
+                    <font color="#000">日期筛选：</font>
+                    <input type="text" class="input-text" name="begin_time" style="width:80px;" id="begin_time"  value="{{ search_data.begin_time }}" onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"/>
+                    <input type="text" class="input-text" name="end_time" style="width:80px;" id="end_time" value="{{ search_data.end_time }}" onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"/>
+                    订单状态筛选:
+                    <select id="status" name="order_status">
+                        {% if  search_data.order_status == '-1' %}
+                        <option value="-1" selected="selected">全部</option>
+                        <option value="0" >未支付</option>
+                        <option value="1" >已支付未接单</option>
+                        <option value="2" >已接单待抢单</option>
+                        <option value="4" >已抢单未取货</option>
+                        <option value="5" >取货中</option>
+                        <option value="6" >已取货配送中</option>
+                        <option value="7" >配送已完成</option>
+                        <option value="8" >已评价</option>
+                        <option value="9" >退款中</option>
+                        <option value="10" >已退款</option>
+                             {% elif  search_data.order_status == '0' %}
+                        <option value="-1" >全部</option>
+                        <option value="0" selected="selected">未支付</option>
+                        <option value="1" >已支付未接单</option>
+                        <option value="2" >已接单待抢单</option>
+                        <option value="4" >已抢单未取货</option>
+                        <option value="5" >取货中</option>
+                        <option value="6" >已取货配送中</option>
+                        <option value="7" >配送已完成</option>
+                        <option value="8" >已评价</option>
+                        <option value="9" >退款中</option>
+                        <option value="10" >已退款</option>
+                            {% elif  search_data.order_status == '1' %}
+                        <option value="-1">全部</option>
+                        <option value="0" >未支付</option>
+                        <option value="1" selected>已支付未接单</option>
+                        <option value="2" >已接单待抢单</option>
+                        <option value="4" >已抢单未取货</option>
+                        <option value="5" >取货中</option>
+                        <option value="6" >已取货配送中</option>
+                        <option value="7" >配送已完成</option>
+                        <option value="8" >已评价</option>
+                        <option value="9" >退款中</option>
+                        <option value="10" >已退款</option>
+                            {% elif  search_data.order_status == '2' %}
+                        <option value="-1" >全部</option>
+                        <option value="0" >未支付</option>
+                        <option value="1" >已支付未接单</option>
+                        <option value="2" selected>已接单待抢单</option>
+                        <option value="4" >已抢单未取货</option>
+                        <option value="5" >取货中</option>
+                        <option value="6" >已取货配送中</option>
+                        <option value="7" >配送已完成</option>
+                        <option value="8" >已评价</option>
+                        <option value="9" >退款中</option>
+                        <option value="10" >已退款</option>
+                            {% elif  search_data.order_status == '4' %}
+                        <option value="-1">全部</option>
+                        <option value="0" >未支付</option>
+                        <option value="1" >已支付未接单</option>
+                        <option value="2" >已接单待抢单</option>
+                        <option value="4" selected>已抢单未取货</option>
+                        <option value="5" >取货中</option>
+                        <option value="6" >已取货配送中</option>
+                        <option value="7" >配送已完成</option>
+                        <option value="8" >已评价</option>
+                        <option value="9" >退款中</option>
+                        <option value="10" >已退款</option>
+                            {% elif  search_data.order_status == '5' %}
+                        <option value="-1">全部</option>
+                        <option value="0" >未支付</option>
+                        <option value="1" >已支付未接单</option>
+                        <option value="2" >已接单待抢单</option>
+                        <option value="4" >已抢单未取货</option>
+                        <option value="5" selected >取货中</option>
+                        <option value="6" >已取货配送中</option>
+                        <option value="7" >配送已完成</option>
+                        <option value="8" >已评价</option>
+                        <option value="9" >退款中</option>
+                        <option value="10" >已退款</option>
+                            {% elif  search_data.order_status == '6' %}
+                        <option value="-1">全部</option>
+                        <option value="0" >未支付</option>
+                        <option value="1" >已支付未接单</option>
+                        <option value="2" >已接单待抢单</option>
+                        <option value="4" >已抢单未取货</option>
+                        <option value="5" >取货中</option>
+                        <option value="6" selected>已取货配送中</option>
+                        <option value="7" >配送已完成</option>
+                        <option value="8" >已评价</option>
+                        <option value="9" >退款中</option>
+                        <option value="10" >已退款</option>
+                            {% elif  search_data.order_status == '7' %}
+                        <option value="-1" >全部</option>
+                        <option value="0" >未支付</option>
+                        <option value="1" >已支付未接单</option>
+                        <option value="2" >已接单待抢单</option>
+                        <option value="4" >已抢单未取货</option>
+                        <option value="5" >取货中</option>
+                        <option value="6" >已取货配送中</option>
+                        <option value="7" selected>配送已完成</option>
+                        <option value="8" >已评价</option>
+                        <option value="9" >退款中</option>
+                        <option value="10" >已退款</option>
+                            {% elif  search_data.order_status == '8' %}
+                        <option value="-1">全部</option>
+                        <option value="0" >未支付</option>
+                        <option value="1" >已支付未接单</option>
+                        <option value="2" >已接单待抢单</option>
+                        <option value="4" >已抢单未取货</option>
+                        <option value="5" >取货中</option>
+                        <option value="6" >已取货配送中</option>
+                        <option value="7" >配送已完成</option>
+                        <option value="8" selected>已评价</option>
+                        <option value="9" >退款中</option>
+                        <option value="10" >已退款</option>
+                            {% elif  search_data.order_status == '9' %}
+                        <option value="-1" >全部</option>
+                        <option value="0" >未支付</option>
+                        <option value="1" >已支付未接单</option>
+                        <option value="2" >已接单待抢单</option>
+                        <option value="4" >已抢单未取货</option>
+                        <option value="5" >取货中</option>
+                        <option value="6" >已取货配送中</option>
+                        <option value="7" >配送已完成</option>
+                        <option value="8" >已评价</option>
+                        <option value="9"selected >退款中</option>
+                        <option value="10" >已退款</option>
+                            {% elif  search_data.order_status == '10' %}
+                        <option value="-1" >全部</option>
+                        <option value="0" >未支付</option>
+                        <option value="1" >已支付未接单</option>
+                        <option value="2" >已接单待抢单</option>
+                        <option value="4" >已抢单未取货</option>
+                        <option value="5" >取货中</option>
+                        <option value="6" >已取货配送中</option>
+                        <option value="7" >配送已完成</option>
+                        <option value="8" >已评价</option>
+                        <option value="9" >退款中</option>
+                        <option value="10" selected >已退款</option>
+                            {% else %}
+                             <option value="-1" selected >全部</option>
+                        <option value="0" >未支付</option>
+                        <option value="1" >已支付未接单</option>
+                        <option value="2" >已接单待抢单</option>
+                        <option value="4" >已抢单未取货</option>
+                        <option value="5" >取货中</option>
+                        <option value="6" >已取货配送中</option>
+                        <option value="7" >配送已完成</option>
+                        <option value="8" >已评价</option>
+                        <option value="9" >退款中</option>
+                        <option value="10"  >已退款</option>
+                        {% endif %}
+                    </select>
+                    支付方式筛选:
+                    <select id="pay_type" name="payment">
+                        {% if search_data.payment == '3' %}
+                        <option value="3" selected="selected">全部支付方式</option>
+                        <option value="2" >微信支付</option>
+                        <option value="1" >支付宝支付</option>
+                        <option value="0" >余额支付</option>
+                            {% elif search_data.payment == '2' %}
+                             <option value="3" >全部支付方式</option>
+                        <option value="2" selected="selected">微信支付</option>
+                        <option value="1" >支付宝支付</option>
+                        <option value="0" >余额支付</option>
+                            {% elif search_data.payment == '1' %}
+                             <option value="3" >全部支付方式</option>
+                        <option value="2" >微信支付</option>
+                        <option value="1" selected="selected">支付宝支付</option>
+                        <option value="0" >余额支付</option>
+                            {% elif search_data.payment == '0' %}
+                             <option value="3" >全部支付方式</option>
+                        <option value="2" >微信支付</option>
+                        <option value="1" >支付宝支付</option>
+                        <option value="0" selected="selected">余额支付</option>
+                            {% else %}
+                             <option value="3" selected="selected">全部支付方式</option>
+                        <option value="2" >微信支付</option>
+                        <option value="1" >支付宝支付</option>
+                        <option value="0" >余额支付</option>
+                        {% endif %}
+                    </select>
+                    <input type="submit" value="查询" class="button"/>　
+                </form>
+            </td>
+{#            <td>#}
+{#                <b>应收总金额：1456749.51</b>　#}
+{#                <b>在线支付总额：1456718.51</b>　#}
+{#                <b>线下支付总额：31</b>#}
+{#            </td>#}
+        </tr>
+    </table>
+    <form name="myform" id="myform" action="" method="post">
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <colgroup>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col width="180" align="center"/>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>订单编号</th>
+                        <th>下单人</th>
+                        <th>电话</th>
+                        <th>总价<i class="menu-icon fa fa-sort"></i></th>
+                        <th>平台优惠(留)</th>
+                        <th>商家优惠</th>
+                        <th>
+                            <a href="" style="color:blue;">支付时间</a>
+                        </th>
+                        <th>送达时间</th>
+                        <th>订单状态</th>
+                        <th>支付情况</th>
+                        <th class="textcenter">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                {% for i in data %}
+                    <tr>
+                        <td>{{ i.order_id }}</td>
+                        <td>{{ i.user_name| default_if_none:"" }}</td>
+                     <td>{{ i.user_phone_number | default_if_none:"" }}</td>
+
+                        <td>￥{{ i.total_price| default_if_none:"￥" }}</td>
+                        <td>￥0</td>
+                        <td>￥0</td>
+                        <td>{{ i.pay_time|date:'Y-m-d h:i:s' }}</td>
+                        <td>{{ i.complete_time|date:'Y-m-d h:i:s' }}</td>
+                        <td class="status">
+                            {% if i.order_status == 0 %}
+                                <b style="color:green">未支付</b>
+                            {% elif i.order_status == 1 %}
+                                <b style="color:green">已支付未接单</b>
+                            {% elif i.order_status == 2 %}
+                                <b style="color:green">已接单待抢单</b>
+                                {#                            TODO 差一个状态3#}
+                            {% elif i.order_status == 4 %}
+                                <b style="color:green">已抢单未取货</b>
+                            {% elif i.order_status == 5 %}
+                                <b style="color:green">取货中</b>
+                            {% elif i.order_status == 6 %}
+                                <b style="color:green">已取货配送中</b>
+                            {% elif i.order_status == 7 %}
+                                <b style="color:green">配送已完成</b>
+                            {% elif i.order_status == 8 %}
+                                <b style="color:green">已评价</b>
+                            {% elif i.order_status == 9 %}
+                                <b style="color:green">退款中</b>
+                            {% elif i.order_status == 10 %}
+                                <b style="color:green">已退款</b>
+                            {% endif %}
+                        </td>
+                    {% if i.pay_mode == 0 %}
+                        <td><span style="color: green">余额支付</span></td>
+                        {% elif i.pay_mode == 1 %}
+                        <td><span style="color: green">支付宝支付</span></td>
+                            {% elif i.pay_mode == 2 %}
+                        <td><span style="color: green">微信支付</span></td>
+                        {% else %}
+                        <td><span style="color: green">未支付</span></td>
+                    {% endif %}
+                        <td class="textcenter">
+                            <a class="check" href="javascript:void(0);">查看</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                 <tfoot id="tfoot" >
+                        <tr>
+                            <td class="textcenter pagebar" colspan="12">
+                                <ul class="pages">
+
+                                    <li><a href='/admin/order_list/?p=1&keyword={{ search_data.keyword }}&searchtype={{ search_data.searchtype }}&begin_time={{ search_data.begin_time }}&end_time={{ search_data.end_time }}&order_status={{ search_data.order_status }}&payment={{ search_data.payment }}'>首页</a></li>
+                                    {% if  get_page  == '1' %}
+                                        <li><a href='#'>&lt;上一页</a></li>
+                                    {% else %}
+                                    <li><a href='/admin/order_list/?p={{ get_page |add:-1}}&keyword={{ search_data.keyword }}&searchtype={{ search_data.searchtype }}&begin_time={{ search_data.begin_time }}&end_time={{ search_data.end_time }}&order_status={{ search_data.order_status }}&payment={{ search_data.payment }}'>&lt;上一页</a></li>
+
+                                    {% endif %}
+                                {% if  get_page  >=  page_total  %}
+                                    <li><a href='#'>下一页&gt;</a></li>
+                                    {% else %}
+                                    <li><a href='/admin/order_list/?p={{ get_page |add:1}}&&keyword={{ search_data.keyword }}&searchtype={{ search_data.searchtype }}&begin_time={{ search_data.begin_time }}&end_time={{ search_data.end_time }}&order_status={{ search_data.order_status }}&payment={{ search_data.payment }}'>下一页&gt;</a></li>
+                                {% endif %}
+                                    <li><a href='/admin/order_list/?p={{ page_total }}&keyword={{ search_data.keyword }}&searchtype={{ search_data.searchtype }}&begin_time={{ search_data.begin_time }}&end_time={{ search_data.end_time }}&order_status={{ search_data.order_status }}&payment={{ search_data.payment }}'>尾页></a></li>
+                                    <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tfoot>
+            </table>
+        </div>
+    </form>
+</div>
+</body>
+<script type="text/javascript">
+  $("#tbody").on('click','a',function () {
+       var clsn=this.className;
+       var order_id=$(this).parent().siblings()[0];
+       order_id=$(order_id).html();
+       if(clsn == 'check'){
+           art.dialog.open('/admin/order_detail/?order_id='+order_id,{
+               title: '查看订单详情',
+               lock: true,
+               width:800,
+               height:400,
+           });
+       }
+  });
+</script>
+</html>

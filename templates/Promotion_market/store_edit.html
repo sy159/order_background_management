@@ -19,43 +19,29 @@
 <body>
 <form id="myform" method="post" action="" enctype="multipart/form-data">
     <table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
-    <input type="hidden" id="parent_id" name="parent_id" value="{{ parent_id }}">
-    <input type="hidden" id="adver_id" name="adver_id" value="{{ data.adver_id }}">
+    <input type="hidden" id="adver_id" name="store_id" value="{{ data.id }}">
         <tr>
-            <th width="80">广告名称</th>
-            <td><input type="text" class="input fl" value="{{ data.title }}" name="name" size="20" validate="maxlength:20,required:true"/></td>
+            <th width="80">店铺名称</th>
+            <td>{{ data.shop_name }}</td>
         </tr>
          <tr>
-            <th width="80">广告现图</th>
+            <th width="80">店铺现图</th>
             <td><img src="{{ data.img }}" style="width:300px;height:80px;" class="view_msg"></td>
         </tr>
         <tr>
-            <th width="80">广告图片</th>
-            <td><input type="file" id="pic"  accept="image/png,image/jpeg,image/gif" value="" class="input fl" name="pic" style="width:200px;" validate="required:true"/></td>
+            <th width="80">新图片</th>
+            <td><input type="file" id="pic"  accept="image/png,image/jpeg,image/gif" value="" class="input fl" name="pic" style="width:200px;"/></td>
             <td><input  type="hidden" id="pic1"  value=""   name="img" style="width:200px;"/></td>
             <td><input  type="hidden" id="pic2"  value=""   name="img2" style="width:200px;"/></td>
         </tr>
         <tr>
-            <th width="80">链接功能</th>
-            <td>
-                <select id="url_type" style="height: 35px;vertical-align: middle;">
-                    <option id="choose" name="" value="0" selected>请选择对应功能</option>
-                    <option id="store" name="function" value="1" >店铺或商品</option>
-                    <option id="store_list" name="function" value="2">店铺列表</option>
-                    <option id="web" name="function" value="3">web链接</option>
-                </select>
-                <input type="text" value="" class="input" name="url" id="url" style="width:200px;display:none" placeholder="请填写链接地址" validate="maxlength:200,required:true,url:true"/>
-                <input type="hidden" name="get_url" id="get_url" value="">
-            </td>
+            <th width="80">店铺序号</th>
+            <td><input type="text" class="input fl" name="sort" style="width:80px;" value="{{ data.priority }}" /></td>
         </tr>
         <tr>
-            <th width="80">广告排序</th>
-            <td><input type="text" class="input fl" name="sort" style="width:80px;" value="{{ data.priority }}" validate="maxlength:10,required:true,number:true"/></td>
-        </tr>
-        <tr>
-            <th width="80">广告状态</th>
+            <th width="80">店铺状态</th>
             <td>
-                {% if data.state == 1 %}
+                {% if data.status == 1 %}
                 <label><input type="radio" name="status" value="1" checked="checked" />启用</label>
                <label><input type="radio" name="status" value="0" />关闭</label>
                     {% else %}
@@ -76,41 +62,15 @@
 </form>
 <script>
 
-    $("#url_type").change(function () {
-       var val=$(this).find("option:selected").val();
-        if(val == 2 || val == 3){
-            $("#url").val("");
-            $("#url").show();
-        }else{
-            $("#url").hide();
-            if(val == 1){
-                 art.dialog.open('/admin/stores/?flag=edit',{
-                    title: '选择商店或者商品',
-                    lock: true,
-                    width:800,
-                    height:400,
-                    close:function () {
-                        var shop_id=art.dialog.data('shop_id');
-                        var shop_name=art.dialog.data('shop_name');
-                        $("#url").show();
-                        $("#url").val(shop_name);
-                        $("#get_url").val(shop_id);
-                    }
-                });
-            }
-        }
-    });
-
     function up() {
         $("#myform").submit(function (e) {
             e.preventDefault();
             $.ajax({
-                url:"/admin/adver_edit/",
+                url:"/admin/store_edit/",
                 type:"post",
                 dataType:"json",
                 data:$("#myform").serialize(),
                 success:function(msg){
-                    console.log(msg);
                     if(msg==1){
                         result("编辑成功","succeed");
                         var win = art.dialog.open.origin;
@@ -144,8 +104,7 @@
              var tmpPath = $("#pic").val();
              tmpPath=tmpPath.split(".")[1];
              var new_name=get_file_name(2);
-             var val=$("#parent_id").val();
-             $("#pic2").val(val+'+'+new_name+Date.parse(new Date())+"."+tmpPath);
+             $("#pic2").val('3+'+new_name+Date.parse(new Date())+"."+tmpPath);
              $("#pic1").val(new_name+Date.parse(new Date())+"."+tmpPath);
              var formData=new FormData();
              var img_file=document.getElementById("pic");
@@ -164,7 +123,6 @@
                  }
              });
          }
-
      });//点击上传图片生成随机图片名
 
      function get_file_name(len) {

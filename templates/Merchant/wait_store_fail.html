@@ -111,18 +111,19 @@
 </body>
 <script>
 
-
     $("#tbody").on('click','a',function () {
         var clsn=this.className;
         var td=$(this).parent().siblings()[0];
         var shop_id=$(td).html();
         if(clsn=='edit_row'){
-            // 调用父页面的方法
-             window.parent.showform();
-              window.parent.change_data("查看店铺信息","/admin/fail_form/",shop_id);
+            art.dialog.open('/admin/fail_form/?shop_id='+shop_id,{
+                title: '查看店铺信息',
+                lock: true,
+                modal:true,
+                width:800,
+                height:400
+            });
         }
     });
-    // 编辑弹窗关闭
-    parent.window.hideform();
 </script>
 </html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>后台管理 - 橙子校园</title>
+    {% include 'Public/header.html' %}
+</head>
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul  class="tbody">
+            <a href="" class="on">商铺列表</a>|
+            <a href="javascript:;" class="add_row">添加推荐店铺</a>
+        </ul>
+    </div>
+    <form name="myform" id="myform" action="" method="post">
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <colgroup>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col width="180" align="center"/>
+                    <col width="180" align="center"/>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>编号</th>
+                        <th>名称</th>
+                        <th>图片(以下为强制小图，点击图片查看大图)</th>
+                        <th class="textcenter">操作者</th>
+                        <th class="textcenter">最后操作时间</th>
+                        <th>状态</th>
+                        <th class="textcenter">操作</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                {% for i in data %}
+                    <tr>
+                        <td>{{ i.priority }}</td>
+                        <td>{{ i.id }}</td>
+                        <td>{{ i.shop_name }}</td>
+                        <td>
+                            <img src="{{ i.img }}"  style="width:300px;height:80px;" class="view_msg"/>
+                        </td>
+                        <td class="textcenter">{{ i.operator }}</td>
+                        <td class="textcenter">{{ i.last_time|date:'Y-m-d H:i:s' }}</td>
+                        <td>
+                            {% if i.status == 1 %}
+                                <font color="green">开启</font>
+                            {% else %}
+                                <font color="green">关闭</font>
+                            {% endif %}
+                        </td>
+                        <td class="textcenter">
+                            <a href="javascript:void(0);" class="edit_row">编辑</a> |
+                            <a href="javascript:void(0);" class="delete_row" parameter="id=40">删除</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </form>
+</div>
+</body>
+<script src="/static/js/del_edit_post_get.js"></script>
+<script>
+ $(".tbody").on('click','a,img',function () {
+        var clsn=this.className;
+        var td=$(this).parent().siblings()[1];
+        var store_id=$(td).html();
+        if(clsn=='edit_row'){
+            art.dialog.open('/admin/store_edit/?id='+store_id,{
+                title: '编辑店铺信息',
+                lock: true,
+                modal:true,
+                width:800,
+                height:400
+            });
+        }else if(clsn=='add_row'){
+            art.dialog.open('/admin/store_add/',{
+                title: '添加推荐店铺',
+                lock: true,
+                modal:true,
+                width:800,
+                height:400
+            });
+        }else if(clsn=='delete_row'){
+            function callback() {}
+                if(confirm("你确定要删除吗？")){
+                   $.deleteJSON("/admin/recommend_list/?id="+store_id,"delete",callback)
+                }else{
+                    return false;
+                }
+            }else if(clsn=='view_msg'){
+            var src=$(this).attr("src");
+            window.parent.showbigimg("<img src="+src+" style=\"width:600px;height:400px;\">");
+        }  //点击图片放大
+    });
+
+</script>
+</html>

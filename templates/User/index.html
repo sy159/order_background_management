@@ -26,7 +26,7 @@
     <table class="search_table" width="100%">
         <tr>
             <td>
-                <form action="/admin/user_list/" method="get">
+                <form  action="/admin/user_list/" method="get">
                     <input type="hidden" name="c" value="User"/>
                     <input type="hidden" name="a" value="index"/>
                     筛选: <input type="text" name="keyword" class="input-text" value="{{ search_data.keyword}}"/>
@@ -46,8 +46,8 @@
                         {% endif %}
                     </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <font color="#000">注册日期筛选：</font>
-                    <input type="text" class="input-text" name="begin_time" style="width:120px;" id="d4311"  value="{{ search_data.begin_time}}" onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"/>
-                    <input type="text" class="input-text" name="end_time" style="width:120px;" id="d4311" value="{{ search_data.end_time}}" onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"/>
+                    <input type="text" class="input-text"  name="begin_time" style="width:120px;" id="begin_time"  value="{{ search_data.begin_time}}" onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"/>
+                    <input type="text" class="input-text"  name="end_time" style="width:120px;" id="end_time" value="{{ search_data.end_time}}" onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"/>
 
                     状态:
                     <select name="status">
@@ -65,7 +65,7 @@
                         <option value="0" selected>禁用</option>
                         {% endif %}
                     </select>
-                    <input type="submit" style="margin-right:20px;" value="查询" class="button"/>
+                    <input type="submit" style="margin-right:20px;" value="查询"   class="button"/>
                     用户总余额：{{ money_data.all_money }}元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     禁止用户总余额：{{ money_data.disable_money }}元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     用户总积分：{{ money_data.all_integral }}个
@@ -110,7 +110,7 @@
                         <td>{{ i.nickname }}</td>
                         <td>{{ i.phone_number }}</td>
                         <td>{{ i.last_login|date:'Y-m-d h:i:s' }}</td>
-                        <td>{{ i.last_ip }}</td>
+                        <td>{{ i.last_ip | default_if_none:""}}</td>
                         <td class="textcenter">￥{{ i.balance }}</td>
                         <td class="textcenter">{{ i.integral }}</td>
                         {% if i.status == 1 %}
@@ -162,6 +162,22 @@
                 height:400
             });
     });
+
+    if($("#begin_time").val() != "" && $("#end_time").val() != ""){
+        var start_time = $("#begin_time").val();
+        var stop_time = $("#end_time").val();
+        var flag=CompareDate(start_time,stop_time);
+        if(flag){
+
+        }else{
+           alert("结束时间应大于开始时间，请重新选择");
+           window.location.href = "/admin/user_list/"//重定向
+        }
+    }//日期判断
+
+     function CompareDate(d1,d2){
+        return ((new Date(d1.replace(/-/g,"\/"))) < (new Date(d2.replace(/-/g,"\/"))));
+    }//比较日期
 
 
 </script>

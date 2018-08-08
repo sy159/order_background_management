@@ -86,6 +86,7 @@
                         <a href="javascript:void(0);" class="edit_row">编辑</a> |
                         <a href="javascript:void(0);" class="dist_authority">编辑权限</a>
                         | <a href="javascript:void(0);" class="delete_row">删除</a>
+                        | <a href="javascript:void(0);" class="clear_key">清除key</a>
                          <a class="label label-warning cancel" title="取消微信绑定" data-id="4" style="display:none;color:red" >取消绑定</a>
                     </td>
                     </tr>
@@ -138,8 +139,39 @@
                 width:800,
                 height:400
             });
+        }else if(clsn == 'clear_key'){
+            if(confirm("你确定要清除key吗？")){
+                $.ajax({
+                    url:"/admin/clear_key/?id="+sort_id,
+                    type:"get",
+                    dataType:"json",
+                    success:function(msg){
+                        if(msg==1){
+                            result("清除成功","succeed");
+                        }else{
+                            result("清除失败","error");
+                        }
+                    },
+                    error:function(xhr,textstatus,thrown){
+                    }
+                });
+            }
+
         }
     });
+
+    function result(title,flag) {
+        art.dialog({
+            content: title,
+            //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+            icon: flag,
+            fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+            time: 3,//如果有cancel方法的话会调用cancel方法
+        });
+        var time = setInterval(function() {
+            art.dialog.close()
+        }, 2000);
+    }
 
 </script>
 </body>

@@ -56,7 +56,7 @@
                 <th width="15%">QQ号</th>
                 <td width="35%">
                     <!--<input type="text" class="input fl" name="qq" size="20" value=""/>-->
-                    <div id="qq" style="height:24px;line-height: 24px;">{{ data.qq }}</div>
+                    <div id="qq" style="height:24px;line-height: 24px;">{{ data.qq | default_if_none:""}}</div>
                 </td>
 			</tr>
 			<tr>
@@ -85,7 +85,7 @@
                 <th width="15%">最后登录地址</th>
                 <td width="35%">
                     <!--<input type="text" class="input fl" name="address" size="20" validate="maxlength:20" value=""/>-->
-                    <div id="address" style="height:24px;line-height: 24px;">{{ data.last_ip }}</div>
+                    <div id="address" style="height:24px;line-height: 24px;">{{ data.last_ip | default_if_none:""}}</div>
                 </td>
 			</tr>
 			<tr>

@@ -19,7 +19,6 @@
 <body style="background:#fff;padding:20px 20px;">
 <div style="background:#fefbe4;border:1px solid #f3ecb9;color:#993300;padding:10px;margin-bottom:5px;">
         使用方法：点击对应内容后面的“选中”即可,如果选择商品就先选商店再选商品。
-    <a href="/admin/adver_add/">点击这里返回模块选择</a>
 </div>
 <form method="get"  action="/admin/stores/">
     <input type="text" name="keyword" class="input-text">
@@ -40,7 +39,11 @@
             <td class="norightborder">
                 &nbsp;&nbsp;&nbsp;
                 <a href="###" class="choose_store">选中</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="" class="choose_goods">商品</a>
+                {% if flag == 'add_store' %}
+
+                {% else %}
+                <a href="###" class="choose_goods">商品</a>
+                {% endif %}
             </td>
         </tr>
     {% endfor %}
@@ -50,28 +53,26 @@
 <div class="selectedSort">
     <b>您当前选择的是：</b>
     <i id="selectedSort"></i>
+    <i id="resultid" style="display: none"></i>
     <button value="" type="button" class="tijiao">确定</button>
     <input type="hidden" value="{{ flag }}" id="flag">
-    <input type="hidden" value="{{ parent_id }}" id="parent_id">
-    <input type="hidden" value="{{ adver_id }}" id="adver_id">
 </div>
 <div class="footactions" style="padding-left:10px">
     <div class="pages">
         <ul class="pages">
-
-            <li><a href='/admin/stores/?p=1'>首页</a></li>
+            <li><a href='/admin/stores/?p=1&flag={{ flag }}'>首页</a></li>
             {% if  get_page  == '1' %}
                 <li><a href='#'>&lt;上一页</a></li>
             {% else %}
-                <li><a href='/admin/stores/?p={{ get_page |add:-1}}'>&lt;上一页</a></li>
+                <li><a href='/admin/stores/?p={{ get_page |add:-1}}&flag={{ flag }}'>&lt;上一页</a></li>
 
             {% endif %}
             {% if  get_page  >=  page_total  %}
                 <li><a href='#'>下一页&gt;</a></li>
             {% else %}
-                <li><a href='/admin/stores/?p={{ get_page |add:1}}'>下一页&gt;</a></li>
+                <li><a href='/admin/stores/?p={{ get_page |add:1}}&flag={{ flag }}'>下一页&gt;</a></li>
             {% endif %}
-            <li><a href='/admin/stores/?p={{ page_total }}'>尾页></a></li>
+            <li><a href='/admin/stores/?p={{ page_total }}&flag={{ flag }}'>尾页></a></li>
             <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
         </ul>
     </div>
@@ -86,22 +87,43 @@
         shopid=$(shop_id).html();
         var result=$(name).html();
         var flag=$("#flag").val();
-        $("#selectedSort").html(result);//给用户看
+        $("#selectedSort").html(result);//给用户看选中的
         if(clsn=='choose_goods'){
-            $(this).attr("href","/admin/goods/?adver_id="+$("#adver_id").val()+"&parent_id="+$("#parent_id").val()+"&flag="+flag+"&shop_id="+shopid+"&stores="+result);
+            art.dialog.open('/admin/goods/?shop_id='+shopid+"&stores="+result,{
+                    title: '选择商店或者商品',
+                    lock: true,
+                    width:800,
+                    height:400,
+                    close:function () {
+                        var goods_id=art.dialog.data('goods_id');
+                        var goods_name=art.dialog.data('goods_name');
+                        $("#selectedSort").html(goods_name);//给用户看选中的
+                        $("#resultid").html(goods_id);//选中商品的的id
+                    }
+                });
         }
     });
+
     $(".tijiao").click(function () {
-        window.parent.showform();
         if($("#flag").val()=='edit'){
-            window.parent.add_data("编辑广告信息","/admin/adver_edit/?parent_id="+$("#parent_id").val()+"&adver_id="+$("#adver_id").val());
+              exc();
         }else if($("#flag").val()=='add'){
-            window.parent.add_data("添加广告","/admin/adver_add/?parent_id="+$("#parent_id").val());
+              exc();
+        }else if($("#flag").val()=='add_store'){
+              exc();
         }
-        window.parent.add_url( $("#selectedSort").html(),"shop_id="+shopid);
 
     });
 
+    function exc() {
+        if( $("#resultid").html() == "" || $("#resultid").html() == 'goods_id=undefined'){
+            art.dialog.data('shop_id',"shop_id="+shopid);//保存数据供父页面读取
+        }else{
+            art.dialog.data('shop_id',$("#resultid").html());//保存数据供父页面读取
+        }
+        art.dialog.data('shop_name',$("#selectedSort").html());
+        art.dialog.close();//关闭当前对话框
+    }
 </script>
 </body>
 </html>

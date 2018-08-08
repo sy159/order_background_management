@@ -145,8 +145,8 @@ class Banner(models.Model):
     state = models.IntegerField()
     start = models.DateTimeField(blank=True, null=True)
     end = models.DateTimeField(blank=True, null=True)
+    priority = models.IntegerField()
     has_prescription = models.IntegerField(blank=True, null=True)
-    priority = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -449,6 +449,8 @@ class OrderGoods(models.Model):
     unit_price = models.FloatField()
     is_recovery = models.IntegerField()
     recovery_id = models.IntegerField(blank=True, null=True)
+    specification_values = models.CharField(max_length=255, blank=True, null=True)
+    attribute_values = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -478,7 +480,7 @@ class Orders(models.Model):
     region_id = models.IntegerField(blank=True, null=True)
     coupon_id = models.IntegerField(blank=True, null=True)
     coupon_type = models.IntegerField(blank=True, null=True)
-    coupon_value = models.FloatField(blank=True, null=True)
+    coupon_value = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     pay_mode = models.IntegerField(blank=True, null=True)
     pay_amount = models.FloatField(blank=True, null=True)
     unfinished_reason = models.CharField(max_length=255, blank=True, null=True)
@@ -528,6 +530,22 @@ class Province(models.Model):
         db_table = 'province'
 
 
+class RecommendShops(models.Model):
+    shop_id = models.IntegerField()
+    shop_name = models.CharField(max_length=255)
+    priority = models.IntegerField(blank=True, null=True)
+    operator_name = models.CharField(max_length=255)
+    last_time = models.DateTimeField(blank=True, null=True)
+    status = models.IntegerField()
+    img = models.CharField(max_length=255)
+    region_id = models.IntegerField()
+    operator_id = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'recommend_shops'
+
+
 class Recovery(models.Model):
     recovery_id = models.IntegerField(primary_key=True)
     order_id = models.CharField(max_length=255, blank=True, null=True)
@@ -574,7 +592,7 @@ class Shop(models.Model):
     shop_id = models.AutoField(primary_key=True)
     shop_name = models.CharField(max_length=255)
     shop_logo = models.CharField(max_length=255)
-    campus_id = models.IntegerField(blank=True, null=True)
+    campus_id = models.IntegerField()
     region_id = models.IntegerField(blank=True, null=True)
     phone_number = models.CharField(max_length=255)
     shop_type = models.IntegerField()
@@ -588,11 +606,12 @@ class Shop(models.Model):
     latitude = models.FloatField(blank=True, null=True)
     manager_id = models.IntegerField()
     default_account = models.IntegerField(blank=True, null=True)
-    alipay_account = models.CharField(max_length=255, blank=True, null=True)
+    bank_account_holder = models.CharField(max_length=255, blank=True, null=True)
     bank_account = models.CharField(max_length=255, blank=True, null=True)
+    bank_name = models.CharField(max_length=255, blank=True, null=True)
     shop_photos = models.CharField(max_length=255, blank=True, null=True)
     packing_commission = models.IntegerField()
-    auth = models.IntegerField(blank=True, null=True)
+    auth = models.IntegerField()
     start_business_time = models.TimeField(blank=True, null=True)
     end_business_time = models.TimeField(blank=True, null=True)
     notice = models.CharField(max_length=255, blank=True, null=True)
@@ -626,9 +645,9 @@ class ShopAssistant(models.Model):
     phone_number = models.CharField(max_length=255)
     profile_image = models.CharField(max_length=255, blank=True, null=True)
     is_assistant = models.IntegerField()
-    university_id = models.IntegerField()
-    campus_id = models.IntegerField()
-    shop_id = models.IntegerField()
+    university_id = models.IntegerField(blank=True, null=True)
+    campus_id = models.IntegerField(blank=True, null=True)
+    shop_id = models.IntegerField(blank=True, null=True)
     register_time = models.DateTimeField()
     last_login = models.DateTimeField()
     permission = models.CharField(max_length=255, blank=True, null=True)
@@ -799,22 +818,21 @@ class User(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     password = models.CharField(max_length=255)
     gender = models.IntegerField()
-    birthday = models.DateTimeField(blank=True, null=True)
+    birthday = models.DateField(blank=True, null=True)
     email = models.CharField(max_length=255, blank=True, null=True)
     phone_number = models.CharField(max_length=255)
     profile_image = models.CharField(max_length=255, blank=True, null=True)
-    university_id = models.IntegerField(blank=True, null=True)
     campus_id = models.IntegerField(blank=True, null=True)
     register_time = models.DateTimeField()
     last_login = models.DateTimeField(blank=True, null=True)
     is_part_time = models.IntegerField(blank=True, null=True)
-    spread_code = models.CharField(max_length=255)
-    status = models.IntegerField(blank=True, null=True)
+    spread_code = models.CharField(max_length=255, blank=True, null=True)
+    status = models.IntegerField()
     is_verified = models.IntegerField(blank=True, null=True)
-    balance = models.FloatField(blank=True, null=True)
-    accumulative_consumption = models.FloatField(blank=True, null=True)
+    balance = models.DecimalField(max_digits=10, decimal_places=2)
+    accumulative_consumption = models.DecimalField(max_digits=10, decimal_places=2)
     payment_password = models.CharField(max_length=255, blank=True, null=True)
-    integral = models.IntegerField()
+    integral = models.PositiveIntegerField()
     last_ip = models.CharField(max_length=20, blank=True, null=True)
     qq = models.CharField(max_length=255, blank=True, null=True)
 

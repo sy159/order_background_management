@@ -4,10 +4,11 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.db.models import Sum, Q, F
 from orange_manage import models
-from .tool import area_data as area
-from .tool import login_validation as val
-from .tool import produce_key as key
-import json, hashlib
+from .utils.password_encryption import pwd_encrypted
+from .utils import login_validation as val
+from .utils import produce_key as key
+import json
+from orange_manage.utils.image_upload import UploadImg
 
 
 # Create your views here.
@@ -21,10 +22,7 @@ def login(request):
         get_ip = request.META['REMOTE_ADDR']
         last_time = timezone.now()
         get_name = request.POST.get('account', None)
-        get_pwd = request.POST.get('pwd', None)
-        hash_key = hashlib.sha256()
-        hash_key.update(get_pwd.encode())
-        get_pwd = hash_key.hexdigest()
+        get_pwd = pwd_encrypted(request.POST.get('pwd', None))
         get_verifycode = request.POST.get('verifycode')
         get_name_obj = models.Admin.objects.filter(account=get_name).first()
         if get_name_obj:  # 判断用户是否存在
@@ -114,3 +112,17 @@ def account_unique(request):
         return JsonResponse({'state': 1})
     else:
         return JsonResponse({'state': 0})
+
+
+def image_upload(request):
+    file = request.FILES.get('file')
+    judge = request.POST['filename'].split('+')[0]
+    img_name = request.POST['filename'].split('+')[1]
+    if judge == '1':  # 轮播图
+        url = request.banner_images + img_name
+    elif judge == '2':  # app菜单
+        url = request.app_menu_images + img_name
+    elif judge == '3':  # 推荐店铺
+        url = request.recommend_shops_images + img_name
+    UploadImg(url, file)
+    return HttpResponse(1)

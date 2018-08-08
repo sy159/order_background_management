@@ -1,4 +1,6 @@
 from orange_manage import models
+
+
 def region_data():
     province_id_list = []  # 存放省id
     province_data = []  # 存放省数据

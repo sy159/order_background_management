@@ -2,6 +2,7 @@ from django.http import JsonResponse, QueryDict
 from django.utils import timezone
 from django.shortcuts import render, redirect, HttpResponse
 from orange_manage import models
+from orange_manage.utils.password_encryption import pwd_encrypted
 import json, hashlib
 
 
@@ -11,24 +12,17 @@ def account_list(request):
     '''
     get_pagesize = 15
     get_page = request.GET.get('p', '1')
-    get_account = request.session['user']
-    obj = models.Admin.objects.filter(account=get_account).first()
-    get_level = obj.level
+    get_level = request.operator_level
     if get_level == 0:
         all_obj = models.Admin.objects.filter(level__lt=2).all()
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
-        if len(all_obj) % int(get_pagesize):
-            page_total = len(all_obj) // int(get_pagesize) + 1
-        else:
-            page_total = len(all_obj) // int(get_pagesize)
+        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+            get_pagesize)
         data_list = []
         for i in all_obj.order_by('level')[start_nun:end_num]:
             region_obj = models.Region.objects.filter(region_id=i.open_admin_region).first()
-            if not region_obj:
-                region_name = '平台所有区域'
-            else:
-                region_name = region_obj.region_name
+            region_name = region_obj.region_name if region_obj else '平台所有区域'
             data_dict = {
                 'id': i.id,
                 'account': i.account,
@@ -46,13 +40,11 @@ def account_list(request):
             }
             data_list.append(data_dict)
     if get_level == 1:
-        all_obj = models.Admin.objects.filter(level=2, open_admin_region=obj.open_admin_region).all()
+        all_obj = models.Admin.objects.filter(level=2, open_admin_region=request.operator_region).all()
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
-        if len(all_obj) % int(get_pagesize):
-            page_total = len(all_obj) // int(get_pagesize) + 1
-        else:
-            page_total = len(all_obj) // int(get_pagesize)
+        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+            get_pagesize)
         data_list = []
         for i in all_obj[start_nun:end_num]:
             region_obj = models.Region.objects.filter(region_id=i.open_admin_region).first()
@@ -81,20 +73,12 @@ def add_account(request):
     添加管理员
     '''
     if request.method == 'GET':
-        operate_name = request.session.get('user')
-        obj = models.Admin.objects.filter(account=operate_name).first()
-        operate_level = obj.level
-        operate_region = obj.open_admin_region
+        operate_level = request.operator_level
+        operate_region = request.operator_region
         return render(request, 'Index/add_accountform.html', {'level': operate_level, 'region_id': operate_region})
     elif request.method == 'POST':
-        print(request.POST)
-        get_operator = request.session.get('user')
-        operator_obj = models.Admin.objects.filter(account=get_operator).first()
         get_account = request.POST.get('account')
-        get_pwd = request.POST.get('pwd')
-        hash_key = hashlib.sha256()
-        hash_key.update(get_pwd.encode())
-        get_pwd = hash_key.hexdigest()
+        get_pwd = pwd_encrypted(request.POST.get('pwd'))
         get_realname = request.POST.get('realname')
         get_phone = request.POST.get('phone')
         get_email = request.POST.get('email')
@@ -105,9 +89,7 @@ def add_account(request):
             get_region = get_region
         else:
             if get_level == '2':
-                operate_name = request.session.get('user')
-                obj = models.Admin.objects.filter(account=operate_name).first()
-                get_region = obj.open_admin_region
+                get_region = request.operator_region
             else:
                 get_region = 0
         get_menus = request.POST.get('authoritydata')
@@ -125,7 +107,7 @@ def add_account(request):
                 son_list.append(j.id)
             parent_dict[i] = son_list
             data_list.append(parent_dict)
-        if not data_list: data_list = json.loads(operator_obj.menus)
+        if not data_list: data_list = json.loads(request.operator_menus)
         data_list = json.dumps(data_list)
         models.Admin.objects.create(account=get_account, pwd=get_pwd, realname=get_realname, phone=get_phone,
                                     email=get_email, qq=get_qq, login_count=0, status=1, level=get_level,
@@ -134,7 +116,7 @@ def add_account(request):
 
 
 def set_authority(request):
-    return  render(request,'Index/set_authority.html')
+    return render(request, 'Index/set_authority.html')
 
 
 def permissions(request):
@@ -142,9 +124,7 @@ def permissions(request):
     显示能够赋予权限
     '''
     if request.method == 'GET':
-        operate_name = request.session.get('user')
-        obj = models.Admin.objects.filter(account=operate_name).first()
-        menus_list = json.loads(obj.menus)
+        menus_list = json.loads(request.operator_menus)
         data_list = []
         for i in menus_list:
             for key, value in i.items():
@@ -163,8 +143,6 @@ def permissions(request):
 
 def edit_accountinfo(request):
     if request.method == 'GET':
-        get_parent = request.session.get('user')
-        parent_obj = models.Admin.objects.filter(account=get_parent).first()
         get_admin_id = request.GET.get('account_id')
         obj = models.Admin.objects.filter(id=get_admin_id).first()
         if obj.open_admin_region:
@@ -208,13 +186,10 @@ def edit_accountinfo(request):
                 'region_name': '',
             }
 
-        return render(request, 'Index/edit_accountinfo.html', {'data': data, 'parent_level': parent_obj.level})
+        return render(request, 'Index/edit_accountinfo.html', {'data': data, 'parent_level': request.operator_level})
     elif request.method == 'POST':
         get_account = request.POST.get('account')
-        get_pwd = request.POST.get('pwd')
-        hash_key = hashlib.sha256()
-        hash_key.update(get_pwd.encode())
-        get_pwd = hash_key.hexdigest()
+        get_pwd = pwd_encrypted(request.POST.get('pwd'))
         get_realname = request.POST.get('realname')
         get_phone = request.POST.get('phone')
         get_email = request.POST.get('email')
@@ -227,9 +202,7 @@ def edit_accountinfo(request):
         elif get_level == 1:
             get_region = get_region
         else:
-            operate_name = request.session.get('user')
-            obj = models.Admin.objects.filter(account=operate_name).first()
-            get_region = obj.open_admin_region
+            get_region = request.operator_region
         if get_pwd:
             models.Admin.objects.filter(account=get_account).update(pwd=get_pwd, realname=get_realname, phone=get_phone,
                                                                     email=get_email, qq=get_qq, status=get_status,
@@ -261,15 +234,12 @@ def edit_authorityform(request):
             data_list.append(permission_name)
         return render(request, 'Index/edit_authorityform.html', {'data': data_list, 'id': get_id})
     elif request.method == 'POST':
-        print(request.POST)
         get_permissions = json.loads(request.POST.get('gmx'))
         get_id = request.POST.get('id')
-        print(get_permissions)
         all_obj = models.Menu.objects.filter(field_function_name__in=get_permissions).exclude(parent_id=0)
         parent_list = []
         for i in all_obj:
-            if i.parent_id not in parent_list:
-                parent_list.append(i.parent_id)
+            if i.parent_id not in parent_list: parent_list.append(i.parent_id)
         data_list = []
         for i in parent_list:
             parent_dict = {}
@@ -281,3 +251,36 @@ def edit_authorityform(request):
         data_list = json.dumps(data_list)
         models.Admin.objects.filter(id=get_id).update(menus=data_list)
         return HttpResponse(1)
+
+
+def edit_personinfo(request):
+    if request.method == 'GET':
+        data = {
+            'account': request.operator_obj.account,
+            'realname': request.operator_obj.realname,
+            'phone': request.operator_obj.phone,
+            'email': request.operator_obj.email,
+            'qq': request.operator_obj.qq,
+        }
+        return render(request, 'Index/personinfo.html', {'data': data})
+    elif request.method == 'POST':
+        get_new_pass = request.POST.get('new_pass')
+        get_pwd = pwd_encrypted(get_new_pass)
+        get_realname = request.POST.get('realname')
+        get_email = request.POST.get('email')
+        get_phone = request.POST.get('phone')
+        get_qq = request.POST.get('qq')
+        obj = models.Admin.objects.filter(id=request.operator_id)
+        if get_pwd:
+            obj.update(pwd=get_pwd, realname=get_realname, email=get_email,
+                       phone=get_phone, qq=get_qq)
+        else:
+            obj.update(realname=get_realname, email=get_email,
+                       phone=get_phone, qq=get_qq)
+        return HttpResponse(1)
+
+
+def clear_key(request):
+    get_id = request.GET.get('id')
+    models.Admin.objects.filter(id=get_id).update(admin_key=None)
+    return HttpResponse(1)

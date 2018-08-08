@@ -24,7 +24,6 @@
 <body style="background:#fff;padding:20px 20px;">
 <div style="background:#fefbe4;border:1px solid #f3ecb9;color:#993300;padding:10px;margin-bottom:5px;">
         使用方法：点击对应内容后面的“选中”即可。
-    <a href="/admin/adver_add/">点击这里返回模块选择</a>
 </div>
 <form method="get"  action="/admin/goods/">
     <input type="text" name="keyword" class="input-text">
@@ -55,10 +54,7 @@
 <div class="selectedSort">
     <b>您当前选择的是：</b>
     <i id="selectedSort">{{ stores }}</i>
-    <button type="button" value="" class="tijiao">提交</button>
-    <input type="hidden" value="{{ flag }}" id="flag">
-    <input type="hidden" value="{{ parent_id }}" id="parent_id">
-    <input type="hidden" value="{{ adver_id }}" id="adver_id">
+    <button type="button"  class="tijiao">提交</button>
 </div>
 <div class="footactions" style="padding-left:10px">
     <div class="pages">
@@ -84,22 +80,19 @@
 <script>
      var goodsid;
      $("#tbody").on('click','a',function () {
-        var clsn=this.className;
         var name=$(this).parent().siblings()[0];
-        var result=$(name).html();
+        var result=$(name).html();//商品名称
         var goods_id=$(this).parent().siblings()[1];
-        goodsid=$(goods_id).html();
-        $("#selectedSort").append("&nbsp;&nbsp"+result);
+        goodsid=$(goods_id).html();//商品id
+        $("#selectedSort").append("    "+result);
     });
+
       $(".tijiao").click(function () {
-        window.parent.showform();
-         if($("#flag").val()=='edit'){
-            window.parent.add_data("编辑广告信息","/admin/adver_edit/?parent_id="+$("#parent_id").val()+"&adver_id="+$("#adver_id").val());
-        }else if($("#flag").val()=='add'){
-            window.parent.add_data("添加广告","/admin/adver_add/?parent_id="+$("#parent_id").val());
-        }
-        window.parent.add_url( $("#selectedSort").html(),"goods_id="+goodsid);
-    });
+          art.dialog.data('goods_id',"goods_id="+goodsid);//保存数据供父页面读取
+          art.dialog.data('goods_name', $("#selectedSort").html());
+          art.dialog.close();//关闭当前对话框
+    });//数据提交到父页面
+
 </script>
 
 

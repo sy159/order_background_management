@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站后台管理 Powered by pigcms.com</title>
+    {% include 'Public/header.html' %}
+</head>
+<body width="100%" style="background:#F3F3F3;">
+ <table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
+    <tr>
+        <th colspan="1">订单编号</th>
+        <th colspan="7">{{ data.order_id }}</th>
+    </tr>
+    <tr>
+        <th colspan="1">流水号</th>
+        <th colspan="7">shop_1807052038561200001011</th>
+{#        TODO 流水号#}
+    </tr>
+     <tr>
+         <th width="180">商品名称</th>
+         <th><strong>所属店铺</strong></th>
+         <th><strong>售价</strong></th>
+         <th>数量</th>
+         <th>规格搭配</th>
+         <th>规格属性</th>
+     </tr>
+ {% for dict in data.shop_info %}
+
+     {% for key,val in dict.items %}
+    {% for i in val %}
+        <tr>
+            <th width="180">{{ i.goods_name | default_if_none:""}}</th>
+            <th style="color:#9F0050">{{ key | default_if_none:""}}</th>
+            <th style="color:#9F0050">{{ i.unit_price | default_if_none:""}}</th>
+            <th style="color:#9F0050"><strong>{{ i.goods_amount| default_if_none:"" }}</strong> (个)</th>
+            <th style="color:#9F0050">{{ i.specification_values| default_if_none:"" }}</th>
+            <th style="color:#9F0050">{{ i.attribute_values | default_if_none:""}}</th>
+        </tr>
+    {% endfor %}
+     {% endfor %}
+{% endfor %}
+     <tr>
+
+
+              <th colspan="8">客户姓名：{{ data.user_name | default_if_none:""}}</th>
+     </tr>
+     <tr>
+              <th colspan="8">客户手机：{{ data.user_phone_number | default_if_none:"" }}</th>
+     </tr>
+     <tr>
+         <th colspan="8" style="color:red">客户注册手机：{{ data.registe_phone | default_if_none:""}}</th>
+     </tr>
+     <tr>
+         <th colspan="8">客户地址：{{ data.user_address| default_if_none:"" }}</th>
+     </tr>
+     <tr>
+         {% if data.distribution_mode == '1' %}
+         <th colspan="8">配送方式：平台配送</th>
+             {% else %}
+              <th colspan="8">配送方式：</th>
+         {% endif %}
+     </tr>
+     <tr>
+         {% if data.order_status == 0 %}
+         <th colspan="8">配送状态：未支付</th>
+             {% elif data.order_status == 1 %}
+         <th colspan="8">配送状态：已支付未接单</th>
+                 {% elif data.order_status == 2 %}
+         <th colspan="8">配送状态：已接单待抢单</th>
+              {% elif data.order_status == 4 %}
+         <th colspan="8">配送状态：已抢单未取货</th>
+              {% elif data.order_status == 5 %}
+         <th colspan="8">配送状态：取货中</th>
+              {% elif data.order_status == 6 %}
+         <th colspan="8">配送状态：已取货配送中</th>
+              {% elif data.order_status == 7 %}
+         <th colspan="8">配送状态：配送已完成</th>
+              {% elif data.order_status == 8 %}
+         <th colspan="8">配送状态：已评价</th>
+              {% elif data.order_status == 9 %}
+         <th colspan="8">配送状态：退款中</th>
+              {% elif data.order_status == 10 %}
+         <th colspan="8">配送状态：已退款</th>
+         {% endif %}
+     </tr>
+     <tr>
+         <th colspan="8">配送员姓名：{{ data.distributor_name| default_if_none:"" }}</th>
+     </tr>
+     <tr>
+         <th colspan="8">配送员电话：{{ data.distributor_phone_number| default_if_none:"" }}</th>
+     </tr>
+     <tr>
+         <th colspan="8">下单时间：{{ data.create_time|date:'Y-m-d h:i:s' }} </th>
+     </tr>
+     <tr>
+         <th colspan="8">支付时间：{{ data.pay_time|date:'Y-m-d h:i:s' }} </th>
+     </tr>
+     <tr>
+         <th colspan="8">送达时间：{{ data.complete_time|date:'Y-m-d h:i:s' }}</th>
+     </tr>
+     <tr>
+         <th colspan="8">商品总价：￥{{ data.total_price | default_if_none:""}} 元</th>
+     </tr>
+     <tr>
+         <th colspan="8">订单总价：￥{{ data.total_price | default_if_none:""}} 元</th>
+     </tr>
+
+     <tr>
+         <th colspan="8">实付金额：￥{{ data.pay_amount | default_if_none:""}} 元</th>
+     </tr>
+     <tr>
+         {% if  data.pay_mode == '0' %}
+         <th colspan="8">支付状态：<b style="color:green">余额支付</b></th>
+              {% elif  data.pay_mode == '1' %}
+         <th colspan="8">支付状态：<b style="color:green">支付宝支付</b></th>
+             {% elif  data.pay_mode == '2' %}
+         <th colspan="8">支付状态：<b style="color:green">微信支付</b></th>
+             {% else %}
+             <th colspan="8">支付状态：<b style="color:green">未支付</b></th>
+         {% endif %}
+     </tr>
+     <tr>
+          {% if data.order_status == 0 %}
+         <th colspan="8">订单状态：未支付</th>
+             {% elif data.order_status == 1 %}
+         <th colspan="8">订单状态：已支付未接单</th>
+                 {% elif data.order_status == 2 %}
+         <th colspan="8">订单状态：已接单待抢单</th>
+              {% elif data.order_status == 4 %}
+         <th colspan="8">订单状态：已抢单未取货</th>
+              {% elif data.order_status == 5 %}
+         <th colspan="8">订单状态：取货中</th>
+              {% elif data.order_status == 6 %}
+         <th colspan="8">订单状态：已取货配送中</th>
+              {% elif data.order_status == 7 %}
+         <th colspan="8">订单状态：配送已完成</th>
+              {% elif data.order_status == 8 %}
+         <th colspan="8">订单状态：已评价</th>
+              {% elif data.order_status == 9 %}
+         <th colspan="8">订单状态：退款中</th>
+              {% elif data.order_status == 10 %}
+         <th colspan="8">订单状态：已退款</th>
+         {% endif %}
+     </tr>
+     <tr>
+         <th colspan="1">对配送员的备注</th>
+         <th colspan="7" >{{ data.distribution_remarks | default_if_none:""}}</th>
+     </tr>
+ {% for i in data.shop_remarks %}
+     {% for key,val in i.items %}
+     <tr>
+         <th colspan="1">对{{ key | default_if_none:""}}的备注</th>
+         <th colspan="7" >{{ val| default_if_none:"" }}</th>
+     </tr>
+         {% endfor %}
+ {% endfor %}
+</table>
+
+
+</body>
+</html>

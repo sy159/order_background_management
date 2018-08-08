@@ -12,6 +12,18 @@
     .ul_img{
         display: flex;
     }
+    .aui_buttons {
+			padding: 4px 0 0 0;
+		}
+		.btn{
+            position:fixed;
+            width: 100%;
+            bottom: 0;
+            right: 0;
+		}
+        form{
+           margin-bottom: 50px;
+        }
 </style>
 
 <script type="text/javascript">
@@ -19,7 +31,7 @@
         $('img').zoomify();
     });
 </script>
-<form id="myform" method="post" action="/admin/store_form/" frame="true" refresh="true">
+<form id="myform" method="post" action="" frame="true" refresh="true">
         {% csrf_token %}
 		<input type="hidden" name="shop_id" value="{{ data.shop_id }}"/>
 		<table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
@@ -34,7 +46,7 @@
 				<td>
                     <ul class="ul_img">
                         {% for i in  data.shop_logo %}
-                            <li><img src="http://college.cqgynet.com/static/shop_images/{{ i }}"></li>
+                            <li><img src="http://ftp.college.cqgynet.com/static/shop_images/{{ i }}"></li>
                         {% endfor %}
                     </ul>
 				</td>
@@ -94,7 +106,7 @@
                     {% for i in  data.business_license %}
                        {% if i == "" %}
                             {% else %}
-                            <li><img src="http://college.cqgynet.com/static/shop_images/{{ i }}"></li>
+                            <li><img src="http://ftp.college.cqgynet.com/static/shop_images/{{ i }}"></li>
                         {% endif %}
                     {% endfor %}
                      </ul>
@@ -105,7 +117,7 @@
 				<td>
                       <ul class="ul_img">
                     {% for i in  data.catering_license %}
-                        <li><img src="http://college.cqgynet.com/static/shop_images/{{ i }}"></li>
+                        <li><img src="http://ftp.college.cqgynet.com/static/shop_images/{{ i }}"></li>
                     {% endfor %}
                      </ul>
 				</td>
@@ -117,9 +129,9 @@
 				</td>
 			</tr>
             <tr>
-				<th width="160">支付宝收款账号</th>
+				<th width="160">银行收款账号</th>
 				<td>
-                    <span  id="address">{{ data.alipay_account }}</span>
+                    <span  id="address">{{ data.bank_account_holder }}</span>
 				</td>
 			</tr>
             <tr>
@@ -129,7 +141,7 @@
                     {% for i in  data.shop_photos %}
                         {% if i == "" %}
                             {% else %}
-                            <li><img src="http://college.cqgynet.com/static/shop_images/{{ i }}"></li>
+                            <li><img src="http://ftp.college.cqgynet.com/static/shop_images/{{ i }}"></li>
                         {% endif %}
                     {% endfor %}
                      </ul>
@@ -157,25 +169,22 @@
                     <textarea cols="50" rows="3" name="remark"></textarea><em style="color: red;font-weight: bold;display: inline-block;padding-left: 15px;">必填</em>
 				</td>
 			</tr>
-            <tr>
-                <td colspan="2" class="aui_footer">
-                    <div class="aui_buttons" style="">
-                        <button id="edit" class="aui_state_highlight" type="submit">提交</button>
-                        <button id="close" type="button">关闭</button>
-                    </div>
-                </td>
-            </tr>
         </table>
+         <div class="btn">
+            <td colspan="2" class="aui_footer">
+                <div class="aui_buttons">
+                    <button id="edit" class="aui_state_highlight" type="submit">提交</button>
+                    <button id="close" type="button">关闭</button>
+                </div>
+            </td>
+        </div>
 	</form>
 <script src="/static/js/jquery.js"></script>
 <script>
     $("#close").click(function () {
-            window.parent.hideform();
-    });
-    $("#edit").click(function () {
-         window.parent.hideform();
-         window.parent.tip("编辑成功");
-     });
+         art.dialog.close();
+    });//关闭对话框
+
      $("#auth_value").val($("#auth option:selected").val());
      $("#auth").change(function () {
                 num = parseInt($("#auth option:selected").val());
@@ -187,10 +196,41 @@
                 }
             });//改变option选项value赋值到隐藏域
 
+     $("#myform").submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url:"/admin/store_form/",
+            type:"post",
+            dataType:"json",
+            data:$("#myform").serialize(),
+            success:function(msg){
+                if(msg==1){
+                    result("编辑成功","succeed");
+                    var win = art.dialog.open.origin;
+                    win.location.reload();
+                }else{
+                    result("编辑失败","error");
+                }
+            },
+            error:function(xhr,textstatus,thrown){
+            }
+        });
+    });//编辑表单提交
+    function result(title,flag) {
+        art.dialog({
+            content: title,
+            //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+            icon: flag,
+            fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+            time: 3,//如果有cancel方法的话会调用cancel方法
+        });
+        var time = setInterval(function() {
+            art.dialog.close()
+        }, 2000);
+    }
 
-
-    ;(function($){
-
+    //点击图片放大
+    (function($){
 	// initialization
 	Zoomify = function (element, options) {
 		var that = this;
@@ -209,7 +249,6 @@
 		easing:   'linear',
 		scale:    0.9
 	};
-
 	// css utilities
 	Zoomify.prototype.transition = function ($element, value) {
 		$element.css({
@@ -220,7 +259,6 @@
 			'transition': value
 		});
 	};
-
 	Zoomify.prototype.addTransition = function ($element) {
 		this.transition($element, 'all ' + this.options.duration + 'ms ' + this.options.easing);
 	};
@@ -247,7 +285,6 @@
 		this.transform('scale(' + scale + ') translate(' + translateX + 'px, ' + translateY + 'px)');
 		this.removeTransition(this.$image, callback);
 	};
-
 	// zooming functions
 	Zoomify.prototype.zoom = function () {
 		if (this._zooming) return;
@@ -300,7 +337,6 @@
 		this.removeShadow();
 		this._zoomed = false;
 	};
-
 	// page listener callbacks
 	Zoomify.prototype.reposition = function () {
 		if (this._zoomed) {
@@ -308,7 +344,6 @@
 			this.zoomIn();
 		}
 	};
-
 	// shadow background
 	Zoomify.prototype.addShadow = function () {
 		var that = this;
@@ -333,7 +368,6 @@
 			that.$shadow = null;
 		});
 	};
-
 	// plugin definition
 	$.fn.zoomify = function (option) {
 		return this.each(function () {
@@ -344,7 +378,6 @@
 			if (typeof option == 'string' && ['zoom', 'zoomIn', 'zoomOut', 'reposition'].indexOf(option) >= 0) zoomify[option]();
 		});
 	};
-
 })(jQuery);
 
 </script>

@@ -12,6 +12,18 @@
     .ul_img{
         display: flex;
     }
+     form{
+        margin-bottom: 50px;
+    }
+     .aui_buttons {
+        padding: 4px 0 0 0;
+    }
+    .btn{
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        right: 0;
+    }
 </style>
 
 <script type="text/javascript">
@@ -34,7 +46,7 @@
 				<td>
                     <ul class="ul_img">
                         {% for i in  data.shop_logo %}
-                            <li><img src="http://college.cqgynet.com/static/shop_images/{{ i }}"></li>
+                            <li><img src="http://ftp.college.cqgynet.com/static/shop_images/{{ i }}"></li>
                         {% endfor %}
                     </ul>
 				</td>
@@ -88,7 +100,7 @@
                         {% for i in  data.business_license %}
                            {% if i == "" %}
                             {% else %}
-                            <li><img src="http://college.cqgynet.com/static/shop_images/{{ i }}"></li>
+                            <li><img src="http://ftp.college.cqgynet.com/static/shop_images/{{ i }}"></li>
                         {% endif %}
                         {% endfor %}
                     </ul>
@@ -99,7 +111,7 @@
 				<td>
                     <ul class="ul_img">
                         {% for i in  data.catering_license %}
-                            <li><img src="http://college.cqgynet.com/static/shop_images/{{ i }}"></li>
+                            <li><img src="http://ftp.college.cqgynet.com/static/shop_images/{{ i }}"></li>
                         {% endfor %}
                     </ul>
 				</td>
@@ -111,9 +123,9 @@
 				</td>
 			</tr>
             <tr>
-				<th width="160">支付宝收款账号</th>
+				<th width="160">银行收款账号</th>
 				<td>
-                    <span  id="address">{{ data.alipay_account }}</span>
+                    <span  id="address">{{ data.bank_account_holder }}</span>
 				</td>
 			</tr>
             <tr>
@@ -123,7 +135,7 @@
                         {% for i in  data.shop_photos %}
                            {% if i == "" %}
                             {% else %}
-                            <li><img src="http://college.cqgynet.com/static/shop_images/{{ i }}"></li>
+                            <li><img src="http://ftp.college.cqgynet.com/static/shop_images/{{ i }}"></li>
                         {% endif %}
                         {% endfor %}
                     </ul>
@@ -147,23 +159,22 @@
                      <span  id="reason">{{ data.remark }}</span>
 				</td>
 			</tr>
-            <tr>
-                <td colspan="2" class="aui_footer">
-                    <div class="aui_buttons" style="">
-                        <button id="close" type="button">关闭</button>
-                    </div>
-                </td>
-            </tr>
         </table>
+        <div class="btn">
+            <td colspan="2" class="aui_footer">
+                <div class="aui_buttons">
+                    <button id="close" type="button">关闭</button>
+                </div>
+            </td>
+        </div>
 	</form>
 <script src="/static/js/jquery.js"></script>
 <script>
     $("#close").click(function () {
-            window.parent.hideform();
+         art.dialog.close();
     });
 
- ;(function($){
-
+ (function($){
 	// initialization
 	Zoomify = function (element, options) {
 		var that = this;

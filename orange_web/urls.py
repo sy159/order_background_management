@@ -20,6 +20,8 @@ from orange_manage.shops import views as merchants
 from orange_manage.basic_info import views as basic_info
 from orange_manage.system_setting import views as system_setting
 from orange_manage.users import views as users
+from orange_manage.trade import views as trade
+from orange_manage.promotion_market import views as promotion_market
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('admin/login/', views.login),#登陆
@@ -27,6 +29,7 @@ urlpatterns = [
     path('admin/bind_account/', views.bind_account),#两步验证,绑定用户
     path('admin/index/', views.index),#主页面
     path('admin/account_unique/', views.account_unique),  # 账号唯一性
+    path('admin/image_upload/', views.image_upload),  # 上传图片
 
     #商户管理
     path('admin/shop_list/', merchants.shop_list),#商户列表
@@ -53,6 +56,8 @@ urlpatterns = [
     path('admin/permissions/', basic_info.permissions),#权限api
     path('admin/edit_authorityform/', basic_info.edit_authorityform),#编辑管理员权限弹框
     path('admin/set_authority/', basic_info.set_authority),#设置管理员权限弹框
+    path('admin/edit_personinfo/', basic_info.edit_personinfo),#编辑个人信息
+    path('admin/clear_key/', basic_info.clear_key),#清除key
 
     #系统设置
     path('admin/adver_management/', system_setting.adver_management),#广告管理
@@ -65,6 +70,15 @@ urlpatterns = [
     #用户管理
     path('admin/user_list/', users.user_list),  # 广告信息列表
     path('admin/user_edit/', users.user_edit),  # 编辑广告信息
+
+    #交易管理
+    path('admin/order_list/', trade.order_list),  # 编辑广告信息
+    path('admin/order_detail/', trade.order_detail),  # 查看订单详情弹框
+
+    #推广营销
+    path('admin/recommend_list/', promotion_market.recommend_list),  # 推荐列表
+    path('admin/store_add/', promotion_market.store_add),  # 添加推荐店铺弹窗
+    path('admin/store_edit/', promotion_market.store_edit),  # 编辑店铺弹窗
 
 ]
 

@@ -120,9 +120,6 @@
                          </ul>
                     </li>
                     {% endfor %}
-
-
-
                 </ul>
             </div>
         </div>
@@ -135,60 +132,6 @@
         </div>
     </div>
     <div style="clear:both;"></div>
-</div>
-{#公用模板#}
-<div id="aui_state_lock" style="display: none;position: fixed;width: 811px;left: 50%;top: 50%;transform:translateX(-50%) translateY(-50%);z-index: 2023;" class="aui_state_lock aui_state_focus">
-    <div class="aui_outer">
-        <table class="aui_border">
-            <tbody>
-            <tr>
-                <td class="aui_nw"></td>
-                <td class="aui_n"></td>
-                <td class="aui_ne"></td>
-            </tr>
-            <tr>
-                <td class="aui_w"></td>
-                <td class="aui_c">
-                    <div class="aui_inner">
-                        <table class="aui_dialog">
-                            <tbody>
-                            <tr>
-                                <td colspan="2" class="aui_header">
-                                    <div class="aui_titleBar">
-                                        <div class="aui_title" style="cursor: move;"></div>
-                                        <a class="aui_close"   href="javascript:/*artDialog*/;">×</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="aui_icon" style="display: none;">
-                                    <div class="aui_iconBg" style="/* background: none; */"></div>
-                                </td>
-                                <td class="aui_main" style="width: 800px; height:440px; visibility: visible;">
-                                    <div class="aui_content aui_state_full" style="padding: 0px;">
-                                        <div class="aui_loading" style="display: none;">
-                                            <span>loading..</span>
-                                        </div>
-                                        <iframe onload="callChild()" id="iframe_form" src="" name="Openedit" frameborder="0" allowtransparency="true"style="width: 100%; height: 100%; border: 0px none;"></iframe>
-                                        <input type="hidden" value="" id="get_a">
-                                        <input type="hidden" value="" id="get_url">
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </td>
-                <td class="aui_e"></td>
-            </tr>
-            <tr>
-                <td class="aui_sw"></td>
-                <td class="aui_s"></td>
-                <td class="aui_se" style="cursor: auto;"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
 </div>
 {#图片放大#}
 <div id="bigimg" style="display: none;position: fixed;width: 600px;left: 50%;top: 50%;transform:translateX(-50%) translateY(-50%);z-index: 2023;" class="aui_state_lock aui_state_focus">
@@ -238,75 +181,35 @@
 <script type="text/javascript" src="/static/js/index.js"></script>
 <script type="text/javascript" src="/static/js/del_edit_post_get.js"></script>
 <script type="text/javascript">
-           function tip(tip){
-               art.dialog({
-                   width: 200,
-                   height: 150,
-                   lock: true,
-                   background: "#000", // 背景色
-                   opacity: 0.3,	// 透明度
-                   time: 2,
-                   content: tip
-               });
-           } // 修改编辑成功后调用此函数
-        // 编辑弹窗关闭函数（由子页面引用）
-           $(".aui_close").click(function () {
-            $("#aui_state_lock").css('display','none');
-            $("#backup").css('display','none');
-            $("#bigimg").css('display','none');
-        });//关闭弹窗
-           function hideform(){
-            $("#aui_state_lock").css('display','none');
-            $("#backup").css('display','none');
-        }//关闭弹窗
-           function showform(){
-                $("#aui_state_lock").css('display','block');
-                $("#backup").css('display','block');
-            } // 编辑弹窗显示函数（由子页面引用）
-           function change_data(title,src,shop_id){
-            $(".aui_title").html(title);
-            $("#iframe_form").attr("src",src+"?shop_id="+shop_id);
-          }//弹框
-           function add_data(title,src){
-            $(".aui_title").html(title);
-            $("#iframe_form").attr("src",src);
-           }//弹框
-           function add_url(url,shopid){
-               $("#get_a").val(url)
-               $("#get_url").val(shopid)
-           }//接收来自子页面的数据
-           function callChild() {
-               if($("#get_a").val()==""){
-                   return false;
-               }else {
-                    Openedit.window.childFunction($("#get_a").val(),$("#get_url").val());
-               }
-             /*
-              child 为iframe的name属性值，
-              不能为id，因为在FireFox下id不能获取iframe对象
-             */
-         }//调用子页面的方法，把数据传过去
 
-            $("#right_open").click(function(){
-                $("#HelpBox").css('right','0px');
-                $("#HelpBox").css('width',"200px");
-                $("#right_open").hide();
-                $("#right_close").show();
-                $('#MainBox').css('margin-right','200px');
-            });
-            $("#right_close").click(function(){
-                $("#HelpBox").css('right','-200px');
-                $("#HelpBox").css('width',"0px");
-                $("#right_open").show();
-                $("#right_close").hide();
-                $('#MainBox').css('margin-right','0px');
-            });
-          //点击小图显示大图函数
-          function showbigimg(lable) {
-                $("#bigimg").css('display','block');
-                $("#backup").css('display','block');
-                $("#aui_content").html(lable);
-          }
+    // 编辑弹窗关闭函数（由子页面引用）
+    $(".aui_close").click(function () {
+        $("#backup").css('display','none');
+        $("#bigimg").css('display','none');
+    });
+
+    $("#right_open").click(function(){
+        $("#HelpBox").css('right','0px');
+        $("#HelpBox").css('width',"200px");
+        $("#right_open").hide();
+        $("#right_close").show();
+        $('#MainBox').css('margin-right','200px');
+    });
+    $("#right_close").click(function(){
+        $("#HelpBox").css('right','-200px');
+        $("#HelpBox").css('width',"0px");
+        $("#right_open").show();
+        $("#right_close").hide();
+        $('#MainBox').css('margin-right','0px');
+    });
+
+
+    //点击小图显示大图函数
+    function showbigimg(lable) {
+        $("#bigimg").css('display','block');
+        $("#backup").css('display','block');
+        $("#aui_content").html(lable);
+    }
 
 
 

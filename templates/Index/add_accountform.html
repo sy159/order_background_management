@@ -262,6 +262,23 @@
                                                 return false;
                                             }else{
                                                 $(".authority").html("");
+                                                $.ajax({
+                                                    url:"/admin/add_account/",
+                                                    type:"post",
+                                                    dataType:"json",
+                                                    data: $("#myform").serialize(),
+                                                    success:function(msg){
+                                                        if(msg==1){
+                                                            result("添加成功","succeed");
+                                                            var win = art.dialog.open.origin;
+                                                            win.location.reload();
+                                                        }else{
+                                                            result("添加失败","error");
+                                                        }
+                                                    },
+                                                    error:function(xhr,textstatus,thrown){
+                                                    }
+                                                });
                                                 return true;
                                             }
                                         }
@@ -270,23 +287,7 @@
                             }
                         }
                     }
-                    $.ajax({
-                        url:"/admin/add_account/",
-                        type:"post",
-                        dataType:"json",
-                        data: $("#myform").serialize(),
-                        success:function(msg){
-                            if(msg==1){
-                                result("添加成功","succeed");
-                                var win = art.dialog.open.origin;
-                                win.location.reload();
-                            }else{
-                                result("添加失败","error");
-                            }
-                        },
-                        error:function(xhr,textstatus,thrown){
-                        }
-                    });
+
                 }
             });
         }

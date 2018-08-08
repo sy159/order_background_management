@@ -21,9 +21,7 @@ def user_list(request):
         get_page = request.GET.get('p', '1')
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
-        get_operator = request.session.get('user')
-        obj = models.Admin.objects.filter(account=get_operator).first()
-        operator_region = obj.open_admin_region
+        operator_region = request.operator_region
         if operator_region:
             operator_campus_obj = models.RegionCampus.objects.filter(region_id=operator_region).all()
         else:
@@ -38,7 +36,7 @@ def user_list(request):
         if disable_money_obj:
             disable_money = 0.0
             for i in disable_money_obj:
-                disable_money += i['all_money']
+                disable_money += float(i['all_money'])
         disable_money = '%.2f' % disable_money
         money_dict = {
             'all_money': all_money,
@@ -58,10 +56,8 @@ def user_list(request):
         if len(get_begin_time) and len(get_end_time):
             all_obj = all_obj.filter(register_time__gte=get_begin_time)
             all_obj = all_obj.filter(register_time__lte=get_end_time)
-        if len(all_obj) % int(get_pagesize):
-            page_total = len(all_obj) // int(get_pagesize) + 1
-        else:
-            page_total = len(all_obj) // int(get_pagesize)
+        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+            get_pagesize)
         data_list = []
         for i in all_obj[start_nun:end_num]:
             data_dict = {
@@ -82,28 +78,28 @@ def user_list(request):
 
 
 def user_edit(request):
-    if request.method=='GET':
-        get_userid=request.GET.get('userid')
-        obj=models.User.objects.get(user_id=get_userid)
-        data={
-            'ID':get_userid,
-            'nickname':obj.nickname,
-            'username':obj.username,
-            'name':obj.name,
-            'gender':obj.gender,
-            'phone_number':obj.phone_number,
-            'qq':obj.qq,
-            'campus_id':obj.campus_id,
-            'register_time':obj.register_time,
-            'last_login':obj.last_login,
-            'status':obj.status,
-            'balance':obj.balance,
-            'integral':obj.integral,
-            'last_ip':obj.last_ip,
+    if request.method == 'GET':
+        get_userid = request.GET.get('userid')
+        obj = models.User.objects.get(user_id=get_userid)
+        data = {
+            'ID': get_userid,
+            'nickname': obj.nickname,
+            'username': obj.username,
+            'name': obj.name,
+            'gender': obj.gender,
+            'phone_number': obj.phone_number,
+            'qq': obj.qq,
+            'campus_id': obj.campus_id,
+            'register_time': obj.register_time,
+            'last_login': obj.last_login,
+            'status': obj.status,
+            'balance': obj.balance,
+            'integral': obj.integral,
+            'last_ip': obj.last_ip,
         }
-        return render(request,'User/edit.html',{'data':data})
-    elif request.method=='POST':
-        get_userid=request.GET.get('userid')
-        get_status=request.GET.get('status')
+        return render(request, 'User/edit.html', {'data': data})
+    elif request.method == 'POST':
+        get_userid = request.GET.get('userid')
+        get_status = request.GET.get('status')
         models.User.objects.filter(user_id=get_userid).update(status=get_status)
         return HttpResponse(1)

@@ -49,15 +49,15 @@
                 <div class="table-list">
                     <table width="100%" cellspacing="0">
                         <thead>
-                        <tr>
-                            <th>编号</th>
-                            <th>店铺名称</th>
-                            <th>联系电话</th>
-                            <th>最后编辑时间</th>
-                            <th>店铺审核</th>
-                            <th>快店资质审核状态</th>
-                            <th class="textcenter">操作</th>
-                        </tr>
+                            <tr>
+                                <th>编号</th>
+                                <th>店铺名称</th>
+                                <th>联系电话</th>
+                                <th>最后编辑时间</th>
+                                <th>店铺审核</th>
+                                <th>快店资质审核状态</th>
+                                <th class="textcenter">操作</th>
+                            </tr>
                         </thead>
                         <tbody id="tbody">
                             {% for i in data %}
@@ -76,7 +76,7 @@
                             <td><font color="green">待审核</font></td>
 
                             <td class="textcenter">
-                                <a href="javascript:void(0);" class="edit_row">操作</a>
+                                <a href="javascript:void(0);" class="edit_row">编辑</a>
                             </td>
                            </tr>
                         {% endfor %}
@@ -116,12 +116,14 @@
         var td=$(this).parent().siblings()[0];
         var shop_id=$(td).html();
         if(clsn=='edit_row'){
-            // 调用父页面的方法
-             window.parent.showform();
-             window.parent.change_data("编辑店铺信息","/admin/store_form/",shop_id);
+             art.dialog.open('/admin/store_form/?shop_id='+shop_id,{
+                title: '编辑店铺信息',
+                lock: true,
+                modal:true,
+                width:800,
+                height:400
+            });
         }
     });
-    // 编辑弹窗关闭
-    parent.window.hideform();
 </script>
 </html>
