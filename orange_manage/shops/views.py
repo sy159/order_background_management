@@ -803,3 +803,107 @@ def edit_childform(request):
         get_sort_id = request.GET.get('sort_id')
         models.ShopSort.objects.filter(sort_id=get_sort_id).delete()
         return HttpResponse(1)
+
+
+def circle_list(request):
+    get_page = request.GET.get('p', '1')
+    get_pagesize = 15
+    start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
+    end_num = start_nun + int(get_pagesize)  # 终止数据位置
+    get_region = request.operator_region
+    all_obj = models.Circle.objects.all() if get_region == 0 else models.Circle.objects.filter(region_id=get_region)
+    page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        get_pagesize)
+    data_list = []
+    all_obj.query.group_by = ['region_id']
+    for i in all_obj.order_by('-priority')[start_nun:end_num]:
+        if get_region:
+            obj = models.Region.objects.get(region_id=get_region)
+        else:
+            obj = models.Region.objects.get(region_id=i.region_id)
+        region_name = obj.region_name
+        data_dict = {
+            'circle_id': i.circle_id,
+            'circle_name': i.circle_name,
+            'priority': i.priority,
+            'region_name': region_name,
+            'region_id': i.region_id,
+        }
+        data_list.append(data_dict)
+    return render(request, 'Merchant/circle_list.html',
+                  {'data': data_list, 'get_page': get_page, 'page_total': str(page_total)})
+
+
+def add_circle(request):
+    if request.method == 'GET':
+        return render(request, 'Merchant/add_circle.html')
+    elif request.method == 'POST':
+        circle_name = request.POST.get('circle_name')
+        priority = request.POST.get('priority')
+        if request.operator_region:
+            models.Circle.objects.create(circle_name=circle_name, priority=priority, region_id=request.operator_region)
+            return HttpResponse(1)
+        else:
+            return HttpResponse(0)
+
+
+def edit_circle(request):
+    if request.method == 'GET':
+        get_id = request.GET.get('id')
+        obj = models.Circle.objects.get(circle_id=get_id)
+        data = {
+            'circle_id': obj.circle_id,
+            'circle_name': obj.circle_name,
+            'priority': obj.priority,
+        }
+        return render(request, 'Merchant/edit_circle.html', {'data': data})
+    elif request.method == 'POST':
+        get_id = request.POST.get('circle_id')
+        get_circle_name = request.POST.get('circle_name')
+        get_priority = request.POST.get('priority')
+        if get_circle_name:
+            models.Circle.objects.filter(circle_id=get_id).update(circle_name=get_circle_name, priority=get_priority)
+        else:
+            models.Circle.objects.filter(circle_id=get_id).update(priority=get_priority)
+        return HttpResponse(1)
+    elif request.method == 'DELETE':
+        get_id = request.GET.get('circle_id')
+        models.Circle.objects.filter(circle_id=get_id).delete()
+        return HttpResponse(1)
+
+
+def store_list(request):
+    if request.method == 'GET':
+        operator_region = request.GET.get('region_id')
+        circle_id = request.GET.get('circle_id')
+        all_circle = models.CircleShop.objects.filter(circle_id=circle_id).all()
+        circle_list = []
+        for i in all_circle:
+            circle_list.append(i.shop_id)
+        get_page = request.GET.get('p', '1')
+        get_pagesize = 15
+        all_obj = models.Shop.objects.filter(auth=2, status=1, region_id=operator_region).all()  # 审核通过，状态开启
+        start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
+        end_num = start_nun + int(get_pagesize)  # 终止数据位置
+        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+            get_pagesize)
+        data_list = []
+        for i in all_obj[start_nun:end_num]:
+            data_dict = {
+                'shop_id': i.shop_id,
+                'shop_name': i.shop_name,
+                'address': i.address,
+            }
+            data_list.append(data_dict)
+        return render(request, 'Merchant/store_list.html',
+                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total),
+                       'region_id': operator_region, 'circle_id': circle_id, 'circle_list': circle_list})
+    elif request.method == 'POST':
+        get_circle_id = request.POST.get('circle_id')
+        get_shop_list = request.POST.getlist('checkbox')
+        if request.operator_region == 0:
+            return HttpResponse(0)
+        models.CircleShop.objects.filter(circle_id=get_circle_id).delete()
+        for i in get_shop_list:
+            models.CircleShop.objects.create(circle_id=get_circle_id, shop_id=i)
+        return HttpResponse(1)

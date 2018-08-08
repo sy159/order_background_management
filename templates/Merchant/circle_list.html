@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站后台管理 橙子校园</title>
+    <style>
+        ul.pages{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ol, ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+    {% include 'Public/header.html' %}
+</head>
+
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul class="tbody">
+            <a href="" class="on">商圈列表</a>|
+            <a href="javascript:;" class="add_circle">添加商圈</a>
+        </ul>
+    </div>
+    <form name="myform" id="myform" action="" method="post">
+    {% csrf_token %}
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <colgroup>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col width="180" align="center"/>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>排序</th>
+                        <th>编号</th>
+                        <th>地区</th>
+                        <th>商圈名称</th>
+                        <th>商店列表</th>
+                        <th class="textcenter">操作</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                {% for i in data %}
+                    <tr>
+                        <td>{{ i.priority }}</td>
+                        <td>{{ i.circle_id }}</td>
+                        <td>{{ i.region_name }}</td>
+                        <td>{{ i.circle_name }}</td>
+                        <td style="display: none">{{ i.region_id }}</td>
+                        <td id="circle_shop"><a href="/admin/store_list/?p=1&circle_id={{ i.circle_id }}&region_id={{ i.region_id }}">商店列表</a></td>
+                        <td class="textcenter">
+                            <a href="javascript:;" class="edit_row">编辑</a> |
+                            <a href="javascript:;" class="delete_row" >删除</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                 <tfoot id="tfoot">
+                            <tr>
+                                <td class="textcenter pagebar" colspan="12">
+                                    <ul class="pages">
+                                        <li id="first_page"><a href='/admin/circle_list/?p=1'>首页</a></li>
+                                        {% if  get_page  == '1' %}
+                                            <li><a href='#'>&lt;上一页</a></li>
+                                        {% else %}
+                                            <li><a href='/admin/circle_list/?p={{ get_page |add:-1}}'>&lt;上一页</a></li>
+
+                                        {% endif %}
+                                        {% if  get_page  >=  page_total  %}
+                                            <li><a href='#'>下一页&gt;</a></li>
+                                        {% else %}
+                                            <li><a href='/admin/circle_list/?p={{ get_page |add:1}}'>下一页&gt;</a></li>
+                                        {% endif %}
+                                        <li><a href='/admin/circle_list/?p={{ page_total }}'>尾页></a></li>
+                                        <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+            </table>
+        </div>
+    </form>
+</div>
+</body>
+<script src="/static/js/del_edit_post_get.js"></script>
+<script>
+  $(".tbody").on('click','a',function () {
+        var clsn=this.className;
+        var td=$(this).parent().siblings()[1];
+        var circle_id=$(td).html();
+        if(clsn=='edit_row'){
+           art.dialog.open('/admin/edit_circle/?id='+circle_id,{
+                title: '编辑商圈',
+                lock: true,
+                modal:true,
+                width:800,
+                height:400
+            });
+        }else if(clsn=='add_circle'){
+            art.dialog.open('/admin/add_circle/',{
+                title: '添加商圈',
+                lock: true,
+                modal:true,
+                width:800,
+                height:400
+            });
+        }else if(clsn=='delete_row'){
+            function callback() {}
+                if(confirm("你确定要删除吗？")){
+                   $.deleteJSON("/admin/edit_circle/?circle_id="+circle_id,"delete",callback)
+                }else{
+                    return false;
+                }
+            }
+
+    });
+</script>
+
+</html>

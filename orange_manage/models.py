@@ -167,6 +167,7 @@ class Circle(models.Model):
     circle_id = models.AutoField(primary_key=True)
     circle_name = models.CharField(max_length=255)
     region_id = models.IntegerField()
+    priority = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -381,6 +382,22 @@ class GoodsAttributeValue(models.Model):
         db_table = 'goods_attribute_value'
 
 
+class GoodsClassify(models.Model):
+    record_id = models.AutoField(primary_key=True)
+    parent_id = models.IntegerField()
+    name = models.CharField(max_length=255)
+    shop_id = models.IntegerField()
+    start_time = models.IntegerField()
+    end_time = models.IntegerField()
+    week_time = models.CharField(max_length=255)
+    privilege = models.IntegerField()
+    is_show = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'goods_classify'
+
+
 class GoodsComment(models.Model):
     comment_id = models.AutoField(primary_key=True)
     goods_id = models.IntegerField()
@@ -415,6 +432,23 @@ class GoodsInfo(models.Model):
     class Meta:
         managed = False
         db_table = 'goods_info'
+
+
+class GoodsSpecification(models.Model):
+    specification_id = models.AutoField(primary_key=True)
+    goods_id = models.IntegerField()
+    unit = models.CharField(max_length=255)
+    unit_price = models.FloatField()
+    original_price = models.FloatField()
+    image = models.CharField(max_length=255, blank=True, null=True)
+    stock = models.IntegerField()
+    salves_amount = models.PositiveIntegerField(blank=True, null=True)
+    spec = models.CharField(max_length=1000, blank=True, null=True)
+    product_code = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'goods_specification'
 
 
 class Menu(models.Model):
@@ -669,22 +703,6 @@ class ShopAuditLog(models.Model):
         db_table = 'shop_audit_log'
 
 
-class ShopClassify(models.Model):
-    record_id = models.AutoField(primary_key=True)
-    parent_id = models.IntegerField()
-    name = models.CharField(max_length=255)
-    shop_id = models.IntegerField()
-    start_time = models.IntegerField()
-    end_time = models.IntegerField()
-    week_time = models.CharField(max_length=255)
-    privilege = models.IntegerField()
-    is_show = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'shop_classify'
-
-
 class ShopComment(models.Model):
     record_id = models.AutoField(primary_key=True)
     shop_id = models.IntegerField()
@@ -739,23 +757,6 @@ class SpecValue(models.Model):
     class Meta:
         managed = False
         db_table = 'spec_value'
-
-
-class Specification(models.Model):
-    specification_id = models.AutoField(primary_key=True)
-    goods_id = models.IntegerField()
-    unit = models.CharField(max_length=255)
-    unit_price = models.FloatField()
-    original_price = models.FloatField()
-    image = models.CharField(max_length=255, blank=True, null=True)
-    stock = models.IntegerField()
-    salves_amount = models.PositiveIntegerField(blank=True, null=True)
-    spec = models.CharField(max_length=1000, blank=True, null=True)
-    product_code = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'specification'
 
 
 class SubOrder(models.Model):

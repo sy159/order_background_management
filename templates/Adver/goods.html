@@ -73,7 +73,7 @@
                 <li><a href='/admin/goods/?p={{ get_page |add:1}}&shop_id={{ shop_id }}'>下一页&gt;</a></li>
             {% endif %}
             <li><a href='/admin/goods/?p={{ page_total }}&shop_id={{ shop_id }}'>尾页></a></li>
-            <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
+            <li disabled><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
         </ul>
     </div>
 </div>

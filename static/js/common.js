@@ -382,12 +382,7 @@ $(function(){
 	}catch(e){
 		// alert(e.name + ": " + e.message);
 	}
-	$('.hideSxBtn').live('click',function(){
-		$('#sx', window.parent.document).hide();
-	});
-	$('.showSxBtn').live('click',function(){
-		$('#sx', window.parent.document).show();
-	});
+
 	if($('#myform').length>0){
 		if(document.getElementById('choose_map')){
 			$('#choose_map').html('<input type="text" class="input fl" name="long_lat" id="long_lat" size="20" placeholder="经度,纬度" value="'+(typeof($('#choose_map').attr('default_long_lat'))!='undefined' ? $('#choose_map').attr('default_long_lat') : '')+'" validate="required:true" readonly="readonly"/><a href="javascript:void(0);" style="margin-left:10px;" id="show_map_frame">点击选取经纬度</a>');

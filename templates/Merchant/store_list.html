@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>后台管理 - 橙子校园</title>
+    {% include 'Public/header.html' %}
+    <style>
+         ul.pages{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ol, ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .btn{
+            background: none;
+            position: relative;
+            text-align: right;
+        }
+        .btn2{
+            margin-right: 60px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul>
+            <a href="/admin/circle_list/">商圈列表</a>|
+            <a href="" class="on">商铺列表</a>
+        </ul>
+    </div>
+    <form name="myform" id="myform" action="" method="post">
+        <div class="table-list">
+            <input type="hidden" name="circle_id" value="{{ circle_id }}">
+            <div id="circle_list"  style="display: none;">{{ circle_list }}</div>
+            <table width="100%" cellspacing="0">
+                <colgroup>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col width="180" align="center"/>
+                    <col width="180" align="center"/>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>名称</th>
+                        <th>位置</th>
+                        <th class="textcenter">操作</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                {% for i in data %}
+                    <tr>
+                        <td>{{ i.shop_id }}</td>
+                        <td>{{ i.shop_name }}</td>
+                        <td>{{ i.address }}</td>
+                        <td style="display: none">{{ i.circle_id }}</td>
+                        <td class="textcenter">
+                            <input type="checkbox" name="{{ i.shop_id }}" value="{{ i.shop_id }}">
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot id="tfoot">
+                <tr>
+                    <td class="textcenter pagebar" colspan="12">
+                        <ul class="pages">
+                            <li id="first_page"><a href='/admin/store_list/?p=1&circle_id={{ i.circle_id }}&region_id={{ region_id }}'>首页</a></li>
+                            {% if  get_page  == '1' %}
+                                <li><a href='#'>&lt;上一页</a></li>
+                            {% else %}
+                                <li><a href='/admin/store_list/?p={{ get_page |add:-1}}&circle_id={{ i.circle_id }}&region_id={{ region_id }}'>&lt;上一页</a></li>
+
+                            {% endif %}
+                            {% if  get_page  >=  page_total  %}
+                                <li><a href='#'>下一页&gt;</a></li>
+                            {% else %}
+                                <li><a href='/admin/store_list/?p={{ get_page |add:1}}&circle_id={{ i.circle_id }}&region_id={{ region_id }}'>下一页&gt;</a></li>
+                            {% endif %}
+                            <li><a href='/admin/store_list/?p={{ page_total }}&circle_id={{ i.circle_id }}&region_id={{ region_id }}'>尾页></a></li>
+                            <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
+                        </ul>
+
+                    </td>
+
+                </tr>
+
+                </tfoot>
+            </table>
+        </div>
+    </form>
+    <div class="btn">
+        <input type="submit" id="submit" name="dosubmit" value="提交" class="button" />
+        <input type="reset" id="cancel" value="取消" class="button btn2"  />
+    </div>
+</div>
+</body>
+<script src="/static/js/del_edit_post_get.js"></script>
+<script>
+    if($("#circle_list").html() == " "){
+        $("#circle_list").html("")
+    }else{
+        var arr=$("#circle_list").html().split(",");
+        arr[0]=arr[0].split("[")[1];
+        arr[arr.length-1]=arr[arr.length-1].split("]")[0];
+        arr.forEach(function (el) {
+            $('input[name='+el+']').prop('checked',true);
+        });
+    }//包装选中的复选框
+
+
+   $("#submit").click(function () {
+        $.ajax({
+            url:"/admin/store_list/",
+            type:"post",
+            dataType:"json",
+            data:$("#myform").serializeArray(),
+            success:function(msg){
+                console.log(msg);
+                if(msg==1){
+                    result("提交成功","succeed");
+
+                }else if(msg == 0){
+                    result("平台管理员不能修改","error");
+                }else {
+                    result("提交失败","error");
+                }
+            },
+            error:function(xhr,textstatus,thrown){
+            }
+        });
+    });//编辑子分类表单提交
+   function result(title,flag) {
+        art.dialog({
+            content: title,
+            //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+            icon: flag,
+            modal:true,
+            fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+            time: 3,//如果有cancel方法的话会调用cancel方法
+            ok:function () {
+                 window.location.href="/admin/circle_list/"; //点击弹窗确定按钮执行的函数
+            }
+        });
+        var time = setInterval(function() {
+            art.dialog.close()
+        }, 2000);
+    }
+
+    $("#cancel").click(function () {
+        window.location.href="/admin/circle_list/";
+    });
+</script>
+</html>

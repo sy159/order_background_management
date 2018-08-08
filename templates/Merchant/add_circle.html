@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站后台管理 Powered by pigcms.com</title>
+    {% include 'Public/header.html' %}
+    <link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css" />
+    <style>
+        .frame_form .input {
+            height: 18px;
+        }
+        .high{ color: red; }
+        .position{
+            display: inline-block;
+            padding-top: 8px;
+            padding-left: 5px;
+        }
+        .aui_buttons {
+			padding: 4px 0 0 0;
+		}
+		.btn{
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            right: 0;
+		}
+    </style>
+</head>
+<body>
+    <form id="myform" method="post" action="" frame="true" refresh="true">
+        {% csrf_token %}
+        <table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
+            <tr>
+                <th width="160">商圈名称</th>
+                <td>
+                    <input type="text" id="circle_name" class="input fl" name="circle_name"  size="25"/>
+                    <strong class='high position circle_name'>*</strong>
+                </td>
+            </tr>
+            <tr>
+                <th width="160">商圈排序</th>
+                <td>
+                    <input type="text" id="priority" class="input fl" name="priority"  size="25" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"  validate="maxlength:20,required:true"/>
+                    <strong class='high position priority'>*(只能输入数字)</strong>
+                </td>
+            </tr>
+        </table>
+        <div class="btn">
+			<td colspan="2" class="aui_footer">
+				<div class="aui_buttons">
+					<button id="add" class="aui_state_highlight" type="submit">添加</button>
+					<button id="close" type="button">关闭</button>
+				</div>
+			</td>
+		</div>
+    </form>
+</body>
+
+<script src="/static/js/jquery.js"></script>
+<script>
+    $("#close").click(function () {
+        art.dialog.close()
+    });//关闭对话框
+
+    $("#myform").submit(function (e) {
+        e.preventDefault();
+          confirm();
+    });//添加主分类表单提交
+
+      //表单验证提交
+    function confirm(){
+        if($("#circle_name").val().length == 0 )
+        {
+            $(".circle_name").html("商圈名称不能为空！");
+            $("#circle_name").focus();
+            return false;
+        }else{
+            $(".circle_name").html(" ");
+            if($("#priority").val().length == 0)
+            {
+                $(".priority").html("商圈排序不能为空！");
+                return false;
+            }else{
+                 $(".priority").html(" ");
+                $.ajax({
+                    url:"/admin/add_circle/",
+                    type:"post",
+                    dataType:"json",
+                    data:$("#myform").serialize(),
+                    success:function(msg){
+                        console.log(msg);
+                        if(msg==1){
+                            result("添加成功","succeed");
+                            var win = art.dialog.open.origin;
+                            win.location.reload();
+                        }else if(msg == 0){
+                            result("平台管理员不能添加","error");
+                        }else {
+                           result("添加失败","error");
+                        }
+                    },
+                    error:function(xhr,textstatus,thrown){
+                    }
+                });
+                 return true;
+            }
+        }
+    }
+
+
+    function result(title,flag) {
+        art.dialog({
+            content: title,
+            //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+            icon: flag,
+            fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+            time: 3,//如果有cancel方法的话会调用cancel方法
+        });
+        var time = setInterval(function() {
+            art.dialog.close()
+        }, 2000);
+    }
+
+
+</script>

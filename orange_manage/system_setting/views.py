@@ -135,6 +135,7 @@ def stores(request):
             data_dict = {
                 'shop_id': i.shop_id,
                 'shop_name': i.shop_name,
+                'address': i.address,
             }
             data_list.append(data_dict)
         return render(request, 'Adver/stores.html',

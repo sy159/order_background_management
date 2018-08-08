@@ -1,0 +1,86 @@
+{% include 'Public/header.html' %}
+<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css" />
+<style>
+     .high{ color: red; }
+    .position{
+        display: inline-block;
+        padding-top: 8px;
+        padding-left: 5px;
+    }
+     .aui_buttons {
+			padding: 4px 0 0 0;
+		}
+    .btn{
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        right: 0;
+    }
+</style>
+<form id="myform" method="post" action="" frame="true" refresh="true">
+        {% csrf_token %}
+        <input type="hidden" name="circle_id" value="{{ data.circle_id }}"/>
+		<table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
+			<tr>
+				<th width="160">商圈名称</th>
+				<td>
+					<input type="text" value="{{ data.circle_name }}" id="sort_name" class="input fl" name="circle_name"  size="25"/>
+				</td>
+			</tr>
+			<tr>
+				<th width="160">商圈排序</th>
+				<td>
+                    <input type="text" value="{{ data.priority }}" id="priority" class="input fl" name="priority"  size="25" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"  validate="maxlength:20,required:true"/>
+				    <strong class='high position'>(只能输入数字)</strong>
+                </td>
+			</tr>
+        </table>
+        <div class="btn">
+			<td colspan="2" class="aui_footer">
+				<div class="aui_buttons">
+					<button id="edit" class="aui_state_highlight" type="submit">编辑</button>
+					<button id="close" type="button">关闭</button>
+				</div>
+			</td>
+		</div>
+	</form>
+
+<script>
+    $("#close").click(function () {
+         art.dialog.close();
+    });//关闭对话框
+
+    $("#myform").submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url:"/admin/edit_circle/",
+            type:"post",
+            dataType:"json",
+            data:$("#myform").serialize(),
+            success:function(msg){
+                if(msg==1){
+                    result("编辑成功","succeed");
+                    var win = art.dialog.open.origin;
+                    win.location.reload();
+                }else{
+                    result("编辑失败","error");
+                }
+            },
+            error:function(xhr,textstatus,thrown){
+            }
+        });
+    });//编辑主分类表单提交
+    function result(title,flag) {
+        art.dialog({
+            content: title,
+            //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+            icon: flag,
+            fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+            time: 3,//如果有cancel方法的话会调用cancel方法
+        });
+        var time = setInterval(function() {
+            art.dialog.close()
+        }, 2000);
+    }
+
+</script>

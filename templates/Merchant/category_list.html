@@ -63,28 +63,28 @@
                     </tr>
                      {% endfor %}
                 </tbody>
-                 <tfoot id="tfoot">
-                            <tr>
-                                <td class="textcenter pagebar" colspan="12">
-                                    <ul class="pages">
-                                        <li id="first_page"><a href='/admin/category_list/?p=1'>首页</a></li>
-                                        {% if  get_page  == '1' %}
-                                            <li><a href='#'>&lt;上一页</a></li>
-                                        {% else %}
-                                            <li><a href='/admin/category_list/?p={{ get_page |add:-1}}'>&lt;上一页</a></li>
+                <tfoot id="tfoot">
+                <tr>
+                    <td class="textcenter pagebar" colspan="12">
+                        <ul class="pages">
+                            <li id="first_page"><a href='/admin/category_list/?p=1'>首页</a></li>
+                            {% if  get_page  == '1' %}
+                                <li><a href='#'>&lt;上一页</a></li>
+                            {% else %}
+                                <li><a href='/admin/category_list/?p={{ get_page |add:-1}}'>&lt;上一页</a></li>
 
-                                        {% endif %}
-                                        {% if  get_page  >=  page_total  %}
-                                            <li><a href='#'>下一页&gt;</a></li>
-                                        {% else %}
-                                            <li><a href='/admin/category_list/?p={{ get_page |add:1}}'>下一页&gt;</a></li>
-                                        {% endif %}
-                                        <li><a href='/admin/category_list/?p={{ page_total }}'>尾页></a></li>
-                                        <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tfoot>
+                            {% endif %}
+                            {% if  get_page  >=  page_total  %}
+                                <li><a href='#'>下一页&gt;</a></li>
+                            {% else %}
+                                <li><a href='/admin/category_list/?p={{ get_page |add:1}}'>下一页&gt;</a></li>
+                            {% endif %}
+                            <li><a href='/admin/category_list/?p={{ page_total }}'>尾页></a></li>
+                            <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
+                        </ul>
+                    </td>
+                </tr>
+                </tfoot>
             </table>
         </div>
     </form>

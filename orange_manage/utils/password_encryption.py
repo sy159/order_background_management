@@ -9,4 +9,4 @@ def pwd_encrypted(get_pwd):
     return get_pwd
 
 
-print(pwd_encrypted('123'))
+

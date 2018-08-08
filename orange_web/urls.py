@@ -48,6 +48,10 @@ urlpatterns = [
     path('admin/add_childform/', merchants.add_childform),#添加子分类
     path('admin/edit_childform/', merchants.edit_childform),#编辑子分类
     path('admin/region_info/', merchants.region_info),#省市区信息
+    path('admin/circle_list/', merchants.circle_list),#商圈列表
+    path('admin/add_circle/', merchants.add_circle),#添加商圈
+    path('admin/edit_circle/', merchants.edit_circle),#编辑商圈
+    path('admin/store_list/', merchants.store_list),#店铺列表
 
     #基本信息相关
     path('admin/account_list/', basic_info.account_list),#管理员列表

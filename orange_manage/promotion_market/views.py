@@ -80,6 +80,5 @@ def store_edit(request):
             'status': request.POST.get('status'),
             'priority': request.POST.get('sort'),
         }
-        print(data_dict)
         models.RecommendShops.objects.filter(id=get_id).update(**data_dict)
         return HttpResponse(1)

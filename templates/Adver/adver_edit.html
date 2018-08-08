@@ -44,7 +44,7 @@
                     <option id="store_list" name="function" value="2">店铺列表</option>
                     <option id="web" name="function" value="3">web链接</option>
                 </select>
-                <input type="text" value="" class="input" name="url" id="url" style="width:200px;display:none" placeholder="请填写链接地址" validate="maxlength:200,required:true,url:true"/>
+                <input type="text" value="" class="input" name="url" id="url" style="width:200px;" placeholder="请填写链接地址" validate="maxlength:200,required:true,url:true"/>
                 <input type="hidden" name="get_url" id="get_url" value="">
             </td>
         </tr>
@@ -76,13 +76,16 @@
 </form>
 <script>
 
+
+
+    $("#url").val(art.dialog.data('urlname'));
+
     $("#url_type").change(function () {
        var val=$(this).find("option:selected").val();
         if(val == 2 || val == 3){
             $("#url").val("");
             $("#url").show();
         }else{
-            $("#url").hide();
             if(val == 1){
                  art.dialog.open('/admin/stores/?flag=edit',{
                     title: '选择商店或者商品',
@@ -124,7 +127,6 @@
             });
         });//表单提交
     }
-
 
      function result(title,flag) {
         art.dialog({

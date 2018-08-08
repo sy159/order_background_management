@@ -39,7 +39,7 @@
                 </colgroup>
                 <thead>
                     <tr>
-                        <th>序号</th>
+                        <th>排序</th>
                         <th>编号</th>
                         <th>名称</th>
                         <th>作用</th>
@@ -58,7 +58,7 @@
                 {%  if i.url == '商品不存在' or  i.url == '店铺不存在' %}
                     <td style="color: red">{{ i.url }}</td>
                 {% else %}
-                     <td>{{ i.url }}</td>
+                     <td id="urlname">{{ i.url }}</td>
                 {% endif %}
                     <td>
                         <img src="{{ i.img }}" style="width:300px;height:80px;" class="view_msg"/>
@@ -89,7 +89,10 @@
         var td=$(this).parent().siblings()[1];
         var adver_id=$(td).html();
         var parent_id=$("#parent_id").val();
+        var td3=$(this).parent().siblings()[3];
+        var shop_name=$(td3).html();
         if(clsn=='edit_row'){
+            art.dialog.data('urlname',shop_name);
             art.dialog.open('/admin/adver_edit/?parent_id='+parent_id+"&adver_id="+adver_id,{
                 title: '编辑广告信息',
                 lock: true,
