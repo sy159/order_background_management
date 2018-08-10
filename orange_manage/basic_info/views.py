@@ -20,6 +20,7 @@ def account_list(request):
         page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
             get_pagesize)
         data_list = []
+        all_obj=all_obj.exclude(id=request.operator_id)
         for i in all_obj.order_by('level')[start_nun:end_num]:
             region_obj = models.Region.objects.filter(region_id=i.open_admin_region).first()
             region_name = region_obj.region_name if region_obj else '平台所有区域'
@@ -46,6 +47,7 @@ def account_list(request):
         page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
             get_pagesize)
         data_list = []
+        all_obj = all_obj.exclude(id=request.operator_id)
         for i in all_obj[start_nun:end_num]:
             region_obj = models.Region.objects.filter(region_id=i.open_admin_region).first()
             data_dict = {

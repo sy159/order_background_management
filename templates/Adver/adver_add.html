@@ -34,25 +34,24 @@
             </td>
         </tr>
         <tr>
-{#            TODO 上传图片未做#}
             <th width="80">广告图片</th>
             <td>
-                <input  type="file" id="pic" accept="image/png,image/jpeg,image/gif" value=""  class="input fl" name="pic" style="width:200px;" placeholder="请上传图片" validate="required:true"/>
+                <input  type="file" id="pic" accept="image/png,image/jpeg,image/gif" value=""  class="input fl" name="pic" placeholder="请上传图片" validate="required:true"/>
                 <strong class='high position pic'>*</strong>
+                <input  type="hidden" id="pic1"  value=""   name="img" style="width:200px;"/>
+                <input  type="hidden" id="pic2"  value=""   name="img2" style="width:200px;"/>
             </td>
-            <td><input  type="hidden" id="pic1"  value=""   name="img" style="width:200px;"/></td>
-            <td><input  type="hidden" id="pic2"  value=""   name="img2" style="width:200px;"/></td>
         </tr>
          <tr>
             <th width="80">链接功能</th>
             <td>
                  <select id="url_type" style="height: 35px;vertical-align: middle;">
-                     <option id="choose" name="" value="0" selected>请选择对应功能</option>
+                     <option name="" value="0" selected>请选择对应功能</option>
                      <option id="store" name="function" value="1" >店铺或商品</option>
-                     <option id="store_list" name="function" value="2">店铺列表</option>
-                     <option id="web" name="function" value="3">web链接</option>
+                     <option id="web" name="function" value="2">web链接</option>
                  </select>
-                <input type="text" id="url" value="" class="input" name="url" style="width:200px;display:none" placeholder="请填写链接地址" validate="maxlength:200,required:true,url:true"/>
+                <input type="hidden" name="function" value="" id="choose">
+                <input type="text" id="url" value="" class="input" name="url" style="width:200px;display:none" placeholder="请填写链接地址" />
                 <input type="hidden" id="get_url" name="get_url" value="">
                 <strong class='high url'>*</strong>
             </td>
@@ -60,7 +59,7 @@
         <tr>
             <th width="80">广告排序</th>
             <td>
-                <input type="text" id="sort" class="input fl" name="sort" style="width:80px;" value="" validate="maxlength:10,required:true,number:true"/>
+                <input type="text" id="sort" class="input fl" name="sort" style="width:80px;" value=""/>
                 <strong class='high position sort'>*</strong>
             </td>
         </tr>
@@ -153,7 +152,8 @@
 
     $("#url_type").change(function () {
        var val=$(this).find("option:selected").val();
-        if(val == 2 || val == 3){
+        $("#choose").val(val);
+        if(val == 2){
             $("#url").val("");
             $("#url").show();
         }else{

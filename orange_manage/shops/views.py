@@ -307,63 +307,66 @@ def store_form(request):
     '''
     审核商店
     '''
-    if request.method == "GET":
-        get_shop_id = request.GET.get('shop_id')
-        shop_obj = models.Shop.objects.filter(shop_id=get_shop_id).first()
-        assistant_obj = models.ShopAssistant.objects.filter(shop_assistant_id=shop_obj.manager_id).first()
-        region_obj = models.Region.objects.filter(region_id=shop_obj.region_id).first()
-        province_obj = models.AddresLibrary.objects.filter(id=region_obj.province_id).first()
-        city_obj = models.AddresLibrary.objects.filter(id=region_obj.city_id).first()
-        area_obj = models.AddresLibrary.objects.filter(id=region_obj.area_id).first()
-        province_name = province_obj.site_name
-        city_name = city_obj.site_name
-        area_name = area_obj.site_name
-        try:
-            x = json.loads(shop_obj.shop_photos)
-            shop_obj.shop_photos = ''
-            for i in x:
-                shop_obj.shop_photos += i + '，'
-        except Exception:
-            pass
-        try:
-            x = json.loads(shop_obj.business_license)
-            shop_obj.business_license = ''
-            for i in x:
-                shop_obj.business_license += i + '，'
-        except Exception:
-            pass
-        shop_logo = shop_obj.shop_logo.split('，') if shop_obj.shop_logo else []  # 商店logo
-        business_license = shop_obj.business_license.split('，') if shop_obj.business_license else []  # 营业执照
-        shop_photos = shop_obj.shop_photos.split('，') if shop_obj.shop_photos else []  # 商店场景图地址列表
-        catering_license = shop_obj.catering_license.split('，') if shop_obj.catering_license else []  # 食品安全地址列表
-        data = {
-            'shop_id': get_shop_id,
-            'shop_name': shop_obj.shop_name,
-            'shop_logo': shop_logo,
-            # 'university_name':shop_obj.university_id,不存在了
-            'campus_name': shop_obj.campus_id,
-            'region_name': region_obj.region_name,
-            'phone_number': shop_obj.phone_number,
-            'manager_phone': assistant_obj.phone_number,
-            'shop_type': shop_obj.shop_type,
-            'in_area': province_name + city_name + area_name,
-            'address': shop_obj.address,
-            'business_license': business_license,
-            'catering_license': catering_license,
-            'bank_account': shop_obj.bank_account,
-            'bank_account_holder': shop_obj.bank_account_holder,
-            'shop_photos': shop_photos,  # 场景图
-            'manage_name': assistant_obj.username,
-        }
-        return render(request, 'Merchant/store_form.html', {'data': data})
-    if request.method == "POST":
-        get_shop_id = request.POST.get('shop_id')
-        get_auth = request.POST.get('auth')
-        get_remark = request.POST.get('remark')
-        models.Shop.objects.filter(shop_id=get_shop_id).update(auth=get_auth)
-        models.ShopAuditLog.objects.create(shop_id=get_shop_id, auth=get_auth, operator_id=request.operator_id,
-                                           remark=get_remark, create_time=timezone.now())
-        return HttpResponse(1)
+    try:
+        if request.method == "GET":
+            get_shop_id = request.GET.get('shop_id')
+            shop_obj = models.Shop.objects.filter(shop_id=get_shop_id).first()
+            assistant_obj = models.ShopAssistant.objects.filter(shop_assistant_id=shop_obj.manager_id).first()
+            region_obj = models.Region.objects.filter(region_id=shop_obj.region_id).first()
+            province_obj = models.AddresLibrary.objects.filter(id=region_obj.province_id).first()
+            city_obj = models.AddresLibrary.objects.filter(id=region_obj.city_id).first()
+            area_obj = models.AddresLibrary.objects.filter(id=region_obj.area_id).first()
+            province_name = province_obj.site_name
+            city_name = city_obj.site_name
+            area_name = area_obj.site_name
+            try:
+                x = json.loads(shop_obj.shop_photos)
+                shop_obj.shop_photos = ''
+                for i in x:
+                    shop_obj.shop_photos += i + '，'
+            except Exception:
+                pass
+            try:
+                x = json.loads(shop_obj.business_license)
+                shop_obj.business_license = ''
+                for i in x:
+                    shop_obj.business_license += i + '，'
+            except Exception:
+                pass
+            shop_logo = shop_obj.shop_logo.split('，') if shop_obj.shop_logo else []  # 商店logo
+            business_license = shop_obj.business_license.split('，') if shop_obj.business_license else []  # 营业执照
+            shop_photos = shop_obj.shop_photos.split('，') if shop_obj.shop_photos else []  # 商店场景图地址列表
+            catering_license = shop_obj.catering_license.split('，') if shop_obj.catering_license else []  # 食品安全地址列表
+            data = {
+                'shop_id': get_shop_id,
+                'shop_name': shop_obj.shop_name,
+                'shop_logo': shop_logo,
+                # 'university_name':shop_obj.university_id,不存在了
+                'campus_name': shop_obj.campus_id,
+                'region_name': region_obj.region_name,
+                'phone_number': shop_obj.phone_number,
+                'manager_phone': assistant_obj.phone_number,
+                'shop_type': shop_obj.shop_type,
+                'in_area': province_name + city_name + area_name,
+                'address': shop_obj.address,
+                'business_license': business_license,
+                'catering_license': catering_license,
+                'bank_account': shop_obj.bank_account,
+                'bank_account_holder': shop_obj.bank_account_holder,
+                'shop_photos': shop_photos,  # 场景图
+                'manage_name': assistant_obj.username,
+            }
+            return render(request, 'Merchant/store_form.html', {'data': data})
+        if request.method == "POST":
+            get_shop_id = request.POST.get('shop_id')
+            get_auth = request.POST.get('auth')
+            get_remark = request.POST.get('remark')
+            models.Shop.objects.filter(shop_id=get_shop_id).update(auth=get_auth)
+            models.ShopAuditLog.objects.create(shop_id=get_shop_id, auth=get_auth, operator_id=request.operator_id,
+                                               remark=get_remark, create_time=timezone.now())
+            return HttpResponse(1)
+    except Exception:
+        pass
 
 
 def status_form(request):

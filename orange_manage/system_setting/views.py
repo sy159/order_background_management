@@ -17,18 +17,21 @@ def adver_list(request):
                 all_obj = models.Banner.objects.filter(region_id=operator_region).all()
             data_list = []
             for i in all_obj.order_by('-priority'):
-                url_type = i.url.split("=")[1].split("#")[0]
-                url_id = i.url.split("#")[1]
-                if url_type == 'shop':
-                    shop_obj = models.Shop.objects.filter(shop_id=url_id).first()
-                    url_name = '店铺:' + shop_obj.shop_name if shop_obj else '店铺不存在'
-                else:
-                    goods_obj = models.Goods.objects.filter(goods_id=url_id).first()
-                    if goods_obj:
-                        shop_obj = models.Shop.objects.filter(shop_id=goods_obj.shop_id).first()
-                        url_name = '店铺:' + shop_obj.shop_name + ' 商品:' + goods_obj.goods_name
+                try:
+                    url_type = i.url.split("=")[1].split("#")[0]
+                    url_id = i.url.split("#")[1]
+                    if url_type == 'shop':
+                        shop_obj = models.Shop.objects.filter(shop_id=url_id).first()
+                        url_name = '店铺:' + shop_obj.shop_name if shop_obj else '店铺不存在'
                     else:
-                        url_name = '商品不存在'
+                        goods_obj = models.Goods.objects.filter(goods_id=url_id).first()
+                        if goods_obj:
+                            shop_obj = models.Shop.objects.filter(shop_id=goods_obj.shop_id).first()
+                            url_name = '店铺:' + shop_obj.shop_name + ' 商品:' + goods_obj.goods_name
+                        else:
+                            url_name = '商品不存在'
+                except Exception:
+                    url_name = i.url
                 data_dict = {
                     'id': i.id,
                     'priority': i.priority,
@@ -51,18 +54,21 @@ def adver_list(request):
                 all_obj = models.AppMenu.objects.filter(region_id=operator_region).all()
             data_list = []
             for i in all_obj.order_by('-priority'):
-                url_type = i.url.split("=")[1].split("#")[0]
-                url_id = i.url.split("#")[1]
-                if url_type == 'shop':
-                    shop_obj = models.Shop.objects.filter(shop_id=url_id).first()
-                    url_name = '店铺:' + shop_obj.shop_name if shop_obj else '店铺不存在'
-                else:
-                    goods_obj = models.Goods.objects.filter(goods_id=url_id).first()
-                    if goods_obj:
-                        shop_obj = models.Shop.objects.filter(shop_id=goods_obj.shop_id).first()
-                        url_name = '店铺:' + shop_obj.shop_name + ' 商品:' + goods_obj.goods_name
+                try:
+                    url_type = i.url.split("=")[1].split("#")[0]
+                    url_id = i.url.split("#")[1]
+                    if url_type == 'shop':
+                        shop_obj = models.Shop.objects.filter(shop_id=url_id).first()
+                        url_name = '店铺:' + shop_obj.shop_name if shop_obj else '店铺不存在'
                     else:
-                        url_name = '商品不存在'
+                        goods_obj = models.Goods.objects.filter(goods_id=url_id).first()
+                        if goods_obj:
+                            shop_obj = models.Shop.objects.filter(shop_id=goods_obj.shop_id).first()
+                            url_name = '店铺:' + shop_obj.shop_name + ' 商品:' + goods_obj.goods_name
+                        else:
+                            url_name = '商品不存在'
+                except Exception:
+                    url_name = i.url
                 data_dict = {
                     'id': i.id,
                     'priority': i.priority,
@@ -97,7 +103,10 @@ def adver_add(request):
         get_img = request.POST.get("img")
         get_priority = request.POST.get("sort")
         get_url = request.POST.get("get_url")  # 获取格式为shop_id=9或者goods_id=9
-        get_url = '?a=shop#' + get_url.split('=')[1] if 'shop' in get_url else '?a=goods#' + get_url.split('=')[1]
+        if request.POST.get('function') == '2':
+            get_url = request.POST.get('url')
+        else:
+            get_url = '?a=shop#' + get_url.split('=')[1] if 'shop' in get_url else '?a=goods#' + get_url.split('=')[1]
         if get_id == '1':
             models.Banner.objects.create(title=get_title, img=get_img, url=get_url, priority=get_priority,
                                          state=get_status, region_id=operator_region)
@@ -203,8 +212,18 @@ def adver_edit(request):
         if not len(get_status): get_status = obj.state
         if not len(get_img): get_img = obj.img
         if not len(get_priority): get_priority = obj.priority
-        if not len(get_url): get_url = obj.url.split('=')[1].split('#')[0] + '=' + obj.url.split('=')[1].split('#')[1]
-        get_url = '?a=shop#' + get_url.split('=')[1] if 'shop' in get_url else '?a=goods#' + get_url.split('=')[1]
+        if request.POST.get('function') == '2':
+            url=request.POST.get('url')
+            if 'http://'in url or 'https://' in url:
+                get_url = url
+            else:
+                get_url = 'http://'+url
+        elif request.POST.get('function') == '1':
+            if not len(get_url): get_url = obj.url.split('=')[1].split('#')[0] + '=' + obj.url.split('=')[1].split('#')[
+                1]
+            get_url = '?a=shop#' + get_url.split('=')[1] if 'shop' in get_url else '?a=goods#' + get_url.split('=')[1]
+        else:
+            get_url = obj.url
         if get_parent_id == '1':  # 轮播图
             models.Banner.objects.filter(id=get_shop_id).update(title=get_title, img=get_img, url=get_url,
                                                                 state=get_status, priority=get_priority)

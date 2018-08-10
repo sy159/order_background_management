@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="/static/css/index.css"/>
     <title>后台管理 - 橙子校园</title>
+    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon" />
     <script type="text/javascript" src="/static/js/jquery.js"></script>
     <script type="text/javascript" src="/static/js/artDialog/jquery.artDialog.js"></script>
     <script type="text/javascript" src="/static/js/artDialog/plugins/iframeTools.js"></script>
@@ -26,16 +27,18 @@
             <div id="indexProfile">
                 <div class="helpContentTitle">个人信息</div>
                 <div class="helpContentContent" style="padding-top:0px;margin-bottom:0px;">
-                    <p><span>会员名：</span>admin_CyJay</p>
-                    <p><span>会员组：</span>超级管理员</p>
-                    <p><span>最后登录时间：</span>2018-07-22 20:11:11</p>
-                    <p><span>最后登录IP/地址：</span>125.80.171.69 / 重庆市渝中区 电信</p>
-                    <p><span>登录次数：</span>635</p>
+                    <p><span>会员名：</span>{{ info.account }}</p>
+                    {% if info.identity == 0 %}
+                    <p><span>会员组：</span>平台管理员</p>
+                      {% elif info.identity == 1 %}
+                    <p><span>会员组：</span>区域主管理员</p>
+                       {% else %}
+                    <p><span>会员组：</span>普通管理员</p>
+                    {% endif %}
+                    <p><span>最后登录时间：</span>{{ info.last_time|date:'Y-m-d H:i:s' }}</p>
+                    <p><span>最后登录IP/地址：</span>{{ info.ip }} / 重庆市璧山区 电信</p>
+                    <p><span>登录次数：</span>{{ info.login_count }}</p>
                 </div>
-                <hr/>
-                <div class="helpContentTitle" style="margin-top:20px;">系统信息</div>
-                <div class="helpContentContent" style="padding-top:0px;margin-bottom:0px;">
-                    <p><span>PHP运行环境:</span>Linux</p><p><span>PHP运行方式:</span>fpm-fcgi</p><p><span>PHP版本:</span>5.4.45</p><p><span>MYSQL版本:</span>5.6.38-log</p><p><span>上传附件限制:</span>50M</p><p><span>执行时间限制:</span>300秒</p><p><span>磁盘剩余空间 :</span>71072.81M</p>						</div>
                 <hr/>
                 <div >
                     <div class="helpContentTitle" style="margin-top:20px;">官方动态</div>
@@ -71,11 +74,11 @@
                     </div>
                     <ul class="profile-2-info">
                         <li>
-                            <h3>{{ account }}</h3>
+                            <h3>{{ info.account }}</h3>
                         </li>
-                        {% if identity == 0 %}
+                        {% if info.identity == 0 %}
                         <li style="color:#999;">平台管理员</li>
-                            {% elif identity == 1 %}
+                            {% elif info.identity == 1 %}
                         <li style="color:#999;">区域主管理员</li>
                             {% else %}
                             <li style="color:#999;">普通管理员</li>
@@ -95,11 +98,27 @@
                         {% for key,val in x.items %}
                         <li class="nav-top">
                         <a class="auto" href="#">
-                                            <span class="pull-right text-muted">
+                            <span class="pull-right text-muted">
                                                 <i class="fa fa-fw fa-angle-right text"></i>
                                                 <i class="fa fa-fw fa-angle-down text-active"></i>
                                             </span>
+
+                            {% if key == '基本信息' %}
                             <i class="fa fa-tasks icon"></i>
+                            {% elif key == '商户管理' %}
+                             <i class="fa fa-cloud icon"></i>
+                            {% elif key == '系统设置' %}
+                             <i class="fa fa-gear icon"></i>
+                            {% elif key == '用户管理' %}
+                             <i class="fa fa-user icon"></i>
+                            {% elif key == '交易管理' %}
+                             <i class="fa fa-globe icon"></i>
+                            {% elif key == '推广营销' %}
+                             <i class="fa fa-magic icon"></i>
+                             {% elif key == '配送管理' %}
+                             <i class="fa fa-truck icon"></i>
+                            {% endif %}
+
                             <span class="font-bold">{{ key }}</span>
                         </a>
                         <ul class="nav nav-sub dk">

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% include 'Public/header.html' %}
+    <link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
+    <style>
+        .high {
+            color: red;
+        }
+
+        .position {
+            display: inline-block;
+            padding-top: 15px;
+            padding-left: 5px;
+        }
+
+        .aui_buttons {
+            padding: 4px 0 0 0;
+        }
+
+        .btn {
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            right: 0;
+        }
+
+        form {
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+<form id="myform" method="post" action="" frame="true" refresh="true">
+    <table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
+    <input type="hidden" name="deliver_id" value="{{ data.deliver_id }}">
+        <tr>
+            <th width="10%">姓名</th>
+            <td width="40%">
+                <input type="text" class="input fl" id="name" name="name" size="20" value="{{ data.name }}"/>
+                <strong class='high position account'>*</strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="10%">头像现图</th>
+            <td width="40%"><img src="{{ data.profile_image }}" style="width:300px;height:80px;" class="view_msg"></td>
+        </tr>
+        <tr>
+            <th width="10%">上传头像</th>
+            <td width="40%">
+                <input type="file" id="pic" accept="image/png,image/jpeg,image/gif" value="" class="input fl"
+                       name="profile_image" placeholder="请上传头像"/>
+                <strong class='high position pic'>*</strong>
+                <input type="hidden" id="pic1" value="" name="img" style="width:200px;"/>
+                <input type="hidden" id="pic2" value="" name="img2" style="width:200px;"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="10%">身份证号</th>
+            <td width="40%">
+                <input type="text" class="input fl" id="id_number" name="id_number" size="20"
+                       value="{{ data.id_number }}"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="10%">学号</th>
+            <td width="40%">
+                <input type="text" class="input fl" id="student_number" name="student_number" size="20"
+                       value="{{ data.student_number }}"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="10%">手机号</th>
+            <td width="40%">
+                <input type="text" class="input fl" id="phone_number" name="phone_number" size="20"
+                       value="{{ data.phone_number }}"/>
+                <strong class='high position phone_number'>*</strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="10%">状态</th>
+            <td width="40%" class="radio_box">
+                {% if data.status == 1 %}
+                    <input type="radio" name="status" value="1" checked>正常
+                    <input type="radio" name="status" value="0"> 禁止
+                {% else %}
+                    <input type="radio" name="status" value="1">正常
+                    <input type="radio" name="status" value="0" checked> 禁止
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th width="10%">是否全职</th>
+            <td width="40%" class="radio_box">
+                {% if data.is_part_time == "0" %}
+                    <input type="radio" name="is_part_time" value="0" checked>是
+                    <input type="radio" name="is_part_time" value="1"> 否
+                {% else %}
+                    <input type="radio" name="is_part_time" value="0">是
+                    <input type="radio" name="is_part_time" value="1" checked> 否
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th width="10%">排序</th>
+            <td width="40%" colspan=3>
+                <input type="text" class="input fl" id="priority" name="priority" size="20" value="{{ data.priority }}"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="10%">性别</th>
+            <td width="40%" class="radio_box">
+                {% if data.gender == 0 %}
+                    <input type="radio" name="gender" value="0" checked>男
+                    <input type="radio" name="gender" value="1"> 女
+                    <input type="radio" name="gender" value="3"> 未知或保密
+                {% elif data.gender == 1 %}
+                    <input type="radio" name="gender" value="0">男
+                    <input type="radio" name="gender" value="1" checked> 女
+                    <input type="radio" name="gender" value="3"> 未知或保密
+                {% else %}
+                    <input type="radio" name="gender" value="0">男
+                    <input type="radio" name="gender" value="1"> 女
+                    <input type="radio" name="gender" value="3" checked> 未知或保密
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th width="10%">所在地</th>
+            {% if s == "1" %}
+                <td>
+                    <select id="choose_cityarea" colspan=3>
+                        {% for i in data_list %}
+                            <option value="{{ i.0 }}">{{ i.1 }}</option>
+                        {% endfor %}
+                        <input type="hidden" class="pub" id="cityarea" name="campus" value="{{ data.campus_id }}">
+                        <strong class='high position cityarea'>*</strong>
+                    </select>
+                </td>
+            {% else %}
+                <td>
+                    <select id="choose_region" colspan=3>
+                        {% for i in data_list %}
+                            <option value="{{ i.0 }}">{{ i.1 }}</option>
+                        {% endfor %}
+                        <input type="hidden" class="pub" id="region" name="region" value="{{ data.region_id }}">
+                    </select>
+                    <select id="choose_campus" colspan=3>
+                        <input type="hidden" class="pub" id="campus" name="campus" value="{{ data.campus_id }}">
+                        <strong class='high position cityarea'>*</strong>
+                    </select>
+                </td>
+            {% endif %}
+        <tr>
+    </table>
+    <div class="btn">
+        <td colspan="2" class="aui_footer">
+            <div class="aui_buttons">
+                <button id="edit" class="aui_state_highlight" type="submit">编辑</button>
+                <button id="close" type="button">关闭</button>
+            </div>
+        </td>
+    </div>
+</form>
+<script>
+    $("#choose_cityarea").find("option[value = '"+ $("#cityarea").val()+"']").attr("selected","selected");//判断哪个option被选中
+    $("#choose_region").find("option[value = '"+ $("#region").val()+"']").attr("selected","selected");//判断哪个option被选中
+    var str="";
+    $.ajax({
+        url: '/admin/campus_api/?region_id=' + $("#choose_region option:selected").val(),
+        type: 'get',
+        success: function (msg) {
+            msg.forEach(function (el) {
+                str += "<option value=\"" + el[0] + "\">" + el[1] + "</option>"
+            });
+            $("#choose_campus").append(str);
+        }
+    });//初始化时包装二级下拉框
+    var time=setInterval(function () {
+        $("#choose_campus").find("option[value = '"+ $("#campus").val()+"']").attr("selected","selected");//判断哪个option被选中
+    },1000);//暂缓初始化时校区被选中（等待包装完毕）
+
+    $("#choose_cityarea").change(function () {
+        var selected = $(this).val();
+        $("#cityarea").val(selected);
+    });//区域管理员改变校区
+
+    $("#choose_campus").change(function () {
+        var campus = $(this).val();
+        $("#campus").val(campus);
+    });
+
+    $("#choose_region").change(function () {
+        var region_id = $(this).val();
+        var str = "";
+        if (region_id != 0) {
+            $("#region").val(region_id);
+            $.ajax({
+                url: '/admin/campus_api/?region_id=' + region_id,
+                type: 'get',
+                success: function (msg) {
+                    msg.forEach(function (el) {
+                        $("#choose_campus").html("<option value=\"0\" selected>请选择校区</option>");
+                        str += "<option value=\"" + el[0] + "\">" + el[1] + "</option>"
+                    });
+                    $("#choose_campus").append(str);
+                }
+            });
+        }
+    });//包装二级下拉框
+
+    $("#close").click(function () {
+        art.dialog.close();
+    });//关闭对话框
+
+    $("#myform").submit(function (e) {
+        e.preventDefault();
+        confirm();
+    });//表单验证提交
+
+    function confirm() {
+        if ($("#name").val().length == 0) {
+            $(".account").html("姓名不能为空!");
+            return false;
+        } else {
+            $(".account").html(" ");
+                if ($("#phone_number").val().length == 0) {
+                    $(".phone_number").html("手机号不能为空!");
+                    return false;
+                } else {
+                    $(".phone_number").html("");
+                    if ($(".pub").val().length == 0) {
+                        $(".cityarea").html("此字段不能为空！");
+                        return false;
+                    } else {
+                        $(".cityarea").html("");
+                        $.ajax({
+                            url: "/admin/deliver_edit/",
+                            type: "post",
+                            dataType: "json",
+                            data: $("#myform").serialize(),
+                            success: function (msg) {
+                                if (msg == 1) {
+                                    result("编辑成功", "succeed");
+                                    var win = art.dialog.open.origin;
+                                    win.location.reload();
+                                } else {
+                                    result("编辑失败", "error");
+                                }
+                            },
+                            error: function (xhr, textstatus, thrown) {
+                            }
+                        });
+                        return true;
+                    }
+                }
+        }
+    }//表单验证提交
+
+    function result(title, flag) {
+        art.dialog({
+            content: title,
+            //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+            icon: flag,
+            fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+            time: 3,//如果有cancel方法的话会调用cancel方法
+        });
+        var time = setInterval(function () {
+            art.dialog.close()
+        }, 2000);
+    }
+
+    $("#pic").change(function () {
+        if ($(this).val() != "") {
+            var tmpPath = $("#pic").val();
+            tmpPath = tmpPath.split(".")[1];
+            var new_name = get_file_name(2);
+            var val = $("#parent_id").val();
+            $("#pic2").val('4+' + new_name + Date.parse(new Date()) + "." + tmpPath);
+            $("#pic1").val(new_name + Date.parse(new Date()) + "." + tmpPath);
+            var formData = new FormData();
+            var img_file = document.getElementById("pic");
+            var fileObj = img_file.files[0];
+            formData.append('file', fileObj);
+            formData.append('filename', $("#pic2").val());
+            $.ajax({
+                url: "/admin/image_upload/",
+                type: "post",
+                dataType: "json",
+                data: formData,
+                processData: false,
+                contentType: false,
+                async: false,
+                success: function () {
+                }
+            });
+        }
+    });//点击上传图片生成随机图片名
+
+    function get_file_name(len) {
+        let new_file_name = 'A';
+        let chars = "1234567890qwertyuiopasdfghjklzxcvbnm";
+        for (i = 0; i < len; i++) {
+            new_file_name += chars[parseInt(Math.random() * chars.length)];
+        }
+        return new_file_name;
+    }//生成随机数
+
+</script>
+</body>
+</html>

@@ -22,6 +22,7 @@ from orange_manage.system_setting import views as system_setting
 from orange_manage.users import views as users
 from orange_manage.trade import views as trade
 from orange_manage.promotion_market import views as promotion_market
+from orange_manage.deliver import views as deliver
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('admin/login/', views.login),#登陆
@@ -83,6 +84,13 @@ urlpatterns = [
     path('admin/recommend_list/', promotion_market.recommend_list),  # 推荐列表
     path('admin/store_add/', promotion_market.store_add),  # 添加推荐店铺弹窗
     path('admin/store_edit/', promotion_market.store_edit),  # 编辑店铺弹窗
+
+    #配送管理
+    path('admin/marki_manage/', deliver.marki_manage),  # 配送管理
+    path('admin/user_add/', deliver.user_add),  # 添加管理员
+    path('admin/campus_api/', deliver.campus_api),  # 获取对应的校区信息
+    path('admin/deliver_edit/', deliver.deliver_edit),  # 编辑配送员信息
+    path('admin/delivery_record/', deliver.delivery_record),  # 查看配送员的配送记录
 
 ]
 

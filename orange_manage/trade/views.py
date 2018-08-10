@@ -1,7 +1,4 @@
-from django.http import JsonResponse, QueryDict
-from django.utils import timezone
 from django.shortcuts import render, redirect, HttpResponse
-from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.db.models import Sum, Q, F
 from orange_manage import models
 
@@ -56,27 +53,53 @@ def order_list(request):
             'pay_mode': i.pay_mode,
         }
         data_list.append(data_dict)
+    if request.operator_region == 0:
+        unpaid = models.OrderStatusLogs.objects.aggregate(all_num=Sum('unpaid'))
+        not_robbing = models.OrderStatusLogs.objects.aggregate(all_num=Sum('not_robbing'))
+        not_pickup = models.OrderStatusLogs.objects.aggregate(all_num=Sum('not_pickup'))
+        picking_up = models.OrderStatusLogs.objects.aggregate(all_num=Sum('picking_up'))
+        dispatching = models.OrderStatusLogs.objects.aggregate(all_num=Sum('dispatching'))
+        pending = models.OrderStatusLogs.objects.aggregate(all_num=Sum('pending'))
+        num_dict = {
+            'unpaid': unpaid['all_num'],
+            'not_robbing': not_robbing['all_num'],
+            'not_pickup': not_pickup['all_num'],
+            'picking_up': picking_up['all_num'],
+            'dispatching': dispatching['all_num'],
+            'pending': pending['all_num'],
+        }
+    else:
+        all_num = models.OrderStatusLogs.objects.get(region_id=request.operator_region)
+        num_dict = {
+            'unpaid': all_num.unpaid,
+            'not_robbing': all_num.not_robbing,
+            'not_pickup': all_num.not_pickup,
+            'picking_up': all_num.picking_up,
+            'dispatching': all_num.dispatching,
+            'pending': all_num.pending,
+        }
     return render(request, 'Trade/order_list.html',
-                  {'data': data_list, 'search_data': search_data, 'get_page': get_page, 'page_total': str(page_total)})
+                  {'data': data_list, 'search_data': search_data, 'get_page': get_page, 'page_total': str(page_total),
+                   'num': num_dict})
 
 
 def order_detail(requst):
     get_order_id = requst.GET.get('order_id')
     order_obj = models.Orders.objects.get(order_id=get_order_id)
     user_obj = models.User.objects.get(user_id=order_obj.user_id)
-    sub_obj = models.SubOrder.objects.filter(order_id=get_order_id).all()
+    sub_obj = models.SubOrders.objects.filter(order_id=get_order_id).all()
     shop_obj = []
     for i in sub_obj:
         shop_obj.append(i.sub_order_id)
     shop_list = []
     shop_remarks_list = []
     for i in shop_obj:
-        shop_obj = models.SubOrder.objects.get(sub_order_id=i)
+        shop_obj = models.SubOrders.objects.get(sub_order_id=i)
         goods_obj = models.OrderGoods.objects.filter(sub_order_id=i).all()
         goods_list = []
-
         for j in goods_obj:
             goods_dict = {
+                'order_status': shop_obj.order_status,
                 'goods_name': j.goods_name,
                 'specification_values': j.specification_values,  # 规格搭配
                 'attribute_values': j.attribute_values,  # 规格属性

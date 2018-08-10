@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站后台管理 Powered by pigcms.com</title>
+    {% include 'Public/header.html' %}
+    <style>
+        ul.pages{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ol, ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul>
+            <a href="/admin/marki_manage/">配送员管理</a>|
+            <a href="" class="on">【{{ distributor_name }}】的配送记录</a>
+        </ul>
+    </div>
+    <table class="search_table" width="100%">
+        <tr>
+            <td>
+                <form action="/admin/delivery_record/" method="get">
+                    <input type="hidden" name="distributor_id" value="{{ distributor_id }}">
+                    配送完成时间:
+                    <input type="text" class="input-text" name="begin_time" style="width:160px;" id="begin_time" value="{{ status_data.begin_time|default_if_none:'' }}" onfocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>&nbsp;&nbsp;&nbsp;
+                    到&nbsp;&nbsp;&nbsp;
+                    <input type="text" class="input-text" name="end_time" style="width:160px;" id="end_time" value="{{ status_data.end_time|default_if_none:'' }}" onfocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>&nbsp;&nbsp;&nbsp;
+                    <input type="submit" value="查询" class="button"/>
+{#                    &nbsp;&nbsp;&nbsp;该筛选条件下总记录数：331&nbsp;&nbsp;&nbsp;总配送费：￥224.50&nbsp;&nbsp;&nbsp;订单总价格：￥5726.59&nbsp;&nbsp;&nbsp;小费总额：￥0.00#}
+{#                #}
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <form name="myform" id="myform" action="" method="post">
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>订单编号</th>
+                    <th>收货人</th>
+                    <th>客户手机</th>
+                    <th>客户地址</th>
+                    <th>支付状态</th>
+                    <th>订单价格</th>
+                    <th>配送费</th>
+
+                    <th>配送状态</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                    <th>配送时长</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in data %}
+                <tr class="even">
+                    <td>{{ i.order_id }}</td>
+                    <td>{{ i.user_name }}</td>
+                    <td>{{ i.user_phone_number }}</td>
+                    <td>{{ i.user_address }}</td>
+                    {% if i.pay_mode == 0 %}
+                    <td>余额支付</td>
+                        {% elif i.pay_mode == 1 %}
+                        <td>支付宝支付</td>
+                        {% elif i.pay_mode == 2 %}
+                        <td>微信支付</td>
+                        {% else %}
+                        <td>未支付</td>
+                    {% endif %}
+                    <td>{{ i.total_price }}</td>
+                    <td>{{ i.distribution_fee }}</td>
+                {% if  i.distribution_status == 0%}
+                    <td>未抢单</td>
+                    {% elif i.distribution_status == 1 %}
+                     <td>已抢单待取货</td>
+                    {% elif i.distribution_status == 2 %}
+                     <td>已取货配送中</td>
+                    {% elif i.distribution_status == 3 %}
+                     <td>配送完成</td>
+                    {% elif i.distribution_status == 4 %}
+                     <td>配送失败</td>
+                {% endif %}
+                    <td>{{ i.distribution_start_time|date:'Y-m-d H:i:s' }}</td>
+                    <td>{{ i.complete_time|date:'Y-m-d H:i:s' }}</td>
+                    <td>{{ i.cost_time }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot id="tfoot" >
+                <tr>
+                    <td class="textcenter pagebar" colspan="12">
+                        <ul class="pages">
+
+                            <li><a href='/admin/delivery_record/?p=1&distributor_id={{ distributor_id }}&begin_time={{ status_data.begin_time|default_if_none:'' }}&end_time={{ status_data.end_time|default_if_none:'' }}'>首页</a></li>
+                            {% if  get_page  == '1' %}
+                                <li><a href='#'>&lt;上一页</a></li>
+                            {% else %}
+                                <li><a href='/admin/delivery_record/?p={{ get_page |add:-1}}&distributor_id={{ distributor_id }}&begin_time={{ status_data.begin_time|default_if_none:'' }}&end_time={{ status_data.end_time|default_if_none:'' }}'>&lt;上一页</a></li>
+
+                            {% endif %}
+                            {% if  get_page  >=  page_total  %}
+                                <li><a href='#'>下一页&gt;</a></li>
+                            {% else %}
+                                <li><a href='/admin/delivery_record/?p={{ get_page |add:1}}&distributor_id={{ distributor_id }}&begin_time={{ status_data.begin_time|default_if_none:'' }}&end_time={{ status_data.end_time|default_if_none:'' }}'>下一页&gt;</a></li>
+                            {% endif %}
+                            <li><a href='/admin/delivery_record/?p={{ page_total }}&distributor_id={{ distributor_id }}&begin_time={{ status_data.begin_time|default_if_none:'' }}&end_time={{ status_data.end_time|default_if_none:'' }}'>尾页></a></li>
+                            <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
+                        </ul>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </form>
+</div>
+<script>
+    var selectStoreId = 0;
+    var selectUserId = 0;
+    $(function(){
+        $("#store").change(function(){
+            selectStoreId = $("#store").val();
+            selectUserId = 0;
+            search();
+        });
+        $("#deliver").change(function(){
+            selectStoreId = 0;
+            selectUserId = $("#deliver").val();
+            search();
+        });
+        $("#order_number").focus(function(){
+            $("#phone").val("");
+        });
+        $("#phone").focus(function(){
+            $("#order_number").val("");
+        });
+        $("#search").click(function(){
+            var orderNum = $("#order_number").val();
+            var phone = $("#phone").val();
+            search(orderNum, phone)
+        });
+        function search(orderNum, phone) {
+            var orderNum =  orderNum || 0;
+            var phone = phone || 0;
+            location.href = "";
+        }
+    });
+</script>
+</body>
+<script type="text/javascript">
+
+ if($("#begin_time").val() != "" && $("#end_time").val() != ""){
+        var start_time = $("#begin_time").val();
+        var stop_time = $("#end_time").val();
+        var flag=CompareDate(start_time,stop_time);
+        if(flag){
+        }else{
+           alert("结束时间应大于开始时间，请重新选择");
+           window.location.href = "/admin/delivery_record/"//重定向
+        }
+    }//日期判断
+
+     function CompareDate(d1,d2){
+        return ((new Date(d1.replace(/-/g,"\/"))) < (new Date(d2.replace(/-/g,"\/"))));
+    }//比较日期
+
+</script>
+</html>

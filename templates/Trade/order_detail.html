@@ -19,6 +19,7 @@
      <tr>
          <th width="180">商品名称</th>
          <th><strong>所属店铺</strong></th>
+         <th>订单状态</th>
          <th><strong>售价</strong></th>
          <th>数量</th>
          <th>规格搭配</th>
@@ -31,6 +32,33 @@
         <tr>
             <th width="180">{{ i.goods_name | default_if_none:""}}</th>
             <th style="color:#9F0050">{{ key | default_if_none:""}}</th>
+            {% if i.order_status == 0  %}
+            <th style="color:#9F0050">未支付</th>
+            {% elif i.order_status == 1 %}
+            <th style="color:#9F0050">已支付未接单</th>
+            {% elif i.order_status == 2 %}
+            <th style="color:#9F0050">已接单未分拣</th>
+            {% elif i.order_status == 3 %}
+            <th style="color:#9F0050">已分拣未抢单</th>
+            {% elif i.order_status == 4 %}
+            <th style="color:#9F0050">已抢单未取货</th>
+            {% elif i.order_status == 5 %}
+            <th style="color:#9F0050">已取货未配送</th>
+            {% elif i.order_status == 6 %}
+            <th style="color:#9F0050">配送中</th>
+             {% elif i.order_status == 7 %}
+            <th style="color:#9F0050">配送已完成</th>
+             {% elif i.order_status == 8 %}
+            <th style="color:#9F0050">已评价</th>
+             {% elif i.order_status == 9 %}
+            <th style="color:#9F0050">退款中</th>
+             {% elif i.order_status == 10 %}
+            <th style="color:#9F0050">已退款</th>
+            {% endif %}
+
+
+
+
             <th style="color:#9F0050">{{ i.unit_price | default_if_none:""}}</th>
             <th style="color:#9F0050"><strong>{{ i.goods_amount| default_if_none:"" }}</strong> (个)</th>
             <th style="color:#9F0050">{{ i.specification_values| default_if_none:"" }}</th>
@@ -40,12 +68,10 @@
      {% endfor %}
 {% endfor %}
      <tr>
-
-
-              <th colspan="8">客户姓名：{{ data.user_name | default_if_none:""}}</th>
+         <th colspan="8">客户姓名：{{ data.user_name | default_if_none:""}}</th>
      </tr>
      <tr>
-              <th colspan="8">客户手机：{{ data.user_phone_number | default_if_none:"" }}</th>
+         <th colspan="8">客户手机：{{ data.user_phone_number | default_if_none:"" }}</th>
      </tr>
      <tr>
          <th colspan="8" style="color:red">客户注册手机：{{ data.registe_phone | default_if_none:""}}</th>
@@ -58,29 +84,6 @@
          <th colspan="8">配送方式：平台配送</th>
              {% else %}
               <th colspan="8">配送方式：</th>
-         {% endif %}
-     </tr>
-     <tr>
-         {% if data.order_status == 0 %}
-         <th colspan="8">配送状态：未支付</th>
-             {% elif data.order_status == 1 %}
-         <th colspan="8">配送状态：已支付未接单</th>
-                 {% elif data.order_status == 2 %}
-         <th colspan="8">配送状态：已接单待抢单</th>
-              {% elif data.order_status == 4 %}
-         <th colspan="8">配送状态：已抢单未取货</th>
-              {% elif data.order_status == 5 %}
-         <th colspan="8">配送状态：取货中</th>
-              {% elif data.order_status == 6 %}
-         <th colspan="8">配送状态：已取货配送中</th>
-              {% elif data.order_status == 7 %}
-         <th colspan="8">配送状态：配送已完成</th>
-              {% elif data.order_status == 8 %}
-         <th colspan="8">配送状态：已评价</th>
-              {% elif data.order_status == 9 %}
-         <th colspan="8">配送状态：退款中</th>
-              {% elif data.order_status == 10 %}
-         <th colspan="8">配送状态：已退款</th>
          {% endif %}
      </tr>
      <tr>
@@ -110,36 +113,13 @@
      </tr>
      <tr>
          {% if  data.pay_mode == '0' %}
-         <th colspan="8">支付状态：<b style="color:green">余额支付</b></th>
+         <th colspan="8">支付情况：<b style="color:green">余额支付</b></th>
               {% elif  data.pay_mode == '1' %}
-         <th colspan="8">支付状态：<b style="color:green">支付宝支付</b></th>
+         <th colspan="8">支付情况：<b style="color:green">支付宝支付</b></th>
              {% elif  data.pay_mode == '2' %}
-         <th colspan="8">支付状态：<b style="color:green">微信支付</b></th>
+         <th colspan="8">支付情况：<b style="color:green">微信支付</b></th>
              {% else %}
-             <th colspan="8">支付状态：<b style="color:green">未支付</b></th>
-         {% endif %}
-     </tr>
-     <tr>
-          {% if data.order_status == 0 %}
-         <th colspan="8">订单状态：未支付</th>
-             {% elif data.order_status == 1 %}
-         <th colspan="8">订单状态：已支付未接单</th>
-                 {% elif data.order_status == 2 %}
-         <th colspan="8">订单状态：已接单待抢单</th>
-              {% elif data.order_status == 4 %}
-         <th colspan="8">订单状态：已抢单未取货</th>
-              {% elif data.order_status == 5 %}
-         <th colspan="8">订单状态：取货中</th>
-              {% elif data.order_status == 6 %}
-         <th colspan="8">订单状态：已取货配送中</th>
-              {% elif data.order_status == 7 %}
-         <th colspan="8">订单状态：配送已完成</th>
-              {% elif data.order_status == 8 %}
-         <th colspan="8">订单状态：已评价</th>
-              {% elif data.order_status == 9 %}
-         <th colspan="8">订单状态：退款中</th>
-              {% elif data.order_status == 10 %}
-         <th colspan="8">订单状态：已退款</th>
+             <th colspan="8">支付情况：<b style="color:green">未支付</b></th>
          {% endif %}
      </tr>
      <tr>

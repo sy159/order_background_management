@@ -21,8 +21,8 @@ def login(request):
     if request.method == 'POST':
         get_ip = request.META['REMOTE_ADDR']
         last_time = timezone.now()
-        get_name = request.POST.get('account', None)
-        get_pwd = pwd_encrypted(request.POST.get('pwd', None))
+        get_name = request.POST.get('account')
+        get_pwd = pwd_encrypted(request.POST.get('pwd'))
         get_verifycode = request.POST.get('verifycode')
         get_name_obj = models.Admin.objects.filter(account=get_name).first()
         if get_name_obj:  # 判断用户是否存在
@@ -82,9 +82,7 @@ def bind_account(request):
 
 
 def index(request):
-    get_account = request.session.get('user')
-    obj = models.Admin.objects.filter(account=get_account).first()
-    menus_list = json.loads(obj.menus)
+    menus_list = json.loads(request.operator_menus)
     data_list = []
     for i in menus_list:
         for key, value in i.items():
@@ -102,7 +100,14 @@ def index(request):
                 child_list.append(child_dict)
             data_dict[index_name] = child_list
         data_list.append(data_dict)
-    return render(request, 'index.html', {'data': data_list, 'account': get_account, 'identity': obj.level})
+    account_info = {
+        'account': request.operator_name,
+        'identity': request.operator_level,
+        'ip': request.operator_obj.last_ip,
+        'last_time': request.operator_obj.last_time,
+        'login_count': request.operator_obj.login_count,
+    }
+    return render(request, 'index.html', {'data': data_list, 'info': account_info})
 
 
 def account_unique(request):
@@ -124,5 +129,7 @@ def image_upload(request):
         url = request.app_menu_images + img_name
     elif judge == '3':  # 推荐店铺
         url = request.recommend_shops_images + img_name
+    elif judge == '4':  # 配送员头像
+        url = request.distributor_image + img_name
     UploadImg(url, file)
     return HttpResponse(1)

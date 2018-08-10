@@ -23,7 +23,7 @@ class Address(models.Model):
     campus_id = models.IntegerField()
     parent_id = models.IntegerField()
     value = models.CharField(max_length=255)
-    cost = models.FloatField(blank=True, null=True)
+    cost = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     have_subordinate = models.IntegerField(blank=True, null=True)
     gender = models.IntegerField()
 
@@ -220,9 +220,10 @@ class Coupon(models.Model):
     image = models.CharField(max_length=255, blank=True, null=True)
     shop_id = models.IntegerField()
     coupon_type = models.IntegerField()
-    use_condition = models.FloatField()
-    coupon_value = models.FloatField()
+    use_condition = models.DecimalField(max_digits=10, decimal_places=2)
+    coupon_value = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.CharField(max_length=255)
+    validity_period = models.IntegerField(blank=True, null=True)
     create_time = models.DateTimeField()
     amount = models.IntegerField()
     total_amount = models.IntegerField()
@@ -230,8 +231,6 @@ class Coupon(models.Model):
     status = models.IntegerField()
     superposable = models.IntegerField()
     is_specific = models.IntegerField()
-    start_time = models.DateTimeField(blank=True, null=True)
-    end_time = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -253,21 +252,23 @@ class Distributor(models.Model):
     distributor_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, blank=True, null=True)
     username = models.CharField(max_length=255)
-    password = models.CharField(max_length=255)
+    password = models.CharField(max_length=255, blank=True, null=True)
     gender = models.IntegerField()
     phone_number = models.CharField(max_length=255)
-    id_number = models.CharField(max_length=255)
+    id_number = models.CharField(max_length=255, blank=True, null=True)
     region_id = models.IntegerField(blank=True, null=True)
     campus_id = models.IntegerField()
     student_number = models.CharField(max_length=255, blank=True, null=True)
     profile_image = models.CharField(max_length=255, blank=True, null=True)
     register_time = models.DateTimeField(blank=True, null=True)
     last_login = models.DateTimeField(blank=True, null=True)
-    is_part_time = models.CharField(max_length=1)
-    balance = models.FloatField(blank=True, null=True)
+    is_part_time = models.IntegerField()
+    balance = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     bank_name = models.CharField(max_length=255, blank=True, null=True)
     bank_account = models.CharField(max_length=255, blank=True, null=True)
     account_holder = models.CharField(max_length=255, blank=True, null=True)
+    priority = models.IntegerField(blank=True, null=True)
+    status = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -434,12 +435,32 @@ class GoodsInfo(models.Model):
         db_table = 'goods_info'
 
 
+class GoodsSpecName(models.Model):
+    spec_name_id = models.AutoField(primary_key=True)
+    spec_name = models.CharField(max_length=255)
+    goods_id = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'goods_spec_name'
+
+
+class GoodsSpecValue(models.Model):
+    spec_value_id = models.AutoField(primary_key=True)
+    spec_name_id = models.IntegerField()
+    spec_value = models.CharField(max_length=255)
+
+    class Meta:
+        managed = False
+        db_table = 'goods_spec_value'
+
+
 class GoodsSpecification(models.Model):
     specification_id = models.AutoField(primary_key=True)
     goods_id = models.IntegerField()
     unit = models.CharField(max_length=255)
-    unit_price = models.FloatField()
-    original_price = models.FloatField()
+    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
+    original_price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.CharField(max_length=255, blank=True, null=True)
     stock = models.IntegerField()
     salves_amount = models.PositiveIntegerField(blank=True, null=True)
@@ -480,7 +501,7 @@ class OrderGoods(models.Model):
     goods_name = models.CharField(max_length=255)
     goods_amount = models.IntegerField()
     image = models.CharField(max_length=255, blank=True, null=True)
-    unit_price = models.FloatField()
+    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
     is_recovery = models.IntegerField()
     recovery_id = models.IntegerField(blank=True, null=True)
     specification_values = models.CharField(max_length=255, blank=True, null=True)
@@ -489,6 +510,21 @@ class OrderGoods(models.Model):
     class Meta:
         managed = False
         db_table = 'order_goods'
+
+
+class OrderStatusLogs(models.Model):
+    id = models.IntegerField(primary_key=True)
+    region_id = models.IntegerField()
+    unpaid = models.IntegerField()
+    not_robbing = models.IntegerField()
+    not_pickup = models.IntegerField()
+    picking_up = models.IntegerField()
+    dispatching = models.IntegerField()
+    pending = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'order_status_logs'
 
 
 class Orders(models.Model):
@@ -509,27 +545,28 @@ class Orders(models.Model):
     complete_time = models.DateTimeField(blank=True, null=True)
     distribution_mode = models.IntegerField(blank=True, null=True)
     distribution_remarks = models.CharField(max_length=255, blank=True, null=True)
-    distribution_fee = models.FloatField(blank=True, null=True)
-    total_price = models.FloatField(blank=True, null=True)
+    distribution_fee = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     region_id = models.IntegerField(blank=True, null=True)
     coupon_id = models.IntegerField(blank=True, null=True)
     coupon_type = models.IntegerField(blank=True, null=True)
     coupon_value = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     pay_mode = models.IntegerField(blank=True, null=True)
-    pay_amount = models.FloatField(blank=True, null=True)
+    pay_amount = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
     unfinished_reason = models.CharField(max_length=255, blank=True, null=True)
     campus_id = models.IntegerField(blank=True, null=True)
     user_name = models.CharField(max_length=255, blank=True, null=True)
     user_phone_number = models.CharField(max_length=255, blank=True, null=True)
     user_address = models.CharField(max_length=255, blank=True, null=True)
     user_gender = models.IntegerField(blank=True, null=True)
-    longitude = models.FloatField(blank=True, null=True)
-    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.DecimalField(max_digits=10, decimal_places=7, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=10, decimal_places=7, blank=True, null=True)
     address_type = models.IntegerField(blank=True, null=True)
     goods_amount = models.IntegerField(blank=True, null=True)
-    final_price = models.FloatField(blank=True, null=True)
+    final_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     trade_no = models.CharField(max_length=255, blank=True, null=True)
     last_up_time = models.BigIntegerField(blank=True, null=True)
+    distribution_status = models.IntegerField()
 
     class Meta:
         managed = False
@@ -622,6 +659,17 @@ class RegionCampus(models.Model):
         db_table = 'region_campus'
 
 
+class RegionConfig(models.Model):
+    id = models.IntegerField(primary_key=True)
+    region_id = models.IntegerField()
+    key = models.CharField(max_length=255)
+    value = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'region_config'
+
+
 class Shop(models.Model):
     shop_id = models.AutoField(primary_key=True)
     shop_name = models.CharField(max_length=255)
@@ -650,10 +698,10 @@ class Shop(models.Model):
     end_business_time = models.TimeField(blank=True, null=True)
     notice = models.CharField(max_length=255, blank=True, null=True)
     status = models.PositiveIntegerField()
-    money = models.FloatField()
+    money = models.DecimalField(max_digits=10, decimal_places=2)
     money_state = models.IntegerField(blank=True, null=True)
     update_time = models.DateTimeField(blank=True, null=True)
-    packing_charge = models.FloatField(blank=True, null=True)
+    packing_charge = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -717,6 +765,17 @@ class ShopComment(models.Model):
         db_table = 'shop_comment'
 
 
+class ShopNoticesLog(models.Model):
+    id = models.IntegerField(primary_key=True)
+    shop_id = models.IntegerField()
+    notice = models.CharField(max_length=255, blank=True, null=True)
+    create_datetime = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'shop_notices_log'
+
+
 class ShopPhoto(models.Model):
     record_id = models.AutoField(primary_key=True)
     shop_id = models.IntegerField()
@@ -739,34 +798,23 @@ class ShopSort(models.Model):
         db_table = 'shop_sort'
 
 
-class SpecName(models.Model):
-    spec_name_id = models.AutoField(primary_key=True)
-    spec_name = models.CharField(max_length=255)
-    goods_id = models.IntegerField()
+class SmsTemplate(models.Model):
+    template_id = models.IntegerField(blank=True, null=True)
+    template_content = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'spec_name'
+        db_table = 'sms_template'
 
 
-class SpecValue(models.Model):
-    spec_value_id = models.AutoField(primary_key=True)
-    spec_name_id = models.IntegerField()
-    spec_value = models.CharField(max_length=255)
-
-    class Meta:
-        managed = False
-        db_table = 'spec_value'
-
-
-class SubOrder(models.Model):
+class SubOrders(models.Model):
     sub_order_id = models.CharField(primary_key=True, max_length=255)
     order_status = models.IntegerField(blank=True, null=True)
     order_id = models.CharField(max_length=255, blank=True, null=True)
     user_id = models.IntegerField()
-    total_price = models.FloatField(blank=True, null=True)
-    packing_charge = models.FloatField(blank=True, null=True)
-    pay_amount = models.FloatField(blank=True, null=True)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    packing_charge = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    pay_amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     region_id = models.IntegerField(blank=True, null=True)
     coupon_id = models.IntegerField(blank=True, null=True)
     coupon_type = models.IntegerField(blank=True, null=True)
@@ -785,14 +833,14 @@ class SubOrder(models.Model):
     user_name = models.CharField(max_length=255, blank=True, null=True)
     user_phone_number = models.CharField(max_length=255, blank=True, null=True)
     user_address = models.CharField(max_length=255, blank=True, null=True)
-    longitude = models.FloatField(blank=True, null=True)
-    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
     address_type = models.IntegerField(blank=True, null=True)
-    final_price = models.FloatField(blank=True, null=True)
+    final_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'sub_order'
+        db_table = 'sub_orders'
 
 
 class Test(models.Model):
@@ -801,6 +849,17 @@ class Test(models.Model):
     class Meta:
         managed = False
         db_table = 'test'
+
+
+class TransactionRecords(models.Model):
+    transaction_id = models.IntegerField(primary_key=True)
+    transaction_no = models.CharField(max_length=255)
+    drawee = models.CharField(max_length=255)
+    payee = models.CharField(max_length=255)
+
+    class Meta:
+        managed = False
+        db_table = 'transaction_records'
 
 
 class University(models.Model):
@@ -850,8 +909,8 @@ class UserAddress(models.Model):
     campus_id = models.IntegerField()
     interior_component = models.CharField(max_length=255, blank=True, null=True)
     interior_detail = models.CharField(max_length=255, blank=True, null=True)
-    longitude = models.FloatField(blank=True, null=True)
-    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.DecimalField(max_digits=10, decimal_places=7, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=10, decimal_places=7, blank=True, null=True)
     other_address = models.CharField(max_length=255, blank=True, null=True)
     name = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=255)
@@ -872,8 +931,8 @@ class UserCoupon(models.Model):
     image = models.CharField(max_length=255, blank=True, null=True)
     shop_id = models.IntegerField(blank=True, null=True)
     coupon_type = models.IntegerField()
-    use_condition = models.FloatField(blank=True, null=True)
-    coupon_value = models.FloatField(blank=True, null=True)
+    use_condition = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    coupon_value = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     description = models.CharField(max_length=255, blank=True, null=True)
     use_time = models.DateTimeField(blank=True, null=True)
     superposable = models.IntegerField(blank=True, null=True)

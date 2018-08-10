@@ -26,8 +26,9 @@ class GlobalInfo(MiddlewareMixin):
             request.operator_obj = obj
         request.FTP_HOST = "http://ftp.college.cqgynet.com"  # 图片访问域名
         request.goods_image = '/static/goods_images/'
-        request.shop_image = '/static/shop_image/'
-        request.user_image = '/static/user_image/'
+        request.shop_image = '/static/shop_images/'
+        request.user_image = '/static/user_images/'
         request.banner_images = '/static/banner_images/'
         request.app_menu_images = '/static/app_menu_images/'
         request.recommend_shops_images = '/static/recommend_shops_images/'
+        request.distributor_image = '/static/distributor_images/'

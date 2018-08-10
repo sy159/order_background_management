@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站后台管理 Powered by pigcms.com</title>
+    {% include 'Public/header.html' %}
+     <style>
+        ul.pages{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ol, ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul  class="tbody">
+            <a href="" class="on">配送员管理</a>|
+            <a href="javascript:void(0);" class="add_row">添加配送员</a>
+        </ul>
+    </div>
+    <table class="search_table" width="100%">
+        <tr>
+            <td>
+                <form action="/admin/marki_manage/" method="get">
+                    筛选: <input type="text" name="keyword" class="input-text" value="{{ data_status.keyword|default_if_none:'' }}"/>
+                    <select name="searchtype">
+                    {% if data_status.searchtype == 'distributor_id' %}
+                        <option value="distributor_id" selected>用户ID</option>
+                        <option value="name" >姓名 </option>
+                        <option value="phone_number" >手机号</option>
+                        {% elif data_status.searchtype == 'name' %}
+                        <option value="distributor_id" >用户ID</option>
+                        <option value="name" selected>姓名 </option>
+                        <option value="phone_number" >手机号</option>
+                            {% elif data_status.searchtype == 'phone_number' %}
+                        <option value="distributor_id" >用户ID</option>
+                        <option value="name" >姓名 </option>
+                        <option value="phone_number" selected>手机号</option>
+                         {% else %}
+                        <option value="distributor_id" >用户ID</option>
+                        <option value="name" >姓名 </option>
+                        <option value="phone_number">手机号</option>
+                    {% endif %}
+                    </select>
+                    <input type="submit" value="查询" class="button"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <form name="myform" id="myform" action="" method="post">
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>排序</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>手机号</th>
+                        <th>常驻地址</th>
+                        <th class="textcenter">状态</th>
+                        <th class="textcenter">是否全职</th>
+                        <th class="textcenter">配送总量</th>
+                        <th class="textcenter">操作</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                {% for i in data %}
+                    <tr>
+                        <td>{{ i.distributor_id }}</td>
+                        <td>{{ i.priority }}</td>
+                        <td>{{ i.name }}</td>
+                        {% if i.gender == 0 %}
+                        <td><font color="blue">男</font>
+                            {% elif  i.gender == 1%}
+                        <td><font color="blue">女</font>
+                            {% else %}
+                        <td><font color="blue">未知</font>
+                        {% endif %}
+                        <td>{{ i.phone_number }}</td>
+                        <td>{{ i.campus_name }}</td>
+                    {% if i.status == 0 %}
+                        <td class="textcenter"><font color="green">关闭</font></td>
+                    {% else %}
+                        <td class="textcenter"><font color="green">开启</font></td>
+                    {% endif %}
+
+                    {% if i.is_part_time == 0 %}
+                        <td class="textcenter"><font color="red">是</font></td>
+                    {% else %}
+                     <td class="textcenter"><font color="red">否</font></td>
+                    {% endif %}
+
+                        <td class="textcenter">?</td>
+                        <td class="textcenter">
+                            <a style="width: 60px;" href="/admin/delivery_record/?distributor_id={{ i.distributor_id }}" class="check_record">查看配送记录</a>　 | 　
+                            <a href="javascript:void(0);" class="edit_row">编辑</a>
+                            　 | 　<a href="javascript:void(0);" class="delete_row">删除</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot id="tfoot" >
+                        <tr>
+                            <td class="textcenter pagebar" colspan="12">
+                                <ul class="pages">
+
+                                    <li><a href='/admin/marki_manage/?p=1&keyword={{ data_status.keyword }}&searchtype={{ data_status.searchtype }}'>首页</a></li>
+                                    {% if  get_page  == '1' %}
+                                        <li><a href='#'>&lt;上一页</a></li>
+                                    {% else %}
+                                    <li><a href='/admin/marki_manage/?p={{ get_page |add:-1}}&keyword={{ data_status.keyword }}&searchtype={{ data_status.searchtype }}'>&lt;上一页</a></li>
+
+                                    {% endif %}
+                                {% if  get_page  >=  page_total  %}
+                                    <li><a href='#'>下一页&gt;</a></li>
+                                    {% else %}
+                                    <li><a href='/admin/marki_manage/?p={{ get_page |add:1}}&keyword={{ data_status.keyword }}&searchtype={{ data_status.searchtype }}'>下一页&gt;</a></li>
+                                {% endif %}
+                                    <li><a href='/admin/marki_manage/?p={{ page_total }}&keyword={{ data_status.keyword }}&searchtype={{ data_status.searchtype }}'>尾页></a></li>
+                                    <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tfoot>
+            </table>
+        </div>
+    </form>
+</div>
+</body>
+<script src="/static/js/del_edit_post_get.js"></script>
+<script type="text/javascript">
+   $(".tbody").on('click','a',function () {
+        var clsn=this.className;
+        var td=$(this).parent().siblings()[0];
+        var sort_id=$(td).html();
+        if(clsn=='edit_row'){
+             art.dialog.open('/admin/deliver_edit/?user_id='+sort_id,{
+                title: '编辑配送员信息',
+                lock: true,
+                modal:true,
+                width:800,
+                height:400
+            });
+        }else if(clsn=='add_row'){
+              art.dialog.open('/admin/user_add/',{
+                title: '添加配送员',
+                lock: true,
+                modal:true,
+                width:800,
+                height:400
+            });
+        }else if(clsn=='delete_row'){
+            function callback() { }
+            if(confirm("你确定要删除吗？")){
+                $.deleteJSON("/admin/marki_manage/?user_id="+sort_id,"delete",callback)
+            }else{
+                return false;
+            }
+        }
+    });
+
+</script>
+</html>
