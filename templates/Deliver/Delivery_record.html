@@ -122,38 +122,6 @@
         </div>
     </form>
 </div>
-<script>
-    var selectStoreId = 0;
-    var selectUserId = 0;
-    $(function(){
-        $("#store").change(function(){
-            selectStoreId = $("#store").val();
-            selectUserId = 0;
-            search();
-        });
-        $("#deliver").change(function(){
-            selectStoreId = 0;
-            selectUserId = $("#deliver").val();
-            search();
-        });
-        $("#order_number").focus(function(){
-            $("#phone").val("");
-        });
-        $("#phone").focus(function(){
-            $("#order_number").val("");
-        });
-        $("#search").click(function(){
-            var orderNum = $("#order_number").val();
-            var phone = $("#phone").val();
-            search(orderNum, phone)
-        });
-        function search(orderNum, phone) {
-            var orderNum =  orderNum || 0;
-            var phone = phone || 0;
-            location.href = "";
-        }
-    });
-</script>
 </body>
 <script type="text/javascript">
 

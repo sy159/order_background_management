@@ -1,61 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/orange_manage/basic_info/views.py" line="404" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="49a6b1be-1c16-4924-9f40-689a058ae6b5" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/orange_manage/deliver/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orange_manage/deliver/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orange_manage/utils/campus_info.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Deliver/Delivery_record.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Deliver/user.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Deliver/user_add.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Deliver/user_edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/05bee0fbaf112929c5619884426bcaee.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/06c98e57ce29f7ca11ea19a6a2bd7718.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/0dc62326468d97eb080818f8eccd1bae.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/10c6748aecf009f1f0d9ba62c263f0af.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/1b9b755b4c451103a81798cc538fc3eb.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/20f345fab9eb33eb537f8a86619fdae3.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/3cc6fc4e0c98ba74ed47f0ae4842fea2.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/3d29707a4929951e3574fa65c691f379.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/411d91182847e8743f090eb7d6f9f8ae.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/42155101362271d88977c1a2e1bab05b.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/43dd464fad6f921c446f4e30ec85a80c.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/4bc882188b442bd2422ab5ebea448907.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/4d5cf696ef5a59539b34e21ff596fadb.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/641fefbbdd53f3383d26b2f124a504fd.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/699b6bf8d9f9921f91624f23d8c86304.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/6c532349dcc8771bcd3ce6a17b8be150.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/6e2352c0d54b6c20667d070477af0ca3.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/72c1b262600941b1d58d386aa0f59879.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/785a8e2b47a7638159bf5dc2c0fcc8d9.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/842aedfc0ab2fdc3dfdd29945b58be87.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/84476e170eabbe1d357f173ac31b0531.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/95e634aa9e27bfe92587c89e7a504826.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/9e6db83b7cfbad35ce84a26d2316f07d.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/a3734272723168b1a6c1036872d7a7ea.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/ab98e699003d76e9eb4e9a8ea009b844.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/d75abd62dbb578850980a84a4b61db62.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/e470bba1c66c64f0898b7c3f87c60b62.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/f74f006d3822980982b4f527bdc5173b.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/fc23b8515fb3bfb36bb36bd1afb0cad0.djcache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/pintuer.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/ds-1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/ds-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/img1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/img2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/500.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Deliver/deliverList.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Deliver/marki_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Index/CampusList.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Index/ExistingAreaList.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Index/ProvinceList.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Index/RegionList.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Index/add_campus.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Index/add_region.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Index/edit_campus.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Index/edit_region.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/System_Setting/ModifyPaymentStatus.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/System_Setting/withdraw_auto.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/orange_manage/basic_info/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/basic_info/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orange_manage/deliver/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/deliver/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/orange_manage/middleware.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/middleware.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/orange_manage/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orange_manage/shops/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/shops/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/orange_manage/system_setting/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/system_setting/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/orange_manage/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/orange_manage/trade/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/trade/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orange_manage/utils/campus_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/utils/campus_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orange_manage/utils/password_encryption.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/utils/password_encryption.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/orange_manage/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orange_web/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_web/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/orange_web/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_web/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/area_adver.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/area_pca.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/common.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/layer/extend/layer.ext.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/layer/layer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/layer/skin/default/icon-ext.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/layer/skin/default/icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/layer/skin/default/loading-0.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/layer/skin/default/loading-1.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/layer/skin/default/loading-2.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/layer/skin/layer.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/layer/skin/layer.ext.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Adver/adver_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Adver/adver_add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Adver/adver_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Adver/adver_edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Promotion_market/store_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Promotion_market/store_add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Public/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Public/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Public/public.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Public/public.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Adver/adver_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Adver/adver_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Adver/goods.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Adver/goods.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Adver/stores.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Adver/stores.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Deliver/Delivery_record.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Deliver/Delivery_record.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Deliver/user_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Deliver/user_add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Index/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Index/add_accountform.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/add_accountform.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Index/add_authorityform.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/add_authorityform.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Index/edit_authorityform.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/edit_authorityform.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/Trade/order_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Trade/order_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/Trade/order_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Trade/order_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/User/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/User/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/User/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/User/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/orange_web$views__1_.coverage" NAME="views (1) Coverage Results" MODIFIED="1533260658983" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/orange_manage/system_setting" />
-    <SUITE FILE_PATH="coverage/orange_web$deal_page.coverage" NAME="deal_page Coverage Results" MODIFIED="1533432067321" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/orange_manage/utils" />
-    <SUITE FILE_PATH="coverage/orange_web$tests__1_.coverage" NAME="tests (1) Coverage Results" MODIFIED="1533815219918" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/orange_manage" />
-    <SUITE FILE_PATH="coverage/orange_web$password_encryption.coverage" NAME="password_encryption Coverage Results" MODIFIED="1533620426122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/orange_manage/utils" />
-    <SUITE FILE_PATH="coverage/orange_web$views.coverage" NAME="views Coverage Results" MODIFIED="1532423522901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/orange_mange" />
-    <SUITE FILE_PATH="coverage/orange_web$area_data.coverage" NAME="area_data Coverage Results" MODIFIED="1532307829914" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/orange_mange/tool" />
     <SUITE FILE_PATH="coverage/orange_web$tests.coverage" NAME="tests Coverage Results" MODIFIED="1532483273876" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/orange_mange" />
+    <SUITE FILE_PATH="coverage/orange_web$area_data.coverage" NAME="area_data Coverage Results" MODIFIED="1532307829914" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/orange_mange/tool" />
+    <SUITE FILE_PATH="coverage/orange_web$run.coverage" NAME="run Coverage Results" MODIFIED="1534075241607" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/orange_web$views__1_.coverage" NAME="views (1) Coverage Results" MODIFIED="1533260658983" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/orange_manage/system_setting" />
+    <SUITE FILE_PATH="coverage/orange_web$tests__1_.coverage" NAME="tests (1) Coverage Results" MODIFIED="1534126778137" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/orange_manage" />
+    <SUITE FILE_PATH="coverage/orange_web$deal_page.coverage" NAME="deal_page Coverage Results" MODIFIED="1533432067321" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/orange_manage/utils" />
+    <SUITE FILE_PATH="coverage/orange_web$views.coverage" NAME="views Coverage Results" MODIFIED="1532423522901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/orange_mange" />
+    <SUITE FILE_PATH="coverage/orange_web$password_encryption.coverage" NAME="password_encryption Coverage Results" MODIFIED="1533620426122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/orange_manage/utils" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -74,86 +115,97 @@
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="201420262">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.20" value="1" />
+          <entry key="project.open.time.21" value="1" />
+          <entry key="project.open.time.25" value="1" />
+          <entry key="project.open.time.7" value="3" />
+          <entry key="project.opened" value="6" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="css" value="2" />
+          <entry key="html" value="64" />
+          <entry key="py" value="42" />
+          <entry key="sh" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CSS" value="2" />
+          <entry key="HTML" value="64" />
+          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="Python" value="42" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="dummy" value="2" />
+          <entry key="html" value="4567" />
+          <entry key="py" value="4161" />
+          <entry key="sh" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="HTML" value="4567" />
+          <entry key="PLAIN_TEXT" value="6" />
+          <entry key="Python" value="4161" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/orange_web/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
-              <caret line="92" column="74" selection-start-line="92" selection-start-column="74" selection-end-line="92" selection-end-column="74" />
+            <state relative-caret-position="243">
+              <caret line="34" column="60" lean-forward="true" selection-start-line="34" selection-start-column="60" selection-end-line="34" selection-end-column="60" />
               <folding>
-                <element signature="e#669#705#0" expanded="true" />
+                <element signature="e#669#706#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/orange_manage/deliver/views.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/orange_manage/basic_info/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="140" column="48" selection-start-line="140" selection-start-column="48" selection-end-line="140" selection-end-column="48" />
+            <state relative-caret-position="271">
+              <caret line="225" column="47" selection-start-line="225" selection-start-column="47" selection-end-line="225" selection-end-column="47" />
               <folding>
-                <element signature="e#0#59#0" expanded="true" />
-                <element signature="e#2033#3128#0" />
-                <element signature="e#2068#2854#0" />
-                <element signature="e#3281#5324#0" />
-                <element signature="e#3273#4987#0" />
-                <element signature="e#4343#5324#0" />
-                <element signature="e#3160#3273#0" />
+                <element signature="e#0#47#0" expanded="true" />
+                <element signature="e#295#4516#0" />
+                <element signature="e#4549#6540#0" />
+                <element signature="e#6575#6625#0" />
+                <element signature="e#6658#7416#0" />
+                <element signature="e#11041#12482#0" />
+                <element signature="e#12519#13583#0" />
+                <element signature="e#13614#13737#0" />
+                <element signature="e#17946#18749#0" />
+                <marker date="1534246167260" expanded="true" signature="15221:15226" ph="..." />
+                <marker date="1534246167260" expanded="true" signature="19490:19799" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Delivery_record.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/Deliver/Delivery_record.html">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/orange_manage/utils/password_encryption.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
-              <folding>
-                <element signature="n#style#0;n#input#0;n#form#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#843#849#0#HTML" expanded="true" />
-                <element signature="e#849#855#0#HTML" expanded="true" />
-                <element signature="e#855#861#0#HTML" expanded="true" />
-                <element signature="e#3060#3066#0#HTML" expanded="true" />
-                <element signature="e#3066#3072#0#HTML" expanded="true" />
-                <element signature="e#3072#3078#0#HTML" expanded="true" />
-                <element signature="n#style#0;n#input#1;n#form#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#3258#3264#0#HTML" expanded="true" />
-                <element signature="e#3264#3270#0#HTML" expanded="true" />
-                <element signature="e#3270#3276#0#HTML" expanded="true" />
-                <element signature="n#thead#0;n#table#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#script#0;n#body#0;n#html#0;n#!!top" />
-              </folding>
+            <state relative-caret-position="162">
+              <caret line="6" column="53" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="53" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="order_list.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/Trade/order_list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="16" column="12" lean-forward="true" selection-start-line="6" selection-start-column="4" selection-end-line="16" selection-end-column="12" />
-              <folding>
-                <element signature="n#select#1;n#form#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#select#2;n#form#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/User/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="26" column="12" lean-forward="true" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tests.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/orange_manage/tests.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="162">
@@ -165,100 +217,57 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/orange_manage/views.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/orange_web/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
+            <state relative-caret-position="-432">
+              <caret line="119" column="29" lean-forward="true" selection-start-line="119" selection-start-column="29" selection-end-line="119" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/Index/set_authority.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="80" column="7" selection-start-line="80" selection-start-column="7" selection-end-line="80" selection-end-column="7" />
               <folding>
-                <element signature="e#549#2374#0" />
-                <element signature="e#549#569#1" />
-                <element signature="e#981#2230#0" />
-                <element signature="e#1041#2158#0" />
-                <element signature="e#1190#1752#0" />
-                <element signature="e#1269#1641#0" />
-                <element signature="e#1795#2158#0" />
-                <element signature="e#2402#2485#0" />
-                <element signature="e#2402#2420#1" />
-                <element signature="e#2519#3367#0" />
-                <element signature="e#2519#2539#1" />
-                <element signature="e#2580#2939#0" />
-                <element signature="e#2983#3367#0" />
-                <element signature="e#3175#3294#0" />
+                <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+                <element signature="n#form#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#script#1;n#body#0;n#html#0;n#!!top" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/orange_manage/basic_info/views.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/Index/account.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="47" column="25" lean-forward="true" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
+            <state>
               <folding>
-                <element signature="e#0#47#0" expanded="true" />
-                <element signature="e#295#316#1" />
-                <element signature="e#1062#1565#0" />
-                <element signature="e#2088#2747#0" />
-                <element signature="e#2193#2707#0" />
-                <element signature="e#2921#2942#1" />
-                <element signature="e#2983#3186#0" />
-                <element signature="e#3695#3817#0" />
-                <element signature="e#4077#4159#0" />
-                <element signature="e#4225#4441#0" />
-                <element signature="e#4947#4997#0" />
-                <element signature="e#5030#5788#0" />
-                <element signature="e#5030#5054#1" />
-                <element signature="e#5095#5788#0" />
-                <element signature="e#5207#5737#0" />
-                <element signature="e#5252#5697#0" />
-                <element signature="e#5481#5646#0" />
-                <element signature="e#5826#9373#0" />
-                <element signature="e#5862#7795#0" />
-                <element signature="e#6020#7057#0" />
-                <element signature="e#6400#7057#0" />
-                <element signature="e#7084#7676#0" />
-                <element signature="e#7091#7676#0" />
-                <element signature="e#7839#9202#0" />
-                <element signature="e#8481#8819#0" />
-                <element signature="e#8846#9171#0" />
-                <element signature="e#9248#9373#0" />
-                <element signature="e#9413#10854#0" />
-                <element signature="e#9449#10054#0" />
-                <element signature="e#9623#9755#0" />
-                <element signature="e#9666#9755#0" />
-                <element signature="e#9818#9955#0" />
-                <element signature="e#10098#10854#0" />
-                <element signature="e#10494#10710#0" />
-                <element signature="e#10891#11955#0" />
-                <element signature="e#10927#11266#0" />
-                <element signature="e#10934#11194#0" />
-                <element signature="e#11310#11955#0" />
-                <element signature="e#11682#11796#0" />
-                <element signature="e#11823#11924#0" />
-                <element signature="e#11986#12109#0" />
+                <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+                <element signature="n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#for#0;n#!!top" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/Deliver/user.html">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/Index/add_accountform.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="99" column="53" selection-start-line="99" selection-start-column="53" selection-end-line="99" selection-end-column="53" />
-              <folding>
-                <element signature="n#style#0;n#a#0;n#td#13;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="243">
+              <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="middleware.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/orange_manage/middleware.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/Adver/adver_add.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="20" column="35" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="35" />
+            <state relative-caret-position="216">
+              <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -276,20 +285,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>college.cqgynet.com</find>
-      <find>http://college.cqgynet.com</find>
-      <find>fail_form</find>
-      <find>store</find>
-      <find>store_add</find>
-      <find>add_row</find>
-      <find>recommend_list</find>
-      <find>url</find>
-      <find>admin/image_upload/</find>
-      <find>import time</find>
-      <find>from django.utils import timezone</find>
-      <find>timezone</find>
-      <find>/static/images/pigcms_logo.png</find>
-      <find>hideSxBtn</find>
       <find>store_list</find>
       <find>print</find>
       <find>inde</find>
@@ -302,10 +297,24 @@
       <find>image_upload</find>
       <find>Subo</find>
       <find>SubOrder</find>
-      <find>pwd_encrypted</find>
       <find>已接单待抢单</find>
       <find>begin_time</find>
       <find>user_edit</find>
+      <find>h:i:s</find>
+      <find>URLconf</find>
+      <find>database</find>
+      <find>cash</find>
+      <find>search</find>
+      <find>status_dict.searchtype</find>
+      <find>requst</find>
+      <find>Q</find>
+      <find>edit_region</find>
+      <find>add_campus</find>
+      <find>add_region</find>
+      <find>pwd_encrypted</find>
+      <find>60*60*24*10</find>
+      <find>add_account</find>
+      <find>cache</find>
     </findStrings>
     <replaceStrings>
       <replace>p</replace>
@@ -313,8 +322,9 @@
       <replace>order_status</replace>
     </replaceStrings>
     <dirStrings>
-      <dir>E:\PycharmProjects\orange_web</dir>
       <dir>E:\PycharmProjects\orange_web\orange_manage</dir>
+      <dir>E:\PycharmProjects\orange_web</dir>
+      <dir>E:\PycharmProjects\orange_web\templates</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -323,57 +333,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/Index/account.html" />
-        <option value="$PROJECT_DIR$/templates/Index/edit_accountinfo.html" />
-        <option value="$PROJECT_DIR$/templates/Index/personinfo.html" />
-        <option value="$PROJECT_DIR$/orange_manage/users/views.py" />
-        <option value="$PROJECT_DIR$/templates/User/index.html" />
-        <option value="$PROJECT_DIR$/templates/Merchant/status_form.html" />
-        <option value="$PROJECT_DIR$/templates/Merchant/store_form.html" />
-        <option value="$PROJECT_DIR$/templates/Merchant/fail_form.html" />
-        <option value="$PROJECT_DIR$/templates/Promotion_market/stores.html" />
-        <option value="$PROJECT_DIR$/orange_manage/utils/area_data.py" />
-        <option value="$PROJECT_DIR$/orange_manage/utils/deal_page.py" />
-        <option value="$PROJECT_DIR$/orange_manage/utils/login_validation.py" />
-        <option value="$PROJECT_DIR$/orange_manage/utils/password_encryption.py" />
-        <option value="$PROJECT_DIR$/orange_manage/utils/produce_key.py" />
-        <option value="$PROJECT_DIR$/templates/Promotion_market/recommend_list.html" />
-        <option value="$PROJECT_DIR$/templates/Promotion_market/store_edit.html" />
-        <option value="$PROJECT_DIR$/templates/Business_circle/circle_list.html" />
-        <option value="$PROJECT_DIR$/orange_manage/promotion_market/views.py" />
-        <option value="$PROJECT_DIR$/templates/Merchant/edit_circle.html" />
-        <option value="$PROJECT_DIR$/templates/Merchant/category_list.html" />
-        <option value="$PROJECT_DIR$/templates/Adver/stores.html" />
-        <option value="$PROJECT_DIR$/templates/Adver/goods.html" />
-        <option value="$PROJECT_DIR$/static/js/common.js" />
-        <option value="$PROJECT_DIR$/templates/Merchant/add_circle.html" />
-        <option value="$PROJECT_DIR$/templates/Merchant/circle_list.html" />
-        <option value="$PROJECT_DIR$/templates/Adver/adver_list.html" />
-        <option value="$PROJECT_DIR$/templates/Merchant/store_list.html" />
-        <option value="$PROJECT_DIR$/orange_manage/basic_info/__init__.py" />
-        <option value="$PROJECT_DIR$/templates/Public/public.html" />
-        <option value="$PROJECT_DIR$/templates/Public/header.html" />
-        <option value="$PROJECT_DIR$/templates/index.html" />
-        <option value="$PROJECT_DIR$/orange_manage/shops/views.py" />
         <option value="$PROJECT_DIR$/templates/Promotion_market/store_add.html" />
-        <option value="$PROJECT_DIR$/templates/Adver/adver_edit.html" />
-        <option value="$PROJECT_DIR$/templates/Adver/adver_add.html" />
-        <option value="$PROJECT_DIR$/orange_manage/system_setting/views.py" />
-        <option value="$PROJECT_DIR$/orange_manage/tests.py" />
+        <option value="$PROJECT_DIR$/templates/Trade/order_detail.html" />
+        <option value="$PROJECT_DIR$/templates/Trade/Delivery_record.html" />
+        <option value="$PROJECT_DIR$/templates/Trade/order_list.html" />
         <option value="$PROJECT_DIR$/orange_manage/utils/campus_info.py" />
+        <option value="$PROJECT_DIR$/templates/User/edit.html" />
+        <option value="$PROJECT_DIR$/orange_manage/trade/views.py" />
+        <option value="$PROJECT_DIR$/venv/Lib/site-packages/django/views/defaults.py" />
         <option value="$PROJECT_DIR$/orange_manage/middleware.py" />
+        <option value="$PROJECT_DIR$/orange_manage/utils/login_validation.py" />
+        <option value="$PROJECT_DIR$/orange_manage/views.py" />
+        <option value="$PROJECT_DIR$/templates/404.html" />
+        <option value="$PROJECT_DIR$/templates/500.html" />
+        <option value="$PROJECT_DIR$/run.py" />
+        <option value="$PROJECT_DIR$/orange_manage/tests.py" />
+        <option value="$PROJECT_DIR$/run.sh" />
+        <option value="$PROJECT_DIR$/templates/System_Setting/withdraw_auto.html" />
+        <option value="$PROJECT_DIR$/templates/System_Setting/ModifyPaymentStatus.html" />
+        <option value="$PROJECT_DIR$/orange_manage/system_setting/views.py" />
+        <option value="$PROJECT_DIR$/orange_manage/deliver/views.py" />
+        <option value="$PROJECT_DIR$/orange_manage/basic_info/views.py" />
+        <option value="$PROJECT_DIR$/orange_manage/utils/password_encryption.py" />
+        <option value="$PROJECT_DIR$/templates/Adver/adver_add.html" />
+        <option value="$PROJECT_DIR$/templates/Adver/adver_edit.html" />
+        <option value="$PROJECT_DIR$/templates/Adver/adver_list.html" />
+        <option value="$PROJECT_DIR$/templates/Adver/adver_management.html" />
+        <option value="$PROJECT_DIR$/templates/Adver/goods.html" />
+        <option value="$PROJECT_DIR$/templates/Adver/stores.html" />
+        <option value="$PROJECT_DIR$/templates/Deliver/deliverList.html" />
+        <option value="$PROJECT_DIR$/templates/Deliver/Delivery_record.html" />
+        <option value="$PROJECT_DIR$/templates/Deliver/marki_list.html" />
+        <option value="$PROJECT_DIR$/templates/Deliver/user.html" />
         <option value="$PROJECT_DIR$/templates/Deliver/user_add.html" />
         <option value="$PROJECT_DIR$/templates/Deliver/user_edit.html" />
-        <option value="$PROJECT_DIR$/orange_manage/basic_info/views.py" />
-        <option value="$PROJECT_DIR$/orange_manage/views.py" />
-        <option value="$PROJECT_DIR$/templates/Trade/order_detail.html" />
-        <option value="$PROJECT_DIR$/orange_manage/trade/views.py" />
-        <option value="$PROJECT_DIR$/templates/Trade/Delivery_record.html" />
+        <option value="$PROJECT_DIR$/templates/Index/add_authorityform.html" />
+        <option value="$PROJECT_DIR$/templates/Index/add_campus.html" />
+        <option value="$PROJECT_DIR$/templates/Index/add_region.html" />
+        <option value="$PROJECT_DIR$/templates/Index/CampusList.html" />
+        <option value="$PROJECT_DIR$/templates/Index/edit_accountinfo.html" />
+        <option value="$PROJECT_DIR$/templates/Index/edit_authorityform.html" />
+        <option value="$PROJECT_DIR$/templates/Index/edit_campus.html" />
+        <option value="$PROJECT_DIR$/templates/Index/edit_region.html" />
+        <option value="$PROJECT_DIR$/templates/Index/ExistingAreaList.html" />
+        <option value="$PROJECT_DIR$/templates/Index/personinfo.html" />
+        <option value="$PROJECT_DIR$/templates/Index/ProvinceList.html" />
+        <option value="$PROJECT_DIR$/templates/Index/RegionList.html" />
+        <option value="$PROJECT_DIR$/templates/Index/set_authority.html" />
+        <option value="$PROJECT_DIR$/templates/Index/account.html" />
+        <option value="$PROJECT_DIR$/templates/Index/add_accountform.html" />
         <option value="$PROJECT_DIR$/orange_web/urls.py" />
-        <option value="$PROJECT_DIR$/templates/Deliver/user.html" />
-        <option value="$PROJECT_DIR$/templates/Trade/order_list.html" />
-        <option value="$PROJECT_DIR$/templates/Deliver/Delivery_record.html" />
-        <option value="$PROJECT_DIR$/orange_manage/deliver/views.py" />
+        <option value="$PROJECT_DIR$/orange_web/settings.py" />
       </list>
     </option>
   </component>
@@ -383,14 +393,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths />
-  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="19" />
-    <option name="y" value="31" />
-    <option name="width" value="1862" />
-    <option name="height" value="998" />
+    <option name="x" value="144" />
+    <option name="y" value="33" />
+    <option name="width" value="1699" />
+    <option name="height" value="983" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -413,12 +420,6 @@
             <path>
               <item name="orange_web" type="b2602c69:ProjectViewProjectNode" />
               <item name="orange_web" type="462c0819:PsiDirectoryNode" />
-              <item name="orange_manage" type="462c0819:PsiDirectoryNode" />
-              <item name="trade" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="orange_web" type="b2602c69:ProjectViewProjectNode" />
-              <item name="orange_web" type="462c0819:PsiDirectoryNode" />
               <item name="orange_web" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -430,19 +431,19 @@
               <item name="orange_web" type="b2602c69:ProjectViewProjectNode" />
               <item name="orange_web" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="Deliver" type="462c0819:PsiDirectoryNode" />
+              <item name="Adver" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="orange_web" type="b2602c69:ProjectViewProjectNode" />
               <item name="orange_web" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="Trade" type="462c0819:PsiDirectoryNode" />
+              <item name="Index" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="orange_web" type="b2602c69:ProjectViewProjectNode" />
               <item name="orange_web" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="User" type="462c0819:PsiDirectoryNode" />
+              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -458,15 +459,15 @@
     <property name="database.console.LAST_STATE" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\PycharmProjects\orange_web\templates" />
+      <recent name="E:\PycharmProjects\orange_web\templates\Index" />
+      <recent name="E:\PycharmProjects\orange_web\templates\System_Setting" />
       <recent name="E:\PycharmProjects\orange_web\static\images" />
-      <recent name="E:\PycharmProjects\orange_web\templates\Merchant" />
-      <recent name="E:\PycharmProjects\orange_web\templates\Business_circle" />
-      <recent name="E:\PycharmProjects\orange_web\templates\Promotion_market" />
+      <recent name="E:\PycharmProjects\orange_web\static\css" />
+      <recent name="E:\PycharmProjects\orange_web\templates\Deliver" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\PycharmProjects\orange_web\templates\Deliver" />
@@ -507,6 +508,9 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="password_encryption" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="orange_web" />
@@ -526,6 +530,31 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="run" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="orange_web" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="E:\PycharmProjects\orange_web\run.sh" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="tests (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="orange_web" />
@@ -545,25 +574,9 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="tests" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="orange_web" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/orange_mange" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/orange_mange/tests.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="views (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="orange_web" />
@@ -583,6 +596,9 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="orange_web" type="Python.DjangoServer" factoryName="Django server">
       <module name="orange_web" />
@@ -606,22 +622,23 @@
       <option name="runNoReload" value="false" />
       <option name="useCustomRunCommand" value="false" />
       <option name="customRunCommand" value="" />
+      <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Django server.orange_web" />
-      <item itemvalue="Python.tests" />
       <item itemvalue="Python.tests (1)" />
       <item itemvalue="Python.views (1)" />
       <item itemvalue="Python.password_encryption" />
       <item itemvalue="Python.deal_page" />
+      <item itemvalue="Python.run" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.tests (1)" />
+        <item itemvalue="Python.run" />
         <item itemvalue="Python.password_encryption" />
         <item itemvalue="Python.deal_page" />
         <item itemvalue="Python.views (1)" />
-        <item itemvalue="Python.tests" />
       </list>
     </recent_temporary>
   </component>
@@ -685,7 +702,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533736114779</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="完成配送员列表，按需求修改前面内容">
+      <created>1533906907154</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1533906907154</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView">
@@ -698,34 +722,37 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="19" y="31" width="1862" height="998" extended-state="0" />
+    <frame x="144" y="33" width="1699" height="983" extended-state="0" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="7" weight="0.32422802" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50108147" side_tool="true" weight="0.575406" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32897863" />
-      <window_info anchor="bottom" id="Python Console" order="11" weight="0.512792" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49700958" visible="true" weight="0.30419162" />
-      <window_info anchor="bottom" id="Terminal" order="13" sideWeight="0.49891853" weight="0.35329342" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15371808" />
-      <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="4" weight="0.3295756" />
-      <window_info anchor="bottom" id="Find" order="2" weight="0.29341316" />
-      <window_info anchor="right" id="SciView" order="3" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17388652" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Database Console" order="0" weight="0.32936978" />
+      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Find" order="2" weight="0.29341316" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.4966443" visible="true" weight="0.34951457" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.46776083" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="7" weight="0.32422802" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5033557" side_tool="true" weight="0.34951457" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32897863" />
+      <window_info anchor="bottom" id="Python Console" order="11" weight="0.512792" />
+      <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="13" sideWeight="0.49891853" weight="0.21674313" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
-      <window_info anchor="bottom" id="Database Console" order="0" weight="0.32936978" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" weight="0.3295756" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.sh" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -738,7 +765,8 @@
     <MESSAGE value="完善前面js问题" />
     <MESSAGE value="完成推广营销相关" />
     <MESSAGE value="完成商圈管理所有" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成商圈管理所有" />
+    <MESSAGE value="完成配送员列表，按需求修改前面内容" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成配送员列表，按需求修改前面内容" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -749,376 +777,210 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="70" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/Adver/stores.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="77" column="10" lean-forward="true" selection-start-line="77" selection-start-column="10" selection-end-line="77" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Adver/goods.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="76" column="13" lean-forward="true" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Index/set_authority.html">
+    <entry file="file://$PROJECT_DIR$/orange_manage/utils/login_validation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
-          <caret line="44" column="19" lean-forward="true" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Merchant/edit_childlform.html">
+    <entry file="file://$PROJECT_DIR$/templates/404.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="754">
-          <caret line="86" column="18" lean-forward="true" selection-start-line="66" selection-start-column="4" selection-end-line="86" selection-end-column="18" />
+        <state relative-caret-position="492">
+          <caret line="86" column="36" selection-start-line="86" selection-start-column="36" selection-end-line="86" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Merchant/add_circle.html">
+    <entry file="file://$PROJECT_DIR$/templates/500.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="91" column="35" lean-forward="true" selection-start-line="91" selection-start-column="35" selection-end-line="91" selection-end-column="35" />
+        <state relative-caret-position="546">
+          <caret line="25" selection-start-line="25" selection-end-line="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Index/add_authorityform.html">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/db/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6826" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/set_authority.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="10" column="44" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="44" />
+        <state relative-caret-position="196">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Index/personinfo.html">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/pytz/tzinfo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2268">
-          <caret line="84" column="5" selection-start-line="73" selection-start-column="2" selection-end-line="84" selection-end-column="5" />
+        <state relative-caret-position="208">
+          <caret line="532" column="12" selection-start-line="532" selection-start-column="4" selection-end-line="532" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Index/edit_authorityform.html">
+    <entry file="file://$PROJECT_DIR$/run.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="79" column="15" selection-start-line="77" selection-start-column="10" selection-end-line="79" selection-end-column="15" />
+        <state>
+          <caret column="6" selection-start-column="6" selection-end-column="61" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Merchant/store_list.html">
+    <entry file="file://$PROJECT_DIR$/orange_manage/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4239">
-          <caret line="157" column="7" selection-start-line="157" selection-start-column="7" selection-end-line="157" selection-end-column="7" />
+        <state relative-caret-position="-16">
+          <caret line="166" column="45" selection-start-line="166" selection-start-column="45" selection-end-line="166" selection-end-column="45" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/orange_manage/basic_info/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/orange_manage/shops/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Merchant/circle_list.html">
+    <entry file="file://$PROJECT_DIR$/templates/Trade/order_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="96" column="5" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
+        <state relative-caret-position="-3433">
+          <caret line="212" column="69" lean-forward="true" selection-start-line="212" selection-start-column="19" selection-end-line="212" selection-end-column="69" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/area_adver.js" />
-    <entry file="file://$PROJECT_DIR$/static/js/area_pca.js" />
-    <entry file="file://$PROJECT_DIR$/static/js/common.js" />
-    <entry file="file://$PROJECT_DIR$/static/js/index.js">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/shortcuts.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-891" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/jquery.form.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1782" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/screenfull.min.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/layer/layer.js" />
-    <entry file="file://$PROJECT_DIR$/templates/Public/public.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="12" column="15" lean-forward="true" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+        <state relative-caret-position="208">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Public/header.html">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/cache/backends/db.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="14" column="73" selection-start-line="14" selection-start-column="73" selection-end-line="14" selection-end-column="73" />
+        <state relative-caret-position="209">
+          <caret line="41" column="6" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/date/showdate.htm">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/views/decorators/cache.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-324" />
+        <state relative-caret-position="81">
+          <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/date/WdatePicker.js">
+    <entry file="file://$PROJECT_DIR$/templates/System_Setting/withdraw_auto.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-648" />
+        <state relative-caret-position="1107">
+          <caret line="41" column="83" selection-start-line="41" selection-start-column="83" selection-end-line="41" selection-end-column="83" />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
+    <entry file="file://$PROJECT_DIR$/templates/System_Setting/ModifyPaymentStatus.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="118" column="50" selection-start-line="118" selection-start-column="50" selection-end-line="118" selection-end-column="50" />
+        <state relative-caret-position="5157">
+          <caret line="191" column="13" selection-start-line="191" selection-start-column="13" selection-end-line="191" selection-end-column="13" />
           <folding>
-            <element signature="n#script#5;n#head#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#span#0;n#a#0;n#li#0;n#ul#0;n#div#1;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Index/account.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="160" column="7" lean-forward="true" selection-start-line="104" selection-start-column="3" selection-end-line="160" selection-end-column="7" />
-          <folding>
-            <element signature="e#4727#6586#0#HTML" />
+            <element signature="n#select#0;n#form#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="e#1464#1470#0#HTML" expanded="true" />
+            <element signature="e#1482#1488#0#HTML" expanded="true" />
+            <element signature="e#1494#1500#0#HTML" expanded="true" />
+            <element signature="e#1506#1512#0#HTML" expanded="true" />
+            <element signature="n#select#2;n#form#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#select#3;n#form#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#thead#0;n#table#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="e#3923#3927#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/orange_manage/shops/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="911" column="30" lean-forward="true" selection-start-line="911" selection-start-column="30" selection-end-line="911" selection-end-column="30" />
+        <state relative-caret-position="972">
+          <caret line="694" column="30" selection-start-line="694" selection-start-column="30" selection-end-line="694" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Promotion_market/recommend_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1134">
-          <caret line="55" column="29" lean-forward="true" selection-start-line="55" selection-start-column="29" selection-end-line="55" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Index/add_accountform.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-74">
-          <caret line="232" column="41" lean-forward="true" selection-start-line="232" selection-start-column="41" selection-end-line="232" selection-end-column="41" />
-          <folding>
-            <element signature="e#4885#5381#0#HTML" />
-            <element signature="e#5510#7585#0#HTML" />
-            <element signature="e#12145#12476#0#HTML" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/orange_manage/system_setting/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="219" column="39" selection-start-line="219" selection-start-column="39" selection-end-line="219" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Promotion_market/store_add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="85" column="29" lean-forward="true" selection-start-line="84" selection-start-column="16" selection-end-line="85" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/orange_manage/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="773" column="6" lean-forward="true" selection-start-line="773" selection-start-column="6" selection-end-line="773" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/orange_manage/utils/campus_info.py">
+    <entry file="file://$PROJECT_DIR$/templates/bind_account.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
-          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/orange_manage/users/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-379">
-          <caret line="79" column="4" selection-start-line="79" selection-start-column="4" selection-end-line="79" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Deliver/user_edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="579">
-          <caret line="222" selection-start-line="222" selection-end-line="222" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#td#0;n#tr#1;n#table#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#tr#7;n#table#0;n#form#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#tr#8;n#table#0;n#form#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#td#0;n#tr#8;n#table#0;n#form#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="e#6336#6679#0#HTML" />
-            <element signature="e#6731#6747#0#HTML" />
-            <element signature="e#6328#6461#0#HTML" />
-            <element signature="e#7076#7172#0#HTML" />
-            <element signature="e#5202#5879#0#HTML" />
-            <element signature="e#5926#5956#0#HTML" />
-            <element signature="e#6004#6058#0#HTML" />
-            <element signature="e#8070#9622#0#HTML" />
-            <element signature="e#7859#8190#0#HTML" />
-            <element signature="e#8225#9202#0#HTML" />
-            <element signature="e#9253#9533#0#HTML" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Adver/adver_add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3348">
-          <caret line="193" column="42" selection-start-line="193" selection-start-column="30" selection-end-line="193" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Adver/adver_edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-983">
-          <caret line="30" column="13" lean-forward="true" selection-start-line="27" selection-start-column="9" selection-end-line="30" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Adver/adver_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="84" selection-start-line="84" selection-end-line="84" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Deliver/user_add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-189">
-          <caret line="110" column="65" lean-forward="true" selection-start-line="110" selection-start-column="24" selection-end-line="110" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/orange_manage/basic_info/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="47" column="25" lean-forward="true" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
-            <element signature="e#295#316#1" />
-            <element signature="e#1062#1565#0" />
-            <element signature="e#2088#2747#0" />
-            <element signature="e#2193#2707#0" />
-            <element signature="e#2921#2942#1" />
-            <element signature="e#2983#3186#0" />
-            <element signature="e#3695#3817#0" />
-            <element signature="e#4077#4159#0" />
-            <element signature="e#4225#4441#0" />
-            <element signature="e#4947#4997#0" />
-            <element signature="e#5030#5788#0" />
-            <element signature="e#5030#5054#1" />
-            <element signature="e#5095#5788#0" />
-            <element signature="e#5207#5737#0" />
-            <element signature="e#5252#5697#0" />
-            <element signature="e#5481#5646#0" />
-            <element signature="e#5826#9373#0" />
-            <element signature="e#5862#7795#0" />
-            <element signature="e#6020#7057#0" />
-            <element signature="e#6400#7057#0" />
-            <element signature="e#7084#7676#0" />
-            <element signature="e#7091#7676#0" />
-            <element signature="e#7839#9202#0" />
-            <element signature="e#8481#8819#0" />
-            <element signature="e#8846#9171#0" />
-            <element signature="e#9248#9373#0" />
-            <element signature="e#9413#10854#0" />
-            <element signature="e#9449#10054#0" />
-            <element signature="e#9623#9755#0" />
-            <element signature="e#9666#9755#0" />
-            <element signature="e#9818#9955#0" />
-            <element signature="e#10098#10854#0" />
-            <element signature="e#10494#10710#0" />
-            <element signature="e#10891#11955#0" />
-            <element signature="e#10927#11266#0" />
-            <element signature="e#10934#11194#0" />
-            <element signature="e#11310#11955#0" />
-            <element signature="e#11682#11796#0" />
-            <element signature="e#11823#11924#0" />
-            <element signature="e#11986#12109#0" />
-          </folding>
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/orange_manage/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
+        <state relative-caret-position="162">
+          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
           <folding>
-            <element signature="e#549#2374#0" />
-            <element signature="e#549#569#1" />
-            <element signature="e#981#2230#0" />
-            <element signature="e#1041#2158#0" />
-            <element signature="e#1190#1752#0" />
-            <element signature="e#1269#1641#0" />
-            <element signature="e#1795#2158#0" />
-            <element signature="e#2402#2485#0" />
-            <element signature="e#2402#2420#1" />
-            <element signature="e#2519#3367#0" />
-            <element signature="e#2519#2539#1" />
-            <element signature="e#2580#2939#0" />
-            <element signature="e#2983#3367#0" />
-            <element signature="e#3175#3294#0" />
+            <element signature="e#568#588#1" />
+            <element signature="e#630#2307#0" />
+            <element signature="e#988#2237#0" />
+            <element signature="e#1048#2165#0" />
+            <element signature="e#1197#1759#0" />
+            <element signature="e#1276#1648#0" />
+            <element signature="e#1802#2165#0" />
+            <element signature="e#2409#2492#0" />
+            <element signature="e#2409#2427#1" />
+            <element signature="e#2526#3374#0" />
+            <element signature="e#2526#2546#1" />
+            <element signature="e#2587#2946#0" />
+            <element signature="e#2990#3374#0" />
+            <element signature="e#3182#3301#0" />
+            <element signature="e#3401#4537#0" />
+            <element signature="e#3501#4186#0" />
+            <element signature="e#3542#4150#0" />
+            <element signature="e#3751#4103#0" />
+            <element signature="e#4206#4453#0" />
+            <element signature="e#4573#4765#0" />
+            <element signature="e#4799#5314#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/orange_manage/deliver/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="30" />
+          <folding>
+            <element signature="e#297#2531#0" />
+            <element signature="e#333#2350#0" />
+            <element signature="e#522#611#0" />
+            <element signature="e#996#1343#0" />
+            <element signature="e#1640#2151#0" />
+            <element signature="e#1719#2111#0" />
+            <element signature="e#2226#2349#0" />
+            <element signature="e#2394#2531#0" />
+            <element signature="e#2561#3682#0" />
+            <element signature="e#2598#3400#0" />
+            <element signature="e#2605#3319#0" />
+            <element signature="e#3446#3548#0" />
+            <element signature="e#3716#5714#0" />
+            <element signature="e#3752#4736#0" />
+            <element signature="e#3909#3954#0" />
+            <element signature="e#3981#4039#0" />
+            <element signature="e#4055#4631#0" />
+            <element signature="e#4780#5714#0" />
+            <element signature="e#4787#5495#0" />
+            <element signature="e#5746#5864#0" />
+            <element signature="e#5901#7829#0" />
+            <element signature="e#6432#6503#0" />
+            <element signature="e#6544#6661#0" />
+            <element signature="e#6850#7551#0" />
+            <element signature="e#6996#7515#0" />
+            <element signature="e#7629#7828#0" />
+            <element signature="e#7863#9832#0" />
+            <element signature="e#8193#8308#0" />
+            <element signature="e#8540#8693#0" />
+            <element signature="e#9024#9667#0" />
+            <element signature="e#9036#9631#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/orange_manage/middleware.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
+        <state relative-caret-position="216">
           <caret line="20" column="35" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Trade/order_detail.html">
+    <entry file="file://$PROJECT_DIR$/orange_manage/system_setting/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" selection-end-line="1" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/orange_manage/trade/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="5" column="14" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="14" />
+        <state relative-caret-position="378">
+          <caret line="174" column="13" selection-start-line="174" selection-start-column="13" selection-end-line="174" selection-end-column="13" />
           <folding>
-            <element signature="e#1#60#0" expanded="true" />
-            <element signature="e#1631#1752#0" />
-            <element signature="e#2448#3233#0" />
-            <element signature="e#2756#4998#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/orange_web/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="92" column="74" selection-start-line="92" selection-start-column="74" selection-end-line="92" selection-end-column="74" />
-          <folding>
-            <element signature="e#669#705#0" expanded="true" />
+            <marker date="1534162032161" expanded="false" signature="16760:16981" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1133,69 +995,387 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Deliver/user.html">
+    <entry file="file://$PROJECT_DIR$/templates/Adver/adver_edit.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="99" column="53" selection-start-line="99" selection-start-column="53" selection-end-line="99" selection-end-column="53" />
+        <state>
+          <caret selection-end-column="16" />
           <folding>
-            <element signature="n#style#0;n#a#0;n#td#13;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#form#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/User/index.html">
+    <entry file="file://$PROJECT_DIR$/templates/Adver/adver_management.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="26" column="12" lean-forward="true" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
+        <state relative-caret-position="27">
+          <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
+          <folding>
+            <element signature="n#html#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Trade/order_list.html">
+    <entry file="file://$PROJECT_DIR$/templates/Adver/adver_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="16" column="12" lean-forward="true" selection-start-line="6" selection-start-column="4" selection-end-line="16" selection-end-column="12" />
+        <state relative-caret-position="189">
+          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="37" />
           <folding>
-            <element signature="n#select#1;n#form#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#select#2;n#form#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="e#229#337#0#HTML" />
+            <element signature="e#353#425#0#HTML" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#table#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#colgroup#0;n#table#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#thead#0;n#table#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#0;n#thead#0;n#table#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#for#0;n#!!top" />
+            <element signature="n#tr#0;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#if#0;n#!!top" />
+            <element signature="n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#if#1;n#!!top" />
+            <element signature="n#td#8;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="e#3164#4512#0#HTML" />
+            <element signature="e#3439#3753#0#HTML" />
+            <element signature="e#3583#3741#0#HTML" />
+            <element signature="e#3777#4016#0#HTML" />
+            <element signature="e#3848#4004#0#HTML" />
+            <element signature="e#4043#4324#0#HTML" />
+            <element signature="e#4119#4253#0#HTML" />
+            <element signature="e#4257#4310#0#HTML" />
+            <element signature="e#4349#4496#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Adver/goods.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#html#0;n#!!top" />
+            <element signature="n#table#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Adver/stores.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="4" lean-forward="true" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#html#0;n#!!top" />
+            <element signature="n#table#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Deliver/deliverList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="18" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/Deliver/Delivery_record.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+        <state relative-caret-position="162">
+          <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="37" />
           <folding>
-            <element signature="n#style#0;n#input#0;n#form#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#843#849#0#HTML" expanded="true" />
-            <element signature="e#849#855#0#HTML" expanded="true" />
-            <element signature="e#855#861#0#HTML" expanded="true" />
-            <element signature="e#3060#3066#0#HTML" expanded="true" />
-            <element signature="e#3066#3072#0#HTML" expanded="true" />
-            <element signature="e#3072#3078#0#HTML" expanded="true" />
-            <element signature="n#style#0;n#input#1;n#form#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#3258#3264#0#HTML" expanded="true" />
-            <element signature="e#3264#3270#0#HTML" expanded="true" />
-            <element signature="e#3270#3276#0#HTML" expanded="true" />
-            <element signature="n#thead#0;n#table#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#0;n#html#0;n#!!top" />
+            <element signature="e#6845#7146#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Deliver/marki_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="5" lean-forward="true" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="38" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#1;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Deliver/user.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="19" column="4" lean-forward="true" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="18" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#1;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Deliver/user_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="6" column="4" lean-forward="true" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#form#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#script#0;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/orange_manage/deliver/views.py">
+    <entry file="file://$PROJECT_DIR$/templates/Deliver/user_edit.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="140" column="48" selection-start-line="140" selection-start-column="48" selection-end-line="140" selection-end-column="48" />
+        <state relative-caret-position="162">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="37" />
           <folding>
-            <element signature="e#0#59#0" expanded="true" />
-            <element signature="e#2033#3128#0" />
-            <element signature="e#2068#2854#0" />
-            <element signature="e#3281#5324#0" />
-            <element signature="e#3273#4987#0" />
-            <element signature="e#4343#5324#0" />
-            <element signature="e#3160#3273#0" />
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#form#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/orange_manage/basic_info/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="225" column="47" selection-start-line="225" selection-start-column="47" selection-end-line="225" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+            <element signature="e#295#4516#0" />
+            <element signature="e#4549#6540#0" />
+            <element signature="e#6575#6625#0" />
+            <element signature="e#6658#7416#0" />
+            <element signature="e#11041#12482#0" />
+            <element signature="e#12519#13583#0" />
+            <element signature="e#13614#13737#0" />
+            <element signature="e#17946#18749#0" />
+            <marker date="1534246167260" expanded="true" signature="15221:15226" ph="..." />
+            <marker date="1534246167260" expanded="true" signature="19490:19799" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Index/add_authorityform.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="4" lean-forward="true" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="37" />
+          <folding>
+            <element signature="n#form#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Index/add_region.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="26" lean-forward="true" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/orange_manage/utils/password_encryption.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="53" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Index/add_campus.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#form#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Index/CampusList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="4" lean-forward="true" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#1;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Index/edit_accountinfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#form#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Index/edit_authorityform.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#form#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#1;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Index/edit_campus.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#form#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Index/edit_region.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="29" column="4" lean-forward="true" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="18" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#form#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Index/ExistingAreaList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="18" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#1;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Index/personinfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="4" lean-forward="true" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Index/ProvinceList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#form#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#table#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Index/RegionList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="5" lean-forward="true" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="38" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#1;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Adver/adver_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Index/account.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#for#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Index/add_accountform.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Index/set_authority.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="80" column="7" selection-start-line="80" selection-start-column="7" selection-end-line="80" selection-end-column="7" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#form#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#script#1;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/orange_web/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-432">
+          <caret line="119" column="29" lean-forward="true" selection-start-line="119" selection-start-column="29" selection-end-line="119" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/orange_web/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="34" column="60" lean-forward="true" selection-start-line="34" selection-start-column="60" selection-end-line="34" selection-end-column="60" />
+          <folding>
+            <element signature="e#669#706#0" expanded="true" />
           </folding>
         </state>
       </provider>

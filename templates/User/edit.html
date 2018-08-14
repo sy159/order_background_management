@@ -1,128 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-	<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
-	{% include 'Public/header.html' %}
-	<style>
-		.aui_buttons {
-			padding: 4px 0 0 0;
-		}
-		.btn{
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
+    {% include 'Public/header.html' %}
+    <style>
+        .aui_buttons {
+            padding: 4px 0 0 0;
+        }
+
+        .btn {
             position: absolute;
             width: 100%;
             bottom: 0;
             right: 0;
-		}
-	</style>
+        }
+    </style>
 </head>
 <body>
-	<form id="myform" method="post" action="" frame="true" refresh="true" autocomplete="off">
-		<table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
-             <input type="hidden" id="id" name="userid" value="{{ data.ID }}">
-			<tr>
-				<th width="15%">ID</th>
-				<td width="35%"><div id="ID" style="height:24px;line-height: 24px;">{{ data.ID }}</div></td>
-				<th width="15%">昵称</th>
-				<td width="35%">
-					<!--<input type="text" class="input fl" name="nickname" size="20" validate="maxlength:50,required:true" value=""/>-->
-					<div id="nickname" style="height:24px;line-height: 24px;">{{ data.nickname }}</div>
-				</td>
-			<tr/>
-			<tr>
-                <th width="15%">姓名</th>
-				<td width="35%">
-					<!--<input type="text" class="input fl" name="username" size="20" validate="maxlength:50,required:true" value=""/>-->
-					<div id="username" style="height:24px;line-height: 24px;">{{ data.username }}</div>
-				</td>
-				<th width="15%">手机号</th>
-				<td width="35%">
-					<!--<input type="text" class="input fl" name="phone" size="20"  value="" autocomplete="off"/>-->
-					<div id="phone" style="height:24px;line-height: 24px;">{{ data.phone_number }}</div>
-				</td>
-			</tr>
-			<tr>
-				<th width="15%">性别</th>
-				<td width="35%" class="radio_box">
-                    {% if data.gender == 0 %}
-					<span class="cb-enable"><label class="cb-enable"><span>男</span><input type="radio" name="sex" value="0"/></label></span>
-                    {% elif data.gender == 1 %}
-					<span class="cb-enable"><label class="cb-enable"><span>女</span><input type="radio" name="sex" value="1"/></label></span>
-                    {% else %}
-					<span class="cb-disable"><label class="cb-disable"><span>未知</span><input type="radio" name="sex" value="2" /></label></span>
-                    {% endif %}
-				</td>
-                <th width="15%">QQ号</th>
-                <td width="35%">
-                    <!--<input type="text" class="input fl" name="qq" size="20" value=""/>-->
-                    <div id="qq" style="height:24px;line-height: 24px;">{{ data.qq | default_if_none:""}}</div>
-                </td>
-			</tr>
-			<tr>
-                <th width="15%">最后登录时间</th>
-                <td width="35%">
-                    <!--<input type="text" class="input fl" name="last_login" size="20" value="" tips="不修改则不填写" autocomplete="new-password"/>-->
-                    <div id="last_login" style="height:24px;line-height: 24px;">{{ data.last_login|date:'Y-m-d h:i:s' }}</div>
-                </td>
-                <th width="15%">状态</th>
-				<td width="35%" class="radio_box">
-                    {% if data.status == 1  %}
-					<input type="radio" name="status" value="1" checked><span>正常</span>
-					<input type="radio" name="status" value="0"/><span>禁用</span>
-                    {% else %}
+<form id="myform" method="post" action="" frame="true" refresh="true" autocomplete="off">
+    <table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
+        <input type="hidden" id="id" name="userid" value="{{ data.ID }}">
+        <tr>
+            <th width="15%">ID</th>
+            <td width="35%">
+                <div id="ID" style="height:24px;line-height: 24px;">{{ data.ID }}</div>
+            </td>
+            <th width="15%">昵称</th>
+            <td width="35%">
+                <!--<input type="text" class="input fl" name="nickname" size="20" validate="maxlength:50,required:true" value=""/>-->
+                <div id="nickname" style="height:24px;line-height: 24px;">{{ data.nickname }}</div>
+            </td>
+        <tr/>
+        <tr>
+            <th width="15%">姓名</th>
+            <td width="35%">
+                <!--<input type="text" class="input fl" name="username" size="20" validate="maxlength:50,required:true" value=""/>-->
+                <div id="username" style="height:24px;line-height: 24px;">{{ data.username }}</div>
+            </td>
+            <th width="15%">手机号</th>
+            <td width="35%">
+                <!--<input type="text" class="input fl" name="phone" size="20"  value="" autocomplete="off"/>-->
+                <div id="phone" style="height:24px;line-height: 24px;">{{ data.phone_number }}</div>
+            </td>
+        </tr>
+        <tr>
+            <th width="15%">性别</th>
+            <td width="35%" class="radio_box">
+                {% if data.gender == 0 %}
+                    <span class="cb-enable"><label class="cb-enable"><span>男</span><input type="radio" name="sex"
+                                                                                          value="0"/></label></span>
+                {% elif data.gender == 1 %}
+                    <span class="cb-enable"><label class="cb-enable"><span>女</span><input type="radio" name="sex"
+                                                                                          value="1"/></label></span>
+                {% else %}
+                    <span class="cb-disable"><label class="cb-disable"><span>未知</span><input type="radio" name="sex"
+                                                                                             value="2"/></label></span>
+                {% endif %}
+            </td>
+            <th width="15%">QQ号</th>
+            <td width="35%">
+                <!--<input type="text" class="input fl" name="qq" size="20" value=""/>-->
+                <div id="qq" style="height:24px;line-height: 24px;">{{ data.qq | default_if_none:"" }}</div>
+            </td>
+        </tr>
+        <tr>
+            <th width="15%">最后登录时间</th>
+            <td width="35%">
+                <!--<input type="text" class="input fl" name="last_login" size="20" value="" tips="不修改则不填写" autocomplete="new-password"/>-->
+                <div id="last_login"
+                     style="height:24px;line-height: 24px;">{{ data.last_login|date:'Y-m-d H:i:s' }}</div>
+            </td>
+            <th width="15%">状态</th>
+            <td width="35%" class="radio_box">
+                {% if data.status == 1 %}
+                    <input type="radio" name="status" value="1" checked><span>正常</span>
+                    <input type="radio" name="status" value="0"/><span>禁用</span>
+                {% else %}
                     <input type="radio" name="status" value="1"><span>正常</span>
-					<input type="radio" name="status" value="0" checked/><span>禁用</span>
-                    {% endif %}
-				</td>
-			</tr>
-			<tr>
-				<th width="15%">校区地址</th>
-				<td width="35%">
-					<!--<input type="text" class="input fl" name="youaddress" value="" style="width: 65%" />-->
-					<div id="youaddress" style="height:24px;line-height: 24px;">{{ data.campus_id }}</div>
-				</td>
-                <th width="15%">最后登录地址</th>
-                <td width="35%">
-                    <!--<input type="text" class="input fl" name="address" size="20" validate="maxlength:20" value=""/>-->
-                    <div id="address" style="height:24px;line-height: 24px;">{{ data.last_ip | default_if_none:""}}</div>
-                </td>
-			</tr>
-			<tr>
-                <th width="15%">注册时间</th>
-				<td width="35%"><div style="height:24px;line-height:24px;">{{ data.register_time|date:'Y-m-d h:i:s' }}</div></td>
-				<th width="15%">注册IP</th>
-				<td width="35%"><div style="height:24px;line-height:24px;"></div></td>
-			</tr>
-			<tr>
-				<th width="15%">余额</th>
-				<td width="35%">
-					<div style="height:30px;line-height:24px;">现在余额：￥{{ data.balance }}
-						<!--<select name="set_money_type">-->
-							<!--<option value="1">增加</option>-->
-							<!--<option value="2">减少</option>-->
-						<!--</select>&nbsp;&nbsp;-->
-						<!--<input type="text" class="input" name="set_money" size="10" validate="number:true" tips="此处填写增加或减少的额度，不是将余额变为此处填写的值"/>-->
-						<!--备注：<input type="text" class="input" name="money_remark" size="20"  tips="更改余额时请填写备注"/>-->
-					<!---->
-					</div>
-				</td>
-				<th width="15%">积分</th>
-				<td width="35%" >
-					<!--<input type="text" class="input fl" name="bp" value="" />-->
-					<div id="bp" style="height:24px;line-height: 24px;">{{ data.integral }}</div>
-				</td>
-			</tr>
-		</table>
-		<div class="btn">
-			<td colspan="2" class="aui_footer">
-				<div class="aui_buttons">
-					<button id="edit" class="aui_state_highlight" type="submit">编辑</button>
-					<button id="close" type="button">关闭</button>
-				</div>
-			</td>
-		</div>
-	</form>
+                    <input type="radio" name="status" value="0" checked/><span>禁用</span>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th width="15%">校区地址</th>
+            <td width="35%">
+                <!--<input type="text" class="input fl" name="youaddress" value="" style="width: 65%" />-->
+                <div id="youaddress" style="height:24px;line-height: 24px;">{{ data.campus_id }}</div>
+            </td>
+            <th width="15%">最后登录地址</th>
+            <td width="35%">
+                <!--<input type="text" class="input fl" name="address" size="20" validate="maxlength:20" value=""/>-->
+                <div id="address" style="height:24px;line-height: 24px;">{{ data.last_ip | default_if_none:"" }}</div>
+            </td>
+        </tr>
+        <tr>
+            <th width="15%">注册时间</th>
+            <td width="35%">
+                <div style="height:24px;line-height:24px;">{{ data.register_time|date:'Y-m-d H:i:s' }}</div>
+            </td>
+            <th width="15%">注册IP</th>
+            <td width="35%">
+                <div style="height:24px;line-height:24px;"></div>
+            </td>
+        </tr>
+        <tr>
+            <th width="15%">余额</th>
+            <td width="35%">
+                <div style="height:30px;line-height:24px;">现在余额：￥{{ data.balance }}
+                    <!--<select name="set_money_type">-->
+                    <!--<option value="1">增加</option>-->
+                    <!--<option value="2">减少</option>-->
+                    <!--</select>&nbsp;&nbsp;-->
+                    <!--<input type="text" class="input" name="set_money" size="10" validate="number:true" tips="此处填写增加或减少的额度，不是将余额变为此处填写的值"/>-->
+                    <!--备注：<input type="text" class="input" name="money_remark" size="20"  tips="更改余额时请填写备注"/>-->
+                    <!---->
+                </div>
+            </td>
+            <th width="15%">积分</th>
+            <td width="35%">
+                <!--<input type="text" class="input fl" name="bp" value="" />-->
+                <div id="bp" style="height:24px;line-height: 24px;">{{ data.integral }}</div>
+            </td>
+        </tr>
+    </table>
+    <div class="btn">
+        <td colspan="2" class="aui_footer">
+            <div class="aui_buttons">
+                <button id="edit" class="aui_state_highlight" type="submit">编辑</button>
+                <button id="close" type="button">关闭</button>
+            </div>
+        </td>
+    </div>
+</form>
 </body>
 <script>
     $("#close").click(function () {
@@ -130,25 +141,26 @@
     });
     $("#myform").submit(function (e) {
         e.preventDefault();
-        var status=$("input[name='status']:checked").val();
+        var status = $("input[name='status']:checked").val();
         $.ajax({
-            url:"/admin/user_edit/?userid="+$("#ID").text()+"&status="+status,
-            type:"post",
-            dataType:"json",
-            success:function(msg){
-                if(msg==1){
-                    result("修改成功","succeed");
+            url: "/admin/user_edit/?userid=" + $("#ID").text() + "&status=" + status,
+            type: "post",
+            dataType: "json",
+            success: function (msg) {
+                if (msg == 1) {
+                    result("修改成功", "succeed");
                     var win = art.dialog.open.origin;
                     win.location.reload();
-                }else{
-                    result("修改失败","error");
+                } else {
+                    result("修改失败", "error");
                 }
             },
-            error:function(xhr,textstatus,thrown){
+            error: function (xhr, textstatus, thrown) {
             }
         });
     });
-    function result(title,flag) {
+
+    function result(title, flag) {
         art.dialog({
             content: title,
             //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
@@ -156,11 +168,10 @@
             fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
             time: 3,//如果有cancel方法的话会调用cancel方法
         });
-        var time = setInterval(function() {
+        var time = setInterval(function () {
             art.dialog.close()
         }, 2000);
     }
-
 
 
 </script>

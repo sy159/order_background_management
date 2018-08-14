@@ -3,7 +3,8 @@ from django.utils import timezone
 from django.shortcuts import render, redirect, HttpResponse
 from orange_manage import models
 from orange_manage.utils.password_encryption import pwd_encrypted
-import json, hashlib
+import json
+from django.db.models import Q
 
 
 def account_list(request):
@@ -14,13 +15,26 @@ def account_list(request):
     get_page = request.GET.get('p', '1')
     get_level = request.operator_level
     if get_level == 0:
-        all_obj = models.Admin.objects.filter(level__lt=2).all()
+        all_obj = models.Admin.objects.filter(level__lt=2)
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
         page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
             get_pagesize)
         data_list = []
-        all_obj=all_obj.exclude(id=request.operator_id)
+        status = {
+            'keyword': request.GET.get('keyword'),
+            'searchtype': request.GET.get('searchtype'),
+        }
+        if request.GET.get('keyword'):
+            if request.GET.get('searchtype') == 'realname':
+                all_obj = all_obj.filter(realname__contains=request.GET.get('keyword'))
+            elif request.GET.get('searchtype') == 'account':
+                all_obj = all_obj.filter(account__contains=request.GET.get('keyword'))
+            elif request.GET.get('searchtype') == 'phone':
+                all_obj = all_obj.filter(phone__contains=request.GET.get('keyword'))
+            elif request.GET.get('searchtype') == 'admin_id':
+                all_obj = all_obj.filter(id=request.GET.get('keyword'))
+        all_obj = all_obj.exclude(id=request.operator_id)
         for i in all_obj.order_by('level')[start_nun:end_num]:
             region_obj = models.Region.objects.filter(region_id=i.open_admin_region).first()
             region_name = region_obj.region_name if region_obj else '平台所有区域'
@@ -47,6 +61,19 @@ def account_list(request):
         page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
             get_pagesize)
         data_list = []
+        status = {
+            'keyword': request.GET.get('keyword'),
+            'searchtype': request.GET.get('searchtype'),
+        }
+        if request.GET.get('keyword'):
+            if request.GET.get('searchtype') == 'realname':
+                all_obj = all_obj.filter(realname__contains=request.GET.get('keyword'))
+            elif request.GET.get('searchtype') == 'account':
+                all_obj = all_obj.filter(account__contains=request.GET.get('keyword'))
+            elif request.GET.get('searchtype') == 'phone':
+                all_obj = all_obj.filter(phone__contains=request.GET.get('keyword'))
+            elif request.GET.get('searchtype') == 'admin_id':
+                all_obj = all_obj.filter(id=request.GET.get('keyword'))
         all_obj = all_obj.exclude(id=request.operator_id)
         for i in all_obj[start_nun:end_num]:
             region_obj = models.Region.objects.filter(region_id=i.open_admin_region).first()
@@ -67,7 +94,7 @@ def account_list(request):
             }
             data_list.append(data_dict)
     return render(request, 'Index/account.html',
-                  {'data': data_list, 'get_page': get_page, 'page_total': str(page_total)})
+                  {'data': data_list, 'get_page': get_page, 'page_total': str(page_total), 'status': status})
 
 
 def add_account(request):
@@ -286,3 +313,146 @@ def clear_key(request):
     get_id = request.GET.get('id')
     models.Admin.objects.filter(id=get_id).update(admin_key=None)
     return HttpResponse(1)
+
+
+def add_campus(request):
+    try:
+        if request.GET.get('flag') == 'a':  # 为区县
+            all_obj = models.AddresLibrary.objects.filter(superior_id=request.GET.get('id'))
+            msg = '区县名称'
+        elif request.GET.get('flag') == 'c':  # 为市:
+            all_obj = models.AddresLibrary.objects.filter(superior_id=request.GET.get('id'))
+            msg = '市名称'
+        # elif request.GET.get('flag') == 'a':  # 为区县:
+        else:  # 为省:
+            all_obj = models.AddresLibrary.objects.filter(character=0)
+            msg = '省名称'
+        if request.GET.get('keyword'): all_obj = all_obj.filter(site_name__contains=request.GET.get('keyword'))
+        data_list = []
+        for i in all_obj:
+            data = []
+            data.append(i.id)
+            data.append(i.site_name)
+            data_list.append(data)
+        return render(request, 'Index/ProvinceList.html',
+                      {'data': data_list, 'msg': msg, 'flag': request.GET.get('flag'), 'id': request.GET.get('id')})
+    except Exception:
+        return HttpResponse('<h2>请选择具体的省市区</h2>')
+
+
+def region_list(request):
+    get_id = request.GET.get('id')
+    all_obj = models.Region.objects.filter(area_id=get_id)
+    data_list = []
+    if all_obj:
+        for i in all_obj:
+            data_dict = {
+                'area_id': get_id,
+                'region_id': i.region_id,
+                'region_name': i.region_name,
+            }
+            data_list.append(data_dict)
+    return render(request, 'Index/RegionList.html', {'data': data_list})
+
+
+def add_region(request):
+    if request.method == 'POST':
+        get_name = request.POST.get('region_name')
+        get_area_id = request.POST.get('area_id')
+        city_obj = models.AddresLibrary.objects.get(id=get_area_id)
+        city_id = city_obj.superior_id
+        city_obj = models.AddresLibrary.objects.get(id=city_id)
+        province_id = city_obj.superior_id
+        models.Region.objects.create(region_name=get_name, province_id=province_id, city_id=city_id,
+                                     area_id=get_area_id)
+        return HttpResponse(1)
+    return render(request, 'Index/add_region.html')
+
+
+def exist_region(request):
+    if request.method == 'GET':
+        get_page = request.GET.get('p', '1')
+        get_pagesize = 15
+        start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
+        end_num = start_nun + int(get_pagesize)  # 终止数据位置
+        all_obj = models.Region.objects.filter(
+            region_id=request.operator_region) if request.operator_region else models.Region.objects.all()
+        if request.GET.get('keyword'):
+            obj = models.AddresLibrary.objects.filter(character=2, site_name__contains=request.GET.get('keyword'))
+            obj_list = []
+            for i in obj:
+                obj_list.append(i.id)
+            all_obj = all_obj.filter(area_id__in=obj_list)
+        data_list = []
+        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+            get_pagesize)
+        for i in all_obj[start_nun:end_num]:
+            p_obj = models.AddresLibrary.objects.get(id=i.province_id)
+            c_obj = models.AddresLibrary.objects.get(id=i.city_id)
+            a_obj = models.AddresLibrary.objects.get(id=i.area_id)
+            data_dict = {
+                'region_id': i.region_id,
+                'region_name': i.region_name,
+                'province_name': p_obj.site_name,
+                'city_name': c_obj.site_name,
+                'area_name': a_obj.site_name,
+            }
+            data_list.append(data_dict)
+        return render(request, 'Index/ExistingAreaList.html',
+                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total),
+                       'operator_region': request.operator_region})
+    elif request.method == 'DELETE':
+        models.Region.objects.filter(region_id=request.GET.get('region_id')).delete()
+        return HttpResponse(1)
+
+
+def edit_region(request):
+    if request.method == 'POST':
+        get_name = request.POST.get('region_name')
+        if not get_name: return HttpResponse(2)
+        models.Region.objects.filter(region_id=request.POST.get('region_id')).update(region_name=get_name)
+        return HttpResponse(1)
+    return render(request, 'Index/edit_region.html')
+
+
+def campus_list(request):
+    if request.method == 'GET':
+        get_id = request.GET.get('region_id')
+        all_obj = models.RegionCampus.objects.filter(region_id=get_id)
+        data_list = []
+        for i in all_obj:
+            obj = models.Campus.objects.get(campus_id=i.campus_id)
+            if obj:
+                data_dict = {
+                    'campus_id': obj.campus_id,
+                    'campus_name': obj.campus,
+                }
+                data_list.append(data_dict)
+        return render(request, 'Index/CampusList.html', {'data': data_list, 'region_id': get_id})
+    elif request.method == 'DELETE':
+        get_id = request.GET.get('campus_id')
+        models.Campus.objects.filter(campus_id=get_id).delete()
+        models.RegionCampus.objects.filter(campus_id=get_id).delete()
+        return HttpResponse(1)
+
+
+def add_campusinfo(request):
+    if request.method == 'POST':
+        get_campus_name = request.POST.get('campus_name')
+        get_region_id = request.POST.get('region_id')
+        obj = models.Campus.objects.create(campus=get_campus_name)
+        models.RegionCampus.objects.create(campus_id=obj.campus_id, region_id=get_region_id)
+        return HttpResponse(1)
+    return render(request, 'Index/add_campus.html')
+
+
+def edit_campusinfo(request):
+    if request.method == 'POST':
+        try:
+            get_campus_id = request.POST.get('campus_id')
+            get_campus_name = request.POST.get('campus_name')
+            models.Campus.objects.filter(campus_id=get_campus_id).update(campus=get_campus_name)
+            return HttpResponse(1)
+        except Exception:
+            return HttpResponse(0)
+    return render(request, 'Index/edit_campus.html')

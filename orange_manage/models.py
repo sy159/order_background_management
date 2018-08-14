@@ -156,11 +156,33 @@ class Banner(models.Model):
 class Campus(models.Model):
     campus_id = models.AutoField(primary_key=True)
     campus = models.CharField(max_length=255)
-    university_id = models.IntegerField()
+    university_id = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'campus'
+
+
+class CashApplications(models.Model):
+    identity = models.IntegerField()
+    account_id = models.IntegerField()
+    cash_account_type = models.IntegerField()
+    cash_account = models.CharField(max_length=255)
+    account_holder = models.CharField(max_length=255)
+    bank_name = models.CharField(max_length=255, blank=True, null=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.IntegerField()
+    operator_id = models.IntegerField(blank=True, null=True)
+    operator_name = models.CharField(max_length=255, blank=True, null=True)
+    operator_phone = models.CharField(max_length=255, blank=True, null=True)
+    create_time = models.DateTimeField()
+    payment_time = models.DateTimeField(blank=True, null=True)
+    region_id = models.IntegerField(blank=True, null=True)
+    account_phone = models.CharField(max_length=12)
+
+    class Meta:
+        managed = False
+        db_table = 'cash_applications'
 
 
 class Circle(models.Model):
@@ -264,11 +286,11 @@ class Distributor(models.Model):
     last_login = models.DateTimeField(blank=True, null=True)
     is_part_time = models.IntegerField()
     balance = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    bank_name = models.CharField(max_length=255, blank=True, null=True)
-    bank_account = models.CharField(max_length=255, blank=True, null=True)
+    alipay_account = models.CharField(max_length=255, blank=True, null=True)
     account_holder = models.CharField(max_length=255, blank=True, null=True)
     priority = models.IntegerField(blank=True, null=True)
     status = models.IntegerField(blank=True, null=True)
+    online = models.IntegerField()
 
     class Meta:
         managed = False
@@ -341,8 +363,8 @@ class Goods(models.Model):
     privilege = models.IntegerField()
     platform_classify_id = models.IntegerField(blank=True, null=True)
     purchasing_limitation = models.PositiveIntegerField(blank=True, null=True)
-    salves_amount = models.PositiveIntegerField(blank=True, null=True)
-    total_salves_amount = models.IntegerField(blank=True, null=True)
+    sales_amount = models.PositiveIntegerField(blank=True, null=True)
+    total_sales_amount = models.IntegerField(blank=True, null=True)
     product_code = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
@@ -463,7 +485,7 @@ class GoodsSpecification(models.Model):
     original_price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.CharField(max_length=255, blank=True, null=True)
     stock = models.IntegerField()
-    salves_amount = models.PositiveIntegerField(blank=True, null=True)
+    sales_amount = models.PositiveIntegerField(blank=True, null=True)
     spec = models.CharField(max_length=1000, blank=True, null=True)
     product_code = models.CharField(max_length=255, blank=True, null=True)
 
@@ -545,14 +567,14 @@ class Orders(models.Model):
     complete_time = models.DateTimeField(blank=True, null=True)
     distribution_mode = models.IntegerField(blank=True, null=True)
     distribution_remarks = models.CharField(max_length=255, blank=True, null=True)
-    distribution_fee = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
+    distribution_fee = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     region_id = models.IntegerField(blank=True, null=True)
     coupon_id = models.IntegerField(blank=True, null=True)
     coupon_type = models.IntegerField(blank=True, null=True)
     coupon_value = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     pay_mode = models.IntegerField(blank=True, null=True)
-    pay_amount = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
+    pay_amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     unfinished_reason = models.CharField(max_length=255, blank=True, null=True)
     campus_id = models.IntegerField(blank=True, null=True)
     user_name = models.CharField(max_length=255, blank=True, null=True)
@@ -566,7 +588,7 @@ class Orders(models.Model):
     final_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     trade_no = models.CharField(max_length=255, blank=True, null=True)
     last_up_time = models.BigIntegerField(blank=True, null=True)
-    distribution_status = models.IntegerField()
+    distribution_status = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -639,7 +661,7 @@ class Recovery(models.Model):
 class Region(models.Model):
     region_id = models.AutoField(primary_key=True)
     region_name = models.CharField(max_length=255, blank=True, null=True)
-    team_id = models.IntegerField()
+    team_id = models.IntegerField(blank=True, null=True)
     province_id = models.IntegerField()
     city_id = models.IntegerField()
     area_id = models.IntegerField()
@@ -796,6 +818,20 @@ class ShopSort(models.Model):
     class Meta:
         managed = False
         db_table = 'shop_sort'
+
+
+class SmsSendLogs(models.Model):
+    addressee = models.CharField(max_length=255)
+    action_type = models.IntegerField(blank=True, null=True)
+    identity_type = models.IntegerField(blank=True, null=True)
+    content = models.CharField(max_length=255)
+    verify_code = models.CharField(max_length=255, blank=True, null=True)
+    valid_till = models.DateTimeField(blank=True, null=True)
+    send_time = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'sms_send_logs'
 
 
 class SmsTemplate(models.Model):

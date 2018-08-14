@@ -3,6 +3,7 @@ from orange_manage import models
 from django.http import JsonResponse
 from orange_manage.utils.campus_info import campus_list, region_list
 from django.utils import timezone
+from django.db.models import Q
 
 
 def marki_manage(request):
@@ -176,3 +177,106 @@ def delivery_record(request):
     return render(request, 'Deliver/Delivery_record.html',
                   {'data': data_list, 'distributor_name': distributor_obj.name, 'distributor_id': get_distributor_id,
                    'status_data': status_data, 'get_page': get_page, 'page_total': str(page_total)})
+
+
+def deliver_list(request):
+    get_page = request.GET.get('p', '1')
+    get_pagesize = 15
+    start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
+    end_num = start_nun + int(get_pagesize)  # 终止数据位置
+    get_user_phone_number = request.GET.get('user_phone_number')
+    get_distribution_status = request.GET.get('distribution_status', '')
+    status = {
+        'user_phone_number': get_user_phone_number,
+        'distribution_status': get_distribution_status,
+    }
+    all_obj = models.Orders.objects.exclude(distribution_status=3).filter(pay_mode__in=[0,1,2])
+    if request.operator_region != 0: all_obj = all_obj.filter(region_id=request.operator_region)
+    if get_user_phone_number:
+        all_obj = all_obj.filter(Q(user_phone_number__contains=get_user_phone_number) | Q(
+            distributor_phone_number__contains=get_user_phone_number))
+    all_obj = all_obj.filter(
+        distribution_status=get_distribution_status) if get_distribution_status else all_obj
+    page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        get_pagesize)
+    data_list = []
+    for i in all_obj[start_nun:end_num]:
+        data_dict = {
+            'order_id': i.order_id,
+            'region_id': i.region_id,
+            'user_name': i.user_name,
+            'user_phone_number': i.user_phone_number,
+            'user_address': i.user_address,
+            'pay_mode': i.pay_mode,
+            'total_price': i.total_price,
+            'distribution_fee': i.distribution_fee,
+            'distribution_start_time': i.distribution_start_time,
+            'distribution_status': i.distribution_status,
+            'distributor_name': i.distributor_name,
+            'distributor_phone_number': i.distributor_phone_number,
+        }
+        data_list.append(data_dict)
+    return render(request, 'Deliver/deliverList.html',
+                  {'data': data_list, 'get_page': get_page, 'page_total': str(page_total), 'status': status})
+
+
+def marki_list(request):
+    if request.method == 'GET':
+        get_page = request.GET.get('p', '1')
+        get_pagesize = 15
+        start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
+        end_num = start_nun + int(get_pagesize)  # 终止数据位置
+        get_region_id = request.GET.get('region_id')
+        all_obj = models.Distributor.objects.filter(region_id=get_region_id, status=1, online=1)
+        if request.GET.get('keyword'):
+            if request.GET.get('searchtype') == 'campus_id':
+                campus_all_id = models.Campus.objects.filter(campus__contains=request.GET.get('keyword')).values_list(
+                    'campus_id')
+                all_obj = all_obj.filter(campus_id__in=campus_all_id)
+            elif request.GET.get('searchtype') == 'name':
+                all_obj = all_obj.filter(name__contains=request.GET.get('keyword'))
+            elif request.GET.get('searchtype') == 'phone_number':
+                all_obj = all_obj.filter(phone_number__contains=request.GET.get('keyword'))
+        status = {
+            'region_id': get_region_id,
+            'keyword': request.GET.get('keyword'),
+            'searchtype': request.GET.get('searchtype'),
+            'order_id': request.GET.get('order_id'),
+        }
+        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+            get_pagesize)
+        data_list = []
+        all_obj.query.group_by = ['campus_id']
+        for i in all_obj.order_by('-priority')[start_nun:end_num]:
+            obj = models.Campus.objects.get(campus_id=i.campus_id)
+            data_dict = {
+                'priority': i.priority,
+                'distributor_id': i.distributor_id,
+                'name': i.name,
+                'gender': i.gender,
+                'phone_number': i.phone_number,
+                'campus': obj.campus,
+            }
+            data_list.append(data_dict)
+        return render(request, 'Deliver/marki_list.html',
+                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total), 'status': status})
+    elif request.method == 'POST':
+        try:
+            get_order_id = request.GET.get('order_id')
+            data = {
+                'distributor_id': request.GET.get('distributor_id'),
+                'distributor_name': request.GET.get('name'),
+                'distributor_phone_number': request.GET.get('phone_number'),
+            }
+            obj = models.Orders.objects.filter(order_id=get_order_id)
+            if obj[0].order_status == 1: obj.update(order_status=2)
+            if obj[0].distribution_status == 0: obj.update(distribution_status=1)
+            obj.update(**data)
+            return HttpResponse(1)
+        except Exception:
+            return HttpResponse(0)
+
+
+
+
+

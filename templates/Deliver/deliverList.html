@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站后台管理 Powered by pigcms.com</title>
+    {% include 'Public/header.html' %}
+    <style>
+        ul.pages{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ol, ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul>
+            <a href="" class="on">配送列表</a>
+        </ul>
+    </div>
+    <table class="search_table" width="100%">
+        <tr>
+            <td>
+                <form action="/admin/deliver_list/" method="get">
+                    <div class="deliver_search">
+                        <span class="mar_l_10">配送状态：
+                            <select id="status" name="distribution_status">
+                                {% if status.distribution_status == "0" %}
+                                        <option value="">全部</option>
+                                        <option value="0"  selected>未抢单</option>
+                                        <option value="1" >已抢单待取货</option>
+                                        <option value="2" >已取货配送中</option>
+                                        <option value="4" >配送失败</option>
+                                {% elif status.distribution_status == "1"  %}
+                                        <option value="">全部</option>
+                                        <option value="0">未抢单</option>
+                                        <option value="1"  selected>已抢单待取货</option>
+                                        <option value="2" >已取货配送中</option>
+                                        <option value="4" >配送失败</option>
+                                {% elif status.distribution_status == "2"  %}
+                                        <option value="">全部</option>
+                                        <option value="0">未抢单</option>
+                                        <option value="1">已抢单待取货</option>
+                                        <option value="2"  selected>已取货配送中</option>
+                                        <option value="4">配送失败</option>
+                                {% elif status.distribution_status == "4"  %}
+                                         <option value="">全部</option>
+                                        <option value="0">未抢单</option>
+                                        <option value="1">已抢单待取货</option>
+                                        <option value="2">已取货配送中</option>
+                                        <option value="4" selected>配送失败</option>
+                                   {% else%}
+                                        <option value="" selected>全部</option>
+                                        <option value="0">未抢单</option>
+                                        <option value="1">已抢单待取货</option>
+                                        <option value="2">已取货配送中</option>
+                                        <option value="4">配送失败</option>
+                                {% endif %}
+                            </select>
+                        </span>
+                        <span class="mar_l_10">用户手机号：<input type="text" id="phone" class="input-text" name="user_phone_number"  value="{{ status.user_phone_number|default_if_none:'' }}"></span>
+                         <input type="submit" value="搜索" class="button"/>　
+{#                        &nbsp;&nbsp;&nbsp;该筛选条件下总记录数：72111&nbsp;&nbsp;&nbsp;总配送费：￥34993.50&nbsp;&nbsp;&nbsp;订单总价格：￥1399268.71&nbsp;&nbsp;&nbsp;小费总额：￥0.00#}
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <form name="myform" id="myform" action="" method="post">
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <colgroup>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col width="180" align="center"/>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>订单编号</th>
+                        <th>客户名称</th>
+                        <th>客户电话</th>
+                        <th>客户地址</th>
+                        <th>支付状态</th>
+                        <th>订单价格</th>
+                        <th>配送状态</th>
+                        <th>配送员名称</th>
+                        <th>配送员电话</th>
+                        <th>开始时间</th>
+                        <th  class="textcenter">分配配送员<i class="menu-icon fa fa-sort"></i></th>
+                        <th class="textcenter">查看订单详情</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                {% for i in data %}
+                    <tr>
+                        <td>{{ i.order_id }}</td>
+                        <input type="hidden" name="region_id" value="{{ i.region_id }}">
+                        <td>{{ i.user_name|default_if_none:'' }}</td>
+                        <td>{{ i.user_phone_number|default_if_none:'' }}</td>
+                        <td>{{ i.user_address|default_if_none:'' }}</td>
+                        {% if i.pay_mode == 0 %}
+                            <td>余额支付</td>
+                        {% elif i.pay_mode == 1 %}
+                            <td>支付宝支付</td>
+                        {% elif i.pay_mode == 2 %}
+                            <td>微信支付</td>
+                        {% else %}
+                            <td>未支付</td>
+                        {% endif %}
+                        <td>{{ i.total_price |default_if_none:''}}</td>
+                    {% if i.distribution_status ==  0 %}
+                        <td>未抢单</td>
+                        {% elif  i.distribution_status ==  1 %}
+                         <td>已抢单待取货</td>
+                        {% elif  i.distribution_status ==  2 %}
+                         <td>已取货配送中</td>
+                        {% elif  i.distribution_status ==  4 %}
+                         <td>配送失败</td>
+                    {% endif %}
+                        <td>{{ i.distributor_name|default_if_none:'' }}</td>
+                        <td>{{ i.distributor_phone_number |default_if_none:''}}</td>
+                        <td>{{ i.distribution_start_time|date:'Y-m-d H:i:s'|default_if_none:'' }}</td>
+                        <td class="textcenter">
+                            <a class="distribution" href="/admin/marki_list/?region_id={{ i.region_id }}&order_id={{ i.order_id }}" style="color: red;">分配</a>
+                        </td>
+                        <td class="textcenter">
+                            <a class="check" href="javascript:void(0);">查看</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                 <tfoot id="tfoot" >
+                        <tr>
+                            <td class="textcenter pagebar" colspan="12">
+                                <ul class="pages">
+
+                                    <li><a href='/admin/deliver_list/?p=1&distribution_status={{ status.distribution_status }}&user_phone_number={{ status.user_phone_number|default_if_none:'' }}'>首页</a></li>
+                                    {% if  get_page  == '1' %}
+                                        <li><a href='#'>&lt;上一页</a></li>
+                                    {% else %}
+                                    <li><a href='/admin/deliver_list/?p={{ get_page |add:-1}}&distribution_status={{ status.distribution_status }}&user_phone_number={{ status.user_phone_number|default_if_none:'' }}'>&lt;上一页</a></li>
+
+                                    {% endif %}
+                                {% if  get_page  >=  page_total  %}
+                                    <li><a href='#'>下一页&gt;</a></li>
+                                    {% else %}
+                                    <li><a href='/admin/deliver_list/?p={{ get_page |add:1}}&distribution_status={{ status.distribution_status }}&user_phone_number={{ status.user_phone_number|default_if_none:'' }}'>下一页&gt;</a></li>
+                                {% endif %}
+                                    <li><a href='/admin/deliver_list/?p={{ page_total }}&distribution_status={{ status.distribution_status }}&user_phone_number={{ status.user_phone_number|default_if_none:'' }}'>尾页></a></li>
+                                    <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tfoot>
+            </table>
+        </div>
+    </form>
+</div>
+</body>
+<script type="text/javascript">
+  $("#tbody").on('click','a',function () {
+       var clsn=this.className;
+       var order_id=$(this).parent().siblings()[0];
+       var region_id=$(this).parent().siblings()[1];
+       region_id=$(region_id).val();
+       order_id=$(order_id).html();
+       if(clsn == 'check'){
+           art.dialog.open('/admin/order_detail/?order_id='+order_id,{
+               title: '查看订单详情',
+               lock: true,
+               width:800,
+               height:400,
+           });
+       }
+  });
+
+</script>
+</html>

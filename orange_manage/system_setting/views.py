@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from orange_manage import models
+from django.utils import timezone
 
 
 def adver_management(request):
@@ -213,11 +214,11 @@ def adver_edit(request):
         if not len(get_img): get_img = obj.img
         if not len(get_priority): get_priority = obj.priority
         if request.POST.get('function') == '2':
-            url=request.POST.get('url')
-            if 'http://'in url or 'https://' in url:
+            url = request.POST.get('url')
+            if 'http://' in url or 'https://' in url:
                 get_url = url
             else:
-                get_url = 'http://'+url
+                get_url = 'http://' + url
         elif request.POST.get('function') == '1':
             if not len(get_url): get_url = obj.url.split('=')[1].split('#')[0] + '=' + obj.url.split('=')[1].split('#')[
                 1]
@@ -231,3 +232,121 @@ def adver_edit(request):
             models.AppMenu.objects.filter(id=get_shop_id).update(title=get_title, img=get_img, url=get_url,
                                                                  state=get_status, priority=get_priority)
         return HttpResponse(1)
+
+
+def withdraw_list(request):
+    if request.method == 'GET':
+        get_page = request.GET.get('p', '1')
+        get_pagesize = 15
+        start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
+        end_num = start_nun + int(get_pagesize)  # 终止数据位置
+        if request.operator_region:
+            all_obj = models.CashApplications.objects.filter(region_id=request.operator_region)
+        else:
+            all_obj = models.CashApplications.objects.all()
+        status_dict = {
+            'keyword': request.GET.get('keyword'),
+            'searchtype': request.GET.get('searchtype'),
+            'status': request.GET.get('status'),
+            'cash_account_type': request.GET.get('cash_account_type'),
+            'identity': request.GET.get('identity'),
+        }
+        if request.GET.get('keyword'):
+            if request.GET.get('searchtype') == 'account_phone':
+                all_obj = all_obj.filter(account_phone__contains=request.GET.get('keyword'))
+            elif request.GET.get('searchtype') == 'account_holder':
+                all_obj = all_obj.filter(account_holder__contains=request.GET.get('keyword'))
+        if request.GET.get('status'): all_obj = all_obj.filter(status=request.GET.get('status'))
+        if request.GET.get('cash_account_type'): all_obj = all_obj.filter(
+            cash_account_type=request.GET.get('cash_account_type'))
+        if request.GET.get('identity'): all_obj = all_obj.filter(identity=request.GET.get('identity'))
+        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+            get_pagesize)
+        data_list = []
+        for i in all_obj.order_by('-amount')[start_nun:end_num]:
+            data_dict = {
+                'id': i.id,
+                'identity': i.identity,  # 提现用户角色; 1:user 2:shopAssistant 3:distributor
+                'account_id': i.account_id,
+                'account_phone': i.account_phone,  # 账户电话
+                'cash_account_type': i.cash_account_type,  # 提现目标账户类型: 1:支付宝 2:微信 3:银行账户
+                'cash_account': i.cash_account,  # 提现目标账号
+                'account_holder': i.account_holder,  # 提款人真实姓名
+                'bank_name': i.bank_name,  # 提款银行
+                'amount': i.amount,  # 提款金额
+                'create_time': i.create_time,  # 申请时间
+                'payment_time': i.payment_time,  # 转账时间
+                'status': i.status,  # 状态 0:未审核，1:审核通过，2:已打款，3:审核失败
+            }
+            data_list.append(data_dict)
+        return render(request, 'System_Setting/withdraw_auto.html',
+                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total),
+                       'status_dict': status_dict})
+    elif request.method == 'POST':
+        get_id = request.POST.get('id')
+        get_status = request.POST.get('status')
+        models.CashApplications.objects.filter(id=get_id).update(status=get_status)
+        return HttpResponse(1)
+
+
+def modify_status(request):
+    if request.method == 'GET':
+        get_page = request.GET.get('p', '1')
+        get_pagesize = 15
+        start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
+        end_num = start_nun + int(get_pagesize)  # 终止数据位置
+        all_obj = models.CashApplications.objects.filter(status=1)
+        if request.operator_region: all_obj = all_obj.filter(region_id=request.operator_region)
+        status_dict = {
+            'keyword': request.GET.get('keyword'),
+            'searchtype': request.GET.get('searchtype'),
+            'status': request.GET.get('status'),
+            'cash_account_type': request.GET.get('cash_account_type'),
+            'identity': request.GET.get('identity'),
+        }
+        if request.GET.get('keyword'):
+            if request.GET.get('searchtype') == 'account_phone':
+                all_obj = all_obj.filter(account_phone__contains=request.GET.get('keyword'))
+            elif request.GET.get('searchtype') == 'account_holder':
+                all_obj = all_obj.filter(account_holder__contains=request.GET.get('keyword'))
+            elif request.GET.get('searchtype') == 'id':
+                all_obj = all_obj.filter(id=request.GET.get('keyword'))
+        if request.GET.get('cash_account_type'): all_obj = all_obj.filter(
+            cash_account_type=request.GET.get('cash_account_type'))
+        if request.GET.get('identity'): all_obj = all_obj.filter(identity=request.GET.get('identity'))
+        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+            get_pagesize)
+        data_list = []
+        for i in all_obj.order_by('-amount')[start_nun:end_num]:
+            data_dict = {
+                'id': i.id,
+                'identity': i.identity,  # 提现用户角色; 1:user 2:shopAssistant 3:distributor
+                'account_id': i.account_id,
+                'account_phone': i.account_phone,  # 账户电话
+                'cash_account_type': i.cash_account_type,  # 提现目标账户类型: 1:支付宝 2:微信 3:银行账户
+                'cash_account': i.cash_account,  # 提现目标账号
+                'account_holder': i.account_holder,  # 提款人真实姓名
+                'bank_name': i.bank_name,  # 提款银行
+                'amount': i.amount,  # 提款金额
+                'create_time': i.create_time,  # 申请时间
+                'payment_time': i.payment_time,  # 转账时间
+                'status': i.status,  # 状态 0:未审核，1:审核通过，2:已打款，3:审核失败
+            }
+            data_list.append(data_dict)
+        return render(request, 'System_Setting/ModifyPaymentStatus.html',
+                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total),
+                       'status_dict': status_dict})
+    elif request.method == 'POST':
+        try:
+            get_id = request.POST.get('id')
+            data = {
+                'status': 2,
+                'operator_id': request.operator_id,
+                'operator_name': request.operator_name,
+                'operator_phone': request.operator_obj.phone,
+                'payment_time': timezone.now(),
+            }
+            models.CashApplications.objects.filter(id=get_id).update(**data)
+            return HttpResponse(1)
+        except Exception:
+            return HttpResponse(0)

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站后台管理 Powered by pigcms.com</title>
+    {% include 'Public/header.html' %}
+    <style>
+        ul.pages{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ol, ul {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        #excell{
+            margin-left: 50px;
+        }
+    </style>
+</head>
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul>
+            <a href="javascript:void (0);" class="on">提款列表</a>
+        </ul>
+    </div>
+    <table class="search_table" width="100%">
+        <tr>
+            <td>
+                <form action="" method="get">
+                    筛选: <input type="text" name="keyword" class="input-text" value="{{ status_dict.keyword|default_if_none:'' }}"/>
+                    <select name="searchtype">
+                        {% if  status_dict.searchtype == 'account_phone' %}
+                        <option value="account_phone" selected>联系电话</option>
+                        <option value="account_holder" >真实姓名</option>
+                            {% else %}
+                             <option value="account_phone" >联系电话</option>
+                        <option value="account_holder" selected>真实姓名</option>
+                        {% endif %}
+                    </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    状态:
+                    <select name="status">
+                            {% if status_dict.status == '0' %}
+                             <option value="" >全部</option>
+                        <option value="0" selected="selected">未审核</option>
+                        <option value="1" >审核通过</option>
+                        <option value="2" >已打款</option>
+                        <option value="3" >审核失败</option>
+                            {% elif status_dict.status == '1' %}
+                             <option value="" >全部</option>
+                        <option value="0" >未审核</option>
+                        <option value="1" selected="selected">审核通过</option>
+                        <option value="2" >已打款</option>
+                        <option value="3" >审核失败</option>
+                            {% elif status_dict.status == '2' %}
+                             <option value="" >全部</option>
+                        <option value="0" >未审核</option>
+                        <option value="1" >审核通过</option>
+                        <option value="2" selected="selected">已打款</option>
+                        <option value="3" >审核失败</option>
+                            {% elif status_dict.status == '3' %}
+                             <option value="" >全部</option>
+                        <option value="0" >未审核</option>
+                        <option value="1" >审核通过</option>
+                        <option value="2" >已打款</option>
+                        <option value="3" selected="selected">审核失败</option>
+                                {% else %}
+                                 <option value="" selected="selected">全部</option>
+                        <option value="0" >未审核</option>
+                        <option value="1" >审核通过</option>
+                        <option value="2" >已打款</option>
+                        <option value="3" >审核失败</option>
+                        {% endif %}
+                    </select>
+                     提款类型:
+                    <select name="cash_account_type">
+                        {% if status_dict.cash_account_type == '1' %}
+                        <option value="">全部</option>
+                        <option value="1"  selected="selected">支付宝</option>
+                        <option value="2" >微信</option>
+                        <option value="3" >银行账号</option>
+                            {% elif status_dict.cash_account_type == '2' %}
+                        <option value="">全部</option>
+                        <option value="1" >支付宝</option>
+                        <option value="2"  selected="selected">微信</option>
+                        <option value="3" >银行账号</option>
+                            {% elif status_dict.cash_account_type == '3' %}
+                        <option value="">全部</option>
+                        <option value="1" >支付宝</option>
+                        <option value="2"  >微信</option>
+                        <option value="3" selected="selected">银行账号</option>
+                            {% else %}
+                            <option value="" selected="selected">全部</option>
+                        <option value="1" >支付宝</option>
+                        <option value="2"  >微信</option>
+                        <option value="3" >银行账号</option>
+                        {% endif %}
+                    </select>
+                     提款人类型:
+                    <select name="identity">
+                         {% if status_dict.identity == '1' %}
+                        <option value="" >全部</option>
+                        <option value="1" selected="selected">用户</option>
+                        <option value="2" >商家</option>
+                        <option value="3" >配送员</option>
+                             {% elif status_dict.identity == '2' %}
+                        <option value="" >全部</option>
+                        <option value="1" >用户</option>
+                        <option value="2" selected="selected">商家</option>
+                        <option value="3" >配送员</option>
+                              {% elif status_dict.identity == '3' %}
+                        <option value="" >全部</option>
+                        <option value="1" >用户</option>
+                        <option value="2" >商家</option>
+                        <option value="3" selected="selected">配送员</option>
+                             {% else %}
+                              <option value="" selected="selected">全部</option>
+                        <option value="1" >用户</option>
+                        <option value="2" >商家</option>
+                        <option value="3" >配送员</option>
+                        {% endif %}
+                    </select>
+                    <button class="button" id="forms" type="submit">查询</button>
+                    <button class="button text-right" id="excell" type="button"   onclick="method5('dataTable')">导出excel</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <form name="myform" id="myform" action="" method="post">
+        <div class="table-list">
+            <table width="100%" cellspacing="0"  id="dataTable">
+                <colgroup><col> <col> <col> <col><col><col><col><col><col width="240" align="center"> </colgroup>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>提款类型</th>
+                        <th>提款人类型</th>
+                        <th>ID</th>
+                        <th>联系电话</th>
+                        <th>真实姓名</th>
+                        <th>账号</th>
+                        <th>开户行名称</th>
+                        <th>提现金额</th>
+                        <th>添加时间</th>
+                        <th>支付时间</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                {% for i in data %}
+                <tr>
+                    <td>{{ i.id }}</td>
+                    {% if i.cash_account_type == 1 %}
+                    <td>支付宝</td>
+                        {% elif i.cash_account_type == 2 %}
+                    <td>微信</td>
+                         {% elif i.cash_account_type == 3 %}
+                    <td>银行账户</td>
+                    {% endif %}
+                {% if i.identity == 1 %}
+                    <td>用户</td>
+                    {% elif i.identity == 2 %}
+                    <td>商家</td>
+                    {% elif i.identity == 3 %}
+                    <td>配送员</td>
+                {% endif  %}
+                    <td>{{ i.account_id }}</td>
+                    <td>{{ i.account_phone }}</td>
+                    <td>{{ i.account_holder }}</td>
+                    <td>{{ i.cash_account }}</td>
+                    <td>{{ i.bank_name|default_if_none:'' }}</td>
+                    <td>{{ i.amount }}</td>
+                    <td>{{ i.create_time|date:'Y-m-d H:i:s' }}</td>
+                    <td>{{ i.payment_time|date:'Y-m-d H:i:s' }}</td>
+                {% if i.status == 0 %}
+                    <td><font color="red">未审核</font>&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <a href="javascript:void (0);" class="pass" id="1"><font color="green">审核通过</font></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <a href="javascript:void (0);" class="fail" id="3"><font color="green">审核失败</font></a>
+                    </td>
+                    {% elif i.status == 1 %}
+                    <td><font>审核通过</font></td>
+                        {% elif i.status == 2 %}
+                    <td><font>已打款</font></td>
+                    {% elif i.status == 3 %}
+                    <td><font>审核失败</font></td>
+                {% endif %}
+                </tr>
+                {% endfor  %}
+                </tbody>
+
+            </table>
+            <div class="textcenter pagebar"  colspan="12">
+                <ul class="pages">
+                    <li><a href='/admin/withdraw_list/?p=1&keyword={{ status_dict.keyword|default_if_none:'' }}&searchtype={{ status_dict.searchtype|default_if_none:'' }}&status={{ status_dict.status|default_if_none:'' }}&cash_account_type={{ status_dict.cash_account_type|default_if_none:'' }}&identity={{ status_dict.identity |default_if_none:''}}'>首页</a></li>
+                    {% if  get_page  == '1' %}
+                        <li><a href='#'>&lt;上一页</a></li>
+                    {% else %}
+                        <li><a href='/admin/withdraw_list/?p={{ get_page |add:-1}}&keyword={{ status_dict.keyword|default_if_none:'' }}&searchtype={{ status_dict.searchtype |default_if_none:''}}&status={{ status_dict.status|default_if_none:'' }}&cash_account_type={{ status_dict.cash_account_type |default_if_none:''}}&identity={{ status_dict.identity|default_if_none:'' }}'>&lt;上一页</a></li>
+                    {% endif %}
+                    {% if  get_page  >=  page_total  %}
+                        <li><a href='#'>下一页&gt;</a></li>
+                    {% else %}
+                        <li><a href='/admin/withdraw_list/?p={{ get_page |add:1}}&keyword={{ status_dict.keyword|default_if_none:'' }}&searchtype={{ status_dict.searchtype|default_if_none:'' }}&status={{ status_dict.status |default_if_none:''}}&cash_account_type={{ status_dict.cash_account_type|default_if_none:'' }}&identity={{ status_dict.identity |default_if_none:''}}'>下一页&gt;</a></li>
+                    {% endif %}
+                    <li><a href='/admin/withdraw_list/?p={{ page_total }}&keyword={{ status_dict.keyword|default_if_none:'' }}&searchtype={{ status_dict.searchtype|default_if_none:'' }}&status={{ status_dict.status|default_if_none:'' }}&cash_account_type={{ status_dict.cash_account_type |default_if_none:''}}&identity={{ status_dict.identity|default_if_none:'' }}'>尾页></a></li>
+                    <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+    </form>
+</div>
+<script>
+    $(".tbody").on('click','a',function () {
+        var clsn=this.className;
+        var id=$(this).parent().siblings()[0];
+        id=$(id).html();
+        var status=$(this).attr("id");
+        if(clsn == 'pass'){
+            if(confirm("确定审核通过吗？")){
+                $.post("/admin/withdraw_list/", { id: id, status: status },
+                    function(msg){
+                        if(msg==1){
+                            result("操作成功","succeed");
+                            var win = art.dialog.open.origin;
+                            win.location.reload();
+                        }else{
+                            result("操作失败","error");
+                        }
+                    });
+            }
+        }else if(clsn == 'fail'){
+            if(confirm("确定审核失败吗？")){
+                $.post("/admin/withdraw_list/", { id: id, status: status },
+                    function(msg){
+                        if(msg==1){
+                            result("操作成功","succeed");
+                            var win = art.dialog.open.origin;
+                            win.location.reload();
+                        }else{
+                            result("操作失败","error");
+                        }
+                    });
+            }
+        }
+    });
+
+      function result(title,flag) {
+        art.dialog({
+            content: title,
+            //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+            icon: flag,
+            fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+            time: 3,//如果有cancel方法的话会调用cancel方法
+        });
+        var time = setInterval(function() {
+            art.dialog.close()
+        }, 2000);
+    }
+
+        //打印表格
+        var idTmr;
+
+        function getExplorer() {
+            var explorer = window.navigator.userAgent;
+            //ie
+            if(explorer.indexOf("MSIE") >= 0) {
+                return 'ie';
+            }
+            //firefox
+            else if(explorer.indexOf("Firefox") >= 0) {
+                return 'Firefox';
+            }
+            //Chrome
+            else if(explorer.indexOf("Chrome") >= 0) {
+                return 'Chrome';
+            }
+            //Opera
+            else if(explorer.indexOf("Opera") >= 0) {
+                return 'Opera';
+            }
+            //Safari
+            else if(explorer.indexOf("Safari") >= 0) {
+                return 'Safari';
+            }
+        }
+
+        function method5(tableid) {
+            if(getExplorer() == 'ie') {
+                var curTbl = document.getElementById(tableid);
+                var oXL = new ActiveXObject("Excel.Application");
+                var oWB = oXL.Workbooks.Add();
+                var xlsheet = oWB.Worksheets(1);
+                var sel = document.body.createTextRange();
+                sel.moveToElementText(curTbl);
+                sel.select();
+                sel.execCommand("Copy");
+                xlsheet.Paste();
+                oXL.Visible = true;
+
+                try {
+                    var fname = oXL.Application.GetSaveAsFilename("Excel.xlsx",
+                        "Excel Spreadsheets (*.xlsx), *.xlsx");
+                } catch(e) {
+                    print("Nested catch caught " + e);
+                } finally {
+                    oWB.SaveAs(fname);
+                    oWB.Close(savechanges = false);
+                    oXL.Quit();
+                    oXL = null;
+                    idTmr = window.setInterval("Cleanup();", 1);
+                }
+
+            } else {
+                tableToExcel(tableid)
+            }
+        }
+
+        function Cleanup() {
+            window.clearInterval(idTmr);
+            CollectGarbage();
+        }
+        var tableToExcel = (function() {
+            var uri = 'data:application/vnd.ms-excel;base64,',
+                template = '<html><head><meta charset="UTF-8"></head><body><table  border="1">{table}</table></body></html>',
+                base64 = function(
+                    s) {
+                    return window.btoa(unescape(encodeURIComponent(s)))
+                },
+                format = function(s, c) {
+                    return s.replace(/{(\w+)}/g, function(m, p) {
+                        return c[p];
+                    })
+                }
+            return function(table, name) {
+                if(!table.nodeType)
+                    table = document.getElementById(table)
+                var ctx = {
+                    worksheet: name || 'Worksheet',
+                    table: table.innerHTML
+                }
+                window.location.href = uri + base64(format(template, ctx))
+            }
+        })()
+
+</script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站后台管理 Powered by pigcms.com</title>
+    {% include 'Public/header.html' %}
+    <style>
+         ul.pages{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ol, ul {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul class="tbody">
+            <a href="javascript:void (0);" class="on">已有运营区域列表</a>|
+            {% if operator_region == 0 %}
+            <a href="/admin/add_campus/">添加运营区域</a>|
+            {% else %}
+            {% endif %}
+        </ul>
+    </div>
+    <table class="search_table" width="100%">
+        <tr>
+            <td style="width:50%;">
+                <form action="" method="get">
+                    所属区:
+                    <input type="text" name="keyword" class="input-text" value=""/>
+
+                    <input type="submit" value="查询" class="button"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <form name="myform" id="myform" action="" method="post">
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <colgroup><col> <col> <col> <col><col><col><col><col><col><col width="240" align="center"> </colgroup>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>名字</th>
+                        <th>所属省</th>
+                        <th>所属市</th>
+                        <th>所属区</th>
+                        <th>校区</th>
+                        <th class="textcenter">操作</th>
+                    </tr>
+                </thead>
+                <tbody  class="tbody">
+                {% for i in data %}
+                    <tr>
+                        <td>{{ i.region_id }}</td>
+                        <td>{{ i.region_name }}</td>
+                        <td>{{ i.province_name }}</td>
+                        <td>{{ i.city_name }}</td>
+                        <td>{{ i.area_name }}</td>
+                        <td><a href="/admin/campus_list/?region_id={{ i.region_id }}" style="color: green;">校区列表</a></td>
+                         <td class="textcenter">
+                            <a href="javascript:void(0);" class="edit_row">编辑</a> |
+                           <a href="javascript:void(0);" class="delete_row">删除</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+               <tfoot id="tfoot">
+                <tr>
+                    <td class="textcenter pagebar" colspan="13">
+                        <ul class="pages">
+                            <li id="first_page"><a href='/admin/exist_region/?p=1'>首页</a></li>
+                            {% if  get_page  == '1' %}
+                                <li><a href='#'>&lt;上一页</a></li>
+                            {% else %}
+                                <li><a href='/admin/exist_region/?p={{ get_page |add:-1}}'>&lt;上一页</a></li>
+
+                            {% endif %}
+                            {% if  get_page  >=  page_total  %}
+                                <li><a href='#'>下一页&gt;</a></li>
+                            {% else %}
+                                <li><a href='/admin/exist_region/?p={{ get_page |add:1}}'>下一页&gt;</a></li>
+                            {% endif %}
+                            <li><a href='/admin/exist_region/?p={{ page_total }}'>尾页></a></li>
+                            <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
+                        </ul>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="/static/js/del_edit_post_get.js"></script>
+<script type="text/javascript">
+    $(".tbody").on('click','a',function () {
+        var clsn=this.className;
+        var td=$(this).parent().siblings()[0];
+        var region_id=$(td).html();
+        var region_name=$(this).parent().siblings()[1];
+             region_name=$(region_name).html();
+        if(clsn=='edit_row'){
+             art.dialog.data("region_id",region_id);
+             art.dialog.data("region_name",region_name);
+             art.dialog.open('/admin/edit_region/',{
+                title: '编辑运营区域信息',
+                lock: true,
+                modal:true,
+                width:800,
+                height:400
+            });
+        }else if(clsn=='delete_row'){
+            function callback() { }
+                if(confirm("你确定要删除吗？")){
+                   $.deleteJSON("/admin/exist_region/?region_id="+region_id,"delete",callback)
+                }else{
+                    return false;
+                }
+         }
+    });
+
+    function result(title,flag) {
+        art.dialog({
+            content: title,
+            //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+            icon: flag,
+            fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+            time: 3,//如果有cancel方法的话会调用cancel方法
+        });
+        var time = setInterval(function() {
+            art.dialog.close()
+        }, 2000);
+    }
+
+</script>
+</body>
+
+</html>

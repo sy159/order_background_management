@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站后台管理 Powered by pigcms.com</title>
+    {% include 'Public/header.html' %}
+    <style>
+         ul.pages{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ol, ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul class="tbody">
+            <a href="/admin/exist_region/">已有运营区域列表</a>|
+            <a href="" class="on">运营区域列表</a>|
+            <a href="javascript:void(0);" class="add_row">添加运营区域</a>|
+        </ul>
+    </div>
+    <form name="myform" id="myform" action="" method="post">
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <colgroup><col> <col> <col> <col><col><col><col><col><col><col width="240" align="center"> </colgroup>
+                <thead>
+                    <tr>
+                        <th>运营区域ID</th>
+                        <th>运营区域名称</th>
+                    </tr>
+                </thead>
+                <tbody  class="tbody">
+
+                {% for i in data %}
+                    <tr>
+                        <input type="hidden" id="area_id" name="area_id" value="{{ i.area_id }}">
+                        <td>{{ i.region_id }}</td>
+                        <td>{{ i.region_name }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="/static/js/del_edit_post_get.js"></script>
+<script type="text/javascript">
+    $(".tbody").on('click','a',function () {
+        var clsn=this.className;
+        var td=$(this).parent().siblings()[0];
+        var sort_id=$(td).html();
+        var area_id=$("#area_id").val();
+        if(clsn=='add_row'){
+             art.dialog.data('area_id',area_id);
+             art.dialog.open('/admin/add_region/',{
+                title: '添加运营区域',
+                lock: true,
+                modal:true,
+                width:800,
+                height:400
+            });
+        }
+    });
+
+</script>
+</body>
+
+</html>

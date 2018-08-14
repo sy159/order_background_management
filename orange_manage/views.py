@@ -1,6 +1,6 @@
 from django.http import JsonResponse, QueryDict
 from django.utils import timezone
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse,render_to_response
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.db.models import Sum, Q, F
 from orange_manage import models
@@ -133,3 +133,4 @@ def image_upload(request):
         url = request.distributor_image + img_name
     UploadImg(url, file)
     return HttpResponse(1)
+

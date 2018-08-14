@@ -109,7 +109,7 @@
                         <td>{{ i.user_id }}</td>
                         <td>{{ i.nickname }}</td>
                         <td>{{ i.phone_number }}</td>
-                        <td>{{ i.last_login|date:'Y-m-d h:i:s' }}</td>
+                        <td>{{ i.last_login|date:'Y-m-d H:i:s' }}</td>
                         <td>{{ i.last_ip | default_if_none:""}}</td>
                         <td class="textcenter">￥{{ i.balance }}</td>
                         <td class="textcenter">{{ i.integral }}</td>

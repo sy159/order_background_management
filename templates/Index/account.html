@@ -4,6 +4,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>网站后台管理 Powered by pigcms.com</title>
     {% include 'Public/header.html' %}
+    <style>
+         ul.pages{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ol, ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
 <div class="mainbox">
@@ -16,17 +27,31 @@
     <table class="search_table" width="100%">
         <tr>
             <td style="width:50%;">
-                <form action="/admin.php?g=System&c=Index&a=account" method="get">
-                    <input type="hidden" name="c" value="Index"/>
-                    <input type="hidden" name="a" value="account"/>
+                <form action="/admin/account_list/" method="get">
                     筛选:
-                    <div id="choose_pca" province_idss="" city_idss="" area_id="" style="display:inline"></div>
-                    <input type="text" name="keyword" class="input-text" value=""/>
+                    <input type="text" name="keyword" class="input-text" value="{{ status.keyword|default_if_none:'' }}"/>
                     <select name="searchtype">
-                        <option value="realname" >管理员姓名</option>
+                        {% if status.searchtype == "realname" %}
+                        <option value="realname" selected>管理员姓名</option>
                         <option value="account" >管理员帐号</option>
                         <option value="phone" >联系电话</option>
                         <option value="admin_id" >管理员编号</option>
+                            {% elif status.searchtype == "account" %}
+                            <option value="realname" >管理员姓名</option>
+                        <option value="account" selected>管理员帐号</option>
+                        <option value="phone" >联系电话</option>
+                        <option value="admin_id" >管理员编号</option>
+                            {% elif status.searchtype == "phone" %}
+                            <option value="realname" >管理员姓名</option>
+                        <option value="account" >管理员帐号</option>
+                        <option value="phone" selected>联系电话</option>
+                        <option value="admin_id" >管理员编号</option>
+                            {% else %}
+                            <option value="realname" >管理员姓名</option>
+                        <option value="account" >管理员帐号</option>
+                        <option value="phone" >联系电话</option>
+                        <option value="admin_id" selected>管理员编号</option>
+                        {% endif %}
                     </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="submit" value="查询" class="button"/>
                 </form>
@@ -55,7 +80,6 @@
                     </tr>
                 </thead>
                 <tbody  class="tbody">
-
                 {% for i in data %}
                     <tr>
                     <td>{{ i.id }}</td>
@@ -91,20 +115,38 @@
                     </td>
                     </tr>
                 {% endfor %}
-
-                <tr>
-                    <td class="textcenter pagebar" colspan="13"></td>
-                </tr>
                 </tbody>
+               <tfoot id="tfoot">
+                <tr>
+                    <td class="textcenter pagebar" colspan="13">
+                        <ul class="pages">
+                            <li id="first_page"><a href='/admin/account_list/?p=1&keyword={{ status.keyword|default_if_none:'' }}&searchtype={{ status.searchtype }}'>首页</a></li>
+                            {% if  get_page  == '1' %}
+                                <li><a href='#'>&lt;上一页</a></li>
+                            {% else %}
+                                <li><a href='/admin/account_list/?p={{ get_page |add:-1}}&keyword={{ status.keyword|default_if_none:'' }}&searchtype={{ status.searchtype }}'>&lt;上一页</a></li>
+
+                            {% endif %}
+                            {% if  get_page  >=  page_total  %}
+                                <li><a href='#'>下一页&gt;</a></li>
+                            {% else %}
+                                <li><a href='/admin/account_list/?p={{ get_page |add:1}}&keyword={{ status.keyword|default_if_none:'' }}&searchtype={{ status.searchtype }}'>下一页&gt;</a></li>
+                            {% endif %}
+                            <li><a href='/admin/account_list/?p={{ page_total }}&keyword={{ status.keyword|default_if_none:'' }}&searchtype={{ status.searchtype }}'>尾页></a></li>
+                            <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
+                        </ul>
+                    </td>
+                </tr>
+                </tfoot>
             </table>
         </div>
     </form>
 </div>
+
 <script type="text/javascript" src="/static/js/del_edit_post_get.js"></script>
 <script type="text/javascript">
     $(".tbody").on('click','a',function () {
         var clsn=this.className;
-        console.log(clsn);
         var td=$(this).parent().siblings()[0];
         var sort_id=$(td).html();
         if(clsn=='edit_row'){
@@ -175,5 +217,4 @@
 
 </script>
 </body>
-
 </html>

@@ -69,15 +69,25 @@ def order_list(request):
             'pending': pending['all_num'],
         }
     else:
-        all_num = models.OrderStatusLogs.objects.get(region_id=request.operator_region)
-        num_dict = {
-            'unpaid': all_num.unpaid,
-            'not_robbing': all_num.not_robbing,
-            'not_pickup': all_num.not_pickup,
-            'picking_up': all_num.picking_up,
-            'dispatching': all_num.dispatching,
-            'pending': all_num.pending,
-        }
+        try:
+            all_num = models.OrderStatusLogs.objects.get(region_id=request.operator_region)
+            num_dict = {
+                'unpaid': all_num.unpaid,
+                'not_robbing': all_num.not_robbing,
+                'not_pickup': all_num.not_pickup,
+                'picking_up': all_num.picking_up,
+                'dispatching': all_num.dispatching,
+                'pending': all_num.pending,
+            }
+        except Exception:
+            num_dict = {
+                'unpaid': 0,
+                'not_robbing': 0,
+                'not_pickup': 0,
+                'picking_up': 0,
+                'dispatching': 0,
+                'pending': 0,
+            }
     return render(request, 'Trade/order_list.html',
                   {'data': data_list, 'search_data': search_data, 'get_page': get_page, 'page_total': str(page_total),
                    'num': num_dict})

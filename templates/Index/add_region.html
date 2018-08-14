@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
+    {% include 'Public/header.html' %}
+    <style>
+          .high{ color: red; }
+         .position{
+            display: inline-block;
+            padding-top: 15px;
+            padding-left: 5px;
+        }
+		.aui_buttons {
+			padding: 4px 0 0 0;
+		}
+		.btn{
+            position:fixed;
+            width: 100%;
+            bottom: 0;
+            right: 0;
+		}
+        form{
+           margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+<form id="myform" method="post"   action="" frame="true" refresh="true">
+		<table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
+			<tr>
+				<th width="160">运营区域名称</th>
+				<td>
+                    <input  type="text"  id="region_name" class="input fl" name="region_name" value="" size="25"/>
+                     <input type="hidden" id="area_id" name="area_id" value="">
+                     <strong class='high position account'>*</strong>
+                </td>
+			</tr>
+        </table>
+        <div class="btn">
+            <td colspan="2" class="aui_footer">
+                <div class="aui_buttons">
+                    <button id="edit" class="aui_state_highlight" type="submit">添加</button>
+                    <button id="close" type="button">关闭</button>
+                </div>
+            </td>
+        </div>
+</form>
+<script>
+    var area_id=art.dialog.data('area_id');
+    $("#area_id").val(area_id);
+    $("#close").click(function () {
+		art.dialog.close();
+     });//关闭对话框
+
+    $("#myform").submit(function (e) {
+        e.preventDefault();
+        confirm();
+        function confirm(){
+            if($("#region_name").val().length == 0){
+                   $(".account").html("运营区域名称不能为空!");
+                   return false;
+            }else {
+                $(".account").html("");
+                $.ajax({
+                    url:"/admin/add_region/",
+                    type:"post",
+                    dataType:"json",
+                    data: $("#myform").serialize(),
+                    success:function(msg){
+                        if(msg==1){
+                            result("添加成功","succeed");
+                            var win = art.dialog.open.origin;
+                            win.location.reload();
+                        }else{
+                            result("添加失败","error");
+                        }
+                    },
+                    error:function(xhr,textstatus,thrown){
+                    }
+                });
+            }
+        }
+    });//表单验证提交
+
+     function result(title,flag) {
+        art.dialog({
+            content: title,
+            //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+            icon: flag,
+            fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+            time: 3,//如果有cancel方法的话会调用cancel方法
+        });
+        var time = setInterval(function() {
+            art.dialog.close()
+        }, 2000);
+    }
+
+</script>
+</body>
+</html>

@@ -93,13 +93,13 @@
          <th colspan="8">配送员电话：{{ data.distributor_phone_number| default_if_none:"" }}</th>
      </tr>
      <tr>
-         <th colspan="8">下单时间：{{ data.create_time|date:'Y-m-d h:i:s' }} </th>
+         <th colspan="8">下单时间：{{ data.create_time|date:'Y-m-d H:i:s' }} </th>
      </tr>
      <tr>
-         <th colspan="8">支付时间：{{ data.pay_time|date:'Y-m-d h:i:s' }} </th>
+         <th colspan="8">支付时间：{{ data.pay_time|date:'Y-m-d H:i:s' }} </th>
      </tr>
      <tr>
-         <th colspan="8">送达时间：{{ data.complete_time|date:'Y-m-d h:i:s' }}</th>
+         <th colspan="8">送达时间：{{ data.complete_time|date:'Y-m-d H:i:s' }}</th>
      </tr>
      <tr>
          <th colspan="8">商品总价：￥{{ data.total_price | default_if_none:""}} 元</th>

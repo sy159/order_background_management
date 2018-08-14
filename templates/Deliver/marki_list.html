@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>后台管理 - 橙子校园</title>
+    {% include 'Public/header.html' %}
+    <style>
+         ul.pages{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ol, ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .btn{
+            background: none;
+            position: relative;
+            text-align: right;
+        }
+        .btn2{
+            margin-right: 60px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul>
+            <a href="/admin/deliver_list/">配送列表</a>|
+            <a href="" class="on">配送员列表</a>
+        </ul>
+    </div>
+    <table class="search_table" width="100%">
+        <tr>
+            <td>
+                <form action="/admin/marki_list/" method="get">
+                    <input type="hidden" name="region_id" value="{{ status.region_id }}">
+                    筛选: <input type="text" name="keyword" class="input-text" value="{{ status.keyword|default_if_none:'' }}"/>
+                    <select name="searchtype">
+                        {% if status.searchtype ==  'campus_id'%}
+                        <option value="campus_id" selected>校区</option>
+                        <option value="name" >姓名 </option>
+                        <option value="phone_number" >手机号</option>
+                            {% elif status.searchtype ==  'name'%}
+                        <option value="campus_id" >校区</option>
+                        <option value="name" selected>姓名 </option>
+                        <option value="phone_number" >手机号</option>
+                            {% else %}
+                        <option value="campus_id" >校区</option>
+                        <option value="name" >姓名 </option>
+                        <option value="phone_number" selected>手机号</option>
+                        {% endif %}
+                    </select>
+                    <input type="submit" value="查询" class="button"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <form name="myform" id="myform" action="" method="post">
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <colgroup>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col width="180" align="center"/>
+                    <col width="180" align="center"/>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>排序</th>
+                        <th>配送员ID</th>
+                        <th>配送员名称</th>
+                        <th>配送员电话</th>
+                        <th>配送员性别</th>
+                        <th>所属校区</th>
+                        <th class="textcenter">操作</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                <input type="hidden" id="order_id" name="order_id" value="{{ status.order_id }}">
+                {% for i in data %}
+                    <tr>
+                        <td>{{ i.priority }}</td>
+                        <td id="distributor_id">{{ i.distributor_id }}</td>
+                        <td id="name">{{ i.name }}</td>
+                        <td id="phone_number">{{ i.phone_number }}</td>
+                        {% if i.gender == 0 %}
+                            <td id="{{ i.gender }}">男</td>
+                        {% elif i.gender == 1 %}
+                            <td id="{{ i.gender }}">女</td>
+                        {% else %}
+                            <td id="{{ i.gender }}">未知</td>
+                        {% endif %}
+                        <td>{{ i.campus }}</td>
+                        <td class="textcenter">
+                            <a style="color: red;" href="javascript:;"  class="appoint">指派给他</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot id="tfoot">
+                <tr>
+                    <td class="textcenter pagebar" colspan="12">
+                        <ul class="pages">
+                            <li id="first_page"><a href='/admin/marki_list/?p=1&region_id={{ status.region_id }}&keyword={{ status.keyword|default_if_none:'' }}&searchtype={{ status.searchtype }}'>首页</a></li>
+                            {% if  get_page  == '1' %}
+                                <li><a href='#'>&lt;上一页</a></li>
+                            {% else %}
+                                <li><a href='/admin/marki_list/?p={{ get_page |add:-1}}&region_id={{ status.region_id }}&keyword={{ status.keyword|default_if_none:'' }}&searchtype={{ status.searchtype }}'>&lt;上一页</a></li>
+
+                            {% endif %}
+                            {% if  get_page  >=  page_total  %}
+                                <li><a href='#'>下一页&gt;</a></li>
+                            {% else %}
+                                <li><a href='/admin/marki_list/?p={{ get_page |add:1}}&region_id={{ status.region_id }}&keyword={{ status.keyword|default_if_none:'' }}&searchtype={{ status.searchtype }}'>下一页&gt;</a></li>
+                            {% endif %}
+                            <li><a href='/admin/marki_list/?p={{ page_total }}&region_id={{ status.region_id }}&keyword={{ status.keyword|default_if_none:'' }}&searchtype={{ status.searchtype }}'>尾页></a></li>
+                            <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
+                        </ul>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </form>
+
+</div>
+</body>
+<script src="/static/js/del_edit_post_get.js"></script>
+<script>
+     $(".tbody").on('click','a',function () {
+         var clsn=this.className;
+         var distributor_id=$(this).parent().siblings()[1];
+              distributor_id=$(distributor_id).html();
+         var name=$(this).parent().siblings()[2];
+              name=$(name).html();
+         var phone_number=$(this).parent().siblings()[3];
+              phone_number=$(phone_number).html();
+         var gender=$(this).parent().siblings()[4];
+              gender=$(gender).attr("id");
+         var order_id=$("#order_id").val();
+         if(clsn == 'appoint'){
+             if(confirm("确定指派吗？")){
+                 $.ajax({
+                     url:"/admin/marki_list/?distributor_id="+distributor_id+"&name="+name+"&phone_number="+phone_number+"&gender="+gender+"&order_id="+order_id,
+                     type:"post",
+                     dataType:"json",
+                     success : function(msg) {
+                         if(msg == 1){
+                             location.href='/admin/deliver_list/'
+                         }else{
+                             confirm("指派发送错误!请重新指派")
+                         }
+                     }
+                 });
+             }
+
+         }
+
+     });
+
+</script>
+</html>

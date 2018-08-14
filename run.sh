@@ -1,0 +1,1 @@
+nohup python manage.py runserver 192.168.0.60:8001 --insecure

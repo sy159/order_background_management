@@ -257,8 +257,8 @@
                         <td>￥{{ i.total_price| default_if_none:"" }}</td>
                         <td>￥0</td>
                         <td>￥0</td>
-                        <td>{{ i.pay_time|date:'Y-m-d h:i:s' }}</td>
-                        <td>{{ i.complete_time|date:'Y-m-d h:i:s' }}</td>
+                        <td>{{ i.pay_time|date:'Y-m-d H:i:s' }}</td>
+                        <td>{{ i.complete_time|date:'Y-m-d H:i:s' }}</td>
                         <td class="status">
                             {% if i.order_status == 0 %}
                                 <b style="color:green">未支付</b>
