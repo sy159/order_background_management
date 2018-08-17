@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from orange_manage.utils.campus_info import campus_list, region_list
 from django.utils import timezone
 from django.db.models import Q
+from orange_manage.utils.password_encryption import pwd
 
 
 def marki_manage(request):
@@ -59,23 +60,33 @@ def marki_manage(request):
 
 def user_add(request):
     if request.method == 'POST':
-        data = {
-            'name': request.POST.get('name'),
-            'username': request.POST.get('phone_number'),
-            'phone_number': request.POST.get('phone_number'),
-            'gender': request.POST.get('gender'),
-            'id_number': request.POST.get('id_number'),
-            'region_id': request.POST.get('region', request.operator_region),
-            'campus_id': request.POST.get('campus'),
-            'student_number': request.POST.get('student_number'),
-            'profile_image': request.POST.get('img'),
-            'register_time': timezone.now(),
-            'priority': request.POST.get('priority'),
-            'status': request.POST.get('status'),
-            'is_part_time': 0,
-        }
-        models.Distributor.objects.create(**data)
-        return HttpResponse(1)
+        try:
+            get_priority = request.POST.get('priority')
+            if not get_priority: get_priority = 0
+            for i in models.Distributor.objects.values_list('phone_number'):
+                if request.POST.get('phone_number') in i: return HttpResponse(0)
+            data = {
+                'name': request.POST.get('name'),
+                'username': request.POST.get('phone_number'),
+                'password': pwd(request.POST.get('pwd')),
+                'phone_number': request.POST.get('phone_number'),
+                'gender': request.POST.get('gender'),
+                'id_number': request.POST.get('id_number'),
+                'region_id': request.POST.get('region', request.operator_region),
+                'campus_id': request.POST.get('campus'),
+                'student_number': request.POST.get('student_number'),
+                'profile_image': request.POST.get('img'),
+                'register_time': timezone.now(),
+                'priority': get_priority,
+                'status': request.POST.get('status'),
+                'is_part_time': 0,
+                'balance': 0,
+                'online': 1,
+            }
+            models.Distributor.objects.create(**data)
+            return HttpResponse(1)
+        except Exception:
+            return HttpResponse(2)
     if request.operator_region == 0:
         data_list = region_list()
         return render(request, 'Deliver/user_add.html', {'data': data_list})
@@ -190,7 +201,7 @@ def deliver_list(request):
         'user_phone_number': get_user_phone_number,
         'distribution_status': get_distribution_status,
     }
-    all_obj = models.Orders.objects.exclude(distribution_status=3).filter(pay_mode__in=[0,1,2])
+    all_obj = models.Orders.objects.exclude(distribution_status=3).filter(pay_mode__in=[0, 1, 2])
     if request.operator_region != 0: all_obj = all_obj.filter(region_id=request.operator_region)
     if get_user_phone_number:
         all_obj = all_obj.filter(Q(user_phone_number__contains=get_user_phone_number) | Q(
@@ -277,6 +288,57 @@ def marki_list(request):
             return HttpResponse(0)
 
 
+def dispatching_console(request):
+    if request.method == 'POST':
+        obj = models.Orders.objects.filter(order_id=request.POST.get('order_id'))
+        if obj[0].distribution_status == 0:
+            dis_obj = models.Distributor.objects.get(distributor_id=request.POST.get('uid'))
+            data = {
+                'distributor_id': request.POST.get('uid'),
+                'distributor_name': dis_obj.name,
+                'distributor_phone_number': dis_obj.phone_number,
+                'distribution_status': 1,
+            }
+            obj.update(**data)
+            return HttpResponse(1)
+        else:
+            return HttpResponse(0)
+    return render(request, 'Deliver/desk.html')
 
 
+def order_api(request):
+    if request.operator_region == 0:
+        all_obj = models.Orders.objects.filter(distribution_status=0)
+    else:
+        all_obj = models.Orders.objects.filter(distribution_status=0, region_id=request.operator_region)
+    data_list = []
+    for i in all_obj.order_by('-create_time')[0:14]:
+        data_dict = {
+            'order_id': i.order_id,
+            'user_name': i.user_name,
+            'user_address': i.user_address,
+            'user_gender': i.user_gender,
+        }
+        data_list.append(data_dict)
+    return JsonResponse(data_list, safe=False)
 
+
+def marki_api(request):
+    if request.operator_region == 0:
+        all_obj = models.Distributor.objects.filter(online=1, status=1)
+    else:
+        all_obj = models.Distributor.objects.filter(region_id=request.operator_region, online=1, status=1)
+    data_list = []
+    for i in all_obj.order_by('-priority')[0:14]:
+        obj = models.Campus.objects.get(campus_id=i.campus_id)
+        orader_obj = models.Orders.objects.filter(distributor_id=i.distributor_id, distribution_status__in=[1, 2])
+        data_dict = {
+            'distributor_id': i.distributor_id,
+            'name': i.name,
+            'phone_number': i.phone_number,
+            'campus_name': obj.campus,
+            'order_num': len(orader_obj),
+            'gender': i.gender,
+        }
+        data_list.append(data_dict)
+    return JsonResponse(data_list, safe=False)

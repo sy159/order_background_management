@@ -1,22 +1,9 @@
-{% load cache %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>网站后台管理 Powered by pigcms.com</title>
-    {% cache 864000 adver_add %}
     {% include 'Public/header.html' %}
-    <style>
-         ul.pages{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        ol, ul {
-            margin-top: 5px;
-        }
-    </style>
-    {% endcache %}
 </head>
 <body>
 <div class="mainbox">
@@ -35,6 +22,7 @@
                     <tr>
                         <th>校区ID</th>
                         <th>校区名称</th>
+                        <th>子地址</th>
                         <th class="textcenter">操作</th>
                     </tr>
                 </thead>
@@ -44,7 +32,8 @@
                         <input type="hidden" name="region_id" id="region_id" value="{{ region_id }}">
                         <td>{{ i.campus_id }}</td>
                         <td>{{ i.campus_name }}</td>
-                         <td class="textcenter">
+                        <td><a href="/admin/address_list/?campus_id={{ i.campus_id }}" style="color: green;">地址列表</a></td>
+                        <td class="textcenter">
                             <a href="javascript:void(0);" class="edit_row">编辑</a> |
                            <a href="javascript:void(0);" class="delete_row">删除</a>
                         </td>
@@ -55,7 +44,7 @@
         </div>
     </form>
 </div>
-{% cache 864000 adver_add %}
+
 <script type="text/javascript" src="/static/js/del_edit_post_get.js"></script>
 <script type="text/javascript">
     $(".tbody").on('click','a',function () {
@@ -107,6 +96,5 @@
     }
 
 </script>
-{% endcache %}
 </body>
 </html>

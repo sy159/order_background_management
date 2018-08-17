@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/desk/style.css">
+    {% include 'Public/public.html' %}
+    <style type="text/css">
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak],  .ng-hide:not (.ng-hide-animate ){
+            display: none !important;
+        }
+
+        ng\:form {
+            display: block;
+        }
+
+        .ng-hide {
+            display:none !important;
+        }
+        #nav.mainnav_title a.on {
+            border-bottom: 2px solid #0099FC;
+            text-decoration: none;
+            color: #3283FA;
+        }
+        #nav.mainnav_title a {
+            height: 48px;
+            padding: 0 20px;
+            min-width: 0;
+            border: none;
+            background: transparent;
+            font-size: 14px;
+            line-height: 46px;
+            display: inline-block;
+        }
+        .norightborder{
+            text-align: center;
+            width:100px;
+        }
+
+        TABLE.ListProduct THEAD TH,TABLE.ListProduct TBODY TD {
+            border-right: none;
+        }
+         #tbody td{
+             width: 13%;
+             text-align: center;
+         }
+    </style>
+    <title>配送员|调度控制台</title>
+    <link href="/static/desk/commoncss.css" rel="stylesheet">
+    <link href="/static/desk/application.css" rel="stylesheet">
+
+</head>
+<body class="embed-theme ng-scope">
+<article class="core-view ng-scope">
+    <div class="hb-fit-page ng-scope">
+        <div id="order-fresh-new-page" class="ng-scope">
+            <header>
+                <span>未分配订单</span>
+            </header>
+            <section>
+                <div class="order-list-wrapper">
+                    <div class="order-tab ng-isolate-scope">
+                        <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th style="width: 20%;text-align: center">订单ID</th>
+                                    <th style="width: 20%;text-align: center">客户姓名</th>
+                                    <th style="width: 20%;text-align: center">客户地址</th>
+                                    <th style="width: 20%;text-align: center">客户性别</th>
+                                    <th style=" width:20%;text-align: center">操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <div id="content" style="height:700px;overflow:scroll;overflow-x: hidden;">
+                            <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+                                <tbody id="tbody">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="postman-list improve" >
+                    <a class="aside-toggle">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                    <div class="search-wrapper">
+                        <input type="text" placeholder="配送员姓名/手机号" class="form-control ng-pristine ng-untouched ng-valid ng-empty" id="searchUser">
+                        <i class="fa fa-search"></i>
+                    </div>
+                    <div class="empty-list-label ng-binding">可选骑手</div>
+                    <ul id="ul">
+                        <template>
+                            <li id="deliverymanItem_{distributor_id}" class="postman-item ng-scope">
+                                <p>
+                                    <span class="name ng-binding">{name}&nbsp;&nbsp;<small style="color: red;font-size: 12px;">{gender}</small></span>
+                                </p>
+                                <p class="wait-for-fetch">
+                                    <span>校区：<span class="ng-binding fetch_{distributor_id}">{campus_name}</span></span>
+                                </p>
+                                <p class="staff-mobile ng-binding">{phone_number}</p>
+                                <p class="wait-for-send">
+                                    <span>已接单：<span class="ng-binding send_{distributor_id}">{order_num}</span></span>
+                                </p>
+                                <div class="assign-wrapper" style="display: none;">
+                                    <p class="name-wrapper"><span class="name-label ng-binding">{name}</span></p>
+                                    <p>
+                                        <span class="assign ng-binding no-motorcycle" data-uid="{distributor_id}">指派给他</span>
+                                        <span class="motorcycle"><i class="fa fa-motorcycle"></i></span>
+                                    </p>
+                                </div>
+                                {#   <div class="ng-scope"><div class="ng-scope"></div></div>#}
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+</article>
+
+<!-- crayfish 信息引用 -->
+<div class="modal-backdrop fade in"  style="z-index: 1040;display:none"></div>
+<div class="modal fade ng-isolate-scope reassign-window in" style="z-index: 1050; display: none;">
+    <div class="modal-dialog modal-lg" >
+        <div class="modal-content">
+            <div id="order-reassign-modal" class="ng-scope">
+                <header class="modal-header">
+                    <h4 class="modal-title">改派订单</h4>
+                    <i class="fa fa-close"></i>
+                </header>
+
+                <section class="modal-body">
+                    <div class="ranking ng-scope">
+                        <div class="courier-list">
+                        </div>
+                    </div>
+                </section>
+                <footer class="modal-footer">
+                    <button class="btn btn-primary" disabled="disabled">确认分配</button>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/desk/desk.js"></script>
+<script type="text/javascript">
+     //搜索骑手
+    $('#searchUser').blur(function(){
+        var nowUsers = [];
+        for (var i in Distributor) {
+            if (Distributor[i].phone_number.match($(this).val()) != null || Distributor[i].name.match($(this).val()) != null) {
+                nowUsers.push(Distributor[i]);
+            }
+        }
+        var html = '';
+        if (nowUsers.length > 0) {
+             html += '<ul>';
+            for (var ii in nowUsers) {
+                var item = nowUsers[ii];
+                html += '<li id="deliverymanItem_' + item.distributor_id + '" class="postman-item ng-scope">';
+                html += '<p>';
+                html += '<span class="name ng-binding">' + item.name;
+                html+='&nbsp;&nbsp;<small style="color:red;font-size:12px;">'+item.gender+'</small></span>';
+                html += '</p>';
+                html += '<p class="wait-for-fetch">';
+                html += '<span>校区：<span class="ng-binding fetch_' + item.distributor_id + '">' + item.campus_name + '</span></span>';
+                html += '</p>';
+                html += '<p class="staff-mobile ng-binding">' + item.phone_number + '</p>';
+                html += '<p class="wait-for-send">';
+                html += '<span>已接单：<span class="ng-binding send_' + item.distributor_id + '">' + item.order_num + '</span></span>';
+                html += '</p>';
+
+                html += '<div class="assign-wrapper" style="display:none;">';
+                html += '<p class="name-wrapper">';
+                html += '<span class="name-label ng-binding">' + item.name + '</span>';
+                html += '</p>';
+                html += '<p>';
+                html += '<span class="assign ng-binding no-motorcycle" data-uid="' + item.distributor_id + '">指派给他</span>';
+                html += '<span class="motorcycle">';
+                html += '<i class="fa fa-motorcycle"></i>';
+                html += '</span>';
+                html += '<span class="location" data-uid="' + item.distributor_id + '">详情</span>';
+                html += '</p>';
+                html += '</div>';
+                html += '</li>';
+            }
+             html += '</ul>';
+        }
+        $('.postman-list ul').remove();
+        $('.postman-list').append(html);
+    });
+
+    var Distributor=[];
+    function PackingData() {
+        var str="";
+        $.ajax({
+            url:'/admin/order_api/',
+            type:'POST',
+            data:'json',
+            dataType:'json',
+            success:function (msg) {
+                $.each(msg,function () {
+                    str+="<tr><td>"+this.order_id+"</td><td>"+this.user_name+"</td><td>"+this.user_address+"</td>" +
+                        "<td>"+this.user_gender+"</td><td class=\"norightborder\"  style=\"width: 12%;\">" +
+                        "<a href=\"javascript:void (0)\"  class=\"choose\"  style=\"color: green;\">选中</a></td></tr>";
+                });
+                $("#tbody").html(str);
+            }
+        })
+    }//实时包装订单数据
+    PackingData();
+    PackingDistributor();
+    setInterval(PackingData, 5000);
+    setInterval(PackingDistributor, 5000);
+    function PackingDistributor() {
+        var str1='';
+        var temp=$('template').html();
+        $.ajax({
+            url:'/admin/marki_api/',
+            type:'POST',
+            data:'json',
+            dataType:'json',
+            success:function (msg) {
+                Distributor=msg;
+                $.each(msg,function () {
+                    str1+=temp.replace('{distributor_id}',this.distributor_id).replace('{name}',this.name)
+                        .replace('{gender}',this.gender).replace('{distributor_id}',this.distributor_id)
+                        .replace('{campus_name}',this.campus_name).replace('{phone_number}',this.phone_number).replace('{distributor_id}',this.distributor_id)
+                        .replace('{order_num}',this.order_num).replace('{name}',this.name).replace('{distributor_id}',this.distributor_id)
+                        ;
+                });
+             $('#ul').html(str1);
+            }
+        })
+    }//实时包装配送员数据
+
+     var arr=[];
+     $("#tbody").on('click','a',function (e) {
+         e.stopPropagation();
+         arr.splice(0,arr.length);//清空数组
+         var clsn=this.className;
+         var order_id=$(this).parent().siblings()[0];
+         order_id=$(order_id).html();
+         arr.push(order_id);
+     });
+
+     //点击指派给配送的按钮事件
+       $(document).on('click', '.assign, .zhipaibutton', function(e){
+        e.stopPropagation();
+        var uid = $(this).data('uid');
+
+        if (arr.length == 1) {
+            arr = arr.concat(uid);
+        } else {
+            art.dialog({
+               content: '请选择一个有效的配送单子指派给该配送员',
+                ok: function () {},
+                cancelVal: '关闭',
+               lock:true,
+               cancel: true //为true等价于function(){}
+            });
+            return false;
+        }
+        $.post("/admin/dispatching_console/", {'order_id':arr[0],'uid':arr[1]}, function(response){
+            if(response == 1){
+                art.dialog({
+                    content: '指派成功',
+                    ok: function () {},
+                    icon:"succeed",
+                    cancelVal: '关闭',
+                    lock:true,
+                    cancel: true //为true等价于function(){}
+                });
+            }else if(response == 0){
+                 art.dialog({
+                    content: '该订单刚被接单',
+                    ok: function () {},
+                    cancelVal: '关闭',
+                    lock:true,
+                    cancel: true //为true等价于function(){}
+                });
+            }else {
+                art.dialog({
+                    content: '指派失败',
+                    ok: function () {},
+                    cancelVal: '关闭',
+                    icon:"error",
+                    lock:true,
+                    cancel: true //为true等价于function(){}
+                });
+            }
+            var win = art.dialog.open.origin;
+            win.location.reload();
+        }, 'json');
+    });
+
+</script>
+</html>

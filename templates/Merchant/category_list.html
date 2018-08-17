@@ -3,17 +3,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>网站后台管理 Powered by pigcms.com</title>
-    <style>
-        ul.pages{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        ol, ul {
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-    </style>
     {% include 'Public/header.html' %}
 </head>
 
@@ -54,8 +43,8 @@
                         <td>{{ i.priority }}</td>
                         <td>{{ i.sort_id }}</td>
                         <td id="title">{{ i.sort_name }}</td>
-                        <td id="look"><a href="/admin/check_childlist/?sort_id={{ i.sort_id }}&name={{ i.sort_name }}">查看子分类</a></td>
-                        <td><font color="green">{{ i.status }}</font></td>
+                        <td id="look"><a href="/admin/check_childlist/?sort_id={{ i.sort_id }}&name={{ i.sort_name }}" style="color: green;">查看子分类</a></td>
+                        <td><font>{{ i.status }}</font></td>
                         <td class="textcenter">
                             <a href="javascript:;" class="edit_row">编辑</a> |
                             <a href="javascript:;" class="delete_row" >删除</a>

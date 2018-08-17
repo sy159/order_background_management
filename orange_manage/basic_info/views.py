@@ -4,7 +4,6 @@ from django.shortcuts import render, redirect, HttpResponse
 from orange_manage import models
 from orange_manage.utils.password_encryption import pwd_encrypted
 import json
-from django.db.models import Q
 
 
 def account_list(request):
@@ -456,3 +455,94 @@ def edit_campusinfo(request):
         except Exception:
             return HttpResponse(0)
     return render(request, 'Index/edit_campus.html')
+
+
+def address_list(request):
+    get_address_id = request.GET.get('address_id')
+    all_obj = models.Address.objects.filter(campus_id=request.GET.get('campus_id'))
+    all_obj = all_obj.filter(parent_id=get_address_id) if get_address_id else all_obj.filter(parent_id=-1)
+    data_list = []
+    for i in all_obj:
+        data_dict = {
+            'address_id': i.address_id,
+            'campus_id': i.campus_id,
+            'value': i.value,
+            'cost': i.cost,
+            'have_subordinate': i.have_subordinate,
+            'gender': i.gender,
+        }
+        data_list.append(data_dict)
+    return render(request, 'Index/AddressList.html', {'data': data_list, 'address_id': get_address_id})
+
+
+def add_address(request):
+    if request.method == 'POST':
+        get_campus_id = request.POST.get('campus_id')
+        get_parent_id = request.POST.get('address_id')
+        get_info = request.POST.get('info')
+        print(get_info)
+        info_list = get_info.split('；')
+        try:
+            for i in info_list:
+                if i == '': break
+                value = i.split('，')[0]
+                gender = i.split('，')[1]
+                if gender == '男':
+                    gender = 1
+                elif gender == '女':
+                    gender = 2
+                else:
+                    gender = 0
+                cost = i.split('，')[2]
+                if get_parent_id == 'None':
+                    data = {
+                        'campus_id': get_campus_id,
+                        'parent_id': -1,
+                        'value': value,
+                        'cost': cost,
+                        'gender': gender,
+                        'have_subordinate': 0,
+                    }
+                else:
+                    models.Address.objects.filter(address_id=get_parent_id).update(have_subordinate=1)
+                    data = {
+                        'campus_id': get_campus_id,
+                        'parent_id': get_parent_id,
+                        'value': value,
+                        'cost': cost,
+                        'gender': gender,
+                        'have_subordinate': 0,
+                    }
+                models.Address.objects.create(**data)
+            return HttpResponse(1)
+        except Exception:
+            return HttpResponse(0)
+    return render(request, 'Index/add_address.html')
+
+
+def edit_address(request):
+    if request.method == 'POST':
+        try:
+            get_gender = request.POST.get('gender')
+            if get_gender == '男':
+                gender = 1
+            elif get_gender == '女':
+                gender = 2
+            else:
+                gender = 0
+            data = {
+                'value': request.POST.get('address_name'),
+                'cost': request.POST.get('cost'),
+                'gender': gender,
+            }
+            models.Address.objects.filter(address_id=request.POST.get('address_id')).update(**data)
+            return HttpResponse(1)
+        except Exception:
+            return HttpResponse(0)
+    elif request.method == 'DELETE':
+        try:
+            models.Address.objects.filter(address_id=request.GET.get('address_id')).delete()
+            return HttpResponse(1)
+        except Exception:
+            return HttpResponse(0)
+    return render(request, 'Index/edit_address.html')

@@ -6,17 +6,17 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
     {% include 'Public/header.html' %}
     <style>
-    .table_form tbody td, .table_form tbody th {
-    border-bottom:none;
-     }
-     .table_form tbody tr {
-       display: flex;
-       border-bottom: 1px solid #eee;
-    }
-    .table_form {
-       border: none;
-    }
-</style>
+        .table_form tbody td, .table_form tbody th {
+            border-bottom:none;
+        }
+        .table_form tbody tr {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+        .table_form {
+            border: none;
+        }
+    </style>
 </head>
 <body>
 <form style="width: 100%;height: 100%;" method="post" id="myform1" action="" frame="true" refresh="true" data-call_fun="1">
@@ -71,10 +71,11 @@
                art.dialog.close();
           });
      //关闭弹窗
+
       $("#close_authority").click(function () {
           data=$("#myform1").serializeArray();
           art.dialog.data('data',data);//返回数据
-          art.dialog.close();
+           art.dialog.close();//关闭当前对话框
       });
 </script>
 </body>

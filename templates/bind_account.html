@@ -3,13 +3,14 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>后台管理 - 橙子校园</title>
+    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon" />
     <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="/static/css/bind_account.css" rel="stylesheet" type="text/css">
     <script src="/static/js/jquery.js"></script>
-    <script src="/static/js/excanvas.compiled.js"></script>
-    <script src="/static/js/jquery.qrcode.min.js"></script>
+    <script src="/static/js/jquery.qrcode.min.js" type="text/javascript" ></script>
+
 </head>
-<body onload="init()">
+<body>
     <section id="getintouch" class="bounceIn animated">
         <div class="container" style="border-bottom: 0;">
             <h1>
@@ -31,17 +32,17 @@
 
                             </div>
                         </div>
-
                         <div class="row clearfix">
-                            <div class="col-sm-12">
+                            <div class="row">
                                 <label class="text-left">
                                     二、打开身份验证器，添加账号
                                 </label>
                                 <p>请使用身份验证器扫描二维码,不能扫描？那就使用APP手动输入吧</p>
-                                <div class="col-sm-3">
-                                    <div id="qrcode"></div>
-                                </div>
-                                <div class="col-sm-4" style="margin-top: 50px;">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-3" style="width: 150px;height: 150px;">
+                                        <div id="code" style="width: 150px;height: 150px;"></div>
+                                    </div>
+                                    <div class="col-sm-6"  style="margin-top: 50px;margin-left: 60px;">
                                         <p >
                                             账号：<span id="account">{{ account }}</span>
                                             <input name="account" hidden value="{{ account }}"/>
@@ -50,10 +51,10 @@
                                             秘钥：<span id="key">{{ key }}</span>
                                             <input name="key" hidden value="{{ key }}"/>
                                         </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="row clearfix">
                             <div class="col-sm-12">
                                 <label class="text-left">
@@ -65,6 +66,12 @@
                             </div>
 
                         </div>
+         -*/////////////
+
+
+
+
+
                         <div class="row  clearfix">
                             <div class="col-sm-12">
                                 <input type="submit" name="submit" id="submit" class="submit" value="提交">
@@ -72,53 +79,46 @@
 
                         </div>
                     </div>
-
                 </div>
             </form>
-
         </div>
     </section>
 </body>
- <script type="text/javascript">
-            function generateQRCode(rendermethod, picwidth, picheight, url) {
-                $("#qrcode").qrcode({
-                    render: rendermethod, // 渲染方式有table方式（IE兼容）和canvas方式
-                    width: picwidth, //宽度
-                    height:picheight, //高度
-                    text: utf16to8(url), //内容
-                    typeNumber:-1,//计算模式
-                    correctLevel:2,//二维码纠错级别
-                    background:"#ffffff",//背景颜色
-                    foreground:"#000000"  //二维码颜色
-                });
+<script type="text/javascript">
+    var account=$("#account").html();
+    var key=$("#key").html();
+    var url='otpauth://totp/'+account+'?secret='+key;
+    var url = toUtf8(url);
+    {#$('#code').qrcode(url);#}
+    $('#code').qrcode({                                 --------
+        text: url,
+        width: 150,
+        height: 150
+    });
+    function toUtf8(str) {
+        var out, i, len, c;
+        out = "";
+        len = str.length;
+        for(i = 0; i < len; i++) {
+            c = str.charCodeAt(i);
+            if ((c >= 0x0001) && (c <= 0x007F)) {
+                out += str.charAt(i);
+            } else if (c > 0x07FF) {
+                out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+                out += String.fromCharCode(0x80 | ((c >>  6) & 0x3F));
+                out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));
+            } else {
+                out += String.fromCharCode(0xC0 | ((c >>  6) & 0x1F));
+                out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));
             }
-            var account=$("#account").html();
-            var key=$("#key").html();
-            var url='otpauth://totp/'+account+'?secret='+key;
-            function init(){
-                generateQRCode("table",150, 150, url);
-            }
+        }
+        return out;
+    }
 
-            //中文编码格式转换
-            function utf16to8(str) {
-                var out, i, len, c;
-                out = "";
-                len = str.length;
-                for (i = 0; i < len; i++) {
-                    c = str.charCodeAt(i);
-                    if ((c >= 0x0001) && (c <= 0x007F)) {
-                        out += str.charAt(i);
-                    } else if (c > 0x07FF) {
-                        out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
-                        out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));
-                        out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
-                    } else {
-                        out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));
-                        out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
-                    }
-                }
-                return out;
-            }
 
-        </script>
-</html>
+
+
+
+
+</script>
+</html>*/

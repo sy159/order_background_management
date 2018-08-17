@@ -1,33 +1,10 @@
-{% load cache %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
-    {% cache 864000 adver_add %}
 	<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
     {% include 'Public/header.html' %}
-    <style>
-          .high{ color: red; }
-         .position{
-            display: inline-block;
-            padding-top: 15px;
-            padding-left: 5px;
-        }
-		.aui_buttons {
-			padding: 4px 0 0 0;
-		}
-		.btn{
-            position:fixed;
-            width: 100%;
-            bottom: 0;
-            right: 0;
-		}
-        form{
-           margin-bottom: 50px;
-        }
-    </style>
-    {% endcache %}
 </head>
 <body>
 <form id="myform" method="post"   action="" frame="true" refresh="true">
@@ -50,7 +27,7 @@
             </td>
         </div>
 </form>
-{% cache 864000 adver_add %}
+
 <script>
     var region_id=art.dialog.data('region_id');
     $("#region_id").val(region_id);
@@ -103,6 +80,6 @@
 
 
 </script>
-{% endcache %}
+
 </body>
 </html>

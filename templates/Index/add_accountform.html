@@ -6,21 +6,6 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
     {% include 'Public/header.html' %}
     <style>
-          .high{ color: red; }
-         .position{
-            display: inline-block;
-            padding-top: 15px;
-            padding-left: 5px;
-        }
-		.aui_buttons {
-			padding: 4px 0 0 0;
-		}
-		.btn{
-            position:fixed;
-            width: 100%;
-            bottom: 0;
-            right: 0;
-		}
         form{
            margin-bottom: 50px;
         }
@@ -142,16 +127,15 @@
         art.dialog.open('/admin/set_authority/',{
             title: '设置管理员使用权限',
             lock: true,
-            modal:true,
             width:800,
             height:400,
             close:function () {
                 var data=art.dialog.data('data');
-                    var arr=[];
-                    data.forEach(function (el) {
-                        arr.push(el.name);
-                    });
-                    $("#recpt_authoritydata").val(arr);
+                var arr=[];
+                data.forEach(function (el) {
+                    arr.push(el.name);
+                });
+                $("#recpt_authoritydata").val(arr);
             }
         });
     }); /*打开设置权限对话框*/

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
+    {% include 'Public/header.html' %}
+</head>
+<body>
+<form id="myform" method="post"   action="" frame="true" refresh="true">
+		<table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
+			<tr>
+				<th width="160">地址信息</th>
+				<td>
+{#                    <input  type="text"  id="address_name" class="input fl" name="info" value="" size="35"/>#}
+                     <textarea cols="50" id="address_name" name="info" rows="10"></textarea>
+                     <input type="hidden" id="campus_id" name="campus_id" value="">
+                     <input type="hidden" id="address_id" name="address_id" value="">
+                     <strong class='high position account'>输入格式：地址名称，性别，配送费；（分隔符中文状态）</strong>
+                </td>
+
+			</tr>
+            <tr>
+                 <th width="160">标准示例</th>
+                 <td>
+                     <p>听松苑，女，7；</p>
+                     <p>听松苑，女，7；竹苑，女，8；</p>
+                 </td>
+            </tr>
+        </table>
+        <div class="btn">
+            <td colspan="2" class="aui_footer">
+                <div class="aui_buttons">
+                    <button id="edit" class="aui_state_highlight" type="submit">添加</button>
+                    <button id="close" type="button">关闭</button>
+                </div>
+            </td>
+        </div>
+</form>
+
+<script>
+    var campus_id=art.dialog.data('campus_id');
+    var address_id=art.dialog.data('address_id');
+    $("#campus_id").val(campus_id);
+    $("#address_id").val(address_id);
+
+    $("#close").click(function () {
+		art.dialog.close();
+     });//关闭对话框
+
+    $("#myform").submit(function (e) {
+        e.preventDefault();
+        confirm();
+        function confirm(){
+            if($("#address_name").val().length == 0){
+                   $(".account").html("地址信息不能为空!");
+                   return false;
+            }else {
+                $(".account").html("");
+                $.ajax({
+                    url:"/admin/add_address/",
+                    type:"post",
+                    dataType:"json",
+                    data: $("#myform").serialize(),
+                    success:function(msg){
+                        if(msg==1){
+                            result("添加成功","succeed");
+                            var win = art.dialog.open.origin;
+                            win.location.reload();
+                        }else{
+                            result("添加失败","error");
+                        }
+                    },
+                    error:function(xhr,textstatus,thrown){
+                    }
+                });
+            }
+        }
+    });//表单验证提交
+
+     function result(title,flag) {
+        art.dialog({
+            content: title,
+            //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+            icon: flag,
+            fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+            time: 3,//如果有cancel方法的话会调用cancel方法
+        });
+        var time = setInterval(function() {
+            art.dialog.close()
+        }, 2000);
+    }
+
+
+</script>
+
+</body>
+</html>

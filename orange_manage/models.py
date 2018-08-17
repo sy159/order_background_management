@@ -285,12 +285,12 @@ class Distributor(models.Model):
     register_time = models.DateTimeField(blank=True, null=True)
     last_login = models.DateTimeField(blank=True, null=True)
     is_part_time = models.IntegerField()
-    balance = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    balance = models.DecimalField(max_digits=10, decimal_places=2)
     alipay_account = models.CharField(max_length=255, blank=True, null=True)
     account_holder = models.CharField(max_length=255, blank=True, null=True)
     priority = models.IntegerField(blank=True, null=True)
     status = models.IntegerField(blank=True, null=True)
-    online = models.IntegerField()
+    online = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -370,18 +370,6 @@ class Goods(models.Model):
     class Meta:
         managed = False
         db_table = 'goods'
-
-
-class GoodsAttribute(models.Model):
-    record_id = models.AutoField(primary_key=True)
-    goods_id = models.IntegerField()
-    attribute_name = models.CharField(max_length=255)
-    attribute_values = models.CharField(max_length=255, blank=True, null=True)
-    sub_order_id = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'goods_attribute'
 
 
 class GoodsAttributeName(models.Model):
@@ -551,7 +539,7 @@ class OrderStatusLogs(models.Model):
 
 class Orders(models.Model):
     order_id = models.CharField(primary_key=True, max_length=255)
-    order_status = models.IntegerField()
+    order_status = models.IntegerField(blank=True, null=True)
     user_id = models.IntegerField()
     distributor_id = models.IntegerField(blank=True, null=True)
     distributor_name = models.CharField(max_length=255, blank=True, null=True)
@@ -570,13 +558,13 @@ class Orders(models.Model):
     distribution_fee = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     region_id = models.IntegerField(blank=True, null=True)
+    campus_id = models.IntegerField(blank=True, null=True)
     coupon_id = models.IntegerField(blank=True, null=True)
     coupon_type = models.IntegerField(blank=True, null=True)
     coupon_value = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     pay_mode = models.IntegerField(blank=True, null=True)
     pay_amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     unfinished_reason = models.CharField(max_length=255, blank=True, null=True)
-    campus_id = models.IntegerField(blank=True, null=True)
     user_name = models.CharField(max_length=255, blank=True, null=True)
     user_phone_number = models.CharField(max_length=255, blank=True, null=True)
     user_address = models.CharField(max_length=255, blank=True, null=True)
@@ -593,6 +581,18 @@ class Orders(models.Model):
     class Meta:
         managed = False
         db_table = 'orders'
+
+
+class OrdersGoodsAttribute(models.Model):
+    record_id = models.AutoField(primary_key=True)
+    goods_id = models.IntegerField()
+    attribute_name = models.CharField(max_length=255)
+    attribute_values = models.CharField(max_length=255, blank=True, null=True)
+    sub_order_id = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'orders_goods_attribute'
 
 
 class Point(models.Model):
@@ -861,6 +861,7 @@ class SubOrders(models.Model):
     distribution_start_time = models.DateTimeField(blank=True, null=True)
     distributor_id = models.IntegerField(blank=True, null=True)
     distributor_name = models.CharField(max_length=255, blank=True, null=True)
+    distributor_phone_number = models.CharField(max_length=255, blank=True, null=True)
     shop_id = models.IntegerField()
     shop_name = models.CharField(max_length=255)
     shop_assistant_id = models.IntegerField(blank=True, null=True)
@@ -873,6 +874,7 @@ class SubOrders(models.Model):
     latitude = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
     address_type = models.IntegerField(blank=True, null=True)
     final_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    last_up_time = models.BigIntegerField()
 
     class Meta:
         managed = False
@@ -885,6 +887,22 @@ class Test(models.Model):
     class Meta:
         managed = False
         db_table = 'test'
+
+
+class Test1(models.Model):
+    name = models.CharField(max_length=255)
+
+    class Meta:
+        managed = False
+        db_table = 'test1'
+
+
+class Test2(models.Model):
+    name = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'test2'
 
 
 class TransactionRecords(models.Model):
@@ -909,7 +927,7 @@ class University(models.Model):
 
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
-    nickname = models.CharField(max_length=255, blank=True, null=True)
+    nickname = models.CharField(max_length=255)
     username = models.CharField(unique=True, max_length=255)
     name = models.CharField(max_length=255, blank=True, null=True)
     password = models.CharField(max_length=255)

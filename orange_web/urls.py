@@ -67,12 +67,15 @@ urlpatterns = [
     path('admin/clear_key/', basic_info.clear_key),  # 清除key
     path('admin/add_campus/', basic_info.add_campus),  # 选所在区域
     path('admin/region_list/', basic_info.region_list),  # 运营区域列表
-    path('admin/add_region/', basic_info.add_region),  # 添加运营区域
+    path('admin/add_region/', cache_page(60 * 60 * 24 * 10)(basic_info.add_region)),  # 添加运营区域
     path('admin/exist_region/', basic_info.exist_region),  # 存在运营区域列表
     path('admin/edit_region/', basic_info.edit_region),  # 编辑运营区域
     path('admin/campus_list/', basic_info.campus_list),  # 校区列表
     path('admin/add_campusinfo/', cache_page(60 * 60 * 24 * 10)(basic_info.add_campusinfo)),  # 添加校区
     path('admin/edit_campusinfo/', basic_info.edit_campusinfo),  # 编辑校区信息
+    path('admin/address_list/', basic_info.address_list),  # 添加详细地址库
+    path('admin/add_address/', cache_page(60 * 60 * 24 * 10)(basic_info.add_address)),  # 添加地址
+    path('admin/edit_address/', basic_info.edit_address),  # 编辑地址信息
 
     # 系统设置
     path('admin/adver_management/', system_setting.adver_management),  # 广告管理
@@ -105,5 +108,9 @@ urlpatterns = [
     path('admin/delivery_record/', deliver.delivery_record),  # 查看配送员的配送记录
     path('admin/deliver_list/', deliver.deliver_list),  # 分配配送员列表
     path('admin/marki_list/', deliver.marki_list),  # 调度
+    path('admin/marki_api/', deliver.marki_api),  # 未接点单api
+    path('admin/order_api/', deliver.order_api),  # 在线配送员api
+    path('admin/dispatching_console/', deliver.dispatching_console),  # 调度控制台
+
 
 ]

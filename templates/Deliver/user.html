@@ -4,17 +4,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>网站后台管理 Powered by pigcms.com</title>
     {% include 'Public/header.html' %}
-     <style>
-        ul.pages{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        ol, ul {
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-    </style>
 </head>
 <body>
 <div class="mainbox">
@@ -76,9 +65,9 @@
                         <td>{{ i.distributor_id }}</td>
                         <td>{{ i.priority }}</td>
                         <td>{{ i.name }}</td>
-                        {% if i.gender == 0 %}
+                        {% if i.gender == 1 %}
                         <td><font color="blue">男</font>
-                            {% elif  i.gender == 1%}
+                            {% elif  i.gender == 2%}
                         <td><font color="blue">女</font>
                             {% else %}
                         <td><font color="blue">未知</font>

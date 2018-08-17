@@ -1,21 +1,5 @@
 {% include 'Public/header.html' %}
 <link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css" />
-<style>
-    .frame_form td.aui_footer{
-        position: absolute;
-        bottom: 0;
-        right: 20px;
-    }
-     .aui_buttons {
-			padding: 4px 0 0 0;
-		}
-    .btn{
-        position: absolute;
-        width: 100%;
-        bottom: 0;
-        right: 0;
-    }
-</style>
 <form id="myform" method="post" action="" frame="true" refresh="true">
         {% csrf_token %}
         <input type="hidden" name="sort_id" value="{{ data.sort_id }}"/>
@@ -24,13 +8,14 @@
 				<th width="160">分类名称</th>
 				<td>
 					<input type="text" value="{{ data.sort_name }}" id="sort_name" class="input fl" name="sort_name"  size="25"  validate="maxlength:20,required:true"/>
-				</td>
+				     <strong class='high position sort_name'>*</strong>
+                </td>
 			</tr>
 			<tr>
 				<th width="160">分类排序</th>
 				<td>
                     <input type="text" value="{{ data.priority }}" id="priority" class="input fl" name="priority"  size="25" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"  validate="maxlength:20,required:true"/>
-				     <em style="color: red;font-weight: bold;display: inline-block;margin-top: 5px;margin-left: 10px;">(只能输入数字)</em>
+				     <em style="color: red;font-weight: bold;display: inline-block;margin-top: 5px;margin-left: 10px;">*(只能输入数字)</em>
                 </td>
 			</tr>
 			<tr>

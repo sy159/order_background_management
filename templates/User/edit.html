@@ -5,18 +5,6 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
     {% include 'Public/header.html' %}
-    <style>
-        .aui_buttons {
-            padding: 4px 0 0 0;
-        }
-
-        .btn {
-            position: absolute;
-            width: 100%;
-            bottom: 0;
-            right: 0;
-        }
-    </style>
 </head>
 <body>
 <form id="myform" method="post" action="" frame="true" refresh="true" autocomplete="off">
@@ -48,15 +36,15 @@
         <tr>
             <th width="15%">性别</th>
             <td width="35%" class="radio_box">
-                {% if data.gender == 0 %}
+                {% if data.gender == 1 %}
                     <span class="cb-enable"><label class="cb-enable"><span>男</span><input type="radio" name="sex"
-                                                                                          value="0"/></label></span>
-                {% elif data.gender == 1 %}
-                    <span class="cb-enable"><label class="cb-enable"><span>女</span><input type="radio" name="sex"
                                                                                           value="1"/></label></span>
+                {% elif data.gender == 2 %}
+                    <span class="cb-enable"><label class="cb-enable"><span>女</span><input type="radio" name="sex"
+                                                                                          value="2"/></label></span>
                 {% else %}
                     <span class="cb-disable"><label class="cb-disable"><span>未知</span><input type="radio" name="sex"
-                                                                                             value="2"/></label></span>
+                                                                                             value="0"/></label></span>
                 {% endif %}
             </td>
             <th width="15%">QQ号</th>

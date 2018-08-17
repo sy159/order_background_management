@@ -39,26 +39,20 @@
             {% elif i.order_status == 2 %}
             <th style="color:#9F0050">已接单未分拣</th>
             {% elif i.order_status == 3 %}
-            <th style="color:#9F0050">已分拣未抢单</th>
+            <th style="color:#9F0050">已分拣未取货</th>
             {% elif i.order_status == 4 %}
-            <th style="color:#9F0050">已抢单未取货</th>
-            {% elif i.order_status == 5 %}
             <th style="color:#9F0050">已取货未配送</th>
+            {% elif i.order_status == 5 %}
+            <th style="color:#9F0050">配送员配送中</th>
             {% elif i.order_status == 6 %}
-            <th style="color:#9F0050">配送中</th>
-             {% elif i.order_status == 7 %}
             <th style="color:#9F0050">配送已完成</th>
-             {% elif i.order_status == 8 %}
+             {% elif i.order_status == 7 %}
             <th style="color:#9F0050">已评价</th>
+             {% elif i.order_status == 8 %}
+            <th style="color:#9F0050">处理中</th>
              {% elif i.order_status == 9 %}
-            <th style="color:#9F0050">退款中</th>
-             {% elif i.order_status == 10 %}
             <th style="color:#9F0050">已退款</th>
             {% endif %}
-
-
-
-
             <th style="color:#9F0050">{{ i.unit_price | default_if_none:""}}</th>
             <th style="color:#9F0050"><strong>{{ i.goods_amount| default_if_none:"" }}</strong> (个)</th>
             <th style="color:#9F0050">{{ i.specification_values| default_if_none:"" }}</th>

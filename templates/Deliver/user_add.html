@@ -6,21 +6,6 @@
     {% include 'Public/header.html' %}
     <link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
     <style>
-         .high{ color: red; }
-         .position{
-            display: inline-block;
-            padding-top: 15px;
-            padding-left: 5px;
-        }
-        .aui_buttons {
-			padding: 4px 0 0 0;
-		}
-		.btn{
-            position:fixed;
-            width: 100%;
-            bottom: 0;
-            right: 0;
-		}
          form{
            margin-bottom: 50px;
         }
@@ -34,6 +19,13 @@
             <td width="40%">
                 <input type="text" class="input fl" id="name" name="name" size="20"  value=""/>
                  <strong class='high position account'>*</strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="10%">密码</th>
+            <td width="40%">
+                <input type="text" class="input fl" id="pwd" name="pwd" size="20"  value=""/>
+                <strong class='high position pwd'>*</strong>
             </td>
         </tr>
         <tr>
@@ -64,7 +56,6 @@
                  <strong class='high position phone_number'>*</strong>
             </td>
         </tr>
-
         <tr>
             <th width="10%">状态</th>
             <td width="40%" class="radio_box">
@@ -81,8 +72,8 @@
         <tr>
             <th width="10%">性别</th>
             <td width="40%" class="radio_box">
-                <input type="radio" name="gender" value="0">男
-                <input type="radio" name="gender" value="1"> 女
+                <input type="radio" name="gender" value="1">男
+                <input type="radio" name="gender" value="2"> 女
             </td>
         </tr>
         <tr>
@@ -180,43 +171,50 @@
             return false;
         }else{
             $(".account").html(" ");
-            if($("#pic").val().length == 0 ){
-                 $(".pic").html("头像不能为空！");
+            if($("#pwd").val().length == 0){
+                $(".pwd").html("密码不能为空!");
                 return false;
-            }else{
-                 $(".pic").html("");
-                if($("#phone_number").val().length == 0){
-                    $(".phone_number").html("手机号不能为空!");
+            }else {
+                $(".pwd").html(" ");
+                if($("#pic").val().length == 0 ){
+                    $(".pic").html("头像不能为空！");
                     return false;
-                }else {
-                     $(".phone_number").html("");
-                     if($(".pub").val().length == 0){
-                         $(".cityarea").html("此字段不能为空！");
-                         return false;
-                     }else{
-                         $(".cityarea").html("");
-                         $.ajax({
-                             url:"/admin/user_add/",
-                             type:"post",
-                             dataType:"json",
-                             data: $("#myform").serialize(),
-                             success:function(msg){
-                                 if(msg==1){
-                                     result("添加成功","succeed");
-                                     var win = art.dialog.open.origin;
-                                     win.location.reload();
-                                 }else{
-                                     result("添加失败","error");
-                                 }
-                             },
-                             error:function(xhr,textstatus,thrown){
-                             }
-                         });
-                         return true;
-                     }
+                }else{
+                    $(".pic").html("");
+                    if($("#phone_number").val().length == 0){
+                        $(".phone_number").html("手机号不能为空!");
+                        return false;
+                    }else {
+                        $(".phone_number").html("");
+                        if($(".pub").val().length == 0){
+                            $(".cityarea").html("此字段不能为空！");
+                            return false;
+                        }else{
+                            $(".cityarea").html("");
+                            $.ajax({
+                                url:"/admin/user_add/",
+                                type:"post",
+                                dataType:"json",
+                                data: $("#myform").serialize(),
+                                success:function(msg){
+                                    if(msg==1){
+                                        result("添加成功","succeed");
+                                        var win = art.dialog.open.origin;
+                                        win.location.reload();
+                                    }else if(msg == 0){
+                                        result("电话号码已存在","error");
+                                    }else {
+                                       result("添加失败","error");
+                                    }
+                                },
+                                error:function(xhr,textstatus,thrown){
+                                }
+                            });
+                            return true;
+                        }
+                    }
                 }
             }
-
         }
     }//表单验证提交
 

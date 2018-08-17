@@ -5,15 +5,6 @@
     <title>后台管理 - 橙子校园</title>
     {% include 'Public/header.html' %}
     <style>
-         ul.pages{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        ol, ul {
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
         .btn{
             background: none;
             position: relative;
@@ -89,9 +80,9 @@
                         <td id="distributor_id">{{ i.distributor_id }}</td>
                         <td id="name">{{ i.name }}</td>
                         <td id="phone_number">{{ i.phone_number }}</td>
-                        {% if i.gender == 0 %}
+                        {% if i.gender == 1 %}
                             <td id="{{ i.gender }}">男</td>
-                        {% elif i.gender == 1 %}
+                        {% elif i.gender == 2 %}
                             <td id="{{ i.gender }}">女</td>
                         {% else %}
                             <td id="{{ i.gender }}">未知</td>

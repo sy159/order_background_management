@@ -5,37 +5,13 @@
     <title>网站后台管理 Powered by pigcms.com</title>
     {% include 'Public/header.html' %}
     <link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css" />
-<style>
-    .frame_form .input {
-     height: 18px;
-     }
-    .frame_form td.aui_footer{
-        position: absolute;
-        bottom: 0;
-        right: 20px;
-    }
-    .high{ color: red; }
-    .position{
-        display: inline-block;
-        padding-top: 8px;
-        padding-left: 5px;
-    }
-    .aui_buttons {
-        padding: 4px 0 0 0;
-    }
-    .btn{
-        position: fixed;
-        width: 100%;
-        bottom: 0;
-        right: 0;
-    }
-</style>
+
 <body>
     <form id="myform" method="post" action="" frame="true" refresh="true">
         {% csrf_token %}
         <input type="hidden" name="parent_id" value="{{ parent_id }}">
         <table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
-            <tr>.
+            <tr>
                 <th width="160">分类名称</th>
                 <td>
                     <input type="text" id="sort_name" class="input fl" name="sort_name"  size="25"  validate="maxlength:20,required:true"/>
