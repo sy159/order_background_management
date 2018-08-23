@@ -66,7 +66,7 @@
                             </div>
 
                         </div>
-         -*/////////////
+
 
 
 
@@ -90,7 +90,7 @@
     var url='otpauth://totp/'+account+'?secret='+key;
     var url = toUtf8(url);
     {#$('#code').qrcode(url);#}
-    $('#code').qrcode({                                 --------
+    $('#code').qrcode({
         text: url,
         width: 150,
         height: 150

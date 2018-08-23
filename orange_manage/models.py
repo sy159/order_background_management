@@ -364,7 +364,6 @@ class Goods(models.Model):
     platform_classify_id = models.IntegerField(blank=True, null=True)
     purchasing_limitation = models.PositiveIntegerField(blank=True, null=True)
     sales_amount = models.PositiveIntegerField(blank=True, null=True)
-    total_sales_amount = models.IntegerField(blank=True, null=True)
     product_code = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
@@ -787,15 +786,14 @@ class ShopComment(models.Model):
         db_table = 'shop_comment'
 
 
-class ShopNoticesLog(models.Model):
-    id = models.IntegerField(primary_key=True)
+class ShopNoticesLogs(models.Model):
     shop_id = models.IntegerField()
     notice = models.CharField(max_length=255, blank=True, null=True)
     create_datetime = models.DateTimeField()
 
     class Meta:
         managed = False
-        db_table = 'shop_notices_log'
+        db_table = 'shop_notices_logs'
 
 
 class ShopPhoto(models.Model):
@@ -859,6 +857,7 @@ class SubOrders(models.Model):
     pay_time = models.DateTimeField(blank=True, null=True)
     goods_get_time = models.DateTimeField(blank=True, null=True)
     distribution_start_time = models.DateTimeField(blank=True, null=True)
+    complete_time = models.DateTimeField(blank=True, null=True)
     distributor_id = models.IntegerField(blank=True, null=True)
     distributor_name = models.CharField(max_length=255, blank=True, null=True)
     distributor_phone_number = models.CharField(max_length=255, blank=True, null=True)
@@ -906,7 +905,7 @@ class Test2(models.Model):
 
 
 class TransactionRecords(models.Model):
-    transaction_id = models.IntegerField(primary_key=True)
+    transaction_id = models.AutoField(primary_key=True)
     transaction_no = models.CharField(max_length=255)
     drawee = models.CharField(max_length=255)
     payee = models.CharField(max_length=255)
