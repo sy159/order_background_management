@@ -29,15 +29,10 @@
       <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/d75abd62dbb578850980a84a4b61db62.djcache" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/ecc09e218e3f3eddc6ea4fb8b1f670b8.djcache" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/f74f006d3822980982b4f527bdc5173b.djcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CQGY-ZZQ/3d29707a4929951e3574fa65c691f379.djcache" beforeDir="false" afterPath="$PROJECT_DIR$/CQGY-ZZQ/3d29707a4929951e3574fa65c691f379.djcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CQGY-ZZQ/72c1b262600941b1d58d386aa0f59879.djcache" beforeDir="false" afterPath="$PROJECT_DIR$/CQGY-ZZQ/72c1b262600941b1d58d386aa0f59879.djcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CQGY-ZZQ/a51aa4163df15307954d68ee7424e6cd.djcache" beforeDir="false" afterPath="$PROJECT_DIR$/CQGY-ZZQ/a51aa4163df15307954d68ee7424e6cd.djcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CQGY-ZZQ/fdb06d33e785b1f8437ff1606aaab0b7.djcache" beforeDir="false" afterPath="$PROJECT_DIR$/CQGY-ZZQ/fdb06d33e785b1f8437ff1606aaab0b7.djcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orange_manage/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orange_web/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_web/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bind_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bind_account.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +84,7 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="15" />
-          <entry key="html" value="183" />
+          <entry key="html" value="184" />
           <entry key="js" value="8" />
           <entry key="md" value="1" />
           <entry key="pstat" value="2" />
@@ -100,7 +95,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="15" />
-          <entry key="HTML" value="183" />
+          <entry key="HTML" value="184" />
           <entry key="JavaScript" value="8" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="4" />
@@ -112,7 +107,7 @@
         <counts>
           <entry key="css" value="8" />
           <entry key="dummy" value="2" />
-          <entry key="html" value="8481" />
+          <entry key="html" value="8482" />
           <entry key="py" value="6535" />
           <entry key="sh" value="90" />
           <entry key="txt" value="31" />
@@ -121,7 +116,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="8" />
-          <entry key="HTML" value="8481" />
+          <entry key="HTML" value="8482" />
           <entry key="PLAIN_TEXT" value="123" />
           <entry key="Python" value="6535" />
         </counts>
@@ -139,11 +134,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="81">
               <caret line="3" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/bind_account.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="290">
+              <caret line="104" column="37" selection-start-line="104" selection-start-column="37" selection-end-line="104" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -307,10 +311,10 @@
         <option value="$PROJECT_DIR$/templates/Merchant/store_form.html" />
         <option value="$PROJECT_DIR$/templates/Merchant/status_form.html" />
         <option value="$PROJECT_DIR$/templates/Merchant/fail_form.html" />
-        <option value="$PROJECT_DIR$/templates/bind_account.html" />
         <option value="$PROJECT_DIR$/orange_web/settings.py" />
         <option value="$PROJECT_DIR$/templates/Index/add_address.html" />
         <option value="$PROJECT_DIR$/run.sh" />
+        <option value="$PROJECT_DIR$/templates/bind_account.html" />
       </list>
     </option>
   </component>
@@ -340,6 +344,11 @@
             </path>
             <path>
               <item name="orange_web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="orange_web" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="orange_web" type="b2602c69:ProjectViewProjectNode" />
               <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
             </path>
           </expand>
@@ -356,7 +365,7 @@
     <property name="database.console.LAST_STATE" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -620,7 +629,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534474355528</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="初步项目">
+      <created>1535022242466</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1535022242466</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView">
@@ -634,6 +650,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20842217" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -641,7 +658,7 @@
       <window_info anchor="bottom" id="Database Console" order="0" weight="0.32936978" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.29341316" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.4966443" weight="0.33406836" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.4966443" visible="true" weight="0.33406836" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4674752" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -962,13 +979,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/bind_account.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="97" column="26" lean-forward="true" selection-start-line="97" selection-start-column="26" selection-end-line="97" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/Index/add_address.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="263">
@@ -1039,6 +1049,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
           <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bind_account.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="104" column="37" selection-start-line="104" selection-start-column="37" selection-end-line="104" selection-end-column="37" />
         </state>
       </provider>
     </entry>
