@@ -1,13 +1,13 @@
 from django.http import JsonResponse, QueryDict
 from django.utils import timezone
-from django.shortcuts import render, redirect, HttpResponse,render_to_response
+from django.shortcuts import render, redirect, HttpResponse, render_to_response
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.db.models import Sum, Q, F
 from orange_manage import models
 from .utils.password_encryption import pwd_encrypted
 from .utils import login_validation as val
 from .utils import produce_key as key
-import json
+import json, os, time
 from orange_manage.utils.image_upload import UploadImg
 
 
@@ -131,6 +131,20 @@ def image_upload(request):
         url = request.recommend_shops_images + img_name
     elif judge == '4':  # 配送员头像
         url = request.distributor_image + img_name
+    elif judge == '5':  # 上传商品图片
+        url = request.goods_image + img_name
     UploadImg(url, file)
     return HttpResponse(1)
 
+
+def kindeditor(request):
+    print(request.POST.get('content'))
+    return render(request, 'kind.html')
+
+
+def upload_img(request):
+    file_obj = request.FILES.get('imgFile')
+    if file_obj.name.split('.')[-1] not in ['jpg', 'png', 'jpeg', 'gif', 'bmp', 'webp']:  # 判断上传不为图片
+        return HttpResponse('<h2>只能上传图片哦</h2>')
+    file_name = str(time.time()) + file_obj.name
+    return HttpResponse(1)

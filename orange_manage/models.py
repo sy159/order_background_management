@@ -360,11 +360,13 @@ class Goods(models.Model):
     stock = models.IntegerField(blank=True, null=True)
     classify_id = models.IntegerField()
     status = models.IntegerField()
+    auth = models.IntegerField()
     privilege = models.IntegerField()
     platform_classify_id = models.IntegerField(blank=True, null=True)
     purchasing_limitation = models.PositiveIntegerField(blank=True, null=True)
     sales_amount = models.PositiveIntegerField(blank=True, null=True)
     product_code = models.CharField(max_length=255, blank=True, null=True)
+    is_recycle = models.IntegerField()
 
     class Meta:
         managed = False
@@ -406,6 +408,21 @@ class GoodsClassify(models.Model):
     class Meta:
         managed = False
         db_table = 'goods_classify'
+
+
+class GoodsClassifyPlatform(models.Model):
+    record_id = models.AutoField(primary_key=True)
+    parent_id = models.IntegerField()
+    name = models.CharField(max_length=255)
+    start_time = models.IntegerField(blank=True, null=True)
+    end_time = models.IntegerField(blank=True, null=True)
+    week_time = models.CharField(max_length=255, blank=True, null=True)
+    privilege = models.IntegerField()
+    is_show = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'goods_classify_platform'
 
 
 class GoodsComment(models.Model):
@@ -504,6 +521,7 @@ class NecessaryGoods(models.Model):
 
 class OrderGoods(models.Model):
     record_id = models.AutoField(primary_key=True)
+    order_id = models.CharField(max_length=255)
     sub_order_id = models.CharField(max_length=255)
     goods_id = models.IntegerField()
     specification_id = models.IntegerField(blank=True, null=True)
@@ -511,8 +529,7 @@ class OrderGoods(models.Model):
     goods_amount = models.IntegerField()
     image = models.CharField(max_length=255, blank=True, null=True)
     unit_price = models.DecimalField(max_digits=10, decimal_places=2)
-    is_recovery = models.IntegerField()
-    recovery_id = models.IntegerField(blank=True, null=True)
+    is_recycle = models.IntegerField()
     specification_values = models.CharField(max_length=255, blank=True, null=True)
     attribute_values = models.CharField(max_length=255, blank=True, null=True)
 

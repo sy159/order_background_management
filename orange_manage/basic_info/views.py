@@ -472,7 +472,7 @@ def address_list(request):
             'gender': i.gender,
         }
         data_list.append(data_dict)
-    return render(request, 'Index/AddressList.html', {'data': data_list, 'address_id': get_address_id})
+    return render(request, 'Index/AddressList.html', {'data': data_list, 'address_id': get_address_id , 'campus_id': request.GET.get('campus_id')})
 
 
 def add_address(request):
@@ -480,7 +480,6 @@ def add_address(request):
         get_campus_id = request.POST.get('campus_id')
         get_parent_id = request.POST.get('address_id')
         get_info = request.POST.get('info')
-        print(get_info)
         info_list = get_info.split('；')
         try:
             for i in info_list:

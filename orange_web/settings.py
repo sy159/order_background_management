@@ -140,7 +140,7 @@ CACHES = {
         'LOCATION': 'CQGY-ZZQ',  # 在内存中存储的变量（保证唯一）
         'TIMEOUT': 120,  # 缓存超时时间（默认300，None表示永不过期，0表示立即过期）
         'OPTIONS': {
-            'MAX_ENTRIES': 300,  # 最大缓存个数（默认300）
+            'MAX_ENTRIES': 500,  # 最大缓存个数（默认300）
             'CULL_FREQUENCY': 6,  # 缓存到达最大个数之后，剔除缓存个数的比例，即：1/CULL_FREQUENCY（默认3）
         },
     }

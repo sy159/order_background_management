@@ -33,6 +33,8 @@ urlpatterns = [
     path('admin/index/', views.index),  # 主页面
     path('admin/account_unique/', views.account_unique),  # 账号唯一性
     path('admin/image_upload/', views.image_upload),  # 上传图片
+    path('admin/kindeditor/', views.kindeditor),  # 在线编辑器
+    path('admin/upload_img/', views.upload_img),  # 在线编辑器
 
     # 商户管理
     path('admin/shop_list/', merchants.shop_list),  # 商户列表
@@ -55,6 +57,8 @@ urlpatterns = [
     path('admin/add_circle/', cache_page(60 * 60 * 24 * 10)(merchants.add_circle)),  # 添加商圈
     path('admin/edit_circle/', merchants.edit_circle),  # 编辑商圈
     path('admin/store_list/', merchants.store_list),  # 店铺列表
+    path('admin/wait_goods/', merchants.wait_goods),  # 待审核商品列表
+    path('admin/goods_details/', merchants.goods_details),  # 商品详情
 
     # 基本信息相关
     path('admin/account_list/', basic_info.account_list),  # 管理员列表
@@ -111,6 +115,5 @@ urlpatterns = [
     path('admin/marki_api/', deliver.marki_api),  # 未接点单api
     path('admin/order_api/', deliver.order_api),  # 在线配送员api
     path('admin/dispatching_console/', deliver.dispatching_console),  # 调度控制台
-
 
 ]

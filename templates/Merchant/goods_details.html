@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>网站后台管理 Powered by pigcms.com</title>
+    {% include 'Public/header.html' %}
+</head>
+<body width="100%" style="background:#F3F3F3;">
+ <table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
+    <tr>
+        <th style="width: 30%;">店铺名</th>
+        <th style="width: 70%;" colspan="2">{{ data.shop_name }}</th>
+    </tr>
+    <tr>
+        <th style="width: 30%;">商品名</th>
+        <th style="width: 70%;" colspan="2">{{ data.goods_name }}</th>
+    </tr>
+     <tr>
+         <th style="width: 30%;">商品条码</th>
+         <th style="width: 70%;" colspan="2">{{ data.product_code|default_if_none:'' }}</th>
+     </tr>
+     <tr>
+         <th style="width: 30%;">是否使用需回收包装</th>
+         {% if data.is_recycle == 1 %}
+         <th style="width: 70%;" colspan="2">是</th>
+         {% else %}
+         <th style="width: 70%;" colspan="2">否</th>
+         {% endif %}
+     </tr>
+     <tr>
+         <th style="width: 30%;">商品图</th>
+         <th style="width: 70%;" colspan="2"><img src="{{ data.image }}" style="width: 100px;height: 100px;"></th>
+     </tr>
+     <tr>
+         <th style="width: 30%;">商品分类</th>
+         <th style="width: 70%;" colspan="2">{{ data.classify_name }}</th>
+     </tr>
+     <tr>
+         <th style="width: 30%;">平台预设的商品分类</th>
+         <th style="width: 70%;" colspan="2">{{ data.platform_classify_name }}</th>
+     </tr>
+ {% if data.judge == 0 %}
+      <tr>
+         <th style="width: 30%;">商品进价</th>
+         <th style="width: 70%;" colspan="2">{{ data.original_price }}</th>
+     </tr>
+      <tr>
+         <th style="width: 30%;">商品售价</th>
+         <th style="width: 70%;" colspan="2">{{ data.unit_price }}</th>
+     </tr>
+ {% else %}
+     <tr>
+         <th style="width:30%;"><strong>规格搭配</strong></th>
+         <th style="width:30%;"><strong>进价</strong></th>
+         <th style="width:40%;"><strong>售价</strong></th>
+     </tr>
+     {% for i in data.add %}
+     <tr>
+         <th style="color:#9F0050;width:30%;">{{ i.name }}</th>
+         <th style="color:#9F0050;width:30%;">{{ i.original_price }}</th>
+         <th style="color:#9F0050;width:40%;">{{ i.unit_price }}</th>
+     </tr>
+     {% endfor %}
+ {% endif %}
+</table>
+
+
+</body>
+</html>

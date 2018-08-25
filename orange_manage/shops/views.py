@@ -910,3 +910,84 @@ def store_list(request):
         for i in get_shop_list:
             models.CircleShop.objects.create(circle_id=get_circle_id, shop_id=i)
         return HttpResponse(1)
+
+
+def wait_goods(request):
+    if request.method == 'GET':
+        get_pagesize = 15
+        get_page = request.GET.get('p', '1')
+        start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
+        end_num = start_nun + int(get_pagesize)  # 终止数据位置
+        if request.operator_region:
+            shop_list = models.Shop.objects.filter(region_id=request.operator_region).values_list('shop_id', flat=True)
+        else:
+            shop_list = models.Shop.objects.values_list('shop_id', flat=True)
+        all_obj = models.Goods.objects.filter(auth=0, shop_id__in=shop_list)
+        get_filter_content = request.GET.get('filter_content')
+        if get_filter_content:
+            filter_list = models.Shop.objects.filter(shop_name__contains=get_filter_content).values_list('shop_id',
+                                                                                                         flat=True)
+            all_obj = all_obj.filter(shop_id__in=filter_list)
+        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+            get_pagesize)
+        data_list = []
+        for i in all_obj.order_by('shop_id')[start_nun:end_num]:
+            obj = models.Shop.objects.get(shop_id=i.shop_id)
+            data_dict = {
+                'goods_id': i.goods_id,
+                'goods_name': i.goods_name,
+                'shop_name': obj.shop_name,
+                'unit_price': i.unit_price,
+            }
+            data_list.append(data_dict)
+        return render(request, 'Merchant/wait_goods.html',
+                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total),
+                       'filter_content': get_filter_content})
+    elif request.method == 'POST':
+        return HttpResponse(1)
+
+
+def goods_details(request):
+    get_id = request.GET.get('goods_id')
+    obj = models.Goods.objects.get(goods_id=get_id)
+    shop_obj = models.Shop.objects.get(shop_id=obj.shop_id)
+    classify_obj = models.GoodsClassify.objects.get(record_id=obj.classify_id)
+    classify_name = classify_obj.name
+    platform_classify_obj = models.GoodsClassifyPlatform.objects.get(record_id=obj.platform_classify_id)
+    platform_classify_name = platform_classify_obj.name
+    if classify_obj.parent_id != -1:
+        c_obj = models.GoodsClassify.objects.get(record_id=classify_obj.parent_id)
+        classify_name = c_obj.name + ' ' + classify_name
+    if platform_classify_obj.parent_id != -1:
+        p_obj = models.GoodsClassifyPlatform.objects.get(record_id=platform_classify_obj.parent_id)
+        platform_classify_name = p_obj.name + ' ' + platform_classify_name
+    data = {
+        'shop_name': shop_obj.shop_name,
+        'goods_name': obj.goods_name,
+        'image': request.FTP_HOST + request.goods_image + obj.image,
+        'product_code': obj.product_code,  # 条码
+        'is_recycle': obj.is_recycle,  # 是否使用需回收包装
+        'classify_name': classify_name,  # 商家分类名字
+        'platform_classify_name': platform_classify_name,  # 平台分类名字
+        'original_price': obj.original_price,  # 进价
+        'unit_price': obj.unit_price,  # 售价
+        'judge': 0,  # 为单规格
+    }
+    add_obj = models.GoodsSpecification.objects.filter(goods_id=get_id)
+    if add_obj:  # 多规格
+        data['judge'] = 1
+        data_list = []
+        for i in add_obj:
+            data_dict = {
+                'unit_price': i.unit_price,  # 售价
+                'original_price': i.original_price,  # 进价
+            }
+            name = ''
+            spec = eval(i.spec)
+            for j in spec:
+                spec_obj = models.GoodsSpecValue.objects.get(spec_value_id=j)
+                name += spec_obj.spec_value + ' '
+            data_dict['name'] = name
+            data_list.append(data_dict)
+        data['add'] = data_list
+    return render(request, 'Merchant/goods_details.html', {'data': data})

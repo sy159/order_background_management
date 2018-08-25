@@ -61,9 +61,9 @@
     <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
         <tbody class="tbody">
         <input type="hidden" id="address_id"  name="address_id" value="{{ address_id }}">
+        <input type="hidden" id="campus_id"  name="campus_id" value="{{ campus_id }}">
         {% for i in data %}
             <tr>
-                <input type="hidden" id="campus_id"  name="campus_id" value="{{ i.campus_id }}">
                 <td id="address_id" style="display: none">{{ i.address_id }}</td>
                 <td style="padding-left: 30px;width: 22%;">{{ i.value }}</td>
                 {% if i.gender == 1 %}
@@ -74,7 +74,7 @@
                      <td style="width: 22%;">未知</td>
                 {% endif %}
                 <td style="width: 22%;">{{ i.cost }}</td>
-                <td style="width: 22%;"><a href="/admin/address_list/?campus_id={{ i.campus_id }}&address_id={{ i.address_id }}" style="color: green;">地址列表</a></td>
+                <td style="width: 22%;"><a href="/admin/address_list/?campus_id={{ campus_id }}&address_id={{ i.address_id }}" style="color: green;">地址列表</a></td>
                 <td class="norightborder"  style="width: 12%;">
                     <a href="javascript:void (0)"  class="edit_row">编辑</a> | <a href="javascript:void (0)"  class="delete_row">删除</a>
                 </td>
@@ -87,13 +87,13 @@
 <script>
     $(".tbody").on('click','a',function () {
         var clsn=this.className;
-        var address_id=$(this).parent().siblings()[1];
+        var address_id=$(this).parent().siblings()[0];
         address_id=$(address_id).html();
-        var address_name=$(this).parent().siblings()[2];
+        var address_name=$(this).parent().siblings()[1];
         address_name=$(address_name).html();
-         var address_gender=$(this).parent().siblings()[3];
+         var address_gender=$(this).parent().siblings()[2];
         address_gender=$(address_gender).html();
-         var address_cost=$(this).parent().siblings()[4];
+         var address_cost=$(this).parent().siblings()[3];
         address_cost=$(address_cost).html();
 
         if(clsn == 'add_row'){

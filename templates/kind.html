@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/admin/kindeditor/" method="post">
+<textarea id="editor_id" name="content" style="height: 300px" ></textarea>
+    <input type="submit" value="提交">
+</form>
+<script src="/static/js/kindeditor/kindeditor-all-min.js"></script>
+    <script src="/static/js/kindeditor/lang/zh-CN.js"></script>
+    <script src="/static/js/kindeditor/themes/default/default.css"></script>
+    <script>
+        KindEditor.ready(function (k) {
+            window.editor = k.create('#editor_id',{
+                width : '100%',
+                resizeType:1, {# 只能改变高度 #}
+                allowImageRemote:false,{# 不能上传网络图片 #}
+                uploadJson : '/admin/upload_img/', {#处理url指定上传文件的服务器端程序#}
+                 items:[
+                        'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+                        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                        'superscript', 'clearhtml', 'quickformat', 'selectall', '/',
+                        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+                        'table', 'hr', 'emoticons', 'baidumap', 'pagebreak','anchor', 'link', 'unlink',
+                    ]
+            });
+        })
+    </script>
+</body>
+</html>
