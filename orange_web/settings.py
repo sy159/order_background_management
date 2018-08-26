@@ -83,7 +83,7 @@ DATABASES = {
         'HOST': '120.77.42.209',  # 数据库地址
         'PORT': 3306,  # 端口号
         'USER': 'root',  # 用户名
-        'PASSWORD': 'luoyang111',  # 密码
+        'PASSWORD': '7#0S~,p_9yKo/NXCUX{V.1Pt4$a#EYd9',  # 密码
         'CONN_MAX_AGE': None,  # 持久化
     }
 }

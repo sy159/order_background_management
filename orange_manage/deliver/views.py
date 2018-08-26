@@ -117,7 +117,7 @@ def deliver_edit(request):
             'profile_image': request.FTP_HOST + request.distributor_image + obj.profile_image,
             'priority': obj.priority,
             'status': obj.status,
-            'is_part_time': obj.is_part_time,
+            'is_part_time': str(obj.is_part_time),
         }
         return render(request, 'Deliver/user_edit.html', {'data': data, 's': s, 'data_list': data_list})
     elif request.method == 'POST':

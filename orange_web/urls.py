@@ -83,7 +83,7 @@ urlpatterns = [
 
     # 系统设置
     path('admin/adver_management/', system_setting.adver_management),  # 广告管理
-    path('admin/adver_list/', cache_page(60 * 60 * 24 * 10)(system_setting.adver_list)),  # 广告列表
+    path('admin/adver_list/', system_setting.adver_list),  # 广告列表
     path('admin/adver_add/', cache_page(60 * 60 * 24 * 10)(system_setting.adver_add)),  # 添加广告
     path('admin/stores/', system_setting.stores),  # 选择商店的弹框
     path('admin/goods/', system_setting.goods),  # 选择商品的弹框

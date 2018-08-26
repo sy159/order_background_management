@@ -944,7 +944,17 @@ def wait_goods(request):
                       {'data': data_list, 'get_page': get_page, 'page_total': str(page_total),
                        'filter_content': get_filter_content})
     elif request.method == 'POST':
-        return HttpResponse(1)
+        try:
+            get_id = request.GET.get('goods_id')
+            get_judge=request.GET.get('judge')  # 判断审核通过还是失败
+            if get_judge:
+                # models.GoodsExamineLog.objects.create()
+                models.Goods.objects.filter(get_id=get_id).update(auth=2)  # 审核失败
+            else:
+                models.Goods.objects.filter(get_id=get_id).update(auth=1)  # 审核通过
+            return HttpResponse(1)
+        except Exception as e:
+            return HttpResponse(0)
 
 
 def goods_details(request):

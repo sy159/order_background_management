@@ -439,6 +439,17 @@ class GoodsComment(models.Model):
         db_table = 'goods_comment'
 
 
+class GoodsExamineLog(models.Model):
+    goods_id = models.IntegerField()
+    reason = models.CharField(max_length=255, blank=True, null=True)
+    create_time = models.DateTimeField(blank=True, null=True)
+    operator = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'goods_examine_log'
+
+
 class GoodsImage(models.Model):
     record_id = models.AutoField(primary_key=True)
     goods_id = models.IntegerField()
@@ -890,6 +901,7 @@ class SubOrders(models.Model):
     latitude = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
     address_type = models.IntegerField(blank=True, null=True)
     final_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    profit = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     last_up_time = models.BigIntegerField()
 
     class Meta:
