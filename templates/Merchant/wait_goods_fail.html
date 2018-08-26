@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>网站后台管理 Powered by pigcms.com</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+    <script src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.validate.js"></script>
+    <script type="text/javascript" src="/static/js/date/WdatePicker.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.colorpicker.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/artDialog/jquery.artDialog.js"></script>
+    <script type="text/javascript" src="/static/js/artDialog/iframeTools.js"></script>
+    <style>
+        ul.pages {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .high {
+            color: red;
+        }
+
+        .position {
+            display: inline-block;
+            padding-top: 15px;
+            padding-left: 5px;
+        }
+
+        .aui_buttons {
+            padding: 4px 0 0 0;
+        }
+
+        .btn {
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul id="tab-menu">
+            <a href="/admin/wait_goods/" id="status_0">待审核商品</a>|
+            <a href="/admin/nopass_goods/" id="status_1" class="on"> 未通过审核商品</a>
+        </ul>
+    </div>
+    <table class="search_table" width="100%">
+        <tr>
+            <td style="width:50%;">
+                <form action="/admin/nopass_goods/" method="get">
+                    <input type="text" name="filter_content" class="input-text"
+                           value="{{ filter_content|default_if_none:'' }}" placeholder="请输入商店名"/>
+                    <input type="submit" value="查询" class="button"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <div class="tab-box">
+        <form name="myform" id="myform1" action="" method="post">
+            <div class="table-list">
+                <table width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>商品名</th>
+                        <th>店铺名</th>
+                        <th>售价</th>
+                        <th>未通过理由</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    {% for i in data %}
+                        <tr>
+                            <td style="display: none" class="goodid">{{ i.goods_id }}</td>
+                            <td>{{ i.goods_name }}</td>
+                            <td>{{ i.shop_name }}</td>
+                            <td>{{ i.unit_price }}</td>
+                            <td>{{ i.reason }}</td>
+                            <td><a style="color: green;cursor: pointer" class="check_details"
+                                   href="javascript:void (0);">查看详情</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot id="tfoot">
+                    <tr>
+                        <td class="textcenter pagebar" colspan="12">
+                            <ul class="pages">
+                                <li id="first_page"><a
+                                        href='/admin/nopass_goods/?p=1&filter_content={{ filter_content|default_if_none:'' }}'>首页</a>
+                                </li>
+                                {% if  get_page  == '1' %}
+                                    <li><a href='#'>&lt;上一页</a></li>
+                                {% else %}
+                                    <li>
+                                        <a href='/admin/nopass_goods/?p={{ get_page |add:-1 }}&filter_content={{ filter_content|default_if_none:'' }}'>&lt;上一页</a>
+                                    </li>
+
+                                {% endif %}
+                                {% if  get_page  >=  page_total %}
+                                    <li><a href='#'>下一页&gt;</a></li>
+                                {% else %}
+                                    <li>
+                                        <a href='/admin/nopass_goods/?p={{ get_page |add:1 }}&filter_content={{ filter_content|default_if_none:'' }}'>下一页&gt;</a>
+                                    </li>
+                                {% endif %}
+                                <li>
+                                    <a href='/admin/nopass_goods/?p={{ page_total }}&filter_content={{ filter_content|default_if_none:'' }}'>尾页></a>
+                                </li>
+                                <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+<script>
+    $("#tbody").on('click', 'a', function () {
+        var clsn = this.className;
+        var goodid = $(this).parent().siblings()[0];
+        goodid = $(goodid).html();
+        if (clsn == 'check_details') {
+            art.dialog.open('/admin/goods_details?goods_id=' + goodid, {
+                title: '商品详情',
+                lock: true,
+                modal: true,
+                width: 800,
+                height: 400
+            });
+        }
+    });
+
+</script>
+</html>

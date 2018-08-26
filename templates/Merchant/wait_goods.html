@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>网站后台管理 Powered by pigcms.com</title>
     {% include 'Public/header.html' %}
 </head>
@@ -9,104 +9,148 @@
 <div class="mainbox">
     <div id="nav" class="mainnav_title">
         <ul id="tab-menu">
-            <a  href="/admin/wait_goods/" id="status_0" class="on">待审核商品</a>|
-            <a  href="/admin/nopass_goods/" id="status_1"> 未通过审核商品</a>
+            <a href="/admin/wait_goods/" id="status_0" class="on">待审核商品</a>|
+            <a href="/admin/nopass_goods/" id="status_1"> 未通过审核商品</a>
         </ul>
     </div>
     <table class="search_table" width="100%">
         <tr>
             <td style="width:50%;">
                 <form action="/admin/wait_goods/" method="get">
-                    <input type="text" name="filter_content" class="input-text" value="{{ filter_content|default_if_none:'' }}" placeholder="请输入商户名"/>
+                    <input type="text" name="filter_content" class="input-text"
+                           value="{{ filter_content|default_if_none:'' }}" placeholder="请输入商店名"/>
                     <input type="submit" value="查询" class="button"/>
                 </form>
             </td>
         </tr>
     </table>
     <div class="tab-box">
-       <form name="myform" id="myform1" action="" method="post">
-                <div class="table-list">
-                    <table width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>商品名</th>
-                                <th>店铺名</th>
-                                <th>售价</th>
-                                <th>详情</th>
-                                <th class="textcenter">审核操作</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody">
-                        {% for i in data %}
-                            <tr>
-                                <td style="display: none" class="goodid">{{ i.goods_id }}</td>
-                                <td>{{ i.goods_name }}</td>
-                                <td>{{ i.shop_name }}</td>
-                                <td>{{ i.unit_price }}</td>
-                                <td><a style="color: green;cursor: pointer"  href="javascript:void (0);" class="goods_details">查看详情</a></td>
-                                <td class="textcenter">
-                                    <a href="javascript:void(0);" class="pass" style="color: green;">通过</a>
-                                    &nbsp;&nbsp;|&nbsp;&nbsp;
-                                    <a href="javascript:void(0);" class="nopass" style="color: red;">不通过</a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                        <tfoot id="tfoot">
-                            <tr>
-                                <td class="textcenter pagebar" colspan="12">
-                                    <ul class="pages">
-                                        <li id="first_page"><a href='/admin/wait_goods/?p=1&filter_content={{ filter_content|default_if_none:'' }}'>首页</a></li>
-                                        {% if  get_page  == '1' %}
-                                            <li><a href='#'>&lt;上一页</a></li>
-                                        {% else %}
-                                            <li><a href='/admin/wait_goods/?p={{ get_page |add:-1}}&filter_content={{ filter_content|default_if_none:'' }}'>&lt;上一页</a></li>
+        <form name="myform" id="myform1" action="" method="post">
+            <div class="table-list">
+                <table width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>商品名</th>
+                        <th>店铺名</th>
+                        <th>售价</th>
+                        <th>详情</th>
+                        <th class="textcenter">审核操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    {% for i in data %}
+                        <tr>
+                            <td style="display: none" class="goodid">{{ i.goods_id }}</td>
+                            <td>{{ i.goods_name }}</td>
+                            <td>{{ i.shop_name }}</td>
+                            <td>{{ i.unit_price }}</td>
+                            <td><a style="color: green;cursor: pointer" href="javascript:void (0);"
+                                   class="goods_details">查看详情</a></td>
+                            <td class="textcenter">
+                                <a href="javascript:void(0);" class="pass" style="color: green;">通过</a>
+                                &nbsp;&nbsp;|&nbsp;&nbsp;
+                                <a href="javascript:void(0);" class="nopass" style="color: red;">不通过</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot id="tfoot">
+                    <tr>
+                        <td class="textcenter pagebar" colspan="12">
+                            <ul class="pages">
+                                <li id="first_page"><a
+                                        href='/admin/wait_goods/?p=1&filter_content={{ filter_content|default_if_none:'' }}'>首页</a>
+                                </li>
+                                {% if  get_page  == '1' %}
+                                    <li><a href='#'>&lt;上一页</a></li>
+                                {% else %}
+                                    <li>
+                                        <a href='/admin/wait_goods/?p={{ get_page |add:-1 }}&filter_content={{ filter_content|default_if_none:'' }}'>&lt;上一页</a>
+                                    </li>
 
-                                        {% endif %}
-                                        {% if  get_page  >=  page_total  %}
-                                            <li><a href='#'>下一页&gt;</a></li>
-                                        {% else %}
-                                            <li><a href='/admin/wait_goods/?p={{ get_page |add:1}}&filter_content={{ filter_content|default_if_none:'' }}'>下一页&gt;</a></li>
-                                        {% endif %}
-                                        <li><a href='/admin/wait_goods/?p={{ page_total }}&filter_content={{ filter_content|default_if_none:'' }}'>尾页></a></li>
-                                        <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                                {% endif %}
+                                {% if  get_page  >=  page_total %}
+                                    <li><a href='#'>下一页&gt;</a></li>
+                                {% else %}
+                                    <li>
+                                        <a href='/admin/wait_goods/?p={{ get_page |add:1 }}&filter_content={{ filter_content|default_if_none:'' }}'>下一页&gt;</a>
+                                    </li>
+                                {% endif %}
+                                <li>
+                                    <a href='/admin/wait_goods/?p={{ page_total }}&filter_content={{ filter_content|default_if_none:'' }}'>尾页></a>
+                                </li>
+                                <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
 
-                </div>
-            </form>
+            </div>
+        </form>
     </div>
 </div>
 </body>
 <script>
-    $("#tbody").on('click','a',function () {
-        var clsn=this.className;
-        var goodid=$(this).parent().siblings()[0];
-        goodid=$(goodid).html();
-        if(clsn=='nopass'){
-           art.dialog({
-               content: '不通过原因  <textarea cols="30" rows="5" id="cont"></textarea>',
-               okVal: "提交",
-               ok: function () { alert("ok了"+$("#cont").html()); },
-               cancelVal: "取消",
-               cancel: true,
-               lock: true,
-               modal:true,
+    $("#tbody").on('click', 'a', function () {
+        var clsn = this.className;
+        var goodid = $(this).parent().siblings()[0];
+        goodid = $(goodid).html();
+        if (clsn == 'nopass') {
+            art.dialog({
+                content: '不通过原因  <textarea cols="30" rows="5" id="cont"></textarea>',
+                okVal: "提交",
+                ok: function () {
+                    var cont = $("#cont").val();
+                    $.ajax({
+                        url: "/admin/wait_goods/?judge=1&goods_id=" + goodid + "&reason=" + cont,
+                        type: "post",
+                        dataType: "json",
+                        success: function (msg) {
+                            console.log(msg);
+                            if (msg == 1) {
+                                var win = art.dialog.open.origin;
+                                win.location.reload();
+                            } else {
+                                alert("操作失败！");
+                            }
+                        },
+                        error: function (xhr, textstatus, thrown) {
+                        }
+                    });
+                },
+                cancelVal: "取消",
+                cancel: true,
+                lock: true,
+                modal: true,
             });
-        }else if(clsn == 'pass'){
-            if(confirm("确定审核通过吗？")) {
-                alert("发请求");
+        } else if (clsn == 'pass') {
+            if (confirm("确定审核通过吗？")) {
+                $.ajax({
+                    url: "/admin/wait_goods/?goods_id=" + goodid,
+                    type: "post",
+                    dataType: "json",
+                    success: function (msg) {
+                        console.log(msg);
+                        if (msg == 1) {
+                            var win = art.dialog.open.origin;
+                            win.location.reload();
+                        } else {
+                            alert("操作失败！");
+                        }
+                    },
+                    error: function (xhr, textstatus, thrown) {
+                    }
+                });
             }
-        }else if(clsn == 'goods_details'){
-                art.dialog.open('/admin/goods_details/?goods_id='+goodid,{
+        } else if (clsn == 'goods_details') {
+            art.dialog.open('/admin/goods_details/?goods_id=' + goodid, {
                 title: '商品详情',
                 lock: true,
-                modal:true,
-                width:800,
-                 height:400
+                modal: true,
+                width: 800,
+                height: 400
             });
         }
     });

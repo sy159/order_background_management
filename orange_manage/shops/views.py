@@ -946,12 +946,19 @@ def wait_goods(request):
     elif request.method == 'POST':
         try:
             get_id = request.GET.get('goods_id')
-            get_judge=request.GET.get('judge')  # 判断审核通过还是失败
+            get_judge = request.GET.get('judge')  # 判断审核通过还是失败
             if get_judge:
-                # models.GoodsExamineLog.objects.create()
-                models.Goods.objects.filter(get_id=get_id).update(auth=2)  # 审核失败
+                get_reason = request.GET.get('reason')
+                data = {
+                    'goods_id': get_id,
+                    'reason': get_reason,
+                    'create_time': timezone.now(),
+                    'operator': request.operator_id,
+                }
+                models.GoodsExamineLog.objects.create(**data)
+                models.Goods.objects.filter(goods_id=get_id).update(auth=2)  # 审核失败
             else:
-                models.Goods.objects.filter(get_id=get_id).update(auth=1)  # 审核通过
+                models.Goods.objects.filter(goods_id=get_id).update(auth=1)  # 审核通过
             return HttpResponse(1)
         except Exception as e:
             return HttpResponse(0)
@@ -1001,3 +1008,38 @@ def goods_details(request):
             data_list.append(data_dict)
         data['add'] = data_list
     return render(request, 'Merchant/goods_details.html', {'data': data})
+
+
+def nopass_goods(request):
+    if request.method == 'GET':
+        get_pagesize = 15
+        get_page = request.GET.get('p', '1')
+        start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
+        end_num = start_nun + int(get_pagesize)  # 终止数据位置
+        if request.operator_region:
+            shop_list = models.Shop.objects.filter(region_id=request.operator_region).values_list('shop_id', flat=True)
+        else:
+            shop_list = models.Shop.objects.values_list('shop_id', flat=True)
+        all_obj = models.Goods.objects.filter(auth=2, shop_id__in=shop_list)
+        get_filter_content = request.GET.get('filter_content')
+        if get_filter_content:
+            filter_list = models.Shop.objects.filter(shop_name__contains=get_filter_content).values_list('shop_id',
+                                                                                                         flat=True)
+            all_obj = all_obj.filter(shop_id__in=filter_list)
+        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+            get_pagesize)
+        data_list = []
+        for i in all_obj.order_by('shop_id')[start_nun:end_num]:
+            obj = models.Shop.objects.get(shop_id=i.shop_id)
+            reason_obj = models.GoodsExamineLog.objects.get(goods_id=i.goods_id)
+            data_dict = {
+                'goods_id': i.goods_id,
+                'goods_name': i.goods_name,
+                'shop_name': obj.shop_name,
+                'unit_price': i.unit_price,
+                'reason': reason_obj.reason,
+            }
+            data_list.append(data_dict)
+        return render(request, 'Merchant/wait_goods_fail.html',
+                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total),
+                       'filter_content': get_filter_content})

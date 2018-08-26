@@ -58,6 +58,7 @@ urlpatterns = [
     path('admin/edit_circle/', merchants.edit_circle),  # 编辑商圈
     path('admin/store_list/', merchants.store_list),  # 店铺列表
     path('admin/wait_goods/', merchants.wait_goods),  # 待审核商品列表
+    path('admin/nopass_goods/', merchants.nopass_goods),  # 审核失败商品列表
     path('admin/goods_details/', merchants.goods_details),  # 商品详情
 
     # 基本信息相关
