@@ -75,7 +75,7 @@
     KindEditor.ready(function (k) {
         window.editor = k.create('#editor_id', {
             width: '100%',
-            resizeType: 1, {# 只能改变高度 #}
+            resizeType: 2, {# 只能改变高度 #}
             allowImageRemote: false, {# 不能上传网络图片 #}
             uploadJson: '/admin/upload_img/', {#处理url指定上传文件的服务器端程序#}
             items: [
@@ -89,6 +89,10 @@
             ]
         });
     })
+
+    $("#close").click(function () {
+        art.dialog.close();
+    });//关闭对话框
 </script>
 </body>
 </html>

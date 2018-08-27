@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>推文列表</title>
+    <title>网站后台管理</title>
+    {% include 'Public/header.html' %}
+</head>
+<body>
+
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul class="tbody">
+            <a href="/admin/system_news/">平台推文分类</a>|
+            <a class="on"> {{ category_name }} - 内容列表</a>|
+            <a href="javascript:add_news()" class="add_row">添加推文</a>|
+        </ul>
+    </div>
+    <form name="myform" id="myform" action="" method="post">
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col width="240" align="center">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>标题</th>
+                    <th>添加时间</th>
+                    <th>最后修改时间</th>
+                    <th>排序</th>
+                    <th>状态</th>
+                    <th class="textcenter">操作</th>
+                </tr>
+                </thead>
+                <tbody class="tbody">
+                {% for i in news_list %}
+                    <tr>
+{#                        <input type="hidden" name="region_id" id="region_id" value="{{ region_id }}">#}
+                        <td>{{ i.id }}</td>
+                        <td>{{ i.title }}</td>
+                        <td>{{ i.create_time }}</td>
+                        <td>{{ i.last_update_time }}</td>
+                        <td>{{ i.sort }}</td>
+                        {% if i.status %}
+                            <td><span style="color: green; ">开启</span></td>
+                        {% else %}
+                            <td><span style="color: red; ">关闭</span></td>
+                        {% endif %}
+{#                        <td><a href="/admin/address_list/?campus_id={{ i.campus_id }}" style="color: green;">地址列表</a>#}
+{#                        </td>#}
+                        <td class="textcenter">
+                            <a href="javascript:void(0);" class="edit_row">编辑</a>
+                            <a href="javascript:void(0);" class="delete_row">删除</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    function add_news() {
+        art.dialog.open('/admin/add_news', {
+            title: '添加推文',
+            lock: false,
+            modal: true,
+            width: 900,
+            height:700
+        });
+    }
+</script>
+
+</body>
+</html>

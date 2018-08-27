@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加推文分类</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
+    {% include 'Public/header.html' %}
+</head>
+<body>
+<form id="myform" method="post" action="" frame="true">
+    <table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
+        <tr>
+            <th width="70">标题</th>
+            <td>
+                <input type="text" id="category_name" class="input fl" name="category_name" value="" size="50"
+                       placeholder=推文分类 validate="maxlength:50,required:true"/>
+                <strong class='high position category_name'>*</strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="70">排序</th>
+            <td>
+                <input type="text" id=sort" class="input fl" name="sort" value="0" size="10" placeholder="排序"
+                       validate="maxlength:20,required:true,digits:true"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="70">状态</th>
+            <td class="radio_box">
+                {# {% if data.status == 1 %}#}
+                <input type="radio" id="status" name="status" value="1" checked>正常
+                <input type="radio" id="status" name="status" value="0"> 禁止
+                {#{% else %}#}
+                {#    <input type="radio" name="status" value="1">正常#}
+                {#    <input type="radio" name="status" value="0" checked> 禁止#}
+                {#{% endif %}#}
+                <strong class='high position status'>*</strong>
+            </td>
+        </tr>
+    </table>
+    <div class="btn">
+        <td colspan="2" class="aui_footer">
+            <div class="aui_buttons">
+                <button id="edit" class="aui_state_highlight" type="submit">提交</button>
+                <button id="close" type="button">关闭</button>
+            </div>
+        </td>
+    </div>
+</form>
+<script type="text/javascript">
+    $("#myform").submit(function (e) {
+            e.preventDefault();
+            if ($("#category_name").val().length == 0) {
+                $(".category_name").html("分类名不能为空!");
+                return false;
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    dataType: "json",
+                    data: $("#myform").serialize(),
+                    success: function (msg) {
+                        if (msg === 1) {
+                            result("添加成功", "succeed");
+                            var win = art.dialog.open.origin;
+                            win.location.reload();
+                        } else {
+                            result("添加失败", "error");
+                        }
+                    },
+                    error: function (xhr, textstatus, thrown) {
+                    }
+                });
+                return true;
+            }
+        }
+    );
+
+    function result(title, flag) {
+        art.dialog({
+            content: title,
+            //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+            icon: flag,
+            fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+            time: 3,//如果有cancel方法的话会调用cancel方法
+        });
+        var time = setInterval(function () {
+            art.dialog.close()
+        }, 2000);
+    }
+
+    $("#close").click(function () {
+        art.dialog.close();
+    });//关闭对话框
+</script>
+</body>
+</html>

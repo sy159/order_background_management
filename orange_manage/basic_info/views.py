@@ -7,9 +7,7 @@ import json
 
 
 def account_list(request):
-    '''
-    管理员列表
-    '''
+    """管理员列表"""
     get_pagesize = 15
     get_page = request.GET.get('p', '1')
     get_level = request.operator_level
@@ -97,9 +95,7 @@ def account_list(request):
 
 
 def add_account(request):
-    '''
-    添加管理员
-    '''
+    """添加管理员"""
     if request.method == 'GET':
         operate_level = request.operator_level
         operate_region = request.operator_region

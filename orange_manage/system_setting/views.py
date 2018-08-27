@@ -350,3 +350,45 @@ def modify_status(request):
             return HttpResponse(1)
         except Exception:
             return HttpResponse(0)
+
+
+def system_news_index(request):
+    if request.method == 'GET':
+        data = models.SystemNewsCategory.objects.all()
+        return render(request, 'System_Setting/SystemNews/index.html', {'data': data})
+
+
+def add_news_category(request):
+    if request.method == 'GET':
+        return render(request, 'System_Setting/SystemNews/add_news_category.html')
+    if request.method == 'POST':
+        category_name = request.POST.get("category_name")
+        sort = request.POST.get("sort")
+        status = request.POST.get("status")
+        print(category_name)
+        if not category_name:
+            return HttpResponse(0)
+        if not sort:
+            sort = 0
+        models.SystemNewsCategory.objects.create(category_name=category_name, sort=sort, status=status)
+        return HttpResponse(1)
+
+
+def system_news_list(request):
+    category_id = request.GET.get('category_id')
+    category = models.SystemNewsCategory.objects.filter(id=category_id).values('category_name').first()
+    news_list = models.SystemNews.objects.filter(category_id=category_id, region_id=0).order_by('sort').values(
+        'id',
+        'title',
+        'create_time',
+        'last_update_time',
+        'sort',
+        'status').all()
+    return render(request, 'System_Setting/SystemNews/system_news_list.html',
+                  {'news_list': news_list, 'category_name': category.get('category_name')})
+
+
+def add_system_news(request):
+    category_id = request.GET.get('category_id')
+    return render(request, 'System_Setting/SystemNews/add_news.html')
+    # {'news_list': news_list, 'category_name': category_name})
