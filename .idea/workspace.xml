@@ -2,266 +2,106 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c8e1383a-a69b-4780-bf4c-9b9c72550e8f" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/Merchant/wait_goods_fail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/orange_web.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/orange_web.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CQGY-ZZQ/0c2d7e2c193ffb3775ef5d89a82b82d6.djcache" beforeDir="false" afterPath="$PROJECT_DIR$/CQGY-ZZQ/0c2d7e2c193ffb3775ef5d89a82b82d6.djcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orange_manage/shops/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/shops/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orange_web/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_web/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Merchant/wait_goods.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Merchant/wait_goods.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/kind.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/kind.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/venv/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="1865188599">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="html" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="HTML" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="html" value="89" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="HTML" value="89" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/orange_web/settings.py">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/kind.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="24" column="12" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/orange_web/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="60" column="47" lean-forward="true" selection-start-line="60" selection-start-column="47" selection-end-line="60" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/orange_manage/shops/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="77">
-              <caret line="1012" column="16" selection-start-line="1012" selection-start-column="4" selection-end-line="1012" selection-end-column="16" />
+            <state relative-caret-position="431">
+              <caret line="28" column="114" selection-start-line="28" selection-start-column="114" selection-end-line="28" selection-end-column="114" />
               <folding>
-                <element signature="e#306#14033#0" />
-                <element signature="e#306#326#1" />
-                <element signature="e#488#13057#0" />
-                <element signature="e#615#830#0" />
-                <element signature="e#857#1365#0" />
-                <element signature="e#1619#4485#0" />
-                <element signature="e#1654#3206#0" />
-                <element signature="e#1704#1890#0" />
-                <element signature="e#1962#2151#0" />
-                <element signature="e#2194#2403#0" />
-                <element signature="e#2725#3206#0" />
-                <element signature="e#2841#3158#0" />
-                <element signature="e#3241#4485#0" />
-                <element signature="e#4004#4485#0" />
-                <element signature="e#4120#4437#0" />
-                <element signature="e#4529#7036#0" />
-                <element signature="e#4761#5566#0" />
-                <element signature="e#4811#5024#0" />
-                <element signature="e#5096#5312#0" />
-                <element signature="e#5355#5566#0" />
-                <element signature="e#5601#6297#0" />
-                <element signature="e#5651#5828#0" />
-                <element signature="e#5900#6077#0" />
-                <element signature="e#6120#6297#0" />
-                <element signature="e#6591#7036#0" />
-                <element signature="e#6703#6992#0" />
-                <element signature="e#7080#9606#0" />
-                <element signature="e#7331#8136#0" />
-                <element signature="e#7381#7594#0" />
-                <element signature="e#7666#7882#0" />
-                <element signature="e#7925#8136#0" />
-                <element signature="e#8171#8867#0" />
-                <element signature="e#8221#8398#0" />
-                <element signature="e#8470#8647#0" />
-                <element signature="e#8690#8867#0" />
-                <element signature="e#9161#9606#0" />
-                <element signature="e#9273#9562#0" />
-                <element signature="e#9633#12232#0" />
-                <element signature="e#9957#10762#0" />
-                <element signature="e#10007#10220#0" />
-                <element signature="e#10292#10508#0" />
-                <element signature="e#10551#10762#0" />
-                <element signature="e#10797#11493#0" />
-                <element signature="e#10847#11024#0" />
-                <element signature="e#11096#11273#0" />
-                <element signature="e#11316#11493#0" />
-                <element signature="e#11787#12232#0" />
-                <element signature="e#11899#12188#0" />
-                <element signature="e#12489#12833#0" />
-                <element signature="e#12910#13056#0" />
-                <element signature="e#13099#14033#0" />
-                <element signature="e#13568#13908#0" />
-                <element signature="e#14064#16352#0" />
-                <element signature="e#14064#14083#1" />
-                <element signature="e#14124#15503#0" />
-                <element signature="e#14282#15396#0" />
-                <element signature="e#14888#15171#0" />
-                <element signature="e#15198#15396#0" />
-                <element signature="e#15545#16352#0" />
-                <element signature="e#15946#16049#0" />
-                <element signature="e#16384#19707#0" />
-                <element signature="e#16384#16404#1" />
-                <element signature="e#16422#19672#0" />
-                <element signature="e#16462#19154#0" />
-                <element signature="e#17233#17391#0" />
-                <element signature="e#17476#17649#0" />
-                <element signature="e#18147#19075#0" />
-                <element signature="e#19204#19672#0" />
-                <element signature="e#19740#22303#0" />
-                <element signature="e#19740#19760#1" />
-                <element signature="e#19801#22303#0" />
-                <element signature="e#20528#20674#0" />
-                <element signature="e#20743#20904#0" />
-                <element signature="e#21374#22227#0" />
-                <element signature="e#22334#25021#0" />
-                <element signature="e#22334#22354#1" />
-                <element signature="e#22395#25021#0" />
-                <element signature="e#23122#23268#0" />
-                <element signature="e#23337#23498#0" />
-                <element signature="e#24053#24947#0" />
-                <element signature="e#25054#25209#0" />
-                <element signature="e#25054#25075#1" />
-                <element signature="e#25242#25417#0" />
-                <element signature="e#25242#25263#1" />
-                <element signature="e#25318#25416#0" />
-                <element signature="e#25449#27836#0" />
-                <element signature="e#25449#25468#1" />
-                <element signature="e#25509#27836#0" />
-                <element signature="e#25670#26649#0" />
-                <element signature="e#26049#26207#0" />
-                <element signature="e#26242#26453#0" />
-                <element signature="e#26676#26895#0" />
-                <element signature="e#27347#27624#0" />
-                <element signature="e#27359#27584#0" />
-                <element signature="e#27706#27835#0" />
-                <element signature="e#27869#30264#0" />
-                <element signature="e#27869#27889#1" />
-                <element signature="e#27930#30264#0" />
-                <element signature="e#28091#29070#0" />
-                <element signature="e#28470#28628#0" />
-                <element signature="e#28663#28874#0" />
-                <element signature="e#29097#29316#0" />
-                <element signature="e#29768#30045#0" />
-                <element signature="e#29780#30005#0" />
-                <element signature="e#30134#30263#0" />
-                <element signature="e#30297#32690#0" />
-                <element signature="e#30297#30317#1" />
-                <element signature="e#30358#32690#0" />
-                <element signature="e#30519#31498#0" />
-                <element signature="e#30898#31056#0" />
-                <element signature="e#31091#31302#0" />
-                <element signature="e#31525#31744#0" />
-                <element signature="e#32196#32473#0" />
-                <element signature="e#32208#32433#0" />
-                <element signature="e#32560#32689#0" />
-                <element signature="e#32725#33570#0" />
-                <element signature="e#32725#32745#1" />
-                <element signature="e#33222#33420#0" />
-                <element signature="e#33234#33384#0" />
-                <element signature="e#33608#34057#0" />
-                <element signature="e#33608#33627#1" />
-                <element signature="e#33766#34057#0" />
-                <element signature="e#34096#35262#0" />
-                <element signature="e#34096#34116#1" />
-                <element signature="e#34157#34525#0" />
-                <element signature="e#34287#34443#0" />
-                <element signature="e#34569#35005#0" />
-                <element signature="e#35051#35262#0" />
-                <element signature="e#35299#36338#0" />
-                <element signature="e#35299#35319#1" />
-                <element signature="e#35900#36116#0" />
-                <element signature="e#36198#36337#0" />
-                <element signature="e#36373#37001#0" />
-                <element signature="e#36373#36394#1" />
-                <element signature="e#36435#36561#0" />
-                <element signature="e#36605#37001#0" />
-                <element signature="e#37037#38314#0" />
-                <element signature="e#37037#37058#1" />
-                <element signature="e#37099#37465#0" />
-                <element signature="e#37229#37385#0" />
-                <element signature="e#37509#38128#0" />
-                <element signature="e#38174#38314#0" />
-                <element signature="e#38347#39565#0" />
-                <element signature="e#38956#39417#0" />
-                <element signature="e#39176#39381#0" />
-                <element signature="e#39597#40060#0" />
-                <element signature="e#39727#40060#0" />
-                <element signature="e#39869#40011#0" />
-                <element signature="e#40093#41092#0" />
-                <element signature="e#40129#40442#0" />
-                <element signature="e#40233#40366#0" />
-                <element signature="e#40486#40914#0" />
-                <element signature="e#40960#41092#0" />
-                <element signature="e#41124#42854#0" />
-                <element signature="e#41160#42413#0" />
-                <element signature="e#41968#42153#0" />
-                <element signature="e#41980#42113#0" />
-                <element signature="e#42235#42412#0" />
-                <element signature="e#42457#42854#0" />
-                <element signature="e#43544#43825#0" />
-                <element signature="e#44633#45341#0" />
-                <element signature="e#44650#45333#0" />
-                <element signature="e#44789#45161#0" />
-                <element signature="e#44825#45026#0" />
-                <element signature="e#44989#47031#0" />
-                <element signature="e#45252#45383#0" />
-                <element signature="e#45438#45604#0" />
-                <element signature="e#45616#46112#0" />
-                <element signature="e#46216#46748#0" />
-                <element signature="e#46295#46716#0" />
-                <element signature="e#46307#46430#0" />
-                <element signature="e#46528#46639#0" />
+                <element signature="n#style#0;n#textarea#0;n#td#0;n#tr#3;n#table#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wait_goods_fail.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/Merchant/wait_goods_fail.html">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/Deliver/user_edit.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-566">
-              <caret line="46" column="23" lean-forward="true" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+            <state relative-caret-position="421">
+              <caret line="113" selection-start-line="113" selection-end-line="117" selection-end-column="73" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/Deliver/user_add.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="320">
+              <caret line="55" column="70" lean-forward="true" selection-start-line="55" selection-start-column="17" selection-end-line="55" selection-end-column="70" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/Adver/adver_add.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="464">
+              <caret line="35" column="62" lean-forward="true" selection-start-line="35" selection-start-column="62" selection-end-line="35" selection-end-column="62" />
               <folding>
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#select#0;n#td#0;n#tr#2;n#table#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="middleware.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/orange_manage/middleware.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/Index/add_address.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="24" column="31" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="31" />
-              <folding>
-                <element signature="e#0#52#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="wait_goods.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/Merchant/wait_goods.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="58" column="143" selection-start-line="58" selection-start-column="124" selection-end-line="58" selection-end-column="143" />
-              <folding>
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/orange_manage/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="441" column="21" selection-start-line="441" selection-start-column="6" selection-end-line="441" selection-end-column="21" />
+            <state relative-caret-position="66">
+              <caret line="3" column="26" lean-forward="true" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -273,6 +113,8 @@
       <find>adver_edit</find>
       <find>goodse</find>
       <find>print</find>
+      <find>colspan</find>
+      <find>`</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -287,6 +129,8 @@
         <option value="$PROJECT_DIR$/orange_web/urls.py" />
         <option value="$PROJECT_DIR$/orange_manage/shops/views.py" />
         <option value="$PROJECT_DIR$/templates/Merchant/wait_goods_fail.html" />
+        <option value="$PROJECT_DIR$/templates/Deliver/user_edit.html" />
+        <option value="$PROJECT_DIR$/templates/kind.html" />
       </list>
     </option>
   </component>
@@ -296,58 +140,69 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths />
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="5" />
-    <option name="y" value="5" />
-    <option name="width" value="1267" />
-    <option name="height" value="739" />
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1920" />
+    <option name="height" value="1009" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="college_circle_management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="college_circle_management" type="462c0819:PsiDirectoryNode" />
+              <item name="CollegeCircleManagement" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CollegeCircleManagement" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="college_circle_management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="college_circle_management" type="462c0819:PsiDirectoryNode" />
-              <item name="orange_manage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="college_circle_management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="college_circle_management" type="462c0819:PsiDirectoryNode" />
-              <item name="orange_web" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="college_circle_management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="college_circle_management" type="462c0819:PsiDirectoryNode" />
+              <item name="CollegeCircleManagement" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CollegeCircleManagement" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="college_circle_management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="college_circle_management" type="462c0819:PsiDirectoryNode" />
+              <item name="CollegeCircleManagement" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CollegeCircleManagement" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
+              <item name="Adver" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CollegeCircleManagement" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CollegeCircleManagement" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="Deliver" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CollegeCircleManagement" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CollegeCircleManagement" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="Index" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CollegeCircleManagement" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CollegeCircleManagement" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="System_Setting" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CollegeCircleManagement" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CollegeCircleManagement" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="Trade" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -365,6 +220,32 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="CollegeCircleManagement" type="Python.DjangoServer" factoryName="Django server">
+      <module name="orange_web" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="orange_web.settings" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/../CollegeCircleManagementVenv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="127.0.0.1" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -388,29 +269,30 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="0" y="23" width="1920" height="1009" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.39593908" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25340393" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="right" id="SciView" order="3" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13951011" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3293348" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.39585605" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -427,24 +309,8 @@
     <entry file="file://$PROJECT_DIR$/templates/Merchant/goods_details.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://D:/python3.6.5/Lib/site-packages/pymysql/cursors.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="164" selection-start-line="164" selection-end-line="164" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../orange_web/orange_manage/system_setting/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-234">
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
-            <element signature="e#285#3928#0" />
-            <element signature="e#3974#4285#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://D:/python3.6.5/Lib/site-packages/pymysql/cursors.py" />
+    <entry file="file://$PROJECT_DIR$/../../orange_web/orange_manage/system_setting/views.py" />
     <entry file="file://$PROJECT_DIR$/run.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -456,17 +322,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="47">
           <caret line="113" column="39" lean-forward="true" selection-start-line="113" selection-start-column="39" selection-end-line="113" selection-end-column="39" />
-          <folding>
-            <element signature="e#353#2587#0" />
-            <element signature="e#2617#4245#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/orange_web/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="24" column="12" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -474,18 +329,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
           <caret line="48" column="47" lean-forward="true" selection-start-line="48" selection-start-column="47" selection-end-line="48" selection-end-column="47" />
-          <folding>
-            <element signature="e#3974#4285#0" />
-            <element signature="e#4316#5563#0" />
-            <element signature="e#8592#9354#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Deliver/user_edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="75" column="39" selection-start-line="75" selection-start-column="27" selection-end-line="75" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -517,16 +360,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/orange_manage/models.py">
+    <entry file="file://$PROJECT_DIR$/orange_web/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="441" column="21" selection-start-line="441" selection-start-column="6" selection-end-line="441" selection-end-column="21" />
+        <state relative-caret-position="528">
+          <caret line="24" column="12" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/orange_web/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="60" column="47" selection-start-line="60" selection-start-column="47" selection-end-line="60" selection-end-column="47" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/orange_manage/middleware.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
+        <state relative-caret-position="496">
           <caret line="24" column="31" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="31" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
@@ -534,26 +384,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/orange_web/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="60" column="47" lean-forward="true" selection-start-line="60" selection-start-column="47" selection-end-line="60" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Merchant/wait_goods.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="58" column="143" selection-start-line="58" selection-start-column="124" selection-end-line="58" selection-end-column="143" />
-          <folding>
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/orange_manage/shops/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
+        <state relative-caret-position="826">
           <caret line="1012" column="16" selection-start-line="1012" selection-start-column="4" selection-end-line="1012" selection-end-column="16" />
           <folding>
             <element signature="e#306#14033#0" />
@@ -716,29 +549,68 @@
             <element signature="e#42235#42412#0" />
             <element signature="e#42457#42854#0" />
             <element signature="e#43544#43825#0" />
-            <element signature="e#44633#45341#0" />
-            <element signature="e#44650#45333#0" />
-            <element signature="e#44789#45161#0" />
-            <element signature="e#44825#45026#0" />
-            <element signature="e#44989#47031#0" />
-            <element signature="e#45252#45383#0" />
-            <element signature="e#45438#45604#0" />
-            <element signature="e#45616#46112#0" />
-            <element signature="e#46216#46748#0" />
-            <element signature="e#46295#46716#0" />
-            <element signature="e#46307#46430#0" />
-            <element signature="e#46528#46639#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/Merchant/wait_goods_fail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-566">
-          <caret line="46" column="23" lean-forward="true" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+        <state relative-caret-position="22">
+          <caret line="46" column="23" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Merchant/wait_goods.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="826">
+          <caret line="58" column="68" selection-start-line="58" selection-start-column="68" selection-end-line="58" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/orange_manage/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="826">
+          <caret line="441" column="21" selection-start-line="441" selection-start-column="6" selection-end-line="441" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Adver/adver_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="35" column="62" lean-forward="true" selection-start-line="35" selection-start-column="62" selection-end-line="35" selection-end-column="62" />
           <folding>
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#td#0;n#tr#2;n#table#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Index/add_address.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="26" lean-forward="true" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Deliver/user_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="55" column="70" lean-forward="true" selection-start-line="55" selection-start-column="17" selection-end-line="55" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Deliver/user_edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="113" selection-start-line="113" selection-end-line="117" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/kind.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="431">
+          <caret line="28" column="114" selection-start-line="28" selection-start-column="114" selection-end-line="28" selection-end-column="114" />
+          <folding>
+            <element signature="n#style#0;n#textarea#0;n#td#0;n#tr#3;n#table#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

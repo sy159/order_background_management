@@ -2,34 +2,88 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>撰写推文</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
+    {% include 'Public/header.html' %}
 </head>
 <body>
 <form action="/admin/kindeditor/" method="post">
-<textarea id="editor_id" name="content" style="height: 300px" ></textarea>
+
+    <table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
+        <tr>
+            <th width="10%">标题</th>
+            <td>
+                <input type="text" class="input fl" name="title" size="75" placeholder="推文标题" validate="maxlength:50"/>
+                <strong class='high position phone_number'>*</strong>
+            </td>
+
+        </tr>
+        <tr>
+            <th width="10%">分类</th>
+{#            <if condition="$category">#}
+                <td>
+                    <select name="category_id">
+                        {% for i in data_list %}
+                            <option value="{{ i.0 }}">{{ i.1 }}</option>
+                        {% endfor %}
+                        <input type="hidden" class="pub" id="cityarea" name="campus" value="{{ data.campus_id }}">
+                    </select>
+                    <strong class='high position phone_number'>*</strong>
+                </td>
+
+{#            </if>#}
+        </tr>
+        <tr>
+            <th width="10%">排序</th>
+
+            <td>
+                <input type="text" class="input fl" name="sort" value="0" placeholder="快报标题"
+                       validate="maxlength:50,digits:true"/>
+                <strong class='high position phone_number'>*</strong>
+            </td>
+
+        </tr>
+        <tr>
+            <th width="10%">内容</th>
+            <td><textarea id="editor_id" name="content" style="height: 300px"></textarea></td>
+            <strong class='high position phone_number'>*</strong>
+        </tr>
+        <tr>
+            <th width="10%">状态</th>
+            <td class="radio_box">
+                {% if data.status == 1 %}
+                    <input type="radio" name="status" value="1" checked>正常
+                    <input type="radio" name="status" value="0"> 禁止
+                {% else %}
+                    <input type="radio" name="status" value="1">正常
+                    <input type="radio" name="status" value="0" checked> 禁止
+                {% endif %}
+            </td>
+        </tr>
+    </table>
     <input type="submit" value="提交">
 </form>
 <script src="/static/js/kindeditor/kindeditor-all-min.js"></script>
-    <script src="/static/js/kindeditor/lang/zh-CN.js"></script>
-    <script src="/static/js/kindeditor/themes/default/default.css"></script>
-    <script>
-        KindEditor.ready(function (k) {
-            window.editor = k.create('#editor_id',{
-                width : '100%',
-                resizeType:1, {# 只能改变高度 #}
-                allowImageRemote:false,{# 不能上传网络图片 #}
-                uploadJson : '/admin/upload_img/', {#处理url指定上传文件的服务器端程序#}
-                 items:[
-                        'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
-                        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
-                        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
-                        'superscript', 'clearhtml', 'quickformat', 'selectall', '/',
-                        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
-                        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
-                        'table', 'hr', 'emoticons', 'baidumap', 'pagebreak','anchor', 'link', 'unlink',
-                    ]
-            });
-        })
-    </script>
+<script src="/static/js/kindeditor/lang/zh-CN.js"></script>
+<script src="/static/js/kindeditor/themes/default/default.css"></script>
+<script>
+    KindEditor.ready(function (k) {
+        window.editor = k.create('#editor_id', {
+            width: '100%',
+            resizeType: 1, {# 只能改变高度 #}
+            allowImageRemote: false, {# 不能上传网络图片 #}
+            uploadJson: '/admin/upload_img/', {#处理url指定上传文件的服务器端程序#}
+            items: [
+                'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+                'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                'superscript', 'clearhtml', 'quickformat', 'selectall', '/',
+                'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+                'table', 'hr', 'emoticons', 'baidumap', 'pagebreak', 'anchor', 'link', 'unlink',
+            ]
+        });
+    })
+</script>
 </body>
 </html>
