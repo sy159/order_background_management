@@ -92,6 +92,11 @@ urlpatterns = [
     path('admin/withdraw_list/', system_setting.withdraw_list),  # 提款列表
     path('admin/modify_status/', system_setting.modify_status),  # 修改支付状态
 
+    path('admin/system_news/', system_setting.system_news_index),  # 平台推文
+    path('admin/add_news_category', system_setting.add_news_category),  # 添加推文分类
+    path('admin/system_news_list', system_setting.system_news_list),  # 平台推文列表
+    path('admin/add_news', system_setting.add_system_news),  # 平台推文列表
+
     # 用户管理
     path('admin/user_list/', users.user_list),  # 广告信息列表
     path('admin/user_edit/', users.user_edit),  # 编辑广告信息

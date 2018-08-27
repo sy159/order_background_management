@@ -244,30 +244,23 @@ class Coupon(models.Model):
     coupon_type = models.IntegerField()
     use_condition = models.DecimalField(max_digits=10, decimal_places=2)
     coupon_value = models.DecimalField(max_digits=10, decimal_places=2)
-    description = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, blank=True, null=True)
     validity_period = models.IntegerField(blank=True, null=True)
     create_time = models.DateTimeField()
-    amount = models.IntegerField()
-    total_amount = models.IntegerField()
-    limit_quantity = models.IntegerField()
+    publish_amount = models.IntegerField()
+    spare_amount = models.IntegerField(blank=True, null=True)
+    user_limit_quantity = models.IntegerField(blank=True, null=True)
     status = models.IntegerField()
     superposable = models.IntegerField()
-    is_specific = models.IntegerField()
+    shop_classify = models.CharField(max_length=11)
+    goods_classify = models.CharField(max_length=255)
+    start_time = models.DateTimeField(blank=True, null=True)
+    end_time = models.DateTimeField(blank=True, null=True)
+    just_newuser = models.IntegerField()
 
     class Meta:
         managed = False
         db_table = 'coupon'
-
-
-class CouponGoods(models.Model):
-    record_id = models.AutoField(primary_key=True)
-    coupon_id = models.IntegerField()
-    type = models.IntegerField()
-    target_id = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'coupon_goods'
 
 
 class Distributor(models.Model):
@@ -727,9 +720,9 @@ class Shop(models.Model):
     region_id = models.IntegerField(blank=True, null=True)
     phone_number = models.CharField(max_length=255)
     shop_type = models.IntegerField()
-    province = models.IntegerField()
-    city = models.IntegerField()
-    county = models.IntegerField()
+    province = models.CharField(max_length=11)
+    city = models.CharField(max_length=11)
+    county = models.CharField(max_length=11)
     address = models.CharField(max_length=255)
     business_license = models.CharField(max_length=255)
     catering_license = models.CharField(max_length=255, blank=True, null=True)
@@ -798,6 +791,15 @@ class ShopAuditLog(models.Model):
     class Meta:
         managed = False
         db_table = 'shop_audit_log'
+
+
+class ShopCategory(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255)
+
+    class Meta:
+        managed = False
+        db_table = 'shop_category'
 
 
 class ShopComment(models.Model):
@@ -907,6 +909,31 @@ class SubOrders(models.Model):
     class Meta:
         managed = False
         db_table = 'sub_orders'
+
+
+class SystemNews(models.Model):
+    region_id = models.IntegerField()
+    category_id = models.IntegerField()
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    create_time = models.IntegerField()
+    last_update_time = models.IntegerField()
+    sort = models.IntegerField()
+    status = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'system_news'
+
+
+class SystemNewsCategory(models.Model):
+    category_name = models.CharField(max_length=22)
+    sort = models.IntegerField()
+    status = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'system_news_category'
 
 
 class Test(models.Model):

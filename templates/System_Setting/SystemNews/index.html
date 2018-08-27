@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>平台推文</title>
+    {% include 'Public/header.html' %}
+</head>
+<body>
+
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul class="tbody">
+            <a href="" class="on">平台推文列表</a>|
+            {% if request.operator_region == 0 %}
+                <a href="javascript:add_news_category()" class="add_row">添加推文分类</a>
+            {% endif %}
+        </ul>
+    </div>
+    <form name="myform" id="myform" action="" method="post">
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>排序</th>
+                    <th>编号</th>
+                    <th>分类名称</th>
+                    <th>内容列表</th>
+                    <th>状态</th>
+                    <th class="textcenter">操作</th>
+                </tr>
+                </thead>
+                <tbody class="tbody">
+                {% for i in data %}
+                    <tr>
+                        <td>{{ i.sort }}</td>
+                        <td>{{ i.id }}</td>
+                        <td>{{ i.category_name }}</td>
+                        <td><a href="/admin/system_news_list?category_id={{ i.id }}" style="color: green;">查看列表</a></td>
+                        <td>
+                            {% if i.status == 1 %}
+                                <span style="color: green; ">开启</span>
+                            {% else %}
+                                <span style="color: red; ">关闭</span>
+                            {% endif %}
+                        </td>
+                        <td class="textcenter">
+                            <a href="javascript:void(0);" class="edit_row">编辑</a> |
+                            <a href="javascript:void(0);" class="delete_row" parameter="id=40">删除</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+{% if request.operator_region == 0 %}
+    <script type="text/javascript">
+        function add_news_category() {
+            art.dialog.open('/admin/add_news_category', {
+                title: '添加推文分类',
+                lock: true,
+                modal: true,
+                width: 600,
+                height: 400
+            });
+        }
+    </script>
+{% endif %}
+</body>
+</html>
