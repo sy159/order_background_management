@@ -22,11 +22,12 @@
             {#<if condition="$category">#}
             <td>
                 <select name="category_id">
-                    {% for categorys in categorys %}
-                        <option value="{{ classify.category_id }}">{{ categorys.category_name }}</option>
+
+                    {% for category in categorys %}
+                        <option value="{{ category.id }}">{{ category.category_name }}</option>
                     {% endfor %}
                     <input type="hidden" class="pub" id="category_id" name="classify_id"
-                           value="{{ categorys.0.category_id }}">
+                           value="1">
                 </select>
             </td>
             {#</if>#}
@@ -75,7 +76,7 @@
         window.editor = k.create('#content', {
             width: '100%',
             resizeType: 2, {# 只能改变高度 #}
-            allowImageRemote: false, {# 不能上传网络图片 #}
+            allowImageRemote: true, {# 不能上传网络图片 #}
             uploadJson: '/admin/upload_img/', {#处理url指定上传文件的服务器端程序#}
             items: [
                 'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',

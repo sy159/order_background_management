@@ -27,19 +27,23 @@ def login(request):
         get_name_obj = models.Admin.objects.filter(account=get_name).first()
         if get_name_obj:  # 判断用户是否存在
             if get_name_obj.pwd == get_pwd:  # 判断密码是否正确
-                judge = models.Admin.objects.filter(account=get_name).values_list('admin_key').first()[0]
-                if judge:  # 判断是否第一次登陆
-                    if val.validation(judge, get_verifycode):  # 判断验证码是否正确
+                admin = models.Admin.objects.filter(account=get_name).first()
+                if admin.admin_key:  # 判断是否第一次登陆
+                    if val.validation(admin.admin_key, get_verifycode):  # 判断验证码是否正确
                         request.session['user'] = get_name
                         request.session['judge'] = True
                         models.Admin.objects.filter(account=get_name).update(last_time=last_time, last_ip=get_ip,
                                                                              login_count=F('login_count') + 1)
+                        admin = models.Admin.objects.filter(account=get_name).first()
+                        request.session['admin'] = admin
+                        request.session['region_id'] = admin.open_admin_region
                         return redirect('/admin/index/')
                     else:
                         return render(request, 'login.html', {'error_msg': '验证码错误'})
                 else:
                     request.session['user'] = get_name
                     request.session['judge'] = True
+                    request.session['region_id'] = admin.open_admin_region
                     models.Admin.objects.filter(account=get_name).update(last_time=last_time, last_ip=get_ip,
                                                                          login_count=F('login_count') + 1)
                     return redirect('/admin/bind_account/')
