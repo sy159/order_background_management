@@ -310,7 +310,7 @@ def clear_key(request):
     return HttpResponse(1)
 
 
-def add_campus(request):
+def choose_address(request):
     try:
         if request.GET.get('flag') == 'a':  # 为区县
             all_obj = models.AddresLibrary.objects.filter(superior_id=request.GET.get('id'))
@@ -329,7 +329,7 @@ def add_campus(request):
             data.append(i.id)
             data.append(i.site_name)
             data_list.append(data)
-        return render(request, 'Index/ProvinceList.html',
+        return render(request, 'Index/AddresLibraryList.html',
                       {'data': data_list, 'msg': msg, 'flag': request.GET.get('flag'), 'id': request.GET.get('id')})
     except Exception:
         return HttpResponse('<h2>请选择具体的省市区</h2>')
@@ -342,12 +342,11 @@ def region_list(request):
     if all_obj:
         for i in all_obj:
             data_dict = {
-                'area_id': get_id,
                 'region_id': i.region_id,
                 'region_name': i.region_name,
             }
             data_list.append(data_dict)
-    return render(request, 'Index/RegionList.html', {'data': data_list})
+    return render(request, 'Index/RegionList.html', {'data': data_list, 'area_id': get_id})
 
 
 def add_region(request):

@@ -27,9 +27,9 @@ from django.views.decorators.cache import cache_page
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('admin/login/', cache_page(60 * 60 * 24 * 30)(views.login)),  # 登陆
-    path('admin/logout/', views.logout),  # 注销
-    path('admin/bind_account/', views.bind_account),  # 两步验证,绑定用户
+    path('admin/login', cache_page(60 * 60 * 24 * 30)(views.login)),  # 登陆
+    path('admin/logout', views.logout),  # 注销
+    path('admin/bind_account', views.bind_account),  # 两步验证,绑定用户
     path('admin/index/', views.index),  # 主页面
     path('admin/account_unique/', views.account_unique),  # 账号唯一性
     path('admin/image_upload/', views.image_upload),  # 上传图片
@@ -70,8 +70,8 @@ urlpatterns = [
     path('admin/set_authority/', basic_info.set_authority),  # 设置管理员权限弹框
     path('admin/edit_personinfo/', basic_info.edit_personinfo),  # 编辑个人信息
     path('admin/clear_key/', basic_info.clear_key),  # 清除key
-    path('admin/add_campus/', basic_info.add_campus),  # 选所在区域
-    path('admin/region_list/', basic_info.region_list),  # 运营区域列表
+    path('admin/choose_address', basic_info.choose_address),  # 选所在地址
+    path('admin/region_list', basic_info.region_list),  # 运营区域列表
     path('admin/add_region/', cache_page(60 * 60 * 24 * 10)(basic_info.add_region)),  # 添加运营区域
     path('admin/exist_region/', basic_info.exist_region),  # 存在运营区域列表
     path('admin/edit_region/', basic_info.edit_region),  # 编辑运营区域

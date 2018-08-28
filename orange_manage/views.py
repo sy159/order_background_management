@@ -37,7 +37,7 @@ def login(request):
                         admin = models.Admin.objects.filter(account=get_name).first()
                         request.session['admin'] = admin
                         request.session['region_id'] = admin.open_admin_region
-                        return redirect('/admin/index/')
+                        return redirect('/admin/index')
                     else:
                         return render(request, 'login.html', {'error_msg': '验证码错误'})
                 else:
@@ -46,7 +46,7 @@ def login(request):
                     request.session['region_id'] = admin.open_admin_region
                     models.Admin.objects.filter(account=get_name).update(last_time=last_time, last_ip=get_ip,
                                                                          login_count=F('login_count') + 1)
-                    return redirect('/admin/bind_account/')
+                    return redirect('/admin/bind_account')
             return render(request, 'login.html', {'error_msg': '密码错误'})
         return render(request, 'login.html', {'error_msg': '该用户不存在'})
     else:
@@ -54,17 +54,13 @@ def login(request):
 
 
 def logout(request):
-    '''
-    注销
-    '''
+    """注销"""
     request.session.clear()
-    return redirect('/admin/login/')
+    return redirect('/admin/login')
 
 
 def bind_account(request):
-    '''
-    两步验证
-    '''
+    """两步验证"""
     if request.method == "GET":
         if request.GET.get('erro'):
             erro = '输入的校验错误，请重新绑定'
@@ -80,9 +76,9 @@ def bind_account(request):
         get_code = request.POST.get('check_code')
         if val.validation(get_key, get_code):
             models.Admin.objects.filter(account=get_account).update(admin_key=get_key)
-            return redirect('/admin/index/')
+            return redirect('/admin/index')
         else:
-            return redirect('/admin/bind_account/?erro=1')
+            return redirect('/admin/bind_account?erro=1')
 
 
 def index(request):
@@ -151,4 +147,5 @@ def upload_img(request):
     if file_obj.name.split('.')[-1] not in ['jpg', 'png', 'jpeg', 'gif', 'bmp', 'webp']:  # 判断上传不为图片
         return HttpResponse('<h2>只能上传图片哦</h2>')
     file_name = str(time.time()) + file_obj.name
+
     return HttpResponse(1)

@@ -48,7 +48,7 @@
     </ul>
 </div>
 
-<form method="get"  action="/admin/add_campus/" style="padding: 15px 0;">
+<form method="get"  action="/admin/choose_address/" style="padding: 15px 0;">
     <input type="hidden" id="flag" name="flag" value="{{ flag|default_if_none:"" }}">
     <input type="hidden" name="id" value="{{ id }}">
     <input type="text" name="keyword" class="input-text" value="">
@@ -101,11 +101,11 @@
             confirm("请选择相应的省市区！！！")
         }else{
             if(flag == ""){
-                location.replace("/admin/add_campus/?id="+id+"&flag=c");//重定向
+                location.replace("/admin/choose_address?id="+id+"&flag=c");//重定向
             }else if(flag == "c"){
-                location.replace("/admin/add_campus/?id="+id+"&flag=a");//重定向
+                location.replace("/admin/choose_address?id="+id+"&flag=a");//重定向
             }else {
-                location.replace("/admin/region_list/?id="+id);//重定向
+                location.replace("/admin/region_list?id="+id);//重定向
             }
         }
 
