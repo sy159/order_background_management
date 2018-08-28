@@ -1,283 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-	<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
     {% include 'Public/header.html' %}
     <style>
-        form{
-           margin-bottom: 50px;
+        form {
+            margin-bottom: 50px;
         }
     </style>
 </head>
 <body>
-<form id="myform" method="post"  action="" frame="true" refresh="true">
-		<table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
-			<tr>
-				<th width="160">账号</th>
-				<td>
-                    <input  type="text"  id="account" class="input fl" name="account" value="" size="25"  validate="maxlength:20,required:true"/>
-				     <input id="recept" type="hidden" value="{{ state }}">
-                     <strong class='high position account'>*</strong>
-                </td>
-			</tr>
-			<tr>
-				<th width="160">密码</th>
-				<td>
-					<input  type="text"  name="pwd" id="pwd" class="input fl" size="25"  validate="maxlength:20,required:true" />
-				    <strong class='high position pwd'>*</strong>
-                </td>
-			</tr>
-			<tr>
-				<th width="160">真实姓名</th>
-				<td>
-					<input type="text"  name="realname" id="realname" class="input fl" size="25"  validate="maxlength:20,required:true" />
-				     <strong class='high position realname'>*</strong>
-                </td>
-			</tr>
-			<tr>
-				<th width="160">电话</th>
-				<td>
-					<input type="text"  id="phone" class="input fl" name="phone" value="" size="25"  validate="required:true" tips="多个电话号码以空格分开"/>
-				    <strong class='high position phone'>*</strong>
-                </td>
-			</tr>
-			<tr>
-				<th width="160">EMAIL</th>
-				<td>
-					<input type="text"  id="email" class="input fl" name="email" value="" size="25"  validate="required:true"/>
-				    <strong class='high position email'>*</strong>
-                </td>
-			</tr>
-			<tr>
-				<th width="160">QQ</th>
-				<td>
-					<input type="text"  id="qq" class="input fl" name="qq" value="" size="25"  validate="required:true"/>
-                     <strong class='high position qq'>*</strong>
-                </td>
-			</tr>
-            <tr>
-                <th width="160">管理员等级</th>
-                {% if level == 0 %}
-				<td>
-					<div class="radio" id="radio">
-						<input type="radio" name="level" id="opt1" value="0">平台管理员
-						<input type="radio" name="level" id="opt0" value="1">区域总管理员 <strong class='high position'>*</strong>
-					</div>
-
-				</td>
-                    {% else %}
-                    <td>
-					<div class="radio" id="radio">
-						<input type="radio" name="level" id="opt0" value="2" checked>普通管理员 <strong class='high position'>*</strong>
-					</div>
-
-				</td>
-                {% endif %}
-
-			</tr>
-            <tr id="choose_reg" style="display: none;">
-                <th width="160">所在区域</th>
-                <td id="choose_cityarea" province_id="" city_id="" area_id="" circle_id="-1">
-                    <select id="choose_province_hide" name="province_idss">
-                        <option id="province"></option>
-                    </select>
-                    <select id="choose_city_hide" name="city_idss">
-                        <option id="city"></option>
-                    </select>
-                    <select id="choose_areass" name="area_id">
-                        <option id="area"></option>
-                    </select>
-                    <select   id="choose_region" name="region_id">
-                        <option id="region"></option>
-                    </select>
-                    <strong class='high position'>*</strong>
-                </td>
-            </tr>
-			<tr>
-				<th width="160">权限</th>
-				<td>
-                    <a id="set_authority" href="javascript:void(0);"  style="color:blue">设置管理员使用权限</a>
-                    <strong class='high position authority'>*</strong>
-                </td>
-                <input id="authoritydata" type="hidden" value="{{ data }}">
-                <input id="recpt_authoritydata" type="hidden" name="authoritydata" value="">
-			</tr>
-			<tr>
-				<th width="160">权限分组</th>
-				<td>
-					<select name="authority_group_id" tips="权限分组">
-						<option value="0">不选</option>
-					</select>
-				</td>
-			</tr>
-        </table>
-        <div class="btn">
-            <td colspan="2" class="aui_footer">
-                <div class="aui_buttons">
-                    <button id="edit" class="aui_state_highlight" type="submit">添加</button>
-                    <button id="close" type="button">关闭</button>
-                </div>
+<form id="myform" method="post" action="" frame="true" refresh="true">
+    <table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
+        <tr>
+            <th width="160">账号</th>
+            <td>
+                <input type="text" id="account" class="input fl" name="account" value="" size="25"
+                       validate="maxlength:20,required:true"/>
+                <input id="recept" type="hidden" value="{{ state }}">
+                <strong class='high position account'>*</strong>
             </td>
-        </div>
+        </tr>
+        <tr>
+            <th width="160">密码</th>
+            <td>
+                <input type="text" name="pwd" id="pwd" class="input fl" size="25"
+                       validate="maxlength:20,required:true"/>
+                <strong class='high position pwd'>*</strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">真实姓名</th>
+            <td>
+                <input type="text" name="realname" id="realname" class="input fl" size="25"
+                       validate="maxlength:20,required:true"/>
+                <strong class='high position realname'>*</strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">电话</th>
+            <td>
+                <input type="text" id="phone" class="input fl" name="phone" value="" size="25" validate="required:true"
+                       tips="多个电话号码以空格分开"/>
+                <strong class='high position phone'>*</strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">EMAIL</th>
+            <td>
+                <input type="text" id="email" class="input fl" name="email" value="" size="25"
+                       validate="required:true"/>
+                <strong class='high position email'>*</strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">QQ</th>
+            <td>
+                <input type="text" id="qq" class="input fl" name="qq" value="" size="25" validate="required:true"/>
+                <strong class='high position qq'>*</strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">管理员等级</th>
+            {% if level == 0 %}
+                <td>
+                    <div class="radio" id="radio">
+                        <input type="radio" name="level" id="opt1" value="0">平台管理员
+                        <input type="radio" name="level" id="opt0" value="1">区域总管理员 <strong
+                            class='high position'>*</strong>
+                    </div>
+                </td>
+            {% else %}
+                <td>
+                    <div class="radio" id="radio">
+                        <input type="radio" name="level" id="opt0" value="2" checked>普通管理员 <strong
+                            class='high position'>*</strong>
+                    </div>
+
+                </td>
+            {% endif %}
+
+        </tr>
+        <tr id="choose_reg" style="display: none;">
+            <th width="160">所在区域</th>
+            <td id="choose_cityarea" province_id="" city_id="" area_id="" circle_id="-1">
+                <select id="choose_province_hide" name="province_idss">
+                    <option id="province"></option>
+                </select>
+                <select id="choose_city_hide" name="city_idss">
+                    <option id="city"></option>
+                </select>
+                <select id="choose_areass" name="area_id">
+                    <option id="area"></option>
+                </select>
+                <select id="choose_region" name="region_id">
+                    <option id="region"></option>
+                </select>
+                <strong class='high position'>*</strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">权限</th>
+            <td>
+                <a id="set_authority" href="javascript:void(0);" style="color:blue">设置管理员使用权限</a>
+                <strong class='high position authority'>*</strong>
+            </td>
+            <input id="authoritydata" type="hidden" value="{{ data }}">
+            <input id="recpt_authoritydata" type="hidden" name="authoritydata" value="">
+        </tr>
+        <tr>
+            <th width="160">权限分组</th>
+            <td>
+                <select name="authority_group_id" tips="权限分组">
+                    <option value="0">不选</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <div class="btn">
+        <td colspan="2" class="aui_footer">
+            <div class="aui_buttons">
+                <button id="edit" class="aui_state_highlight" type="submit">添加</button>
+                <button id="close" type="button">关闭</button>
+            </div>
+        </td>
+    </div>
 </form>
 <script>
-    $("#set_authority").click(function (){
-        art.dialog.open('/admin/set_authority/',{
+    $("#set_authority").click(function () {
+        art.dialog.open('/admin/set_authority/', {
             title: '设置管理员使用权限',
             lock: true,
-            width:800,
-            height:400,
-            close:function () {
-                var data=art.dialog.data('data');
-                var arr=[];
+            width: 800,
+            height: 400,
+            close: function () {
+                var data = art.dialog.data('data');
+                var arr = [];
                 data.forEach(function (el) {
                     arr.push(el.name);
                 });
                 $("#recpt_authoritydata").val(arr);
             }
         });
-    }); /*打开设置权限对话框*/
+    });
+    /*打开设置权限对话框*/
 
-     $("#close").click(function () {
-		art.dialog.close();
-     });//关闭对话框
+    $("#close").click(function () {
+        art.dialog.close();
+    });//关闭对话框
 
-     $("#radio").click(function () {
-         var val=parseInt($('input:radio[name="level"]:checked').val());
-         if(val == 1){
-         $("#choose_reg").css("display","table-row");
-        var province="<option selected value=\"0\">全部省</option>",city="<option selected value=\"0\">全部市</option>",area="<option selected value=\"0\">全部区</option>";
-        var num,nums,numss;
-       $.getJSON("/admin/region_info/",function (data) {
-            $.each(data.data[0], function (i, e) {
-                province += "<option value=" + "\"" + e.province_id + "\"" + ">" + e.province_name + "</option>";
-            });
-            $("#choose_province_hide").html(province);
-            $("#choose_province_hide").change(function () {
-                num = parseInt($("#choose_province_hide option:selected").val());
-                city = "<option value=\"0\">请选择市</option>"
-                $.each(data.data[1][num], function (i, e) {
-                    city += "<option value=" + "\"" + e.city_id + "\"" + ">" + e.city_name + "</option>";
+    $("#radio").click(function () {
+        var val = parseInt($('input:radio[name="level"]:checked').val());
+        if (val == 1) {
+            $("#choose_reg").css("display", "table-row");
+            var province = "<option selected value=\"0\">全部省</option>",
+                city = "<option selected value=\"0\">全部市</option>", area = "<option selected value=\"0\">全部区</option>";
+            var num, nums, numss;
+            $.getJSON("/admin/region_info/", function (data) {
+                $.each(data.data[0], function (i, e) {
+                    province += "<option value=" + "\"" + e.province_id + "\"" + ">" + e.province_name + "</option>";
                 });
-                $("#choose_city_hide").html(city);
-            });
-            $("#choose_city_hide").change(function () {
-                nums = parseInt($("#choose_city_hide option:selected").val());
-                area = "<option value=\"0\">请选择区</option>"
-                $.each(data.data[2][nums], function (i, e) {
-                    area += "<option value=" + "\"" + e.area_id + "\"" + ">" + e.area_name + "</option>";
+                $("#choose_province_hide").html(province);
+                $("#choose_province_hide").change(function () {
+                    num = parseInt($("#choose_province_hide option:selected").val());
+                    city = "<option value=\"0\">请选择市</option>"
+                    $.each(data.data[1][num], function (i, e) {
+                        city += "<option value=" + "\"" + e.city_id + "\"" + ">" + e.city_name + "</option>";
+                    });
+                    $("#choose_city_hide").html(city);
                 });
-                $("#choose_areass").html(area);
-            });
-             $("#choose_areass").change(function () {
-                numss = parseInt($("#choose_areass option:selected").val());
-                region = "<option>请选择营运区</option>"
-                $.each(data.data[3][numss], function (i, e) {
-                    region += "<option value=" + "\"" + e.region_id + "\"" + ">" + e.region_name + "</option>";
+                $("#choose_city_hide").change(function () {
+                    nums = parseInt($("#choose_city_hide option:selected").val());
+                    area = "<option value=\"0\">请选择区</option>"
+                    $.each(data.data[2][nums], function (i, e) {
+                        area += "<option value=" + "\"" + e.area_id + "\"" + ">" + e.area_name + "</option>";
+                    });
+                    $("#choose_areass").html(area);
                 });
-                $("#choose_region").html(region);
+                $("#choose_areass").change(function () {
+                    numss = parseInt($("#choose_areass option:selected").val());
+                    region = "<option>请选择营运区</option>"
+                    $.each(data.data[3][numss], function (i, e) {
+                        region += "<option value=" + "\"" + e.region_id + "\"" + ">" + e.region_name + "</option>";
+                    });
+                    $("#choose_region").html(region);
+                });
             });
-       });
-         }else{
-             $("#choose_reg").css("display","none");
-         }
-     }); //区域下拉框根据管理员等级显示与隐藏
+        } else {
+            $("#choose_reg").css("display", "none");
+        }
+    }); //区域下拉框根据管理员等级显示与隐藏
 
     $("#myform").submit(function (e) {
         e.preventDefault();
         confirm();
-        function confirm(){
-            if($("#account").val().length == 0){
-                   $(".account").html("账号不能为空!")
-                   return false;
-            }else{
-             var username = $("#account").val();
-            $.ajax({
-                url : "/admin/account_unique/", //后台查询验证的方法
-                data : {
-                    "account" : username
-                }, //携带的参数
-                type : "get",
-                success : function(msg) {
-                    //根据后台返回前台的msg给提示信息加HTML
-                    if (msg.state==1) {
-                        // 账号已经存在
-                        $(".account").html("抱歉，" + username + "已存在，请更换！")
-                        $(".account").focus()
-                         return false;
-                    } else {
-                        // 账号不存在
-                        $(".account").html( "恭喜，" + username + " 可以添加！")
-                        if($("#pwd").val().length == 0)
-                        {
-                            $(".pwd").html("密码不能为空！")
+
+        function confirm() {
+            if ($("#account").val().length == 0) {
+                $(".account").html("账号不能为空!")
+                return false;
+            } else {
+                var username = $("#account").val();
+                $.ajax({
+                    url: "/admin/account_unique/", //后台查询验证的方法
+                    data: {
+                        "account": username
+                    }, //携带的参数
+                    type: "get",
+                    success: function (msg) {
+                        //根据后台返回前台的msg给提示信息加HTML
+                        if (msg.state == 1) {
+                            // 账号已经存在
+                            $(".account").html("抱歉，" + username + "已存在，请更换！")
+                            $(".account").focus()
                             return false;
-                        }else{
-                            $(".pwd").html(" ")
-                            if($("#realname").val().length == 0)
-                            {
-                                $(".realname").html("真实姓名不能为空！")
-                                $("#realname").focus();
+                        } else {
+                            // 账号不存在
+                            $(".account").html("恭喜，" + username + " 可以添加！")
+                            if ($("#pwd").val().length == 0) {
+                                $(".pwd").html("密码不能为空！")
                                 return false;
-                            }else{
-                                $(".realname").html(" ")
-                                if($("#phone").val().length == 0)
-                                {
-                                    $(".phone").html("电话不能为空！")
+                            } else {
+                                $(".pwd").html(" ")
+                                if ($("#realname").val().length == 0) {
+                                    $(".realname").html("真实姓名不能为空！")
+                                    $("#realname").focus();
                                     return false;
-                                }else {
-                                    $(".phone").html(" ")
-                                    if($("#email").val().length == 0)
-                                    {
-                                        $(".email").html("EMAILL不能为空！")
+                                } else {
+                                    $(".realname").html(" ")
+                                    if ($("#phone").val().length == 0) {
+                                        $(".phone").html("电话不能为空！")
                                         return false;
-                                    }else{
-                                        $(".email").html(" ")
-                                        if($("#qq").val().length == 0){
-                                            $(".qq").html("QQ不能为空！")
+                                    } else {
+                                        $(".phone").html(" ")
+                                        if ($("#email").val().length == 0) {
+                                            $(".email").html("EMAILL不能为空！")
                                             return false;
-                                        }else{
-                                            $(".qq").html("")
-                                            if($("#recpt_authoritydata").val().length == 0){
-                                                $(".authority").html("请选择权限！")
+                                        } else {
+                                            $(".email").html(" ")
+                                            if ($("#qq").val().length == 0) {
+                                                $(".qq").html("QQ不能为空！")
                                                 return false;
-                                            }else{
-                                                $(".authority").html("");
-                                                $.ajax({
-                                                    url:"/admin/add_account/",
-                                                    type:"post",
-                                                    dataType:"json",
-                                                    data: $("#myform").serialize(),
-                                                    success:function(msg){
-                                                        if(msg==1){
-                                                            result("添加成功","succeed");
-                                                            var win = art.dialog.open.origin;
-                                                            win.location.reload();
-                                                        }else{
-                                                            result("添加失败","error");
+                                            } else {
+                                                $(".qq").html("")
+                                                if ($("#recpt_authoritydata").val().length == 0) {
+                                                    $(".authority").html("请选择权限！")
+                                                    return false;
+                                                } else {
+                                                    $(".authority").html("");
+                                                    $.ajax({
+                                                        url: "/admin/add_account/",
+                                                        type: "post",
+                                                        dataType: "json",
+                                                        data: $("#myform").serialize(),
+                                                        success: function (msg) {
+                                                            if (msg == 1) {
+                                                                result("添加成功", "succeed");
+                                                                var win = art.dialog.open.origin;
+                                                                win.location.reload();
+                                                            } else {
+                                                                result("添加失败", "error");
+                                                            }
+                                                        },
+                                                        error: function (xhr, textstatus, thrown) {
                                                         }
-                                                    },
-                                                    error:function(xhr,textstatus,thrown){
-                                                    }
-                                                });
-                                                return true;
+                                                    });
+                                                    return true;
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
                         }
-                    }
 
-                }
-            });
-        }
-    }//表单验证提交(含判断账号唯一性)
+                    }
+                });
+            }
+        }//表单验证提交(含判断账号唯一性)
     });//表单验证提交
 
-     function result(title,flag) {
+    function result(title, flag) {
         art.dialog({
             content: title,
             //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
@@ -285,7 +290,7 @@
             fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
             time: 3,//如果有cancel方法的话会调用cancel方法
         });
-        var time = setInterval(function() {
+        var time = setInterval(function () {
             art.dialog.close()
         }, 2000);
     }

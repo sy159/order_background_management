@@ -64,7 +64,7 @@ urlpatterns = [
     # 基本信息相关
     path('admin/account_list/', basic_info.account_list),  # 管理员列表
     path('admin/edit_accountinfo/', basic_info.edit_accountinfo),  # 编辑账号信息
-    path('admin/add_account/', cache_page(60 * 60 * 24 * 10)(basic_info.add_account)),  # 添加管理员
+    path('admin/add_account/', basic_info.add_account),  # 添加管理员
     path('admin/permissions/', basic_info.permissions),  # 权限api
     path('admin/edit_authorityform/', basic_info.edit_authorityform),  # 编辑管理员权限弹框
     path('admin/set_authority/', basic_info.set_authority),  # 设置管理员权限弹框
@@ -95,7 +95,7 @@ urlpatterns = [
     path('admin/system_news/', system_setting.system_news_index),  # 平台推文
     path('admin/add_news_category', system_setting.add_news_category),  # 添加推文分类
     path('admin/system_news_list', system_setting.system_news_list),  # 平台推文列表
-    path('admin/add_news', system_setting.add_system_news),  # 平台推文列表
+    path('admin/add_news', system_setting.add_system_news),  # 添加平台推文
 
     # 用户管理
     path('admin/user_list/', users.user_list),  # 广告信息列表

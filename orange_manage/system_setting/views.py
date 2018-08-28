@@ -399,7 +399,7 @@ def add_system_news(request):
             categorys = models.SystemNewsCategory.objects.values('id', 'category_name').all()
         return render(request, 'System_Setting/SystemNews/add_news.html', {'categorys': categorys})
     else:
-        region_id = request.session['region_id']
+        region_id = request.operator_region
         title = request.POST.get("title")
         sort = request.POST.get("sort")
         category_id = request.POST.get("category_id")

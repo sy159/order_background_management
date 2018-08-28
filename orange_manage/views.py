@@ -15,9 +15,7 @@ from orange_manage.utils.image_upload import UploadImg
 
 @csrf_protect
 def login(request):
-    '''
-    登陆跳转
-    '''
+    """登陆跳转"""
     if request.method == 'POST':
         get_ip = request.META['REMOTE_ADDR']
         last_time = timezone.now()
@@ -35,14 +33,12 @@ def login(request):
                         models.Admin.objects.filter(account=get_name).update(last_time=last_time, last_ip=get_ip,
                                                                              login_count=F('login_count') + 1)
                         admin = models.Admin.objects.filter(account=get_name).first()
-                        request.session['region_id'] = admin.open_admin_region
                         return redirect('/admin/index')
                     else:
                         return render(request, 'login.html', {'error_msg': '验证码错误'})
                 else:
                     request.session['user'] = get_name
                     request.session['judge'] = True
-                    request.session['region_id'] = admin.open_admin_region
                     models.Admin.objects.filter(account=get_name).update(last_time=last_time, last_ip=get_ip,
                                                                          login_count=F('login_count') + 1)
                     return redirect('/admin/bind_account')

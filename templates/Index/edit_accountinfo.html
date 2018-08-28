@@ -1,260 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-	<link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
-	<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
-	{% include 'Public/header.html' %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
+    {% include 'Public/header.html' %}
     <style>
-        form{
-           margin-bottom: 50px;
+        form {
+            margin-bottom: 50px;
         }
     </style>
 </head>
 <body>
 
 <form id="myform" method="post" action="" frame="true" refresh="true">
-		<!--<input type="hidden" name="account_id" value=""/>-->
-		<table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
-			<tr>
-				<th width="160">账号</th>
-				<td>
-                    {{ data.account }}
-                    <input type="hidden" name="account"  value="{{ data.account }}">
-				</td>
-			</tr>
-			<tr>
-				<th width="160">密码</th>
-				<td>
-					<input type="text" name="pwd" id="pwd" class="input fl" size="25"  validate="maxlength:20,required:true" />
-				</td>
-			</tr>
-            <tr>
-                <th width="160">状态</th>
-                <td>
-                    <div class="radio" id="status">
-                        {% if data.status == 1 %}
-						<input type="radio" name="status" id="status1" value="1" checked>开启
+    <!--<input type="hidden" name="account_id" value=""/>-->
+    <table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
+        <tr>
+            <th width="160">账号</th>
+            <td>
+                {{ data.account }}
+                <input type="hidden" name="account" value="{{ data.account }}">
+            </td>
+        </tr>
+        <tr>
+            <th width="160">密码</th>
+            <td>
+                <input type="text" name="pwd" id="pwd" class="input fl" size="25"
+                       validate="maxlength:20,required:true"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">状态</th>
+            <td>
+                <div class="radio" id="status">
+                    {% if data.status == 1 %}
+                        <input type="radio" name="status" id="status1" value="1" checked>开启
                         <input type="radio" name="status" id="status2" value="0">关闭
-                        {% else %}
+                    {% else %}
                         <input type="radio" name="status" id="status1" value="1">开启
                         <input type="radio" name="status" id="status2" value="0" checked>关闭
-                        {% endif %}
-				    </div>
-                </td>
-            </tr>
-			<tr>
-				<th width="160">真实姓名</th>
-				<td>
-					<input type="text" value="{{ data.realname }}" name="realname" id="realname" class="input fl" size="25"  validate="maxlength:20,required:true" />
-				</td>
-			</tr>
-			<tr>
-				<th width="160">昵称</th>
-				<td>
-					<input type="text" value="{{ data.nickname }}" name="nickname" id="nickname" class="input fl" size="25"  validate="maxlength:20,required:true" />
-				</td>
-			</tr>
-			<tr>
-				<th width="160">电话</th>
-				<td>
-					<input type="text" value="{{ data.phone }}" id="phone" class="input fl" name="phone"  size="25"  validate="required:true" tips="多个电话号码以空格分开"/>
-				</td>
-			</tr>
-			<tr>
-				<th width="160">EMAIL</th>
-				<td>
-					<input type="text" value="{{ data.email }}" id="email" class="input fl" name="email"  size="25"  validate="required:true"/>
-				</td>
-			</tr>
-			<tr>
-				<th width="160">QQ</th>
-				<td>
-					<input type="text" value="{{ data.qq }}" id="qq" class="input fl" name="qq" size="25"  validate="required:true"/>
-				</td>
-			</tr>
-			<tr id="levels">
-                <th width="160">管理员等级</th>
-                {% if parent_level == 0 %}
-				<td>
-					<div class="radio" id="radio">
-                        {% if data.level == 0 %}
-						<input type="radio" name="level" id="opt1" value="0" checked>平台管理员
-						<input type="radio" name="level" id="opt0" value="1">区域总管理员
-                            {% else %}
-						<input type="radio" name="level" id="opt1" value="0" >平台管理员
-						<input type="radio" name="level" id="opt0" value="1" checked>区域总管理员
-                            {% endif %}
-					</div>
-				</td>
-                    {% else %}
-                    <td>
-					<div class="radio" id="radio">
-						<input type="radio" name="level" id="opt0" value="2" checked>普通管理员
-					</div>
-				</td>
-
-                {% endif %}
-			</tr>
-               <tr id="choose_reg" style="display: none;">
-                    <th width="160">所在区域</th>
-                    <td id="choose_cityarea" province_id="" city_id="" area_id="" circle_id="-1">
-                        <select id="choose_province_hide" name="province_idss">
-                            <option id="province"></option>
-                        </select>
-                        <select id="choose_city_hide" name="city_idss">
-                            <option id="city">{{ data.city_name }}</option>
-                        </select>
-                        <select id="choose_areass" name="area_id">
-                            <option id="area">{{ data.area_name }}</option>
-                        </select>
-                        <select  id="choose_region" name="region_id">
-                            <option id="region">{{ data.region_name }}</option>
-                        </select>
-                    </td>
-                </tr>
-			<tr>
-				<th width="160">权限分组</th>
-				<td>
-					<select name="authority_group_id" tips="权限分组">
-						<option value="0">不选</option>
-					</select>
-				</td>
-			</tr>
-        </table>
-        <div class="btn">
-            <td colspan="2" class="aui_footer">
-                <div class="aui_buttons">
-                    <button id="edit" class="aui_state_highlight" type="submit">编辑</button>
-                    <button id="close" type="button">关闭</button>
+                    {% endif %}
                 </div>
             </td>
-        </div>
-	</form>
+        </tr>
+        <tr>
+            <th width="160">真实姓名</th>
+            <td>
+                <input type="text" value="{{ data.realname }}" name="realname" id="realname" class="input fl" size="25"
+                       validate="maxlength:20,required:true"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">昵称</th>
+            <td>
+                <input type="text" value="{{ data.nickname }}" name="nickname" id="nickname" class="input fl" size="25"
+                       validate="maxlength:20,required:true"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">电话</th>
+            <td>
+                <input type="text" value="{{ data.phone }}" id="phone" class="input fl" name="phone" size="25"
+                       validate="required:true" tips="多个电话号码以空格分开"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">EMAIL</th>
+            <td>
+                <input type="text" value="{{ data.email }}" id="email" class="input fl" name="email" size="25"
+                       validate="required:true"/>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">QQ</th>
+            <td>
+                <input type="text" value="{{ data.qq }}" id="qq" class="input fl" name="qq" size="25"
+                       validate="required:true"/>
+            </td>
+        </tr>
+        <tr id="levels">
+            <th width="160">管理员等级</th>
+            {% if parent_level == 0 %}
+                <td>
+                    <div class="radio" id="radio">
+                        {% if data.level == 0 %}
+                            <input type="radio" name="level" id="opt1" value="0" checked>平台管理员
+                            <input type="radio" name="level" id="opt0" value="1">区域总管理员
+                        {% else %}
+                            <input type="radio" name="level" id="opt1" value="0">平台管理员
+                            <input type="radio" name="level" id="opt0" value="1" checked>区域总管理员
+                        {% endif %}
+                    </div>
+                </td>
+            {% else %}
+                <td>
+                    <div class="radio" id="radio">
+                        <input type="radio" name="level" id="opt0" value="2" checked>普通管理员
+                    </div>
+                </td>
+
+            {% endif %}
+        </tr>
+        <tr id="choose_reg" style="display: none;">
+            <th width="160">所在区域</th>
+            <td id="choose_cityarea" province_id="" city_id="" area_id="" circle_id="-1">
+                <select id="choose_province_hide" name="province_idss">
+                    <option id="province"></option>
+                </select>
+                <select id="choose_city_hide" name="city_idss">
+                    <option id="city">{{ data.city_name }}</option>
+                </select>
+                <select id="choose_areass" name="area_id">
+                    <option id="area">{{ data.area_name }}</option>
+                </select>
+                <select id="choose_region" name="region_id">
+                    <option id="region">{{ data.region_name }}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">权限分组</th>
+            <td>
+                <select name="authority_group_id" tips="权限分组">
+                    <option value="0">不选</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <div class="btn">
+        <td colspan="2" class="aui_footer">
+            <div class="aui_buttons">
+                <button id="edit" class="aui_state_highlight" type="submit">编辑</button>
+                <button id="close" type="button">关闭</button>
+            </div>
+        </td>
+    </div>
+</form>
 <script>
 
-      function choose() {
-                 $("#choose_province_hide").html(province);
-                 $("#choose_province_hide").change(function () {
-                     num = parseInt($("#choose_province_hide option:selected").val());
-                     city = "<option value=\"0\">请选择市</option>"
-                     $.each(data.data[1][num], function (i, e) {
-                         city += "<option value=" + "\"" + e.city_id + "\"" + ">" + e.city_name + "</option>";
-                     });
-                     $("#choose_city_hide").html(city);
-                 });
-                 $("#choose_city_hide").change(function () {
-                     nums = parseInt($("#choose_city_hide option:selected").val());
-                     area = "<option value=\"0\">请选择区</option>"
-                     $.each(data.data[2][nums], function (i, e) {
-                         area += "<option value=" + "\"" + e.area_id + "\"" + ">" + e.area_name + "</option>";
-                     });
-                     $("#choose_areass").html(area);
-                 });
-                 $("#choose_areass").change(function () {
-                     numss = parseInt($("#choose_areass option:selected").val());
-                     region = "<option>请选择营运区</option>"
-                     $.each(data.data[3][numss], function (i, e) {
-                         region += "<option value=" + "\"" + e.region_id + "\"" + ">" + e.region_name + "</option>";
-                     });
-                     $("#choose_region").html(region);
-                 });
-      }//选择省、市、区函数
+    function choose() {
+        $("#choose_province_hide").html(province);
+        $("#choose_province_hide").change(function () {
+            num = parseInt($("#choose_province_hide option:selected").val());
+            city = "<option value=\"0\">请选择市</option>"
+            $.each(data.data[1][num], function (i, e) {
+                city += "<option value=" + "\"" + e.city_id + "\"" + ">" + e.city_name + "</option>";
+            });
+            $("#choose_city_hide").html(city);
+        });
+        $("#choose_city_hide").change(function () {
+            nums = parseInt($("#choose_city_hide option:selected").val());
+            area = "<option value=\"0\">请选择区</option>"
+            $.each(data.data[2][nums], function (i, e) {
+                area += "<option value=" + "\"" + e.area_id + "\"" + ">" + e.area_name + "</option>";
+            });
+            $("#choose_areass").html(area);
+        });
+        $("#choose_areass").change(function () {
+            numss = parseInt($("#choose_areass option:selected").val());
+            region = "<option>请选择营运区</option>"
+            $.each(data.data[3][numss], function (i, e) {
+                region += "<option value=" + "\"" + e.region_id + "\"" + ">" + e.region_name + "</option>";
+            });
+            $("#choose_region").html(region);
+        });
+    }//选择省、市、区函数
 
-     var level=parseInt($('input:radio[name="level"]:checked').val());
-      if(level == 1){
-         $("#choose_reg").css("display","table-row");
-         var province,
-         city="<option selected>"+$("#city").html()+"</option>",
-         area="<option selected>"+$("#area").html()+"</option>",
-         region="<option selected>"+$("#region").html()+"</option>";
-         var num,nums,numss;
-             $.getJSON("/admin/region_info/",function (data) {
-                 $.each(data.data[0], function (i, e) {
-                     province += "<option value=" + "\"" + e.province_id + "\"" + ">" + e.province_name + "</option>";
-                 });
-                 province += "<option value=\"0\">请选择省</option>"
-                 choose();
-         });
+    var level = parseInt($('input:radio[name="level"]:checked').val());
+    if (level == 1) {
+        $("#choose_reg").css("display", "table-row");
+        var province,
+            city = "<option selected>" + $("#city").html() + "</option>",
+            area = "<option selected>" + $("#area").html() + "</option>",
+            region = "<option selected>" + $("#region").html() + "</option>";
+        var num, nums, numss;
+        $.getJSON("/admin/region_info/", function (data) {
+            $.each(data.data[0], function (i, e) {
+                province += "<option value=" + "\"" + e.province_id + "\"" + ">" + e.province_name + "</option>";
+            });
+            province += "<option value=\"0\">请选择省</option>"
+            choose();
+        });
 
-         }else{
-             $("#choose_reg").css("display","none");
-         }//包装区域 ---区域下拉框根据管理员等级显示与隐藏
+    } else {
+        $("#choose_reg").css("display", "none");
+    }//包装区域 ---区域下拉框根据管理员等级显示与隐藏
 
-     $('input[type="radio"]').click(function () {
-         var level=parseInt($('input:radio[name="level"]:checked').val());
-         if(level==0){
-             $("#choose_reg").hide();
-             $("#province").html("")
-             $("#city").html("")
-             $("#area").html("")
-             $("#region").html("")
-         }else if(level==1){
-             $("#choose_reg").show();
-             var province="<option selected value=\"0\">请选择省</option>",
-                 city="<option selected value=\"0\">请选择市</option>",
-                 area="<option selected value=\"0\">请选择区</option>";
-                 region = "<option  selected value=\"0\">请选择营运区</option>";
-                var num,nums,numss;
-             $.getJSON("/admin/region_info/",function (data) {
-                 $.each(data.data[0], function (i, e) {
-                     province += "<option value=" + "\"" + e.province_id + "\"" + ">" + e.province_name + "</option>";
-                 });
+    $('input[type="radio"]').click(function () {
+        var level = parseInt($('input:radio[name="level"]:checked').val());
+        if (level == 0) {
+            $("#choose_reg").hide();
+            $("#province").html("")
+            $("#city").html("")
+            $("#area").html("")
+            $("#region").html("")
+        } else if (level == 1) {
+            $("#choose_reg").show();
+            var province = "<option selected value=\"0\">请选择省</option>",
+                city = "<option selected value=\"0\">请选择市</option>",
+                area = "<option selected value=\"0\">请选择区</option>";
+            region = "<option  selected value=\"0\">请选择营运区</option>";
+            var num, nums, numss;
+            $.getJSON("/admin/region_info/", function (data) {
+                $.each(data.data[0], function (i, e) {
+                    province += "<option value=" + "\"" + e.province_id + "\"" + ">" + e.province_name + "</option>";
+                });
                 $("#choose_province_hide").html(province);
-                 $("#choose_province_hide").change(function () {
-                     num = parseInt($("#choose_province_hide option:selected").val());
-                     city = "<option value=\"0\">请选择市</option>"
-                     $.each(data.data[1][num], function (i, e) {
-                         city += "<option value=" + "\"" + e.city_id + "\"" + ">" + e.city_name + "</option>";
-                     });
-                     $("#choose_city_hide").html(city);
-                 });
-                 $("#choose_city_hide").change(function () {
-                     nums = parseInt($("#choose_city_hide option:selected").val());
-                     area = "<option value=\"0\">请选择区</option>"
-                     $.each(data.data[2][nums], function (i, e) {
-                         area += "<option value=" + "\"" + e.area_id + "\"" + ">" + e.area_name + "</option>";
-                     });
-                     $("#choose_areass").html(area);
-                 });
-                 $("#choose_areass").change(function () {
-                     numss = parseInt($("#choose_areass option:selected").val());
-                     region = "<option>请选择营运区</option>"
-                     $.each(data.data[3][numss], function (i, e) {
-                         region += "<option value=" + "\"" + e.region_id + "\"" + ">" + e.region_name + "</option>";
-                     });
-                     $("#choose_region").html(region);
-                 });
-         });
-         }
-     });//选择区域
+                $("#choose_province_hide").change(function () {
+                    num = parseInt($("#choose_province_hide option:selected").val());
+                    city = "<option value=\"0\">请选择市</option>"
+                    $.each(data.data[1][num], function (i, e) {
+                        city += "<option value=" + "\"" + e.city_id + "\"" + ">" + e.city_name + "</option>";
+                    });
+                    $("#choose_city_hide").html(city);
+                });
+                $("#choose_city_hide").change(function () {
+                    nums = parseInt($("#choose_city_hide option:selected").val());
+                    area = "<option value=\"0\">请选择区</option>"
+                    $.each(data.data[2][nums], function (i, e) {
+                        area += "<option value=" + "\"" + e.area_id + "\"" + ">" + e.area_name + "</option>";
+                    });
+                    $("#choose_areass").html(area);
+                });
+                $("#choose_areass").change(function () {
+                    numss = parseInt($("#choose_areass option:selected").val());
+                    region = "<option>请选择营运区</option>"
+                    $.each(data.data[3][numss], function (i, e) {
+                        region += "<option value=" + "\"" + e.region_id + "\"" + ">" + e.region_name + "</option>";
+                    });
+                    $("#choose_region").html(region);
+                });
+            });
+        }
+    });//选择区域
 
-     $("#close").click(function () {
-		 art.dialog.close();
-     });//关闭对话框
+    $("#close").click(function () {
+        art.dialog.close();
+    });//关闭对话框
 
-     $("#myform").submit(function (e) {
+    $("#myform").submit(function (e) {
         e.preventDefault();
         $.ajax({
-            url:"/admin/edit_accountinfo/",
-            type:"post",
-            dataType:"json",
-            data:$("#myform").serialize(),
-            success:function(msg){
-                if(msg==1){
-                    result("编辑成功","succeed");
+            url: "/admin/edit_accountinfo/",
+            type: "post",
+            dataType: "json",
+            data: $("#myform").serialize(),
+            success: function (msg) {
+                if (msg == 1) {
+                    result("编辑成功", "succeed");
                     var win = art.dialog.open.origin;
                     win.location.reload();
-                }else{
-                    result("编辑失败","error");
+                } else {
+                    result("编辑失败", "error");
                 }
             },
-            error:function(xhr,textstatus,thrown){
+            error: function (xhr, textstatus, thrown) {
             }
         });
     });//表单提交
-     function result(title,flag) {
+    function result(title, flag) {
         art.dialog({
             content: title,
             //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
@@ -262,7 +268,7 @@
             fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
             time: 3,//如果有cancel方法的话会调用cancel方法
         });
-        var time = setInterval(function() {
+        var time = setInterval(function () {
             art.dialog.close()
         }, 2000);
     }

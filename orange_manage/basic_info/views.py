@@ -1,17 +1,19 @@
-from django.http import JsonResponse, QueryDict
+import json
+
+from django.http import JsonResponse
+from django.shortcuts import render, HttpResponse
 from django.utils import timezone
-from django.shortcuts import render, redirect, HttpResponse
+from django.views.decorators.cache import cache_control
+
 from orange_manage import models
 from orange_manage.utils.password_encryption import pwd_encrypted
-import json
 
 
 def account_list(request):
     """管理员列表"""
     get_pagesize = 15
     get_page = request.GET.get('p', '1')
-    get_level = request.operator_level
-    if get_level == 0:
+    if request.operator_level:
         all_obj = models.Admin.objects.filter(level__lt=2)
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
@@ -51,7 +53,7 @@ def account_list(request):
                 'open_admin_region': region_name,
             }
             data_list.append(data_dict)
-    if get_level == 1:
+    else:
         all_obj = models.Admin.objects.filter(level=2, open_admin_region=request.operator_region).all()
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
@@ -91,9 +93,10 @@ def account_list(request):
             }
             data_list.append(data_dict)
     return render(request, 'Index/account.html',
-                  {'data': data_list, 'get_page': get_page, 'page_total': str(page_total), 'status': status})
+                  {'level': request.operator_level, 'data': data_list, 'get_page': get_page, 'page_total': str(page_total), 'status': status})
 
 
+@cache_control(private=True)
 def add_account(request):
     """添加管理员"""
     if request.method == 'GET':
@@ -443,13 +446,15 @@ def add_campusinfo(request):
 def edit_campusinfo(request):
     if request.method == 'POST':
         try:
-            get_campus_id = request.POST.get('campus_id')
-            get_campus_name = request.POST.get('campus_name')
-            models.Campus.objects.filter(campus_id=get_campus_id).update(campus=get_campus_name)
+            campus_id = request.POST.get('campus_id')
+            campus_name = request.POST.get('campus_name')
+            models.Campus.objects.filter(campus_id=campus_id).update(campus=campus_name)
             return HttpResponse(1)
         except Exception:
             return HttpResponse(0)
-    return render(request, 'Index/edit_campus.html')
+    campus_id = request.POST.get('campus_id')
+    campus_name = request.POST.get('campus_name')
+    return render(request, 'Index/edit_campus.html', {'campus_id ': campus_id, 'campus_name': campus_name})
 
 
 def address_list(request):
@@ -467,7 +472,8 @@ def address_list(request):
             'gender': i.gender,
         }
         data_list.append(data_dict)
-    return render(request, 'Index/AddressList.html', {'data': data_list, 'address_id': get_address_id , 'campus_id': request.GET.get('campus_id')})
+    return render(request, 'Index/AddressList.html',
+                  {'data': data_list, 'address_id': get_address_id, 'campus_id': request.GET.get('campus_id')})
 
 
 def add_address(request):
@@ -475,6 +481,8 @@ def add_address(request):
         get_campus_id = request.POST.get('campus_id')
         get_parent_id = request.POST.get('address_id')
         get_info = request.POST.get('info')
+        get_info = get_info.replace('\r', '')
+        get_info = get_info.replace('\n', '')
         info_list = get_info.split('；')
         try:
             for i in info_list:
