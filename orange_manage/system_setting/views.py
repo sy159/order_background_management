@@ -1,6 +1,9 @@
-from django.shortcuts import render, HttpResponse, redirect
-from orange_manage import models
+import time
+
+from django.shortcuts import render, HttpResponse
 from django.utils import timezone
+
+from orange_manage import models
 
 
 def adver_management(request):
@@ -365,7 +368,6 @@ def add_news_category(request):
         category_name = request.POST.get("category_name")
         sort = request.POST.get("sort")
         status = request.POST.get("status")
-        print(category_name)
         if not category_name:
             return HttpResponse(0)
         if not sort:
@@ -385,10 +387,27 @@ def system_news_list(request):
         'sort',
         'status').all()
     return render(request, 'System_Setting/SystemNews/system_news_list.html',
-                  {'news_list': news_list, 'category_name': category.get('category_name')})
+                  {'news_list': news_list, 'category': category})
 
 
 def add_system_news(request):
-    category_id = request.GET.get('category_id')
-    return render(request, 'System_Setting/SystemNews/add_news.html')
-    # {'news_list': news_list, 'category_name': category_name})
+    if request.method != "POST":
+        category_id = request.GET.get('category_id')
+        if category_id:
+            categorys = models.SystemNewsCategory.objects.filter(id=category_id).values('id', 'category_name').first()
+        else:
+            categorys = models.SystemNewsCategory.objects.values('id', 'category_name').all()
+        return render(request, 'System_Setting/SystemNews/add_news.html', {'categorys': categorys})
+    else:
+        title = request.POST.get("title")
+        sort = request.POST.get("sort")
+        category_id = request.POST.get("category_id")
+        content = request.POST.get("content")
+        status = request.POST.get("status")
+        print(content)
+        models.SystemNews.objects.create(region_id=0, category_id=category_id, title=title, content=content,
+                                         create_time=time.time(), last_update_time=time.time(), sort=sort, status=status)
+
+        return HttpResponse(1)
+
+# {'news_list': news_list, 'category_name': category_name})

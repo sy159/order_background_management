@@ -7,7 +7,7 @@
     {% include 'Public/header.html' %}
 </head>
 <body>
-<form id="myform" method="post" action="" frame="true">
+<form id="myform" method="post">
     <table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
         <tr>
             <th width="70">标题</th>
@@ -50,7 +50,7 @@
 <script type="text/javascript">
     $("#myform").submit(function (e) {
             e.preventDefault();
-            if ($("#category_name").val().length == 0) {
+            if ($("#category_name").val().length === 0) {
                 $(".category_name").html("分类名不能为空!");
                 return false;
             } else {

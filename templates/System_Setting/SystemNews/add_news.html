@@ -7,12 +7,13 @@
     <link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
 </head>
 <body>
-<form action="/admin/kindeditor/" method="post">
+<form id='myform'>
     <table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
         <tr>
             <th width="10%">标题</th>
             <td>
-                <input type="text" class="input fl" name="title" size="75" placeholder="推文标题" validate="maxlength:50"/>
+                <input type="text" id="title" class="input fl" name="title" size="75" placeholder="推文标题"
+                       validate="maxlength:50"/>
                 <strong class='high position phone_number'>*</strong>
             </td>
         </tr>
@@ -20,42 +21,40 @@
             <th width="10%">分类</th>
             {#<if condition="$category">#}
             <td>
-                <select name="classify_id">
-                    {% for classify in classify_list %}
-                        <option value="{{ classify.0 }}">{{ classify.1 }}</option>
+                <select name="category_id">
+                    {% for categorys in categorys %}
+                        <option value="{{ classify.category_id }}">{{ categorys.category_name }}</option>
                     {% endfor %}
-                    <input type="hidden" class="pub" id="classify" name="campus" value="{{ data.campus_id }}">
+                    <input type="hidden" class="pub" id="category_id" name="classify_id"
+                           value="{{ categorys.0.category_id }}">
                 </select>
-                <strong class='high position phone_number'>*</strong>
             </td>
             {#</if>#}
         </tr>
         <tr>
             <th width="10%">排序</th>
             <td>
-                <input type="text" class="input fl" name="sort" value="0" placeholder="快报标题"
+                <input type="text" id='sort' class="input fl" name="sort" value="0" placeholder="快报标题"
                        validate="maxlength:50,digits:true"/>
-                <strong class='high position phone_number'>*</strong>
             </td>
         </tr>
         <tr>
             <th width="10%">内容</th>
             <td>
-                <textarea id="editor_id" name="content" style="height: 300px"></textarea>
-                <strong class='high position phone_number'>*</strong>
+                <textarea id="content" name="content" style="height: 300px"></textarea>
+                <strong class='high position content'>*</strong>
             </td>
         </tr>
         <tr>
             <th width="10%">状态</th>
             <td class="radio_box">
                 {# {% if data.status == 1 %}#}
-                <input type="radio" name="status" value="1" checked>正常
-                <input type="radio" name="status" value="0"> 禁止
+                <input type="radio" id='status' name="status" value="1" checked>正常
+                <input type="radio" id='status' name="status" value="0"> 禁止
                 {#{% else %}#}
                 {#    <input type="radio" name="status" value="1">正常#}
                 {#    <input type="radio" name="status" value="0" checked> 禁止#}
                 {#{% endif %}#}
-                <strong class='high position phone_number'>*</strong>
             </td>
         </tr>
     </table>
@@ -73,7 +72,7 @@
 <script src="/static/js/kindeditor/themes/default/default.css"></script>
 <script>
     KindEditor.ready(function (k) {
-        window.editor = k.create('#editor_id', {
+        window.editor = k.create('#content', {
             width: '100%',
             resizeType: 2, {# 只能改变高度 #}
             allowImageRemote: false, {# 不能上传网络图片 #}
@@ -88,7 +87,45 @@
                 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak', 'anchor', 'link', 'unlink',
             ]
         });
-    })
+    });
+
+    $("#myform").submit(function (e) {
+        e.preventDefault();
+        if ($("#title").val().length === 0) {
+            $(".title").html("标题不能为空")
+        } else {
+            $.ajax({
+                dataType: "json",
+                type: "POST",
+                data: $("#myform").serialize(),
+                success: function (msg) {
+                    if (msg === 1) {
+                        result("添加成功", "succeed");
+                        var win = art.dialog.open.origin;
+                        win.location.reload();
+                    } else {
+                        result("添加失败", "error");
+                    }
+                },
+                error: function (xhr, textstatus, thrown) {
+                }
+            });
+            return true;
+        }
+    });
+
+    function result(title, flag) {
+        art.dialog({
+            content: title,
+            //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+            icon: flag,
+            fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+            time: 3,//如果有cancel方法的话会调用cancel方法
+        });
+        var time = setInterval(function () {
+            art.dialog.close()
+        }, 2000);
+    }
 
     $("#close").click(function () {
         art.dialog.close();
