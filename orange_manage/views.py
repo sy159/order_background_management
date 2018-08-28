@@ -35,7 +35,6 @@ def login(request):
                         models.Admin.objects.filter(account=get_name).update(last_time=last_time, last_ip=get_ip,
                                                                              login_count=F('login_count') + 1)
                         admin = models.Admin.objects.filter(account=get_name).first()
-                        request.session['admin'] = admin
                         request.session['region_id'] = admin.open_admin_region
                         return redirect('/admin/index/')
                     else:
