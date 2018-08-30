@@ -69,5 +69,20 @@
 {% endif %}
 
 <script type="text/javascript" src="/static/js/del_edit_post_get.js"></script>
+<script>
+    $(".tbody").on('click', 'a', function () {
+        let clsn = this.className;
+        let td = $(this).parent().siblings()[1];
+        let id = $(td).html;
+        let url = `/admin/edit_news_category/?id=${id}`;
+        if (clsn==='edit_row') {
+            art.dialog.open(url,{
+                title:'编辑推文'
+            });
+        }else if (clsn === 'delete_row') {
+
+        }
+    })
+</script>
 </body>
 </html>

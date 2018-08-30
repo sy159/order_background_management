@@ -95,6 +95,7 @@ urlpatterns = [
 
     path('admin/system_news/', system_setting.system_news_index),  # 平台推文
     path('admin/add_news_category', system_setting.add_news_category),  # 添加推文分类
+    path('admin/edit_news_category', system_setting.edit_news_category),  # 添加推文分类
     path('admin/system_news_list', system_setting.system_news_list),  # 平台推文列表
     path('admin/add_news', system_setting.add_system_news),  # 添加平台推文
 

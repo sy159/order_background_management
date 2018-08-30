@@ -375,6 +375,9 @@ def add_news_category(request):
         models.SystemNewsCategory.objects.create(category_name=category_name, sort=sort, status=status)
         return HttpResponse(1)
 
+def edit_news_category(request):
+    if request.method == 'GET':
+        pass
 
 def system_news_list(request):
     category_id = request.GET.get('category_id')
