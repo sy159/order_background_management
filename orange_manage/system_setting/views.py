@@ -375,9 +375,6 @@ def add_news_category(request):
         models.SystemNewsCategory.objects.create(category_name=category_name, sort=sort, status=status)
         return HttpResponse(1)
 
-def edit_news_category(request):
-    if request.method == 'GET':
-        pass
 
 def system_news_list(request):
     category_id = request.GET.get('category_id')
@@ -412,3 +409,10 @@ def add_system_news(request):
                                          create_time=time.time(), last_update_time=time.time(), sort=sort,
                                          status=status)
         return HttpResponse(1)
+
+
+def edit_system_news(request):
+    if request.method == 'GET':
+        news_id = request.GET.get('id')
+        news = models.SystemNews.objects.filter(id=news_id).first()
+        return render(request, 'System_Setting/SystemNews/add_news.html', {'news': news})

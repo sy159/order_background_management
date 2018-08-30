@@ -80,7 +80,25 @@
             height:700
         });
     }
-</script>
 
+    $(".tbody").on('click', 'a', function () {
+    let clsn = this.className;
+    let td = $(this).parent().siblings()[0];
+    let news_id = $(td).html();
+    let url = `/admin/edit_news?id=${news_id}`;
+
+    if (clsn==='edit_row') {
+        art.dialog.open(url,{
+            title:'编辑推文',
+            lock: true,
+            modal: true,
+            width: 600,
+            height: 400
+        });
+    }else if (clsn === 'delete_row') {
+        //TODO 删除推文
+    }
+})
+</script>
 </body>
 </html>
