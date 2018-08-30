@@ -13,10 +13,9 @@
             <th width="10%">标题</th>
             <td>
                 <input type="text" id="title" class="input fl" name="title" size="75" placeholder="推文标题"
-                       validate="maxlength:50"
-                value="{{ news.title }}"
-                />
+                       validate="maxlength:50" value="{{ news.title }}"/>
                 <strong class='high position phone_number'>*</strong>
+                <input type="hidden" id="news_id" class="put" name="news_id" value="{{ news.id }}">
             </td>
         </tr>
         <tr>
@@ -24,12 +23,12 @@
             {#<if condition="$category">#}
             <td>
                 <select name="category_id">
-
                     {% for category in categorys %}
-                        <option value="{{ category.id }}">{{ category.category_name }}</option>
+                        <option value="{{ category.id }}" {% if category.id == news.category_id %}
+                                selected="selected"{% endif %}>{{ category.category_name }}</option>
                     {% endfor %}
                     <input type="hidden" class="pub" id="category_id" name="classify_id"
-                           value="1">
+                           value="{{ news.category_id }}">
                 </select>
             </td>
             {#</if>#}
@@ -37,7 +36,8 @@
         <tr>
             <th width="10%">排序</th>
             <td>
-                <input type="text" id='sort' class="input fl" name="sort" value="0" placeholder="快报标题"
+                <input type="text" id='sort' class="input fl" name="sort" {% if news.sort %}
+                       value="{{ news.sort }}" {% else %} value="0" {% endif %} placeholder="快报标题"
                        validate="maxlength:50,digits:true"/>
             </td>
         </tr>
@@ -45,7 +45,7 @@
             <th width="10%">内容</th>
             <td>
                 <label for="content">
-                    <textarea type="text" id="content" name="content" style="height: 300px"></textarea>
+                    <textarea type="text" id="content" name="content" style="height: 300px">{{ news.content }}</textarea>
                 </label>
                 <strong class='high position content'>*</strong>
             </td>
@@ -53,13 +53,13 @@
         <tr>
             <th width="10%">状态</th>
             <td class="radio_box">
-                {# {% if data.status == 1 %}#}
-                <input type="radio" id='status' name="status" value="1" checked>正常
-                <input type="radio" id='status' name="status" value="0"> 禁止
-                {#{% else %}#}
-                {#    <input type="radio" name="status" value="1">正常#}
-                {#    <input type="radio" name="status" value="0" checked> 禁止#}
-                {#{% endif %}#}
+                {% if news.status == 1 %}
+                    <input type="radio" id='status' name="status" value="1">正常
+                    <input type="radio" id='status' name="status" value="0"> 禁止
+                {% else %}
+                    <input type="radio" name="status" value="1">正常
+                    <input type="radio" name="status" value="0" checked> 禁止
+                {% endif %}
             </td>
         </tr>
     </table>
@@ -77,20 +77,28 @@
 <script src="/static/js/kindeditor/themes/default/default.css"></script>
 <script>
     KindEditor.ready(function (k) {
+
         window.editor = k.create('#content', {
             width: '100%',
+            high:'3000',
             resizeType: 2, {# 只能改变高度 #}
             allowImageRemote: true, {# 不能上传网络图片 #}
             uploadJson: '/admin/upload_img/', {#处理url指定上传文件的服务器端程序#}
             items: [
                 'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
-                'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
-                'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
-                'superscript', 'clearhtml', 'quickformat', 'selectall', '/',
-                'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
-                'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
-                'table', 'hr', 'emoticons', 'baidumap', 'pagebreak', 'anchor', 'link', 'unlink',
-            ]
+                'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyfull',
+                'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript', 'superscript',
+                'clearhtml', 'quickformat', 'selectall', '/', 'formatblock', 'fontname', 'fontsize', '|', 'forecolor',
+                'hilitecolor', 'bold', 'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat',
+                '|', 'image', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak', 'anchor', 'link', 'unlink',
+            ],
+            afterBlur: function () {
+                this.sync();
+            },
+            afterCreate: function () {
+                this.sync();
+            }
+
         });
     });
 
@@ -100,7 +108,7 @@
             $(".title").html("标题不能为空")
         } else {
             alert($("#title").val());
-            window.editor.sync();
+            {#window.editor.sync();#}
             $.ajax({
                 dataType: "json",
                 type: "post",

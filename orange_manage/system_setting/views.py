@@ -412,7 +412,19 @@ def add_system_news(request):
 
 
 def edit_system_news(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
+        news_id = request.POST.get("news_id")
+        title = request.POST.get("title")
+        sort = request.POST.get("sort")
+        category_id = request.POST.get("category_id")
+        content = request.POST.get("content")
+        status = request.POST.get("status")
+        models.SystemNews.objects.update(id=news_id, category_id=category_id, title=title, content=content,
+                                         create_time=time.time(), last_update_time=time.time(), sort=sort,
+                                         status=status)
+    else:
         news_id = request.GET.get('id')
+        categorys = models.SystemNewsCategory.objects.values('id', 'category_name').all()
         news = models.SystemNews.objects.filter(id=news_id).first()
-        return render(request, 'System_Setting/SystemNews/add_news.html', {'news': news})
+        return render(request, 'System_Setting/SystemNews/add_news.html', {'news': news, 'categorys': categorys})
+    return HttpResponse(1)
