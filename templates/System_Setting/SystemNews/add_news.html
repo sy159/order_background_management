@@ -107,8 +107,6 @@
         if ($("#title").val().length === 0) {
             $(".title").html("标题不能为空")
         } else {
-            alert($("#title").val());
-            {#window.editor.sync();#}
             $.ajax({
                 dataType: "json",
                 type: "post",

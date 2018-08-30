@@ -428,3 +428,10 @@ def edit_system_news(request):
         news = models.SystemNews.objects.filter(id=news_id).first()
         return render(request, 'System_Setting/SystemNews/add_news.html', {'news': news, 'categorys': categorys})
     return HttpResponse(1)
+
+
+def get_system_news(request):
+        news_id = request.GET.get('id')
+        news = models.SystemNews.objects.filter(id=news_id).first()
+        return render(request, 'System_Setting/SystemNews/news.html', {'news': news})
+

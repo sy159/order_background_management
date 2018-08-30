@@ -3,7 +3,7 @@ from upyun import upyun
 up = upyun.UpYun("ftp-college-circle", "development", "cxTT9BCjG7AbHioWZsck")
 
 
-def UploadImg(route, file, headers=None, checksum=False, ):
+def UploadImg(route, file, headers=None, checksum=False):
     """ 上传文件到又拍云
     :param headers:需要的头信息
     :param checksum:是否进行 MD5 校验
@@ -11,6 +11,7 @@ def UploadImg(route, file, headers=None, checksum=False, ):
     :param file:需要上传的文件对象
     :return:
     """
+    print("调用了我")
     try:
         if headers:
             res = up.put(route, file, checksum=checksum, headers=headers)

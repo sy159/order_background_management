@@ -147,11 +147,12 @@ def upload_img(request):
     file_obj = request.FILES.get('imgFile')
     if file_obj.name.split('.')[-1] not in ['jpg', 'png', 'jpeg', 'gif', 'bmp', 'webp']:  # 判断上传不为图片
         return HttpResponse('<h2>只能上传图片哦</h2>')
-    file_name = str(time.time()) + file_obj.name
+    file_name = str(int(time.time())) + "." + file_obj.name.split('.')[-1]
+    print(file_name)
     url = "/static/illustratio/"+file_name
     UploadImg(url, file_obj)
     resp = {
-        "error":0,
-        "url":"http://ftp.college.cqgynet.com"+url
+        "error": 0,
+        "url": "http://ftp.college.cqgynet.com"+url
     }
     return JsonResponse(resp)
