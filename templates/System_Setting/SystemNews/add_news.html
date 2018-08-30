@@ -42,7 +42,9 @@
         <tr>
             <th width="10%">内容</th>
             <td>
-                <textarea id="content" name="content" style="height: 300px"></textarea>
+                <label for="content">
+                    <textarea type="text" id="content" name="content" style="height: 300px"></textarea>
+                </label>
                 <strong class='high position content'>*</strong>
             </td>
         </tr>
@@ -95,9 +97,11 @@
         if ($("#title").val().length === 0) {
             $(".title").html("标题不能为空")
         } else {
+            alert($("#title").val());
+            window.editor.sync();
             $.ajax({
                 dataType: "json",
-                type: "POST",
+                type: "post",
                 data: $("#myform").serialize(),
                 success: function (msg) {
                     if (msg === 1) {
