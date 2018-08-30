@@ -1,14 +1,17 @@
-from django.http import JsonResponse, QueryDict, HttpResponseRedirect
+import json
+import time
+
+from django.db.models import F
+from django.http import JsonResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.utils import timezone
-from django.shortcuts import render, redirect, HttpResponse, render_to_response
-from django.views.decorators.csrf import csrf_exempt, csrf_protect
-from django.db.models import Sum, Q, F
+from django.views.decorators.csrf import csrf_protect
+
 from orange_manage import models
-from .utils.password_encryption import pwd_encrypted
+from orange_manage.utils.image_upload import UploadImg
 from .utils import login_validation as val
 from .utils import produce_key as key
-import json, os, time
-from orange_manage.utils.image_upload import UploadImg
+from .utils.password_encryption import pwd_encrypted
 
 
 # Create your views here.
