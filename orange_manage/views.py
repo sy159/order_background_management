@@ -1,4 +1,4 @@
-from django.http import JsonResponse, QueryDict
+from django.http import JsonResponse, QueryDict, HttpResponseRedirect
 from django.utils import timezone
 from django.shortcuts import render, redirect, HttpResponse, render_to_response
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
@@ -12,6 +12,9 @@ from orange_manage.utils.image_upload import UploadImg
 
 
 # Create your views here.
+def home(request):
+    return HttpResponseRedirect('/admin/index')
+
 
 @csrf_protect
 def login(request):

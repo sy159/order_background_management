@@ -26,7 +26,8 @@ from orange_manage.deliver import views as deliver
 from django.views.decorators.cache import cache_page
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('', views.home),
+    path('admin/', views.home),
     path('admin/login', cache_page(60 * 60 * 24 * 30)(views.login)),  # 登陆
     path('admin/logout', views.logout),  # 注销
     path('admin/bind_account', views.bind_account),  # 两步验证,绑定用户
