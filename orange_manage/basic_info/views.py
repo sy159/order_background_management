@@ -1,19 +1,16 @@
-import json
-
-from django.http import JsonResponse
-from django.shortcuts import render, HttpResponse
+from django.http import JsonResponse, QueryDict
 from django.utils import timezone
-from django.views.decorators.cache import cache_control
-
+from django.shortcuts import render, redirect, HttpResponse
 from orange_manage import models
 from orange_manage.utils.password_encryption import pwd_encrypted
+import json
 
 
 def account_list(request):
     """管理员列表"""
     get_pagesize = 15
     get_page = request.GET.get('p', '1')
-    if request.operator_level:
+    if request.operator_level == 0:
         all_obj = models.Admin.objects.filter(level__lt=2)
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
@@ -452,9 +449,9 @@ def edit_campusinfo(request):
             return HttpResponse(1)
         except Exception:
             return HttpResponse(0)
-    campus_id = request.POST.get('campus_id')
-    campus_name = request.POST.get('campus_name')
-    return render(request, 'Index/edit_campus.html', {'campus_id ': campus_id, 'campus_name': campus_name})
+    campus_id = request.GET.get('campus_id')
+    campus_name = request.GET.get('campus_name')
+    return render(request, 'Index/edit_campus.html', {'campus_id': campus_id, 'campus_name': campus_name})
 
 
 def address_list(request):
@@ -481,8 +478,8 @@ def add_address(request):
         get_campus_id = request.POST.get('campus_id')
         get_parent_id = request.POST.get('address_id')
         get_info = request.POST.get('info')
-        get_info = get_info.replace('\r', '')
-        get_info = get_info.replace('\n', '')
+        get_info = get_info.replace("\r", "")
+        get_info = get_info.replace("\n", "")
         info_list = get_info.split('；')
         try:
             for i in info_list:
