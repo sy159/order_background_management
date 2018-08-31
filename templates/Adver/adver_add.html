@@ -30,8 +30,9 @@
             <td>
                  <select id="url_type" style="height: 35px;vertical-align: middle;">
                      <option name="" value="0" selected>请选择对应功能</option>
-                     <option id="store" name="function" value="1" >店铺或商品</option>
-                     <option id="web" name="function" value="2">web链接</option>
+                     <option id="store" name="function" value="storeOrGoods" >某店铺或商品</option>
+                     <option id="shop_category" name="function" value="shop_category" >店铺分类</option>
+                     <option id="web" name="function" value="webUrl">web链接</option>
                  </select>
                 <input type="hidden" name="function" value="" id="choose">
                 <input type="text" id="url" value="" class="input" name="url" style="width:200px;display:none" placeholder="请填写链接地址" />
@@ -72,26 +73,26 @@
 
     //表单验证提交
     function confirm(){
-        if($("#adver_name").val().length == 0 )
+        if($("#adver_name").val().length === 0 )
         {
             $(".adver_name").html("广告名称不能为空！");
             $("#adver_name").focus();
             return false;
         }else{
             $(".adver_name").html(" ");
-            if($("#pic").val().length == 0)
+            if($("#pic").val().length === 0)
             {
                 $(".pic").html("广告图片不能为空！");
                 return false;
             }else{
                  $(".pic").html(" ");
-                if($("#url").val().length == 0)
+                if($("#url").val().length === 0)
                 {
                     $(".url").html("链接功能不能为空！");
                     return false;
                 }else {
                     $(".url").html(" ");
-                    if($("#sort").val().length == 0)
+                    if($("#sort").val().length === 0)
                     {
                         $(".sort").html("广告排序不能为空！");
                         return false;
@@ -136,23 +137,37 @@
     $("#url_type").change(function () {
        var val=$(this).find("option:selected").val();
         $("#choose").val(val);
-        if(val == 2){
+        if(val === "webUrl"){
             $("#url").val("");
             $("#url").show();
         }else{
             $("#url").hide();
-            if(val == 1){
-                art.dialog.open('/admin/stores/?flag=add',{
+            if(val === "storeOrGoods"){
+                art.dialog.open('/admin/choice_stores?flag=add',{
                     title: '选择商店或者商品',
                     lock: true,
                     width:800,
-                    height:400,
+                    height:500,
                     close:function () {
                         var shop_id=art.dialog.data('shop_id');
                         var shop_name=art.dialog.data('shop_name');
                         $("#url").show();
                         $("#url").val(shop_name);
                         $("#get_url").val(shop_id);
+                    }
+                });
+            }else if (val === "shop_category"){
+                art.dialog.open('/admin/choose_shop_category?flag=add',{
+                    title: '选择商店分类',
+                    lock: true,
+                    width:800,
+                    height:500,
+                    close:function () {
+                        const get_url = art.dialog.data('get_url');
+                        const category_name = art.dialog.data('category_name');
+                        $("#url").show();
+                        $("#url").val(category_name);
+                        $("#get_url").val(get_url);
                     }
                 });
             }

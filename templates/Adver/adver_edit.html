@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>网站后台管理</title>
     {% include 'Public/header.html' %}
 </head>
 <body>
 <form id="myform" method="post" action="" enctype="multipart/form-data">
     <table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
-    <input type="hidden" id="parent_id" name="parent_id" value="{{ parent_id }}">
-    <input type="hidden" id="adver_id" name="adver_id" value="{{ data.adver_id }}">
+        <input type="hidden" id="parent_id" name="parent_id" value="{{ parent_id }}">
+        <input type="hidden" id="adver_id" name="adver_id" value="{{ data.adver_id }}">
         <tr>
             <th width="80">广告名称</th>
-            <td><input type="text" class="input fl" value="{{ data.title }}" name="name" size="20" validate="maxlength:20,required:true"/></td>
+            <td><input type="text" class="input fl" value="{{ data.title }}" name="name" size="20"
+                       validate="maxlength:20,required:true"/></td>
         </tr>
-         <tr>
+        <tr>
             <th width="80">广告现图</th>
             <td><img src="{{ data.img }}" style="width:300px;height:80px;" class="view_msg"></td>
         </tr>
         <tr>
             <th width="80">广告图片</th>
             <td>
-                <input type="file" id="pic"  accept="image/png,image/jpeg,image/gif" value="" class="input fl" name="pic" validate="required:true"/>
-                <input  type="hidden" id="pic1"  value=""   name="img" style="width:200px;"/>
-                <input  type="hidden" id="pic2"  value=""   name="img2" style="width:200px;"/>
+                <input type="file" id="pic" accept="image/png,image/jpeg,image/gif" value="" class="input fl" name="pic"
+                       validate="required:true"/>
+                <input type="hidden" id="pic1" value="" name="img" style="width:200px;"/>
+                <input type="hidden" id="pic2" value="" name="img2" style="width:200px;"/>
             </td>
 
         </tr>
@@ -32,27 +34,29 @@
             <td>
                 <select id="url_type" style="height: 35px;vertical-align: middle;">
                     <option name="" value="0" selected>请选择对应功能</option>
-                    <option id="store" name="function" value="1" >店铺或商品</option>
+                    <option id="store" name="function" value="1">店铺或商品</option>
                     <option id="web" name="function" value="2">web链接</option>
                 </select>
                 <input type="hidden" name="function" value="" id="choose">
-                <input type="text" value="" class="input" name="url" id="url" style="width:200px;" placeholder="请填写链接地址" validate="maxlength:200,required:true,url:true"/>
+                <input type="text" value="" class="input" name="url" id="url" style="width:200px;" placeholder="请填写链接地址"
+                       validate="maxlength:200,required:true,url:true"/>
                 <input type="hidden" name="get_url" id="get_url" value="">
             </td>
         </tr>
         <tr>
             <th width="80">广告排序</th>
-            <td><input type="text" class="input fl" name="sort" style="width:80px;" value="{{ data.priority }}" validate="maxlength:10,required:true,number:true"/></td>
+            <td><input type="text" class="input fl" name="sort" style="width:80px;" value="{{ data.priority }}"
+                       validate="maxlength:10,required:true,number:true"/></td>
         </tr>
         <tr>
             <th width="80">广告状态</th>
             <td>
                 {% if data.state == 1 %}
-                <label><input type="radio" name="status" value="1" checked="checked" />启用</label>
-               <label><input type="radio" name="status" value="0" />关闭</label>
-                    {% else %}
-                    <label><input type="radio" name="status" value="1"  />启用</label>
-               <label><input type="radio" name="status" value="0" checked="checked"/>关闭</label>
+                    <label><input type="radio" name="status" value="1" checked="checked"/>启用</label>
+                    <label><input type="radio" name="status" value="0"/>关闭</label>
+                {% else %}
+                    <label><input type="radio" name="status" value="1"/>启用</label>
+                    <label><input type="radio" name="status" value="0" checked="checked"/>关闭</label>
                 {% endif %}
             </td>
         </tr>
@@ -70,21 +74,35 @@
     $("#url").val(art.dialog.data('urlname'));
 
     $("#url_type").change(function () {
-       var val=$(this).find("option:selected").val();
-       $("#choose").val(val);
-        if(val == 2){
+        var val = $(this).find("option:selected").val();
+        $("#choose").val(val);
+        if (val == 2) {
             $("#url").val("");
             $("#url").show();
-        }else{
-            if(val == 1){
-                 art.dialog.open('/admin/stores/?flag=edit',{
+        } else {
+            if (val === 1) {
+                art.dialog.open('/admin/choice_stores/?flag=edit', {
                     title: '选择商店或者商品',
                     lock: true,
-                    width:800,
-                    height:400,
-                    close:function () {
-                        var shop_id=art.dialog.data('shop_id');
-                        var shop_name=art.dialog.data('shop_name');
+                    width: 800,
+                    height: 500,
+                    close: function () {
+                        var shop_id = art.dialog.data('shop_id');
+                        var shop_name = art.dialog.data('shop_name');
+                        $("#url").show();
+                        $("#url").val(shop_name);
+                        $("#get_url").val(shop_id);
+                    }
+                });
+            } else if (val === "shop_category") {
+                art.dialog.open('/admin/choice_stores/?flag=add', {
+                    title: '选择商店或者商品',
+                    lock: true,
+                    width: 800,
+                    height: 500,
+                    close: function () {
+                        var shop_id = art.dialog.data('shop_id');
+                        var shop_name = art.dialog.data('shop_name');
                         $("#url").show();
                         $("#url").val(shop_name);
                         $("#get_url").val(shop_id);
@@ -98,27 +116,27 @@
         $("#myform").submit(function (e) {
             e.preventDefault();
             $.ajax({
-                url:"/admin/adver_edit/",
-                type:"post",
-                dataType:"json",
-                data:$("#myform").serialize(),
-                success:function(msg){
+                url: "/admin/adver_edit/",
+                type: "post",
+                dataType: "json",
+                data: $("#myform").serialize(),
+                success: function (msg) {
                     console.log(msg);
-                    if(msg==1){
-                        result("编辑成功","succeed");
+                    if (msg == 1) {
+                        result("编辑成功", "succeed");
                         var win = art.dialog.open.origin;
                         win.location.reload();
-                    }else{
-                        result("编辑失败","error");
+                    } else {
+                        result("编辑失败", "error");
                     }
                 },
-                error:function(xhr,textstatus,thrown){
+                error: function (xhr, textstatus, thrown) {
                 }
             });
         });//表单提交
     }
 
-     function result(title,flag) {
+    function result(title, flag) {
         art.dialog({
             content: title,
             //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
@@ -126,51 +144,51 @@
             fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
             time: 3,//如果有cancel方法的话会调用cancel方法
         });
-        var time = setInterval(function() {
+        var time = setInterval(function () {
             art.dialog.close()
         }, 2000);
     }
 
-     $("#pic").change(function () {
-         if($(this).val() != ""){
-             var tmpPath = $("#pic").val();
-             tmpPath=tmpPath.split(".")[1];
-             var new_name=get_file_name(2);
-             var val=$("#parent_id").val();
-             $("#pic2").val(val+'+'+new_name+Date.parse(new Date())+"."+tmpPath);
-             $("#pic1").val(new_name+Date.parse(new Date())+"."+tmpPath);
-             var formData=new FormData();
-             var img_file=document.getElementById("pic");
-             var fileObj=img_file.files[0];
-             formData.append('file',fileObj);
-             formData.append('filename',$("#pic2").val());
-             $.ajax({
-                 url: "/admin/image_upload/",
-                 type: "post",
-                 dataType: "json",
-                 data:formData,
-                 processData : false,
-                 contentType : false,
-                 async:false,
-                 success:function () {
-                 }
-             });
-         }
+    $("#pic").change(function () {
+        if ($(this).val() != "") {
+            var tmpPath = $("#pic").val();
+            tmpPath = tmpPath.split(".")[1];
+            var new_name = get_file_name(2);
+            var val = $("#parent_id").val();
+            $("#pic2").val(val + '+' + new_name + Date.parse(new Date()) + "." + tmpPath);
+            $("#pic1").val(new_name + Date.parse(new Date()) + "." + tmpPath);
+            var formData = new FormData();
+            var img_file = document.getElementById("pic");
+            var fileObj = img_file.files[0];
+            formData.append('file', fileObj);
+            formData.append('filename', $("#pic2").val());
+            $.ajax({
+                url: "/admin/image_upload/",
+                type: "post",
+                dataType: "json",
+                data: formData,
+                processData: false,
+                contentType: false,
+                async: false,
+                success: function () {
+                }
+            });
+        }
 
-     });//点击上传图片生成随机图片名
+    });//点击上传图片生成随机图片名
 
-     function get_file_name(len) {
-            let new_file_name = 'A';
-            let chars = "1234567890qwertyuiopasdfghjklzxcvbnm";
-            for (i = 0; i < len; i++) {
-                new_file_name += chars[parseInt(Math.random() * chars.length)];
-            }
-            return new_file_name;
-        }//生成随机数
+    function get_file_name(len) {
+        let new_file_name = 'A';
+        let chars = "1234567890qwertyuiopasdfghjklzxcvbnm";
+        for (i = 0; i < len; i++) {
+            new_file_name += chars[parseInt(Math.random() * chars.length)];
+        }
+        return new_file_name;
+    }//生成随机数
 
-     $("#close").click(function () {
-		 art.dialog.close();
-     });//关闭对话框
+    $("#close").click(function () {
+        art.dialog.close();
+    });//关闭对话框
 
 </script>
 </body>

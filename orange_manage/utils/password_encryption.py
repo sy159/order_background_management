@@ -2,9 +2,7 @@ import hashlib, random, string
 
 
 def pwd_encrypted(get_pwd):
-    '''
-    管理员加密方法
-    '''
+    '''管理员加密方法'''
     salt = 'cqgynet'
     hash_key = hashlib.sha256()
     hash_key.update((str(get_pwd) + salt).encode('utf-8'))

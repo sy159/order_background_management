@@ -45,7 +45,7 @@
                 <tbody class="tbody">
                 {% for i in news_list %}
                     <tr>
-{#                        <input type="hidden" name="region_id" id="region_id" value="{{ region_id }}">#}
+                        {#                        <input type="hidden" name="region_id" id="region_id" value="{{ region_id }}">#}
                         <td>{{ i.id }}</td>
                         <td>{{ i.title }}</td>
                         <td>{{ i.create_time }}</td>
@@ -56,9 +56,10 @@
                         {% else %}
                             <td><span style="color: red; ">关闭</span></td>
                         {% endif %}
-{#                        <td><a href="/admin/address_list/?campus_id={{ i.campus_id }}" style="color: green;">地址列表</a>#}
-{#                        </td>#}
+                        {#                        <td><a href="/admin/address_list/?campus_id={{ i.campus_id }}" style="color: green;">地址列表</a>#}
+                        {#                        </td>#}
                         <td class="textcenter">
+                            <a href="javascript:void(0);" class="show_content">预览</a>
                             <a href="javascript:void(0);" class="edit_row">编辑</a>
                             <a href="javascript:void(0);" class="delete_row">删除</a>
                         </td>
@@ -72,33 +73,71 @@
 
 <script type="text/javascript">
     function add_news() {
-        art.dialog.open('/admin/add_news', {
+        art.dialog.open('/admin/edit_news', {
             title: '添加推文',
             lock: false,
             modal: true,
             width: 900,
-            height:700
+            height: 700
         });
     }
 
     $(".tbody").on('click', 'a', function () {
-    let clsn = this.className;
-    let td = $(this).parent().siblings()[0];
-    let news_id = $(td).html();
-    let url = `/admin/edit_news?id=${news_id}`;
+        let clsn = this.className;
+        let td = $(this).parent().siblings()[0];
+        let news_id = $(td).html();
 
-    if (clsn==='edit_row') {
-        art.dialog.open(url,{
-            title:'编辑推文',
-            lock: true,
-            modal: true,
-            width: 900,
-            height: 700
-        });
-    }else if (clsn === 'delete_row') {
-        //TODO 删除推文
-    }
-})
+        if (clsn === 'show_content') {
+            art.dialog.open(`/admin/getnews?id=${news_id}`, {
+                title: '查看推文',
+                lock: true,
+                modal: true,
+                width: 900,
+                height: 700
+            });
+        } else if (clsn === 'edit_row') {
+            art.dialog.open(`/admin/edit_news?id=${news_id}`, {
+                title: '编辑推文',
+                lock: true,
+                modal: true,
+                width: 900,
+                height: 700
+            });
+        } else if (clsn === 'delete_row') {
+            $.ajax({
+                url: "/admin/del_news",
+                type: "post",
+                dataType: "json",
+                data: {"news_id": news_id},
+                success: function (msg) {
+                    console.log(msg);
+                    if (msg == 1) {
+                        result("删除成功", "succeed");
+                        var win = art.dialog.open.origin;
+                        win.location.reload();
+                    } else {
+                        result("删除失败", "error");
+                    }
+                },
+                error: function (xhr, textstatus, thrown) {
+                }
+            });
+
+
+            function result(title, flag) {
+                art.dialog({
+                    content: title,
+                    //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+                    icon: flag,
+                    fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+                    time: 3,//如果有cancel方法的话会调用cancel方法
+                });
+                var time = setInterval(function () {
+                    art.dialog.close()
+                }, 2000);
+            }
+        }
+    })
 </script>
 </body>
 </html>

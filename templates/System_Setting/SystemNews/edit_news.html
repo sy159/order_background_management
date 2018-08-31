@@ -54,11 +54,11 @@
             <th width="10%">状态</th>
             <td class="radio_box">
                 {% if news.status == 1 %}
-                    <input type="radio" id='status' name="status" value="1">正常
+                    <input type="radio" id='status' name="status" value="1" checked>正常
                     <input type="radio" id='status' name="status" value="0"> 禁止
                 {% else %}
-                    <input type="radio" name="status" value="1">正常
-                    <input type="radio" name="status" value="0" checked> 禁止
+                    <input type="radio" id='status' name="status" value="1">正常
+                    <input type="radio" id='status' name="status" value="0" checked> 禁止
                 {% endif %}
             </td>
         </tr>
@@ -113,7 +113,7 @@
                 data: $("#myform").serialize(),
                 success: function (msg) {
                     if (msg === 1) {
-                        result("添加成功", "succeed");
+                        result("编辑成功", "succeed");
                         var win = art.dialog.open.origin;
                         win.location.reload();
                     } else {

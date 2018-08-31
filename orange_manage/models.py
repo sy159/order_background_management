@@ -206,36 +206,6 @@ class CircleShop(models.Model):
         db_table = 'circle_shop'
 
 
-class City(models.Model):
-    city_id = models.AutoField(primary_key=True)
-    city = models.CharField(max_length=255)
-    province_id = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'city'
-
-
-class CommentImage(models.Model):
-    record_id = models.AutoField(primary_key=True)
-    comment_id = models.IntegerField()
-    image = models.CharField(max_length=255)
-
-    class Meta:
-        managed = False
-        db_table = 'comment_image'
-
-
-class County(models.Model):
-    county_id = models.AutoField(primary_key=True)
-    county = models.CharField(max_length=255)
-    city_id = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'county'
-
-
 class Coupon(models.Model):
     coupon_id = models.AutoField(primary_key=True)
     coupon_name = models.CharField(max_length=255)
@@ -407,8 +377,8 @@ class GoodsClassifyPlatform(models.Model):
     record_id = models.AutoField(primary_key=True)
     parent_id = models.IntegerField()
     name = models.CharField(max_length=255)
-    start_time = models.IntegerField(blank=True, null=True)
-    end_time = models.IntegerField(blank=True, null=True)
+    start_time = models.TimeField(blank=True, null=True)
+    end_time = models.TimeField(blank=True, null=True)
     week_time = models.CharField(max_length=255, blank=True, null=True)
     privilege = models.IntegerField()
     is_show = models.IntegerField()
@@ -441,16 +411,6 @@ class GoodsExamineLog(models.Model):
     class Meta:
         managed = False
         db_table = 'goods_examine_log'
-
-
-class GoodsImage(models.Model):
-    record_id = models.AutoField(primary_key=True)
-    goods_id = models.IntegerField()
-    image = models.CharField(max_length=255)
-
-    class Meta:
-        managed = False
-        db_table = 'goods_image'
 
 
 class GoodsInfo(models.Model):
@@ -500,6 +460,28 @@ class GoodsSpecification(models.Model):
     class Meta:
         managed = False
         db_table = 'goods_specification'
+
+
+class IemiLog(models.Model):
+    id = models.IntegerField(primary_key=True)
+    imei = models.CharField(max_length=255)
+    phone_number = models.CharField(max_length=11)
+    activity = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'iemi_log'
+
+
+class InvitationLog(models.Model):
+    phone_number = models.CharField(max_length=11)
+    invitation_user = models.IntegerField()
+    commission = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'invitation_log'
 
 
 class Menu(models.Model):
@@ -615,34 +597,6 @@ class OrdersGoodsAttribute(models.Model):
         db_table = 'orders_goods_attribute'
 
 
-class Point(models.Model):
-    point_id = models.AutoField(primary_key=True)
-    remitter_id = models.IntegerField()
-    remitter_nick = models.CharField(max_length=255)
-    payee_id = models.IntegerField()
-    payee_nick = models.CharField(max_length=255)
-    amount = models.IntegerField()
-    time = models.DateTimeField()
-    order_id = models.CharField(max_length=255, blank=True, null=True)
-    title = models.CharField(max_length=255)
-    mode = models.CharField(max_length=1)
-    university_id = models.IntegerField()
-    campus_id = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'point'
-
-
-class Province(models.Model):
-    province_id = models.AutoField(primary_key=True)
-    province = models.CharField(max_length=255)
-
-    class Meta:
-        managed = False
-        db_table = 'province'
-
-
 class RecommendShops(models.Model):
     shop_id = models.IntegerField()
     shop_name = models.CharField(max_length=255)
@@ -712,6 +666,20 @@ class RegionConfig(models.Model):
         db_table = 'region_config'
 
 
+class RegionNotice(models.Model):
+    region_id = models.IntegerField(blank=True, null=True)
+    campus_id = models.IntegerField(blank=True, null=True)
+    title = models.CharField(max_length=255)
+    content = models.CharField(max_length=255)
+    status = models.IntegerField()
+    trigger_scene = models.IntegerField(blank=True, null=True)
+    target = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'region_notice'
+
+
 class Shop(models.Model):
     shop_id = models.AutoField(primary_key=True)
     shop_name = models.CharField(max_length=255)
@@ -740,7 +708,7 @@ class Shop(models.Model):
     end_business_time = models.TimeField(blank=True, null=True)
     notice = models.CharField(max_length=255, blank=True, null=True)
     status = models.PositiveIntegerField()
-    money = models.DecimalField(max_digits=10, decimal_places=2)
+    money = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     money_state = models.IntegerField(blank=True, null=True)
     update_time = models.DateTimeField(blank=True, null=True)
     packing_charge = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
@@ -794,7 +762,6 @@ class ShopAuditLog(models.Model):
 
 
 class ShopCategory(models.Model):
-    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
 
     class Meta:
@@ -805,7 +772,7 @@ class ShopCategory(models.Model):
 class ShopComment(models.Model):
     record_id = models.AutoField(primary_key=True)
     shop_id = models.IntegerField()
-    sub_order_id = models.IntegerField()
+    sub_order_id = models.CharField(max_length=255)
     shop_rating = models.IntegerField(blank=True, null=True)
     shop_comment = models.CharField(max_length=255, blank=True, null=True)
     user_id = models.IntegerField(blank=True, null=True)
@@ -916,8 +883,8 @@ class SystemNews(models.Model):
     category_id = models.IntegerField()
     title = models.CharField(max_length=100)
     content = models.TextField()
-    create_time = models.IntegerField()
-    last_update_time = models.IntegerField()
+    create_time = models.DateTimeField(auto_now_add=True)
+    last_update_time = models.DateTimeField(auto_now=True)
     sort = models.IntegerField()
     status = models.IntegerField()
 
@@ -1053,6 +1020,24 @@ class UserCoupon(models.Model):
     class Meta:
         managed = False
         db_table = 'user_coupon'
+
+
+class UserIntegral(models.Model):
+    remitter_id = models.IntegerField()
+    remitter_nick = models.CharField(max_length=255)
+    payee_id = models.IntegerField()
+    payee_nick = models.CharField(max_length=255)
+    amount = models.IntegerField()
+    time = models.DateTimeField()
+    order_id = models.CharField(max_length=255, blank=True, null=True)
+    title = models.CharField(max_length=255)
+    mode = models.CharField(max_length=1)
+    university_id = models.IntegerField()
+    campus_id = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'user_integral'
 
 
 class UserTransaction(models.Model):

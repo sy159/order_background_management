@@ -33,8 +33,8 @@ def user_list(request):
         all_money = '%.2f' % obj.values('balance').aggregate(all_money=Sum('balance'))['all_money']
         all_integral = '%.2f' % obj.values('integral').aggregate(all_integral=Sum('integral'))['all_integral']
         disable_money_obj = obj.values('balance').annotate(all_money=Sum('balance')).filter(status=0)
+        disable_money = 0.0
         if disable_money_obj:
-            disable_money = 0.0
             for i in disable_money_obj:
                 disable_money += float(i['all_money'])
         disable_money = '%.2f' % disable_money

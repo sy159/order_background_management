@@ -3,13 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>显示推文</title>
+    <style>
+        @media (min-width: 992px) and (max-width: 1199px) {
+           h1{
+               font-size: 1.5em;
+           }
+            p img{
+                width: 450px;
+                height: 300px;
+            }
+        }
+        /*在768 和991 像素之间的屏幕里，小屏幕，主要是PAD*/
+        @media (min-width: 768px) and (max-width: 991px) {
+            h1{
+                font-size: 1em;
+            }
+            p img{
+                width: 420px;
+                height: 280px;
+            }
+        }
+        /*在480 和767 像素之间的屏幕里，超小屏幕，主要是手机*/
+        @media (min-width: 480px) and (max-width: 767px) {
+            h1{
+                font-size: 0.8em;
+            }
+            p img{
+                width: 400px;
+                height: 260px;
+            }
+        }
+        /*在小于480 像素的屏幕，微小屏幕，更低分辨率的手机*/
+        @media (max-width: 479px) {
+            h1{
+                font-size: 0.5em;
+            }
+            p img{
+                width: 330px;
+                height: 220px;
+            }
+        }
+    </style>
 
 
 </head>
 <body>
-
+<div>
+   {{ news.content |safe}}
+</div>
 </body>
 <script>
-
 </script>
 </html>

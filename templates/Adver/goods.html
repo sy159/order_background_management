@@ -14,7 +14,7 @@
 <div style="background:#fefbe4;border:1px solid #f3ecb9;color:#993300;padding:10px;margin-bottom:5px;">
         使用方法：点击对应内容后面的“选中”即可。
 </div>
-<form method="get"  action="/admin/goods/">
+<form method="get"  action="/admin/choose_goods/">
     <input type="text" name="keyword" class="input-text">
     <input type="hidden" name="shop_id" value="{{ shop_id }}" class="input-text">
     <input type="hidden" name="stores" value="{{ stores }}" class="input-text">
@@ -49,20 +49,20 @@
     <div class="pages">
         <ul class="pages">
 
-            <li><a href='/admin/goods/?p=1&shop_id={{ shop_id }}'>首页</a></li>
+            <li><a href='/admin/choose_goods/?p=1&shop_id={{ shop_id }}'>首页</a></li>
             {% if  get_page  == '1' %}
                 <li><a href='#'>&lt;上一页</a></li>
             {% else %}
-                <li><a href='/admin/goods/?p={{ get_page |add:-1}}&shop_id={{ shop_id }}'>&lt;上一页</a></li>
+                <li><a href='/admin/choose_goods/?p={{ get_page |add:-1}}&shop_id={{ shop_id }}'>&lt;上一页</a></li>
 
             {% endif %}
             {% if  get_page  >=  page_total  %}
                 <li><a href='#'>下一页&gt;</a></li>
             {% else %}
-                <li><a href='/admin/goods/?p={{ get_page |add:1}}&shop_id={{ shop_id }}'>下一页&gt;</a></li>
+                <li><a href='/admin/choose_goods/?p={{ get_page |add:1}}&shop_id={{ shop_id }}'>下一页&gt;</a></li>
             {% endif %}
-            <li><a href='/admin/goods/?p={{ page_total }}&shop_id={{ shop_id }}'>尾页></a></li>
-            <li disabled><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
+            <li><a href='/admin/choose_goods/?p={{ page_total }}&shop_id={{ shop_id }}'>尾页></a></li>
+            <li disabled><a href='#' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
         </ul>
     </div>
 </div>

@@ -107,8 +107,12 @@ def adver_add(request):
         get_img = request.POST.get("img")
         get_priority = request.POST.get("sort")
         get_url = request.POST.get("get_url")  # 获取格式为shop_id=9或者goods_id=9
-        if request.POST.get('function') == '2':
+        if request.POST.get('function') == 'webUrl':
             get_url = request.POST.get('url')
+        if request.POST.get('function') == 'shop_category':
+            category_name = request.POST.get('url')
+            import urllib.parse
+            get_url = '?a=shop_category&shop_category_name=' + urllib.parse.quote(category_name) + '#' + get_url.split('=')[1]
         else:
             get_url = '?a=shop#' + get_url.split('=')[1] if 'shop' in get_url else '?a=goods#' + get_url.split('=')[1]
         if get_id == '1':
@@ -120,7 +124,7 @@ def adver_add(request):
         return HttpResponse(1)
 
 
-def stores(request):
+def choice_stores(request):
     get_flag = request.GET.get('flag')
     operator_region = request.operator_region
     if request.method == 'GET':
@@ -155,7 +159,7 @@ def stores(request):
                       {'data': data_list, 'get_page': get_page, 'page_total': str(page_total), 'flag': get_flag, })
 
 
-def goods(request):
+def choose_goods(request):
     get_shop_id = request.GET.get('shop_id')
     get_stores = request.GET.get('stores')
     if request.method == 'GET':
@@ -180,6 +184,35 @@ def goods(request):
         return render(request, 'Adver/goods.html',
                       {'data': data_list, 'get_page': get_page, 'page_total': str(page_total), 'stores': get_stores,
                        'shop_id': get_shop_id})
+
+
+def choose_shop_category(request):
+    get_flag = request.GET.get('flag')
+    if request.method == 'GET':
+        get_page = request.GET.get('p', "1")
+        get_pagesize = 7
+        keyword = request.GET.get('keyword')
+        start_nun = get_pagesize * (int(get_page) - 1)  # 起始数据位置
+        end_num = start_nun + get_pagesize  # 终止数据位置
+        if keyword:
+            count_of_shopCategory = models.ShopCategory.objects.filter(name__contains=keyword).count()
+            all_obj = models.ShopCategory.objects.filter(name__contains=keyword).all()[
+                      start_nun:end_num]  # 审核通过，状态开启
+        else:
+            count_of_shopCategory = models.ShopCategory.objects.count()
+            all_obj = models.ShopCategory.objects.all()[start_nun:end_num]  # 审核通过，状态开启
+
+        page_total = count_of_shopCategory // get_pagesize + 1 if count_of_shopCategory % get_pagesize else \
+            count_of_shopCategory // get_pagesize
+        data_list = []
+        for i in all_obj:
+            data_dict = {
+                'category_id': i.id,
+                'category_name': i.name
+            }
+            data_list.append(data_dict)
+        return render(request, 'Adver/shop_category.html',
+                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total), 'flag': get_flag})
 
 
 def adver_edit(request):
@@ -363,7 +396,7 @@ def system_news_index(request):
 
 def add_news_category(request):
     if request.method == 'GET':
-        return render(request, 'System_Setting/SystemNews/add_news_category.html')
+        return render(request, 'System_Setting/SystemNews/edit_news_category.html')
     if request.method == 'POST':
         category_name = request.POST.get("category_name")
         sort = request.POST.get("sort")
@@ -390,48 +423,61 @@ def system_news_list(request):
                   {'news_list': news_list, 'category': category})
 
 
-def add_system_news(request):
+def edit_system_news(request):
     if request.method != "POST":
         category_id = request.GET.get('category_id')
-        if category_id:
-            categorys = models.SystemNewsCategory.objects.filter(id=category_id).values('id', 'category_name').first()
-        else:
+        news_id = request.GET.get('id')
+        if news_id:
+            news_id = request.GET.get('id')
             categorys = models.SystemNewsCategory.objects.values('id', 'category_name').all()
-        return render(request, 'System_Setting/SystemNews/add_news.html', {'categorys': categorys})
+            news = models.SystemNews.objects.filter(id=news_id).first()
+            return render(request, 'System_Setting/SystemNews/edit_news.html', {'news': news, 'categorys': categorys})
+        else:
+            if category_id:
+                categorys = models.SystemNewsCategory.objects.filter(id=category_id).values('id',
+                                                                                            'category_name').first()
+            else:
+                categorys = models.SystemNewsCategory.objects.values('id', 'category_name').all()
+            return render(request, 'System_Setting/SystemNews/edit_news.html', {'categorys': categorys})
     else:
-        region_id = request.operator_region
-        title = request.POST.get("title")
-        sort = request.POST.get("sort")
-        category_id = request.POST.get("category_id")
-        content = request.POST.get("content")
-        status = request.POST.get("status")
-        models.SystemNews.objects.create(region_id=region_id, category_id=category_id, title=title, content=content,
-                                         create_time=time.time(), last_update_time=time.time(), sort=sort,
-                                         status=status)
+        news_id = request.POST.get("news_id")
+        if news_id:
+            news_id = request.POST.get("news_id")
+            news = models.SystemNews.objects.filter(id=news_id).first()
+            if news.region_id != request.operator_region:
+                return HttpResponse(0)
+            news.title = request.POST.get("title")
+            news.sort = request.POST.get("sort")
+            news.category_id = request.POST.get("category_id")
+            news.content = request.POST.get("content")
+            news.status = request.POST.get("status")
+            news.last_update_time = time.time()
+            news.save()
+        else:
+            region_id = request.operator_region
+            title = request.POST.get("title")
+            sort = request.POST.get("sort")
+            category_id = request.POST.get("category_id")
+            content = request.POST.get("content")
+            status = request.POST.get("status")
+            models.SystemNews.objects.create(region_id=region_id, category_id=category_id, title=title, content=content,
+                                             create_time=time.time(), last_update_time=time.time(), sort=sort,
+                                             status=status)
+
         return HttpResponse(1)
 
 
-def edit_system_news(request):
+def del_system_news(request):
     if request.method == 'POST':
         news_id = request.POST.get("news_id")
-        title = request.POST.get("title")
-        sort = request.POST.get("sort")
-        category_id = request.POST.get("category_id")
-        content = request.POST.get("content")
-        status = request.POST.get("status")
-        models.SystemNews.objects.update(id=news_id, category_id=category_id, title=title, content=content,
-                                         create_time=time.time(), last_update_time=time.time(), sort=sort,
-                                         status=status)
-    else:
-        news_id = request.GET.get('id')
-        categorys = models.SystemNewsCategory.objects.values('id', 'category_name').all()
         news = models.SystemNews.objects.filter(id=news_id).first()
-        return render(request, 'System_Setting/SystemNews/add_news.html', {'news': news, 'categorys': categorys})
+        if news.region_id != request.operator_region:
+            return HttpResponse(0)
+        models.SystemNews.objects.get(id=news_id).delete()
     return HttpResponse(1)
 
 
 def get_system_news(request):
-        news_id = request.GET.get('id')
-        news = models.SystemNews.objects.filter(id=news_id).first()
-        return render(request, 'System_Setting/SystemNews/news.html', {'news': news})
-
+    news_id = request.GET.get('id')
+    news = models.SystemNews.objects.filter(id=news_id).first()
+    return render(request, 'System_Setting/SystemNews/news.html', {'news': news})

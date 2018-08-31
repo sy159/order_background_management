@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title></title>
+<meta http-equiv="MSThemeCompatible" content="Yes">
+{% include 'Public/public.html' %}
+</head>
+<body style="background:#fff;padding:20px 20px;">
+<div style="background:#fefbe4;border:1px solid #f3ecb9;color:#993300;padding:10px;margin-bottom:5px;">
+    使用方法：点击对应内容后面的“选中”即可。
+</div>
+<form method="get" action="/admin/choose_shop_category/">
+    <input type="text" name="keyword" class="input-text">
+    <input type="submit" value="查询" class="button">
+</form>
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+    <thead>
+    <tr>
+        <th>商店</th>
+        <th style=" width:100px;text-align: center">操作</th>
+    </tr>
+    </thead>
+    <tbody id="tbody">
+    {% for i in data %}
+        <tr>
+            <td>{{ i.category_name }}</td>
+            <td style="display: none;">{{ i.category_id }}</td>
+            <td class="norightborder" style="text-align: center">
+                <a href="#">选中</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+<div class="selectedSort">
+    <b>您当前选择的是：</b>
+    <i id="selectedSort"></i>
+    <button value="" type="button" class="tijiao">确定</button>
+    <input type="hidden" value="{{ flag }}" id="flag">
+</div>
+<div class="footactions" style="padding-left:10px">
+    <div class="pages">
+        <ul class="pages">
+            {% if get_page  == '1' %}
+                <li>首页</li>
+                <li>&lt;上一页</li>
+            {% else %}
+                <li><a href='/admin/choose_shop_category?p=1&flag={{ flag }}'>首页</a></li>
+                <li><a href='/admin/choose_shop_category?p={{ get_page |add:-1 }}&flag={{ flag }}'>&lt;上一页</a></li>
+            {% endif %}
+            {% if get_page  >=  page_total %}
+                <li>下一页&gt;</li>
+                <li>尾页</li>
+            {% else %}
+                <li><a href='/admin/choose_shop_category?p={{ get_page |add:1 }}&flag={{ flag }}'>下一页&gt;</a></li>
+                <li><a href='/admin/choose_shop_category?p={{ page_total }}&flag={{ flag }}'>尾页></a></li>
+            {% endif %}
+            <li disabled>{{ get_page }}/{{ page_total }}</li>
+        </ul>
+    </div>
+</div>
+<script>
+    let category_id;
+    let category_name;
+    $("#tbody").on('click', 'a', function () {
+        const name = $(this).parent().siblings()[0];
+        const categoryid = $(this).parent().siblings()[1];
+        category_name = $(name).html();
+        category_id = $(categoryid).html();
+        $("#selectedSort").html(category_name);//给用户看选中的
+
+        alert(category_id)
+    });
+
+    $(".tijiao").click(function () {
+        art.dialog.data('get_url', 'category_id=' + category_id);//保存数据供父页面读取
+        art.dialog.data('category_name', category_name);
+        art.dialog.close();//关闭当前对话框
+    });
+</script>
+</body>
+</html>

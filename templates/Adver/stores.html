@@ -9,7 +9,7 @@
 <div style="background:#fefbe4;border:1px solid #f3ecb9;color:#993300;padding:10px;margin-bottom:5px;">
         使用方法：点击对应内容后面的“选中”即可,如果选择商品就先选商店再选商品。
 </div>
-<form method="get"  action="/admin/stores/">
+<form method="get"  action="/admin/choice_stores/">
     <input type="text" name="keyword" class="input-text">
     <input type="submit" value="查询" class="button">
 </form>
@@ -49,19 +49,19 @@
 <div class="footactions" style="padding-left:10px">
     <div class="pages">
         <ul class="pages">
-            <li><a href='/admin/stores/?p=1&flag={{ flag }}'>首页</a></li>
+            <li><a href='/admin/choice_stores/?p=1&flag={{ flag }}'>首页</a></li>
             {% if  get_page  == '1' %}
                 <li><a href='#'>&lt;上一页</a></li>
             {% else %}
-                <li><a href='/admin/stores/?p={{ get_page |add:-1}}&flag={{ flag }}'>&lt;上一页</a></li>
+                <li><a href='/admin/choice_stores/?p={{ get_page |add:-1}}&flag={{ flag }}'>&lt;上一页</a></li>
 
             {% endif %}
             {% if  get_page  >=  page_total  %}
                 <li><a href='#'>下一页&gt;</a></li>
             {% else %}
-                <li><a href='/admin/stores/?p={{ get_page |add:1}}&flag={{ flag }}'>下一页&gt;</a></li>
+                <li><a href='/admin/choice_stores/?p={{ get_page |add:1}}&flag={{ flag }}'>下一页&gt;</a></li>
             {% endif %}
-            <li><a href='/admin/stores/?p={{ page_total }}&flag={{ flag }}'>尾页></a></li>
+            <li><a href='/admin/choice_stores/?p={{ page_total }}&flag={{ flag }}'>尾页></a></li>
             <li disabled><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
         </ul>
     </div>
@@ -76,8 +76,8 @@
         var result=$(name).html();
         var flag=$("#flag").val();
         $("#selectedSort").html(result);//给用户看选中的
-        if(clsn=='choose_goods'){
-            art.dialog.open('/admin/goods/?shop_id='+shopid+"&stores="+result,{
+        if(clsn==='choose_goods'){
+            art.dialog.open('/admin/choose_goods/?shop_id='+shopid+"&stores="+result,{
                     title: '选择商店或者商品',
                     lock: true,
                     width:800,

@@ -11,7 +11,6 @@ def UploadImg(route, file, headers=None, checksum=False):
     :param file:需要上传的文件对象
     :return:
     """
-    print("调用了我")
     try:
         if headers:
             res = up.put(route, file, checksum=checksum, headers=headers)
