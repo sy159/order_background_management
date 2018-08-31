@@ -98,6 +98,7 @@ urlpatterns = [
     path('admin/system_news_list', system_setting.system_news_list),  # 平台推文列表
     path('admin/add_news', system_setting.add_system_news),  # 添加平台推文
     path('admin/edit_news/', system_setting.edit_system_news),  # 添加平台推文
+    path('admin/getnews',system_setting.get_system_news),
 
     # 用户管理
     path('admin/user_list/', users.user_list),  # 广告信息列表
@@ -123,5 +124,8 @@ urlpatterns = [
     path('admin/marki_api/', deliver.marki_api),  # 未接点单api
     path('admin/order_api/', deliver.order_api),  # 在线配送员api
     path('admin/dispatching_console/', deliver.dispatching_console),  # 调度控制台
+
+
+
 
 ]
