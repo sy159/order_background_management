@@ -112,7 +112,8 @@ def adver_add(request):
         if request.POST.get('function') == 'shop_category':
             category_name = request.POST.get('url')
             import urllib.parse
-            get_url = '?a=shop_category&shop_category_name=' + urllib.parse.quote(category_name) + '#' + get_url.split('=')[1]
+            get_url = '?a=shop_category&shop_category_name=' + urllib.parse.quote(category_name) + '#' + \
+                      get_url.split('=')[1]
         else:
             get_url = '?a=shop#' + get_url.split('=')[1] if 'shop' in get_url else '?a=goods#' + get_url.split('=')[1]
         if get_id == '1':
@@ -412,7 +413,8 @@ def add_news_category(request):
 def system_news_list(request):
     category_id = request.GET.get('category_id')
     category = models.SystemNewsCategory.objects.filter(id=category_id).values('category_name').first()
-    news_list = models.SystemNews.objects.filter(category_id=category_id, region_id=0).order_by('sort').values(
+    news_list = models.SystemNews.objects.filter(category_id=category_id, region_id=request.operator_region).order_by(
+        'sort').values(
         'id',
         'title',
         'create_time',
