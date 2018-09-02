@@ -106,13 +106,13 @@
          <th colspan="8">实付金额：￥{{ data.pay_amount | default_if_none:""}} 元</th>
      </tr>
      <tr>
-         {% if  data.pay_mode == '0' %}
-         <th colspan="8">支付情况：<b style="color:green">余额支付</b></th>
-              {% elif  data.pay_mode == '1' %}
-         <th colspan="8">支付情况：<b style="color:green">支付宝支付</b></th>
-             {% elif  data.pay_mode == '2' %}
-         <th colspan="8">支付情况：<b style="color:green">微信支付</b></th>
-             {% else %}
+         {% if  data.pay_mode == 0 %}
+             <th colspan="8">支付情况：<b style="color:green">余额支付</b></th>
+         {% elif  data.pay_mode == 1 %}
+             <th colspan="8">支付情况：<b style="color:green">支付宝支付</b></th>
+         {% elif  data.pay_mode == 2 %}
+             <th colspan="8">支付情况：<b style="color:green">微信支付</b></th>
+         {% else %}
              <th colspan="8">支付情况：<b style="color:green">未支付</b></th>
          {% endif %}
      </tr>

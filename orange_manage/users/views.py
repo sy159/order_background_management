@@ -45,13 +45,16 @@ def user_list(request):
         }
         if len(get_keyword):
             if get_searchtype == 'user_id':
-                all_obj = models.User.objects.filter(campus_id__in=campus_list, user_id=get_keyword)
+                all_obj = models.User.objects.filter(campus_id__in=campus_list, user_id=get_keyword).order_by(
+                    "-user_id")
             elif get_searchtype == 'nickname':
-                all_obj = models.User.objects.filter(campus_id__in=campus_list, nickname__contains=get_keyword)
+                all_obj = models.User.objects.filter(campus_id__in=campus_list,
+                                                     nickname__contains=get_keyword).order_by("-user_id")
             elif get_searchtype == 'phone_number':
-                all_obj = models.User.objects.filter(campus_id__in=campus_list, phone_number__contains=get_keyword)
+                all_obj = models.User.objects.filter(campus_id__in=campus_list,
+                                                     phone_number__contains=get_keyword).order_by("-user_id")
         else:
-            all_obj = models.User.objects.filter(campus_id__in=campus_list)
+            all_obj = models.User.objects.filter(campus_id__in=campus_list).order_by("-user_id")
         if get_status != '2': all_obj = all_obj.filter(status=get_status)
         if len(get_begin_time) and len(get_end_time):
             all_obj = all_obj.filter(register_time__gte=get_begin_time)

@@ -22,8 +22,11 @@ def order_list(request):
         'order_status': get_order_status,
         'payment': get_payment,
     }
-    all_obj = models.Orders.objects.filter(
-        region_id=request.operator_region) if request.operator_region else models.Orders.objects.all()
+    if request.operator_region:
+        all_obj = models.Orders.objects.filter(order_status__isnull=False,
+                                               region_id=request.operator_region).order_by("-create_time").all()
+    else:
+        all_obj = models.Orders.objects.filter(order_status__isnull=False).order_by("-create_time").all()
     if get_keyword:
         if get_searchtype == 'order_id':
             all_obj = all_obj.filter(order_id__contains=get_keyword)
@@ -145,4 +148,5 @@ def order_detail(requst):
         'shop_info': shop_list,
         'shop_remarks': shop_remarks_list,
     }
+    print(order_obj.pay_mode)
     return render(requst, 'Trade/order_detail.html', {'data': data})
