@@ -261,19 +261,18 @@ class Distributor(models.Model):
 
 
 class DistributorTransaction(models.Model):
-    transaction_id = models.AutoField(primary_key=True)
-    shop_id = models.IntegerField(blank=True, null=True)
-    shop_name = models.CharField(max_length=255, blank=True, null=True)
-    distributor_id = models.IntegerField()
-    distributor_name = models.CharField(max_length=255)
-    amount = models.FloatField()
-    time = models.DateTimeField()
-    pay_mode = models.IntegerField()
+    transaction_id = models.CharField(primary_key=True, max_length=255)
+    payee = models.IntegerField(blank=True, null=True)
+    payee_account = models.CharField(max_length=255, blank=True, null=True)
+    payee_account_type = models.IntegerField(blank=True, null=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    create_time = models.DateTimeField()
     order_id = models.CharField(max_length=255, blank=True, null=True)
-    title = models.CharField(max_length=255)
-    in_or_out = models.IntegerField()
+    title = models.CharField(max_length=11)
+    remarks = models.CharField(max_length=255, blank=True, null=True)
+    action = models.IntegerField()
     campus_id = models.IntegerField(blank=True, null=True)
-    balance = models.FloatField(blank=True, null=True)
+    balance = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -815,6 +814,24 @@ class ShopSort(models.Model):
         db_table = 'shop_sort'
 
 
+class ShopTransaction(models.Model):
+    transaction_id = models.CharField(primary_key=True, max_length=255)
+    payee = models.IntegerField(blank=True, null=True)
+    payee_account = models.CharField(max_length=255, blank=True, null=True)
+    payee_account_type = models.IntegerField(blank=True, null=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    create_time = models.DateTimeField()
+    order_id = models.CharField(max_length=255, blank=True, null=True)
+    title = models.CharField(max_length=11)
+    remarks = models.CharField(max_length=255, blank=True, null=True)
+    action = models.IntegerField()
+    campus_id = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'shop_transaction'
+
+
 class SmsSendLogs(models.Model):
     addressee = models.CharField(max_length=255)
     action_type = models.IntegerField(blank=True, null=True)
@@ -883,8 +900,8 @@ class SystemNews(models.Model):
     category_id = models.IntegerField()
     title = models.CharField(max_length=100)
     content = models.TextField()
-    create_time = models.DateTimeField(auto_now_add=True)
-    last_update_time = models.DateTimeField(auto_now=True)
+    create_time = models.DateTimeField()
+    last_update_time = models.DateTimeField()
     sort = models.IntegerField()
     status = models.IntegerField()
 
@@ -1006,7 +1023,7 @@ class UserCoupon(models.Model):
     coupon_name = models.CharField(max_length=255, blank=True, null=True)
     image = models.CharField(max_length=255, blank=True, null=True)
     shop_id = models.IntegerField(blank=True, null=True)
-    coupon_type = models.IntegerField()
+    coupon_type = models.IntegerField(blank=True, null=True)
     use_condition = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     coupon_value = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     description = models.CharField(max_length=255, blank=True, null=True)
@@ -1014,8 +1031,6 @@ class UserCoupon(models.Model):
     superposable = models.IntegerField(blank=True, null=True)
     is_specific = models.IntegerField(blank=True, null=True)
     status = models.IntegerField(blank=True, null=True)
-    start_time = models.DateTimeField(blank=True, null=True)
-    end_time = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -1041,17 +1056,20 @@ class UserIntegral(models.Model):
 
 
 class UserTransaction(models.Model):
-    transaction_id = models.AutoField(primary_key=True)
-    shop_id = models.IntegerField(blank=True, null=True)
-    shop_name = models.CharField(max_length=255, blank=True, null=True)
-    user_id = models.IntegerField()
-    username = models.CharField(max_length=255)
-    amount = models.FloatField()
-    time = models.DateTimeField()
+    transaction_id = models.CharField(primary_key=True, max_length=255)
+    drawee = models.IntegerField(blank=True, null=True)
+    drawee_account = models.CharField(max_length=255, blank=True, null=True)
     pay_mode = models.IntegerField()
+    other_transaction_id = models.CharField(max_length=255, blank=True, null=True)
+    payee = models.IntegerField(blank=True, null=True)
+    payee_account = models.CharField(max_length=255, blank=True, null=True)
+    payee_account_type = models.IntegerField(blank=True, null=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    create_time = models.DateTimeField()
     order_id = models.CharField(max_length=255, blank=True, null=True)
-    title = models.CharField(max_length=255)
-    in_or_out = models.IntegerField()
+    title = models.CharField(max_length=11)
+    remarks = models.CharField(max_length=255, blank=True, null=True)
+    action = models.IntegerField()
     campus_id = models.IntegerField(blank=True, null=True)
 
     class Meta:
