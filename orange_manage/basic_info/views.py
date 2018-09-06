@@ -91,6 +91,7 @@ def account_list(request):
                 'open_admin_region': region_obj.region_name,
             }
             data_list.append(data_dict)
+    if page_total == 0: page_total = 1
     return render(request, 'Index/account.html',
                   {'level': request.operator_level, 'data': data_list, 'get_page': int(get_page),
                    'page_total': page_total, 'status': status})
@@ -212,7 +213,6 @@ def edit_accountinfo(request):
                 'area_name': '',
                 'region_name': '',
             }
-
         return render(request, 'Index/edit_accountinfo.html', {'data': data, 'parent_level': request.operator_level})
     elif request.method == 'POST':
         get_account = request.POST.get('account')
@@ -224,9 +224,9 @@ def edit_accountinfo(request):
         get_status = request.POST.get('status')
         get_level = request.POST.get('level')
         get_region = request.POST.get('region_id')
-        if get_level == 0:
+        if get_level == '0':
             get_region = 0
-        elif get_level == 1:
+        elif get_level == '1':
             get_region = get_region
         else:
             get_region = request.operator_region
@@ -395,6 +395,7 @@ def exist_region(request):
                 'area_name': a_obj.site_name,
             }
             data_list.append(data_dict)
+        if page_total == 0: page_total = 1
         return render(request, 'Index/ExistingAreaList.html',
                       {'data': data_list, 'get_page': int(get_page), 'page_total': page_total,
                        'operator_region': request.operator_region})

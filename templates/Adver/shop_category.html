@@ -54,7 +54,11 @@
                 <li>尾页</li>
             {% else %}
                 <li><a href='/admin/choose_shop_category?p={{ get_page |add:1 }}&flag={{ flag }}'>下一页&gt;</a></li>
+                {% if page_total == 0 %}
+                     <li><a href='/admin/choose_shop_category?p=1&flag={{ flag }}'>尾页></a></li>
+                    {% else %}
                 <li><a href='/admin/choose_shop_category?p={{ page_total }}&flag={{ flag }}'>尾页></a></li>
+               {% endif %}
             {% endif %}
             <li disabled>{{ get_page }}/{{ page_total }}</li>
         </ul>

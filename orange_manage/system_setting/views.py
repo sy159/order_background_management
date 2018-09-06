@@ -156,6 +156,7 @@ def choice_stores(request):
                 'address': i.address,
             }
             data_list.append(data_dict)
+        if page_total == 0: page_total = 1
         return render(request, 'Adver/stores.html',
                       {'data': data_list, 'get_page': int(get_page), 'page_total': page_total, 'flag': get_flag, })
 
@@ -182,6 +183,7 @@ def choose_goods(request):
                 'goods_name': i.goods_name,
             }
             data_list.append(data_dict)
+        if page_total == 0: page_total = 1
         return render(request, 'Adver/goods.html',
                       {'data': data_list, 'get_page': int(get_page), 'page_total': page_total, 'stores': get_stores,
                        'shop_id': get_shop_id})
@@ -212,6 +214,7 @@ def choose_shop_category(request):
                 'category_name': i.name
             }
             data_list.append(data_dict)
+        if page_total == 0: page_total = 1
         return render(request, 'Adver/shop_category.html',
                       {'data': data_list, 'get_page': int(get_page), 'page_total': page_total, 'flag': get_flag})
 
@@ -316,6 +319,7 @@ def withdraw_list(request):
                 'status': i.status,  # 状态 0:未审核，1:审核通过，2:已打款，3:审核失败
             }
             data_list.append(data_dict)
+        if page_total == 0: page_total = 1
         return render(request, 'System_Setting/withdraw_auto.html',
                       {'data': data_list, 'get_page': int(get_page), 'page_total': page_total,
                        'status_dict': status_dict})
@@ -370,6 +374,7 @@ def modify_status(request):
                 'status': i.status,  # 状态 0:未审核，1:审核通过，2:已打款，3:审核失败
             }
             data_list.append(data_dict)
+        if page_total == 0: page_total = 1
         return render(request, 'System_Setting/ModifyPaymentStatus.html',
                       {'data': data_list, 'get_page': int(get_page), 'page_total': page_total,
                        'status_dict': status_dict})

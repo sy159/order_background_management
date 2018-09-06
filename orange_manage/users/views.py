@@ -63,7 +63,7 @@ def user_list(request):
         page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
             get_pagesize)
         data_list = []
-        for i in all_obj[start_nun:end_num]:
+        for i in all_obj.order_by('-balance')[start_nun:end_num]:
             data_dict = {
                 'user_id': i.user_id,
                 'nickname': i.nickname,
@@ -76,10 +76,7 @@ def user_list(request):
                 'integral': i.integral,
             }
             data_list.append(data_dict)
-        if int(get_page)  >=  page_total:
-            print(0)
-        else:
-            print(1)
+        if page_total == 0: page_total = 1
         return render(request, 'User/index.html',
                       {'data': data_list, 'money_data': money_dict, 'get_page': int(get_page), 'page_total': page_total,
                        'search_data': search_data})

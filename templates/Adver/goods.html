@@ -61,7 +61,11 @@
             {% else %}
                 <li><a href='/admin/choose_goods/?p={{ get_page |add:1}}&shop_id={{ shop_id }}'>下一页&gt;</a></li>
             {% endif %}
+        {% if page_total == 0 %}
+            <li><a href='/admin/choose_goods/?p=1&shop_id={{ shop_id }}'>尾页></a></li>
+            {% else %}
             <li><a href='/admin/choose_goods/?p={{ page_total }}&shop_id={{ shop_id }}'>尾页></a></li>
+           {% endif %}
             <li disabled><a href='#' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
         </ul>
     </div>

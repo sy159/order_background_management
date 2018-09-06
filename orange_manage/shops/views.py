@@ -226,6 +226,7 @@ def shop_list(request):
             'get_status_len': len(get_status),
             'get_searchorder': get_searchorder,
         }
+        if page_total == 0: page_total = 1
         return render(request, 'Merchant/index.html',
                       {'data': data_list, 'get_page': int(get_page), 'page_total': page_total, 'all_money': all_money,
                        'status_info': status_all})
@@ -553,6 +554,7 @@ def wait_store(request):
                 'status': i.status,
             }
             data_list.append(data_dict)
+        if page_total == 0: page_total = 1
         return render(request, 'Merchant/wait_store.html',
                       {'data': data_list, 'page_total': page_total, 'get_page': int(get_page),
                        'filter_content': filter_content})
@@ -608,6 +610,7 @@ def wait_store2(request):
                 'status': i.status,
             }
             data_list.append(data_dict)
+        if page_total == 0: page_total = 1
         return render(request, 'Merchant/wait_store_status.html',
                       {'data': data_list, 'page_total': page_total, 'get_page': int(get_page),
                        'filter_content': filter_content})
@@ -663,6 +666,7 @@ def wait_store3(request):
                 'status': i.status,
             }
             data_list.append(data_dict)
+        if page_total == 0: page_total = 1
         return render(request, 'Merchant/wait_store_fail.html',
                       {'data': data_list, 'page_total': page_total, 'get_page': int(get_page),
                        'filter_content': filter_content})
@@ -688,6 +692,7 @@ def category_list(request):
             'status': i.state,
         }
         data_list.append(data_dict)
+    if page_total == 0: page_total = 1
     return render(request, 'Merchant/category_list.html',
                   {'data': data_list, 'page_total': page_total, 'get_page': int(get_page)})
 
@@ -756,6 +761,7 @@ def check_childlist(request):
         data_dict['priority'] = i.priority
         data_dict['state'] = i.state
         data_list.append(data_dict)
+    if page_total == 0: page_total = 1
     return render(request, 'Merchant/category_childlist.html',
                   {'data': data_list, 'f_id': get_parent_id, 'name': get_parent_name, 'page_total': page_total,
                    'get_page': int(get_page)})
@@ -833,6 +839,7 @@ def circle_list(request):
             'region_id': i.region_id,
         }
         data_list.append(data_dict)
+    if page_total == 0: page_total = 1
     return render(request, 'Merchant/circle_list.html',
                   {'data': data_list, 'get_page': int(get_page), 'page_total': page_total})
 
@@ -898,6 +905,7 @@ def store_list(request):
                 'address': i.address,
             }
             data_list.append(data_dict)
+        if page_total == 0: page_total = 1
         return render(request, 'Merchant/store_list.html',
                       {'data': data_list, 'get_page': int(get_page), 'page_total': page_total,
                        'region_id': operator_region, 'circle_id': circle_id, 'circle_list': circle_list})
@@ -940,6 +948,7 @@ def wait_goods(request):
                 'unit_price': i.unit_price,
             }
             data_list.append(data_dict)
+        if page_total == 0: page_total = 1
         return render(request, 'Merchant/wait_goods.html',
                       {'data': data_list, 'get_page': int(get_page), 'page_total': page_total,
                        'filter_content': get_filter_content})
@@ -1040,6 +1049,7 @@ def nopass_goods(request):
                 'reason': reason_obj.reason,
             }
             data_list.append(data_dict)
+        if page_total == 0: page_total = 1
         return render(request, 'Merchant/wait_goods_fail.html',
                       {'data': data_list, 'get_page': int(get_page), 'page_total': page_total,
                        'filter_content': get_filter_content})

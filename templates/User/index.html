@@ -80,13 +80,13 @@
                 </colgroup>
                 <thead>
                     <tr>
-                        <th><a href="" style="color:blue;">ID</a></th>
+                        <th>ID</th>
                         <th>昵称</th>
                         <th>手机号</th>
-                        <th><a href="" style="color:blue;">最后登录时间</a></th>
+                        <th>最后登录时间</th>
                         <th>注册时间</th>
-                        <th class="textcenter"><a href="" style="color:blue;">余额</a></th>
-                        <th class="textcenter"><a href="" style="color:blue;">积分</a></th>
+                        <th class="textcenter">余额</th>
+                        <th class="textcenter">积分</th>
                         <th class="textcenter">状态</th>
                         <th class="textcenter">推广用户</th>
                         <th class="textcenter">操作</th>
@@ -128,7 +128,11 @@
                                 {% else %}
                                 <li><a href='/admin/user_list/?p={{ get_page |add:1}}&keyword={{ search_data.keyword}}&begin_time={{ search_data.begin_time}}&end_time={{ search_data.end_time}}&status={{ search_data.status }}&searchtype={{ search_data.searchtype }}'>下一页&gt;</a></li>
                             {% endif %}
+                            {% if page_total == 0 %}
+                                <li><a href='/admin/user_list/?p=1&keyword={{ search_data.keyword}}&begin_time={{ search_data.begin_time}}&end_time={{ search_data.end_time}}&status={{ search_data.status }}&searchtype={{ search_data.searchtype }}'>尾页></a></li>
+                            {% else %}
                                 <li><a href='/admin/user_list/?p={{ page_total }}&keyword={{ search_data.keyword}}&begin_time={{ search_data.begin_time}}&end_time={{ search_data.end_time}}&status={{ search_data.status }}&searchtype={{ search_data.searchtype }}'>尾页></a></li>
+                            {% endif %}
                                 <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
                             </ul>
                         </td>

@@ -140,18 +140,18 @@
             </table>
             <div class="textcenter pagebar"  colspan="12">
                 <ul class="pages">
-                    <li><a href='/admin/modify_status/?p=1&keyword={{ status_dict.keyword|default_if_none:'' }}&searchtype={{ status_dict.searchtype }}&cash_account_type={{ status_dict.cash_account_type }}&identity={{ status_dict.identity }}'>首页</a></li>
+                    <li><a href='/admin/modify_status/?p=1&keyword={{ status_dict.keyword|default_if_none:'' }}&searchtype={{ status_dict.searchtype }}&cash_account_type={{ status_dict.cash_account_type|default_if_none:'' }}&identity={{ status_dict.identity |default_if_none:''}}'>首页</a></li>
                     {% if  get_page  == 1 %}
                         <li><a href='#'>&lt;上一页</a></li>
                     {% else %}
-                        <li><a href='/admin/modify_status/?p={{ get_page |add:-1}}&keyword={{ status_dict.keyword|default_if_none:'' }}&searchtype={{ status_dict.searchtype }}&cash_account_type={{ status_dict.cash_account_type }}&identity={{ status_dict.identity }}'>&lt;上一页</a></li>
+                        <li><a href='/admin/modify_status/?p={{ get_page |add:-1}}&keyword={{ status_dict.keyword|default_if_none:'' }}&searchtype={{ status_dict.searchtype }}&cash_account_type={{ status_dict.cash_account_type |default_if_none:''}}&identity={{ status_dict.identity|default_if_none:'' }}'>&lt;上一页</a></li>
                     {% endif %}
                     {% if  get_page  >=  page_total  %}
                         <li><a href='#'>下一页&gt;</a></li>
                     {% else %}
-                        <li><a href='/admin/modify_status/?p={{ get_page |add:1}}&keyword={{ status_dict.keyword|default_if_none:'' }}&searchtype={{ status_dict.searchtype }}&cash_account_type={{ status_dict.cash_account_type }}&identity={{ status_dict.identity }}'>下一页&gt;</a></li>
+                        <li><a href='/admin/modify_status/?p={{ get_page |add:1}}&keyword={{ status_dict.keyword|default_if_none:'' }}&searchtype={{ status_dict.searchtype }}&cash_account_type={{ status_dict.cash_account_type|default_if_none:'' }}&identity={{ status_dict.identity |default_if_none:''}}'>下一页&gt;</a></li>
                     {% endif %}
-                    <li><a href='/admin/modify_status/?p={{ page_total }}&keyword={{ status_dict.keyword|default_if_none:'' }}&searchtype={{ status_dict.searchtype }}&cash_account_type={{ status_dict.cash_account_type }}&identity={{ status_dict.identity }}'>尾页></a></li>
+                    <li><a href='/admin/modify_status/?p={{ page_total }}&keyword={{ status_dict.keyword|default_if_none:'' }}&searchtype={{ status_dict.searchtype }}&cash_account_type={{ status_dict.cash_account_type|default_if_none:'' }}&identity={{ status_dict.identity|default_if_none:'' }}'>尾页></a></li>
                     <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
                 </ul>
             </div>

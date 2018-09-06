@@ -91,6 +91,7 @@ def order_list(request):
                 'dispatching': 0,
                 'pending': 0,
             }
+    if page_total == 0: page_total = 1
     return render(request, 'Trade/order_list.html',
                   {'data': data_list, 'search_data': search_data, 'get_page': int(get_page), 'page_total': page_total,
                    'num': num_dict})
