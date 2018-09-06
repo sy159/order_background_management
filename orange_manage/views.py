@@ -134,8 +134,23 @@ def image_upload(request):
         url = request.distributor_image + img_name
     elif judge == '5':  # 上传商品图片
         url = request.goods_image + img_name
+    elif judge == '6':  # 上传优惠券图片
+        url = request.coupon_images + img_name
     UploadImg(url, file)
     return HttpResponse(1)
+
+
+def good_sort(request):
+    get_id = request.GET.get('id')
+    all_obj = models.GoodsClassifyPlatform.objects.filter(parent_id=get_id)
+    data= []
+    for i in all_obj:
+        data_dict = {
+            'record_id': i.record_id,
+            'name': i.name,
+        }
+        data.append(data_dict)
+    return JsonResponse(data,safe=False)
 
 
 def kindeditor(request):

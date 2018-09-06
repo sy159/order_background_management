@@ -35,6 +35,7 @@ urlpatterns = [
     path('admin/index/', views.index),  # 主页面
     path('admin/account_unique/', views.account_unique),  # 账号唯一性
     path('admin/image_upload/', views.image_upload),  # 上传图片
+    path('admin/good_sort/', views.good_sort),  # 获取goods子集
     path('admin/kindeditor/', views.kindeditor),  # 在线编辑器
     path('admin/upload_img/', views.upload_img),  # 在线编辑器
 
@@ -114,6 +115,9 @@ urlpatterns = [
     path('admin/recommend_list/', promotion_market.recommend_list),  # 推荐列表
     path('admin/store_add/', promotion_market.store_add),  # 添加推荐店铺弹窗
     path('admin/store_edit/', promotion_market.store_edit),  # 编辑店铺弹窗
+    path('admin/coupon_list/', promotion_market.coupon_list),  # 优惠券管理
+    path('admin/add_coupon/', promotion_market.add_coupon),  # 添加优惠券
+    path('admin/edit_coupon/', promotion_market.edit_coupon),  # 编辑优惠券
 
     # 配送管理
     path('admin/marki_manage/', deliver.marki_manage),  # 配送管理

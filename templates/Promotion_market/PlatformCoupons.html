@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>网站后台管理 Powered by pigcms.com</title>
+    {% include 'Public/header.html' %}
+</head>
+<body>
+<div class="mainbox">
+    <div id="nav" class="mainnav_title">
+        <ul class="tbody">
+            <a href="javascript:void(0);" class="on">优惠券列表</a>|
+            <a href="javascript:void(0);" class="add_row">添加优惠券</a>
+        </ul>
+    </div>
+    <form name="myform" id="myform" action="" method="post">
+        <div class="table-list">
+            <table width="100%" cellspacing="0">
+                <colgroup>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col width="180" align="center"/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>名称</th>
+                    <th>图片</th>
+                    <th>使用店铺分类</th>
+                    <th>使用商品分类</th>
+                    <th>总数</th>
+                    <th>已领取</th>
+                    <th>已使用</th>
+                    <th>起止时间</th>
+                    <th>优惠详情</th>
+                    <th class="textcenter">是否仅新用户</th>
+                    <th>状态</th>
+                    <th class="textcenter">操作</th>
+                </tr>
+                </thead>
+                <tbody class="tbody">
+                {% for i in data %}
+                    <tr>
+                        <td>{{ i.coupon_id }}</td>
+                        <td>{{ i.coupon_name }}</td>
+                        <td><a href="javascript:void (0);"><img src="{{ i.image }}" style="width: 150px;height: 100px;"></a>
+                        </td>
+                        <td>{{ i.shop_classify }}</td>
+                        <td>{{ i.goods_classify }}</td>
+                        <td>{{ i.publish_amount }}</td>
+                        <td>{{ i.spare_amount|default_if_none:'' }}</td>
+                        <td>???</td>
+                        <td>{{ i.start_time|date:'Y-m-d H:i:s' }}<br/><br/>{{ i.end_time|date:'Y-m-d H:i:s' }}</td>
+                        <td>{{ i.details }}</td>
+                        {% if i.just_newuser == 1 %}
+                            <td class="textcenter">是</td>
+                        {% else %}
+                            <td class="textcenter">否</td>
+                        {% endif %}
+                        {% if i.status == 1 %}
+                            <td>开启</td>
+                        {% else %}
+                            <td>关闭</td>
+                        {% endif %}
+                        <td class="textcenter">
+                            <a href="javascript:void(0);" class="edit_row">编辑</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot id="tfoot" style="width: 100%;">
+                <tr>
+                    <td class="textcenter pagebar" colspan="13">
+                        <ul class="pages">
+                            <li id="first_page"><a href='/admin/coupon_list/?p=1'>首页</a></li>
+                            {% if  get_page  == '1' %}
+                                <li><a href='#'>&lt;上一页</a></li>
+                            {% else %}
+                                <li><a href='/admin/coupon_list/?p={{ get_page |add:-1 }}'>&lt;上一页</a></li>
+
+                            {% endif %}
+                            {% if  get_page  >=  page_total %}
+                                <li><a href='#'>下一页&gt;</a></li>
+                            {% else %}
+                                <li><a href='/admin/coupon_list/?p={{ get_page |add:1 }}'>下一页&gt;</a></li>
+                            {% endif %}
+                            <li><a href='/admin/coupon_list/?p={{ page_total }}'>尾页></a></li>
+                            <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
+                        </ul>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </form>
+</div>
+</body>
+<script>
+    $(".tbody").on('click', 'a', function () {
+        var clsn = this.className;
+        var id = $(this).parent().siblings()[0];
+        var id = $(id).html();
+        if (clsn == 'edit_row') {
+            art.dialog.open('/admin/edit_coupon/?coupon_id=' + id, {
+                title: '编辑优惠券信息',
+                lock: true,
+                modal: true,
+                width: 800,
+                height: 400
+            });
+        } else if (clsn == 'add_row') {
+            art.dialog.open('/admin/add_coupon/', {
+                title: '添加优惠券',
+                lock: true,
+                modal: true,
+                width: 800,
+                height: 400
+            });
+        }
+    });
+</script>
+</html>

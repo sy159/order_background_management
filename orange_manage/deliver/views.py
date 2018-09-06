@@ -201,7 +201,7 @@ def deliver_list(request):
         'user_phone_number': get_user_phone_number,
         'distribution_status': get_distribution_status,
     }
-    all_obj = models.Orders.objects.exclude(order_status=0).filter(order_status__isnull=False)
+    all_obj = models.Orders.objects.exclude(distribution_status=3).filter(order_status__gt=0)
     if request.operator_region != 0:
         all_obj = all_obj.filter(region_id=request.operator_region)
     if get_user_phone_number:

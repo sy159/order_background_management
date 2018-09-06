@@ -33,4 +33,5 @@ class GlobalInfo(MiddlewareMixin):
         request.app_menu_images = '/static/app_menu_images/'
         request.recommend_shops_images = '/static/recommend_shops_images/'
         request.distributor_image = '/static/distributor_images/'
+        request.coupon_images = '/static/coupon_images/'
 

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>网站后台管理 Powered by pigcms.com</title>
+    {% include 'Public/header.html' %}
+    <style>
+        /*新添加样式*/
+        .frame_form td {
+            vertical-align: center;
+        !important;
+        }
+
+        .frame_form {
+            margin-bottom: 50px;
+        }
+
+        div#result1 {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            border: 1px solid gainsboro;
+        }
+
+        div#result1 img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+<form id="myform" method="post" action="" enctype="multipart/form-data">
+    <table cellpadding="0" cellspacing="0" class="frame_form" width="100%">
+        <tr>
+            <th width="160">优惠券名称</th>
+            <td colspan="4">
+                <input type="text" id="coupons_name" name="coupon_name" value="" style="line-height: 30px;">
+                <strong class='high coupons_name'>*</strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">优惠券图片</th>
+            <td style="width: 100px;vertical-align: center">
+                <div id="result1"></div>
+            </td>
+            <td style="vertical-align: center;!important;">
+                <input type="file" id="pic" accept="image/png,image/jpeg,image/gif" value="" class="input fl" name="pic"
+                       style="width:180px;" placeholder="请上传图片"/>
+                <strong class='high position pic'></strong>
+            </td>
+            <td>
+                <input type="hidden" id="pic1" value="" name="img" style="width:200px;"/>
+                <input type="hidden" id="pic2" value="" name="img2" style="width:200px;"/>
+            </td>
+            <td colspan="1" style="vertical-align: center;!important;">
+                <strong class='tip'>不上传图片则不能生产二维码</strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">是否只允许新用户领取</th>
+            <td colspan="2">
+                是&nbsp;<input type="radio" id="newget1" name="just_newuser" value="1"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                否&nbsp;<input type="radio" id="newget2" name="just_newuser" value="0"/>
+                <strong class='high just_newuser'></strong>
+            </td>
+            <td colspan="2">
+                <strong class='tip'>未购买相应分类则视为新用户</strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">优惠券是否可叠加使用</th>
+            <td colspan="4">
+                是&nbsp;<input type="radio" id="superposable" name="superposable" value="1"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                否&nbsp;<input type="radio" id="superposable" name="superposable" value="0"/>
+                <strong class='high superposable'></strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">优惠券类型</th>
+            <td colspan="4">
+                减免&nbsp;<input type="radio" id="breaks" name="coupon_type" value="2"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                折扣&nbsp;<input type="radio" id="discount" name="coupon_type" value="1"/>
+                <strong class='high coupon_type'></strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">使用条件</th>
+            <td colspan="2">
+                <input type="text" id="conditions" name="use_condition" value="" style="line-height: 30px;">
+                <strong class='high conditions'>*</strong>
+            </td>
+            <td colspan="2">
+                <strong class='tip'>为0时，代表是现金券</strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">优惠力度</th>
+            <td colspan="2">
+                <input type="text" id="preferential" name="coupon_value" value="" style="line-height: 30px;">
+                <strong class='high preferential'>*</strong>
+            </td>
+            <td colspan="2">
+                <strong class='tip'>若为减免券，请填写优惠的金额，若为折扣券，请填写折扣比例</strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">店铺类别</th>
+            <td colspan="4">
+                <select class="StoreType">
+                    <option selected value="0">全部</option>
+                    {% for i in shop_data %}
+                        <option value="{{ i.0 }}">{{ i.1 }}</option>
+                    {% endfor %}
+                </select>
+                <input id="shop_classify" type="hidden" name="shop_classify" value="0">
+            </td>
+        </tr>
+        <tr>
+            <th width="160">商品类别</th>
+            <td colspan="2">
+                <select class="GoodsType1">
+                    <option selected value="0">全部</option>
+                    {% for i in goods_data %}
+                        <option value="{{ i.0 }}">{{ i.1 }}</option>
+                    {% endfor %}
+                </select>
+                <select class="GoodsType2">
+                    <option selected value="0">全部</option>
+                </select>
+                <input id="goods_classify1" type="hidden" name="goods_classify1" value="0">
+                <input id="goods_classify2" type="hidden" name="goods_classify2" value="0">
+            </td>
+            <td colspan="2">
+            </td>
+        </tr>
+        <tr>
+            <th width="160">描述</th>
+            <td colspan="4">
+                <textarea cols="30" rows="5" name="description"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">发行数量</th>
+            <td colspan="4">
+                <input type="text" id="IssueNumber" name="publish_amount" value="" style="line-height: 30px;">
+                <strong class='high  IssueNumber'>*</strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">起始时间</th>
+            <td colspan="4">
+                <input type="text" class="input-text" name="start_time" style="width:100px;" id="begin_time" value=""
+                       onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"/>
+                &nbsp;&nbsp;至&nbsp;&nbsp;
+                <input type="text" class="input-text" name="end_time" style="width:100px;" id="end_time" value=""
+                       onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"/>
+                <strong class='high begin_time'></strong>
+            </td>
+        </tr>
+        <tr>
+            <th width="160">状态</th>
+            <td colspan="4">
+                启用&nbsp;<input type="radio" id="on" name="status" value="1"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                禁用&nbsp;<input type="radio" id="off" name="status" value="0"/>
+                <strong class='high status'></strong>
+            </td>
+        </tr>
+    </table>
+    <div class="btn">
+        <td colspan="2" class="aui_footer">
+            <div class="aui_buttons">
+                <button id="edit" class="aui_state_highlight" type="submit">添加</button>
+                <button id="close" type="button">关闭</button>
+            </div>
+        </td>
+    </div>
+</form>
+<script>
+    $(".GoodsType1").change(function () {
+        var id = $(this).val();
+        $("#goods_classify1").val(id);
+        $.ajax({
+            url: "/admin/good_sort/?id=" + id,
+            type: "GET",
+            dataType: "json",
+            success: function (msg) {
+                var str = "";
+                $(".GoodsType2").html("<option selected value=\"0\">全部</option>");
+                msg.forEach(function (el) {
+                    str += "<option  value=" + el.record_id + ">" + el.name + "</option>"
+                });
+                $(".GoodsType2").append(str);
+            }
+        });
+    });
+    $(".GoodsType2").change(function () {
+        var id = $(this).val();
+        $("#goods_classify2").val(id);
+    });
+    $(".StoreType").change(function () {
+        var id = $(this).val();
+        $("#shop_classify").val(id);
+    });
+
+    $("#myform").submit(function (e) {
+        e.preventDefault();
+        confirm();
+    });
+
+    //表单验证提交
+    function confirm() {
+        if ($("#coupons_name").val().length == 0) {
+            $(".coupons_name").html("必填项！");
+            return false;
+        } else {
+            $(".coupons_name").html(" ");
+            if ($("#pic").val().length == 0) {
+                $(".pic").html("必填项！");
+                return false;
+            } else {
+                $(".pic").html(" ");
+                var val = $('input:radio[name="just_newuser"]:checked').val();
+                if (val == null) {
+                    $(".just_newuser").html("必选项！");
+                    return false;
+                } else {
+                    $(".just_newuser").html(" ");
+                    var val2 = $('input:radio[name="superposable"]:checked').val();
+                    if (val2 == null) {
+                        $(".superposable").html("必选项！");
+                        return false;
+                    } else {
+                        $(".superposable").html(" ");
+                        var val3 = $('input:radio[name="coupon_type"]:checked').val();
+                        if (val3 == null) {
+                            $(".coupon_type").html("必选项！");
+                            return false;
+                        } else {
+                            $(".coupon_type").html(" ");
+                            if ($("#conditions").val().length == 0) {
+                                $(".conditions").html("必填项！");
+                                return false;
+                            } else {
+                                $(".conditions").html(" ");
+                                if ($("#preferential").val().length == 0) {
+                                    $(".preferential").html("必填项！");
+                                    return false;
+                                } else {
+                                    $(".preferential").html(" ");
+                                    if ($("#IssueNumber").val().length == 0) {
+                                        $(".IssueNumber").html("必填项！");
+                                        return false;
+                                    } else {
+                                        $(".IssueNumber").html(" ");
+                                        if ($("#begin_time").val().length == 0) {
+                                            $(".begin_time").html("开始时间不能为空！");
+                                            return false;
+                                        } else {
+                                            $(".begin_time").html(" ");
+                                            var val4 = $('input:radio[name="status"]:checked').val();
+                                            if (val4 == null) {
+                                                $(".status").html("必选项！");
+                                                return false;
+                                            } else {
+                                                $(".status").html(" ");
+                                                $.ajax({
+                                                    url: "/admin/add_coupon/",
+                                                    type: "post",
+                                                    dataType: "json",
+                                                    data: $("#myform").serialize(),
+                                                    success: function (msg) {
+                                                        if (msg == 1) {
+                                                            result("添加成功", "succeed");
+                                                            var win = art.dialog.open.origin;
+                                                            win.location.reload();
+                                                        } else {
+                                                            result("添加失败", "error");
+                                                        }
+                                                    },
+                                                    error: function (xhr, textstatus, thrown) {
+                                                    }
+                                                });
+                                                return true;
+                                            }
+
+                                        }
+
+                                    }
+
+                                }
+                            }
+
+                        }
+                    }
+                }
+
+
+            }
+        }
+    }
+
+    function result(title, flag) {
+        art.dialog({
+            content: title,
+            //以“skins/icons/”目录下的图标名作为参数名（不包含后缀名）
+            icon: flag,
+            fixed: true,//静止在浏览器某个地方不动，不受滚动条拖动影响
+            time: 3,//如果有cancel方法的话会调用cancel方法
+        });
+        var time = setInterval(function () {
+            art.dialog.close()
+        }, 2000);
+    }
+
+    $("#pic").change(function () {
+        if ($(this).val() != "") {
+            var tmpPath = $("#pic").val();
+            tmpPath = tmpPath.split(".")[1];
+            var new_name = get_file_name(2);
+            $("#pic2").val('6+' + new_name + Date.parse(new Date()) + "." + tmpPath);
+            $("#pic1").val(new_name + Date.parse(new Date()) + "." + tmpPath);
+            var formData = new FormData();
+            var img_file = document.getElementById("pic");
+            var fileObj = img_file.files[0];
+            //把上传的图片显示出来
+            var reader = new FileReader();
+            reader.readAsBinaryString(fileObj);
+            reader.onload = function (f) {
+                var result = document.getElementById("result1");
+                var src = "data:" + fileObj.type + ";base64," + window.btoa(this.result);
+                result.innerHTML = '<img src ="' + src + '"/>';
+            };
+
+            formData.append('file', fileObj);
+            formData.append('filename', $("#pic2").val());
+            $.ajax({
+                url: "/admin/image_upload/",
+                type: "post",
+                dataType: "json",
+                data: formData,
+                processData: false,
+                contentType: false,
+                async: false,
+                success: function () {
+                }
+            });
+        }
+    });//点击上传图片生成随机图片名
+
+    function get_file_name(len) {
+        let new_file_name = 'A';
+        let chars = "1234567890qwertyuiopasdfghjklzxcvbnm";
+        for (i = 0; i < len; i++) {
+            new_file_name += chars[parseInt(Math.random() * chars.length)];
+        }
+        return new_file_name;
+    }//生成随机数
+
+    $("#close").click(function () {
+        art.dialog.close();
+    });//关闭对话框
+</script>
+</body>
+</html>
