@@ -24,13 +24,10 @@ def user_list(request):
         operator_region = request.operator_region
         if operator_region:
             operator_campus_obj = models.RegionCampus.objects.filter(region_id=operator_region).all()
-            # else:
-            #     operator_campus_obj = models.RegionCampus.objects.all()
             campus_list = []
             for i in operator_campus_obj:
                 campus_list.append(i.campus_id)
             obj = models.User.objects.filter(campus_id__in=campus_list)
-
         else:
             obj = models.User.objects
         money_dict = {
@@ -72,7 +69,7 @@ def user_list(request):
                 'nickname': i.nickname,
                 'username': i.username,
                 'phone_number': i.phone_number,
-                'last_ip': i.last_ip,
+                'register_time': i.register_time,
                 'last_login': i.last_login,
                 'status': i.status,
                 'balance': i.balance,

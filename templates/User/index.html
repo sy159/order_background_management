@@ -84,7 +84,7 @@
                         <th>昵称</th>
                         <th>手机号</th>
                         <th><a href="" style="color:blue;">最后登录时间</a></th>
-                        <th>最后登录地址</th>
+                        <th>注册时间</th>
                         <th class="textcenter"><a href="" style="color:blue;">余额</a></th>
                         <th class="textcenter"><a href="" style="color:blue;">积分</a></th>
                         <th class="textcenter">状态</th>
@@ -99,7 +99,7 @@
                         <td>{{ i.nickname }}</td>
                         <td>{{ i.phone_number }}</td>
                         <td>{{ i.last_login|date:'Y-m-d H:i:s' }}</td>
-                        <td>{{ i.last_ip | default_if_none:""}}</td>
+                        <td>{{ i.register_time|date:'Y-m-d H:i:s' | default_if_none:""}}</td>
                         <td class="textcenter">￥{{ i.balance }}</td>
                         <td class="textcenter">{{ i.integral }}</td>
                         {% if i.status == 1 %}
