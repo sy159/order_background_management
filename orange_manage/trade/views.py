@@ -23,10 +23,10 @@ def order_list(request):
         'payment': get_payment,
     }
     if request.operator_region:
-        all_obj = models.Orders.objects.filter(order_status__isnull=False,
+        all_obj = models.Orders.objects.exclude(order_status__isnull=True).filter(
                                                region_id=request.operator_region).order_by("-create_time").all()
     else:
-        all_obj = models.Orders.objects.filter(order_status__isnull=False).order_by("-create_time").all()
+        all_obj = models.Orders.objects.exclude(order_status__isnull=True).order_by("-create_time").all()
     if get_keyword:
         if get_searchtype == 'order_id':
             all_obj = all_obj.filter(order_id__contains=get_keyword)
@@ -112,11 +112,25 @@ def order_detail(requst):
         goods_obj = models.OrderGoods.objects.filter(sub_order_id=i).all()
         goods_list = []
         for j in goods_obj:
+            specification_values = ''
+            if j.specification_values:
+                for val in eval(j.specification_values):
+                   specification_values += val + ' '
+            attribute_values = ''
+            if j.attribute_values:
+                values = ''
+                for val in eval(j.attribute_values):
+                    values += val['attribute_name'] + ':'
+                    values_end = ''
+                    for i in val['attribute_values']:
+                       values_end += i + ' '
+                    values += values_end
+                    attribute_values += values + ' '
             goods_dict = {
                 'order_status': shop_obj.order_status,
                 'goods_name': j.goods_name,
-                'specification_values': j.specification_values,  # 规格搭配
-                'attribute_values': j.attribute_values,  # 规格属性
+                'specification_values': specification_values,  # 规格搭配
+                'attribute_values': attribute_values,  # 规格属性
                 'unit_price': j.unit_price,  # 单价
                 'goods_amount': j.goods_amount,  # 数量
             }
@@ -149,5 +163,4 @@ def order_detail(requst):
         'shop_info': shop_list,
         'shop_remarks': shop_remarks_list,
     }
-    print(order_obj.pay_mode)
     return render(requst, 'Trade/order_detail.html', {'data': data})
