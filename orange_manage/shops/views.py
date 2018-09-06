@@ -1043,5 +1043,3 @@ def nopass_goods(request):
         return render(request, 'Merchant/wait_goods_fail.html',
                       {'data': data_list, 'get_page': get_page, 'page_total': str(page_total),
                        'filter_content': get_filter_content})
-
-

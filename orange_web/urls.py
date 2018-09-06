@@ -131,7 +131,4 @@ urlpatterns = [
     path('admin/order_api/', deliver.order_api),  # 在线配送员api
     path('admin/dispatching_console/', deliver.dispatching_console),  # 调度控制台
 
-
-
-
 ]

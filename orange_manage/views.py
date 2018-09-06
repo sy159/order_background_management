@@ -143,14 +143,14 @@ def image_upload(request):
 def good_sort(request):
     get_id = request.GET.get('id')
     all_obj = models.GoodsClassifyPlatform.objects.filter(parent_id=get_id)
-    data= []
+    data = []
     for i in all_obj:
         data_dict = {
             'record_id': i.record_id,
             'name': i.name,
         }
         data.append(data_dict)
-    return JsonResponse(data,safe=False)
+    return JsonResponse(data, safe=False)
 
 
 def kindeditor(request):
@@ -164,10 +164,10 @@ def upload_img(request):
         return HttpResponse('<h2>只能上传图片哦</h2>')
     file_name = str(int(time.time())) + "." + file_obj.name.split('.')[-1]
     print(file_name)
-    url = "/static/illustratio/"+file_name
+    url = "/static/illustratio/" + file_name
     UploadImg(url, file_obj)
     resp = {
         "error": 0,
-        "url": "http://ftp.college.cqgynet.com"+url
+        "url": "http://ftp.college.cqgynet.com" + url
     }
     return JsonResponse(resp)

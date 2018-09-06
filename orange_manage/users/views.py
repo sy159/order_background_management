@@ -24,12 +24,15 @@ def user_list(request):
         operator_region = request.operator_region
         if operator_region:
             operator_campus_obj = models.RegionCampus.objects.filter(region_id=operator_region).all()
+            # else:
+            #     operator_campus_obj = models.RegionCampus.objects.all()
+            campus_list = []
+            for i in operator_campus_obj:
+                campus_list.append(i.campus_id)
+            obj = models.User.objects.filter(campus_id__in=campus_list)
+
         else:
-            operator_campus_obj = models.RegionCampus.objects.all()
-        campus_list = []
-        for i in operator_campus_obj:
-            campus_list.append(i.campus_id)
-        obj = models.User.objects.filter(campus_id__in=campus_list)
+            obj = models.User.objects
         money_dict = {
             'all_money': 0.0,
             'all_integral': 0.0,
@@ -37,7 +40,8 @@ def user_list(request):
         }
         if obj:
             money_dict['all_money'] = '%.2f' % obj.values('balance').aggregate(all_money=Sum('balance'))['all_money']
-            money_dict['all_integral'] = '%.2f' % obj.values('integral').aggregate(all_integral=Sum('integral'))['all_integral']
+            money_dict['all_integral'] = '%.2f' % obj.values('integral').aggregate(all_integral=Sum('integral'))[
+                'all_integral']
             disable_money_obj = obj.values('balance').annotate(all_money=Sum('balance')).filter(status=0)
             disable_money = 0.0
             if disable_money_obj:
@@ -45,19 +49,16 @@ def user_list(request):
                     disable_money += float(i['all_money'])
             disable_money = '%.2f' % disable_money
             money_dict['disable_money'] = disable_money
-
         if len(get_keyword):
             if get_searchtype == 'user_id':
-                all_obj = models.User.objects.filter(campus_id__in=campus_list, user_id=get_keyword).order_by(
+                all_obj = obj.filter(user_id=get_keyword).order_by(
                     "-user_id")
             elif get_searchtype == 'nickname':
-                all_obj = models.User.objects.filter(campus_id__in=campus_list,
-                                                     nickname__contains=get_keyword).order_by("-user_id")
+                all_obj = obj.filter(nickname__contains=get_keyword).order_by("-user_id")
             elif get_searchtype == 'phone_number':
-                all_obj = models.User.objects.filter(campus_id__in=campus_list,
-                                                     phone_number__contains=get_keyword).order_by("-user_id")
+                all_obj = obj.filter(phone_number__contains=get_keyword).order_by("-user_id")
         else:
-            all_obj = models.User.objects.filter(campus_id__in=campus_list).order_by("-user_id")
+            all_obj = obj.order_by("-user_id")
         if get_status != '2': all_obj = all_obj.filter(status=get_status)
         if len(get_begin_time) and len(get_end_time):
             all_obj = all_obj.filter(register_time__gte=get_begin_time)

@@ -92,7 +92,8 @@ def account_list(request):
             }
             data_list.append(data_dict)
     return render(request, 'Index/account.html',
-                  {'level': request.operator_level, 'data': data_list, 'get_page': get_page, 'page_total': str(page_total), 'status': status})
+                  {'level': request.operator_level, 'data': data_list, 'get_page': get_page,
+                   'page_total': str(page_total), 'status': status})
 
 
 @cache_control(private=True)
