@@ -70,7 +70,7 @@
             }else{
                 $(".pic").html(" ");
                 $.ajax({
-                        url:"/admin/store_add/?",
+                        url:"/admin/store_add?",
                         type:"post",
                         dataType:"json",
                         data: $("#myform").serialize(),
@@ -105,7 +105,7 @@
     }
 
      function choose_store(){
-        art.dialog.open('/admin/stores/?flag=add_store',{
+        art.dialog.open('/admin/choice_stores?flag=add_store',{
             title: '选择店铺',
             lock: true,
             width:800,
