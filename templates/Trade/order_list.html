@@ -290,7 +290,7 @@
                                 <ul class="pages">
 
                                     <li><a href='/admin/order_list/?p=1&keyword={{ search_data.keyword }}&searchtype={{ search_data.searchtype }}&begin_time={{ search_data.begin_time }}&end_time={{ search_data.end_time }}&order_status={{ search_data.order_status }}&payment={{ search_data.payment }}'>首页</a></li>
-                                    {% if  get_page  == '1' %}
+                                    {% if  get_page  == 1 %}
                                         <li><a href='#'>&lt;上一页</a></li>
                                     {% else %}
                                     <li><a href='/admin/order_list/?p={{ get_page |add:-1}}&keyword={{ search_data.keyword }}&searchtype={{ search_data.searchtype }}&begin_time={{ search_data.begin_time }}&end_time={{ search_data.end_time }}&order_status={{ search_data.order_status }}&payment={{ search_data.payment }}'>&lt;上一页</a></li>

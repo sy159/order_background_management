@@ -227,7 +227,7 @@ def shop_list(request):
             'get_searchorder': get_searchorder,
         }
         return render(request, 'Merchant/index.html',
-                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total), 'all_money': all_money,
+                      {'data': data_list, 'get_page': int(get_page), 'page_total': page_total, 'all_money': all_money,
                        'status_info': status_all})
     if request.method == 'POST':
         province_name = request.POST.get('province_idss')  # 省名
@@ -554,7 +554,7 @@ def wait_store(request):
             }
             data_list.append(data_dict)
         return render(request, 'Merchant/wait_store.html',
-                      {'data': data_list, 'page_total': str(page_total), 'get_page': get_page,
+                      {'data': data_list, 'page_total': page_total, 'get_page': int(get_page),
                        'filter_content': filter_content})
 
 
@@ -609,7 +609,7 @@ def wait_store2(request):
             }
             data_list.append(data_dict)
         return render(request, 'Merchant/wait_store_status.html',
-                      {'data': data_list, 'page_total': str(page_total), 'get_page': get_page,
+                      {'data': data_list, 'page_total': page_total, 'get_page': int(get_page),
                        'filter_content': filter_content})
 
 
@@ -664,7 +664,7 @@ def wait_store3(request):
             }
             data_list.append(data_dict)
         return render(request, 'Merchant/wait_store_fail.html',
-                      {'data': data_list, 'page_total': str(page_total), 'get_page': get_page,
+                      {'data': data_list, 'page_total': page_total, 'get_page': int(get_page),
                        'filter_content': filter_content})
 
 
@@ -689,7 +689,7 @@ def category_list(request):
         }
         data_list.append(data_dict)
     return render(request, 'Merchant/category_list.html',
-                  {'data': data_list, 'page_total': str(page_total), 'get_page': get_page})
+                  {'data': data_list, 'page_total': page_total, 'get_page': int(get_page)})
 
 
 def add_originalform(request):
@@ -757,8 +757,8 @@ def check_childlist(request):
         data_dict['state'] = i.state
         data_list.append(data_dict)
     return render(request, 'Merchant/category_childlist.html',
-                  {'data': data_list, 'f_id': get_parent_id, 'name': get_parent_name, 'page_total': str(page_total),
-                   'get_page': get_page})
+                  {'data': data_list, 'f_id': get_parent_id, 'name': get_parent_name, 'page_total': page_total,
+                   'get_page': int(get_page)})
 
 
 def add_childform(request):
@@ -834,7 +834,7 @@ def circle_list(request):
         }
         data_list.append(data_dict)
     return render(request, 'Merchant/circle_list.html',
-                  {'data': data_list, 'get_page': get_page, 'page_total': str(page_total)})
+                  {'data': data_list, 'get_page': int(get_page), 'page_total': page_total})
 
 
 def add_circle(request):
@@ -899,7 +899,7 @@ def store_list(request):
             }
             data_list.append(data_dict)
         return render(request, 'Merchant/store_list.html',
-                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total),
+                      {'data': data_list, 'get_page': int(get_page), 'page_total': page_total,
                        'region_id': operator_region, 'circle_id': circle_id, 'circle_list': circle_list})
     elif request.method == 'POST':
         get_circle_id = request.POST.get('circle_id')
@@ -941,7 +941,7 @@ def wait_goods(request):
             }
             data_list.append(data_dict)
         return render(request, 'Merchant/wait_goods.html',
-                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total),
+                      {'data': data_list, 'get_page': int(get_page), 'page_total': page_total,
                        'filter_content': get_filter_content})
     elif request.method == 'POST':
         try:
@@ -1041,5 +1041,5 @@ def nopass_goods(request):
             }
             data_list.append(data_dict)
         return render(request, 'Merchant/wait_goods_fail.html',
-                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total),
+                      {'data': data_list, 'get_page': int(get_page), 'page_total': page_total,
                        'filter_content': get_filter_content})

@@ -141,7 +141,7 @@
             <div class="textcenter pagebar"  colspan="12">
                 <ul class="pages">
                     <li><a href='/admin/modify_status/?p=1&keyword={{ status_dict.keyword|default_if_none:'' }}&searchtype={{ status_dict.searchtype }}&cash_account_type={{ status_dict.cash_account_type }}&identity={{ status_dict.identity }}'>首页</a></li>
-                    {% if  get_page  == '1' %}
+                    {% if  get_page  == 1 %}
                         <li><a href='#'>&lt;上一页</a></li>
                     {% else %}
                         <li><a href='/admin/modify_status/?p={{ get_page |add:-1}}&keyword={{ status_dict.keyword|default_if_none:'' }}&searchtype={{ status_dict.searchtype }}&cash_account_type={{ status_dict.cash_account_type }}&identity={{ status_dict.identity }}'>&lt;上一页</a></li>

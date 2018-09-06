@@ -157,7 +157,7 @@ def choice_stores(request):
             }
             data_list.append(data_dict)
         return render(request, 'Adver/stores.html',
-                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total), 'flag': get_flag, })
+                      {'data': data_list, 'get_page': int(get_page), 'page_total': page_total, 'flag': get_flag, })
 
 
 def choose_goods(request):
@@ -183,7 +183,7 @@ def choose_goods(request):
             }
             data_list.append(data_dict)
         return render(request, 'Adver/goods.html',
-                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total), 'stores': get_stores,
+                      {'data': data_list, 'get_page': int(get_page), 'page_total': page_total, 'stores': get_stores,
                        'shop_id': get_shop_id})
 
 
@@ -213,7 +213,7 @@ def choose_shop_category(request):
             }
             data_list.append(data_dict)
         return render(request, 'Adver/shop_category.html',
-                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total), 'flag': get_flag})
+                      {'data': data_list, 'get_page': int(get_page), 'page_total': page_total, 'flag': get_flag})
 
 
 def adver_edit(request):
@@ -317,7 +317,7 @@ def withdraw_list(request):
             }
             data_list.append(data_dict)
         return render(request, 'System_Setting/withdraw_auto.html',
-                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total),
+                      {'data': data_list, 'get_page': int(get_page), 'page_total': page_total,
                        'status_dict': status_dict})
     elif request.method == 'POST':
         get_id = request.POST.get('id')
@@ -371,7 +371,7 @@ def modify_status(request):
             }
             data_list.append(data_dict)
         return render(request, 'System_Setting/ModifyPaymentStatus.html',
-                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total),
+                      {'data': data_list, 'get_page': int(get_page), 'page_total': page_total,
                        'status_dict': status_dict})
     elif request.method == 'POST':
         try:

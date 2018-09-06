@@ -114,7 +114,7 @@
                     <td class="textcenter pagebar" colspan="13">
                         <ul class="pages">
                             <li id="first_page"><a href='/admin/account_list/?p=1&keyword={{ status.keyword|default_if_none:'' }}&searchtype={{ status.searchtype }}'>首页</a></li>
-                            {% if  get_page  == '1' %}
+                            {% if  get_page  == 1 %}
                                 <li><a href='#'>&lt;上一页</a></li>
                             {% else %}
                                 <li><a href='/admin/account_list/?p={{ get_page |add:-1}}&keyword={{ status.keyword|default_if_none:'' }}&searchtype={{ status.searchtype }}'>&lt;上一页</a></li>

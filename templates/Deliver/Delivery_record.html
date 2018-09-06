@@ -90,7 +90,7 @@
                         <ul class="pages">
 
                             <li><a href='/admin/delivery_record/?p=1&distributor_id={{ distributor_id }}&begin_time={{ status_data.begin_time|default_if_none:'' }}&end_time={{ status_data.end_time|default_if_none:'' }}'>首页</a></li>
-                            {% if  get_page  == '1' %}
+                            {% if  get_page  == 1 %}
                                 <li><a href='#'>&lt;上一页</a></li>
                             {% else %}
                                 <li><a href='/admin/delivery_record/?p={{ get_page |add:-1}}&distributor_id={{ distributor_id }}&begin_time={{ status_data.begin_time|default_if_none:'' }}&end_time={{ status_data.end_time|default_if_none:'' }}'>&lt;上一页</a></li>

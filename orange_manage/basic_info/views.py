@@ -92,8 +92,8 @@ def account_list(request):
             }
             data_list.append(data_dict)
     return render(request, 'Index/account.html',
-                  {'level': request.operator_level, 'data': data_list, 'get_page': get_page,
-                   'page_total': str(page_total), 'status': status})
+                  {'level': request.operator_level, 'data': data_list, 'get_page': int(get_page),
+                   'page_total': page_total, 'status': status})
 
 
 @cache_control(private=True)
@@ -396,7 +396,7 @@ def exist_region(request):
             }
             data_list.append(data_dict)
         return render(request, 'Index/ExistingAreaList.html',
-                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total),
+                      {'data': data_list, 'get_page': int(get_page), 'page_total': page_total,
                        'operator_region': request.operator_region})
     elif request.method == 'DELETE':
         models.Region.objects.filter(region_id=request.GET.get('region_id')).delete()

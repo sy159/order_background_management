@@ -50,7 +50,7 @@ def marki_manage(request):
             }
             data_list.append(data_dict)
         return render(request, 'Deliver/user.html',
-                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total),
+                      {'data': data_list, 'get_page': int(get_page), 'page_total': page_total,
                        'data_status': data_status})
     if request.method == 'DELETE':
         get_id = request.GET.get('user_id')
@@ -187,7 +187,7 @@ def delivery_record(request):
         data_list.append(data_dict)
     return render(request, 'Deliver/Delivery_record.html',
                   {'data': data_list, 'distributor_name': distributor_obj.name, 'distributor_id': get_distributor_id,
-                   'status_data': status_data, 'get_page': get_page, 'page_total': str(page_total)})
+                   'status_data': status_data, 'get_page': int(get_page), 'page_total': page_total})
 
 
 def deliver_list(request):
@@ -229,7 +229,7 @@ def deliver_list(request):
         }
         data_list.append(data_dict)
     return render(request, 'Deliver/deliverList.html',
-                  {'data': data_list, 'get_page': get_page, 'page_total': str(page_total), 'status': status})
+                  {'data': data_list, 'get_page': int(get_page), 'page_total': page_total, 'status': status})
 
 
 def marki_list(request):
@@ -271,7 +271,7 @@ def marki_list(request):
             }
             data_list.append(data_dict)
         return render(request, 'Deliver/marki_list.html',
-                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total), 'status': status})
+                      {'data': data_list, 'get_page': int(get_page), 'page_total': page_total, 'status': status})
     elif request.method == 'POST':
         try:
             get_order_id = request.GET.get('order_id')

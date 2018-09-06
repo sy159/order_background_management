@@ -101,7 +101,7 @@
                                 <ul class="pages">
 
                                     <li><a href='/admin/marki_manage/?p=1&keyword={{ data_status.keyword }}&searchtype={{ data_status.searchtype }}'>首页</a></li>
-                                    {% if  get_page  == '1' %}
+                                    {% if  get_page  == 1 %}
                                         <li><a href='#'>&lt;上一页</a></li>
                                     {% else %}
                                     <li><a href='/admin/marki_manage/?p={{ get_page |add:-1}}&keyword={{ data_status.keyword }}&searchtype={{ data_status.searchtype }}'>&lt;上一页</a></li>

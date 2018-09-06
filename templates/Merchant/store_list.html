@@ -62,7 +62,7 @@
                     <td class="textcenter pagebar" colspan="12">
                         <ul class="pages">
                             <li id="first_page"><a href='/admin/store_list/?p=1&circle_id={{ i.circle_id }}&region_id={{ region_id }}'>首页</a></li>
-                            {% if  get_page  == '1' %}
+                            {% if  get_page  == 1 %}
                                 <li><a href='#'>&lt;上一页</a></li>
                             {% else %}
                                 <li><a href='/admin/store_list/?p={{ get_page |add:-1}}&circle_id={{ i.circle_id }}&region_id={{ region_id }}'>&lt;上一页</a></li>

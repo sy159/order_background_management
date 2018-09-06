@@ -76,8 +76,12 @@ def user_list(request):
                 'integral': i.integral,
             }
             data_list.append(data_dict)
+        if int(get_page)  >=  page_total:
+            print(0)
+        else:
+            print(1)
         return render(request, 'User/index.html',
-                      {'data': data_list, 'money_data': money_dict, 'get_page': get_page, 'page_total': str(page_total),
+                      {'data': data_list, 'money_data': money_dict, 'get_page': int(get_page), 'page_total': page_total,
                        'search_data': search_data})
 
 

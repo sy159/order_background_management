@@ -133,7 +133,7 @@
                                 <ul class="pages">
 
                                     <li><a href='/admin/deliver_list/?p=1&distribution_status={{ status.distribution_status }}&user_phone_number={{ status.user_phone_number|default_if_none:'' }}'>首页</a></li>
-                                    {% if  get_page  == '1' %}
+                                    {% if  get_page  == 1 %}
                                         <li><a href='#'>&lt;上一页</a></li>
                                     {% else %}
                                     <li><a href='/admin/deliver_list/?p={{ get_page |add:-1}}&distribution_status={{ status.distribution_status }}&user_phone_number={{ status.user_phone_number|default_if_none:'' }}'>&lt;上一页</a></li>

@@ -185,7 +185,7 @@
             <div class="textcenter pagebar"  colspan="12">
                 <ul class="pages">
                     <li><a href='/admin/withdraw_list/?p=1&keyword={{ status_dict.keyword|default_if_none:'' }}&searchtype={{ status_dict.searchtype|default_if_none:'' }}&status={{ status_dict.status|default_if_none:'' }}&cash_account_type={{ status_dict.cash_account_type|default_if_none:'' }}&identity={{ status_dict.identity |default_if_none:''}}'>首页</a></li>
-                    {% if  get_page  == '1' %}
+                    {% if  get_page  == 1 %}
                         <li><a href='#'>&lt;上一页</a></li>
                     {% else %}
                         <li><a href='/admin/withdraw_list/?p={{ get_page |add:-1}}&keyword={{ status_dict.keyword|default_if_none:'' }}&searchtype={{ status_dict.searchtype |default_if_none:''}}&status={{ status_dict.status|default_if_none:'' }}&cash_account_type={{ status_dict.cash_account_type |default_if_none:''}}&identity={{ status_dict.identity|default_if_none:'' }}'>&lt;上一页</a></li>

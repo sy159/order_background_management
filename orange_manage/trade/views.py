@@ -92,7 +92,7 @@ def order_list(request):
                 'pending': 0,
             }
     return render(request, 'Trade/order_list.html',
-                  {'data': data_list, 'search_data': search_data, 'get_page': get_page, 'page_total': str(page_total),
+                  {'data': data_list, 'search_data': search_data, 'get_page': int(get_page), 'page_total': page_total,
                    'num': num_dict})
 
 

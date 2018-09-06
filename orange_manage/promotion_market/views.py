@@ -28,7 +28,7 @@ def recommend_list(request):
             }
             data_list.append(data_dict)
         return render(request, 'Promotion_market/recommend_list.html',
-                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total)})
+                      {'data': data_list, 'get_page': int(get_page), 'page_total': page_total})
     elif request.method == 'DELETE':
         get_id = request.GET.get('id')
         models.RecommendShops.objects.filter(id=get_id).delete()
@@ -133,7 +133,7 @@ def coupon_list(request):
             }
             data_list.append(data_dict)
         return render(request, 'Promotion_market/PlatformCoupons.html',
-                      {'data': data_list, 'get_page': get_page, 'page_total': str(page_total)})
+                      {'data': data_list, 'get_page': int(get_page), 'page_total': page_total})
 
 
 def add_coupon(request):

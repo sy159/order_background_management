@@ -58,7 +58,7 @@
                                 <td class="textcenter pagebar" colspan="12">
                                     <ul class="pages">
                                         <li id="first_page"><a href='/admin/circle_list/?p=1'>首页</a></li>
-                                        {% if  get_page  == '1' %}
+                                        {% if  get_page  == 1 %}
                                             <li><a href='#'>&lt;上一页</a></li>
                                         {% else %}
                                             <li><a href='/admin/circle_list/?p={{ get_page |add:-1}}'>&lt;上一页</a></li>
