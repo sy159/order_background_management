@@ -76,6 +76,17 @@ WSGI_APPLICATION = 'orange_web.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'test',  # 数据库名字
+#         'HOST': '127.0.0.1',  # 数据库地址
+#         'PORT': 3306,  # 端口号
+#         'USER': 'root',  # 用户名
+#         'PASSWORD': 'wq1997qw',  # 密码
+#         'CONN_MAX_AGE': None,  # 持久化
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

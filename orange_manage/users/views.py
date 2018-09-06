@@ -30,19 +30,22 @@ def user_list(request):
         for i in operator_campus_obj:
             campus_list.append(i.campus_id)
         obj = models.User.objects.filter(campus_id__in=campus_list)
-        all_money = '%.2f' % obj.values('balance').aggregate(all_money=Sum('balance'))['all_money']
-        all_integral = '%.2f' % obj.values('integral').aggregate(all_integral=Sum('integral'))['all_integral']
-        disable_money_obj = obj.values('balance').annotate(all_money=Sum('balance')).filter(status=0)
-        disable_money = 0.0
-        if disable_money_obj:
-            for i in disable_money_obj:
-                disable_money += float(i['all_money'])
-        disable_money = '%.2f' % disable_money
         money_dict = {
-            'all_money': all_money,
-            'all_integral': all_integral,
-            'disable_money': disable_money,
+            'all_money': 0.0,
+            'all_integral': 0.0,
+            'disable_money': 0.0,
         }
+        if obj:
+            money_dict['all_money'] = '%.2f' % obj.values('balance').aggregate(all_money=Sum('balance'))['all_money']
+            money_dict['all_integral'] = '%.2f' % obj.values('integral').aggregate(all_integral=Sum('integral'))['all_integral']
+            disable_money_obj = obj.values('balance').annotate(all_money=Sum('balance')).filter(status=0)
+            disable_money = 0.0
+            if disable_money_obj:
+                for i in disable_money_obj:
+                    disable_money += float(i['all_money'])
+            disable_money = '%.2f' % disable_money
+            money_dict['disable_money'] = disable_money
+
         if len(get_keyword):
             if get_searchtype == 'user_id':
                 all_obj = models.User.objects.filter(campus_id__in=campus_list, user_id=get_keyword).order_by(
