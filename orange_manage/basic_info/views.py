@@ -194,6 +194,9 @@ def edit_accountinfo(request):
                 'city_name': city_obj.site_name,
                 'area_name': area_obj.site_name,
                 'region_name': obj_region.region_name,
+                'city_id': obj_region.city_id,
+                'area_id': obj_region.area_id,
+                'region_id': obj.open_admin_region,
             }
         else:
             data = {

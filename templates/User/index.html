@@ -54,6 +54,22 @@
                         <option value="0" selected>禁用</option>
                         {% endif %}
                     </select>
+                排序：
+                <select name="priority">
+                    {% if search_data.priority == "user_id" %}
+                    <option value="user_id" selected>ID</option>
+                    <option value="register_time">注册时间</option>
+                    <option value="balance">余额</option>
+                    {% elif search_data.priority == "register_time" %}
+                    <option value="user_id" >ID</option>
+                    <option value="register_time" selected>注册时间</option>
+                    <option value="balance">余额</option>
+                        {% else %}
+                         <option value="user_id" >ID</option>
+                    <option value="register_time">注册时间</option>
+                    <option value="balance" selected>余额</option>
+                    {% endif %}
+                </select>
                     <input type="submit" style="margin-right:20px;" value="查询"   class="button"/>
                     用户总余额：{{ money_data.all_money }}元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     禁止用户总余额：{{ money_data.disable_money }}元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -116,22 +132,22 @@
                     <tr>
                         <td class="textcenter pagebar" colspan="12">
                             <ul class="pages">
-                                <li><a href='/admin/user_list/?p=1&keyword={{ search_data.keyword}}&begin_time={{ search_data.begin_time}}&end_time={{ search_data.end_time}}&status={{ search_data.status }}&searchtype={{ search_data.searchtype }}'>首页</a></li>
+                                <li><a href='/admin/user_list/?p=1&keyword={{ search_data.keyword}}&begin_time={{ search_data.begin_time}}&end_time={{ search_data.end_time}}&status={{ search_data.status }}&searchtype={{ search_data.searchtype }}&priority={{ search_data.priority }}'>首页</a></li>
                                 {% if  get_page  == 1 %}
                                     <li><a href='#'>&lt;上一页</a></li>
                                 {% else %}
-                                <li><a href='/admin/user_list/?p={{ get_page |add:-1}}&keyword={{ search_data.keyword}}&begin_time={{ search_data.begin_time}}&end_time={{ search_data.end_time}}&status={{ search_data.status }}&searchtype={{ search_data.searchtype }}'>&lt;上一页</a></li>
+                                <li><a href='/admin/user_list/?p={{ get_page |add:-1}}&keyword={{ search_data.keyword}}&begin_time={{ search_data.begin_time}}&end_time={{ search_data.end_time}}&status={{ search_data.status }}&searchtype={{ search_data.searchtype }}&priority={{ search_data.priority }}'>&lt;上一页</a></li>
 
                                 {% endif %}
                             {% if  get_page  >=  page_total  %}
                                 <li><a href='#'>下一页&gt;</a></li>
                                 {% else %}
-                                <li><a href='/admin/user_list/?p={{ get_page |add:1}}&keyword={{ search_data.keyword}}&begin_time={{ search_data.begin_time}}&end_time={{ search_data.end_time}}&status={{ search_data.status }}&searchtype={{ search_data.searchtype }}'>下一页&gt;</a></li>
+                                <li><a href='/admin/user_list/?p={{ get_page |add:1}}&keyword={{ search_data.keyword}}&begin_time={{ search_data.begin_time}}&end_time={{ search_data.end_time}}&status={{ search_data.status }}&searchtype={{ search_data.searchtype }}&priority={{ search_data.priority }}'>下一页&gt;</a></li>
                             {% endif %}
                             {% if page_total == 0 %}
-                                <li><a href='/admin/user_list/?p=1&keyword={{ search_data.keyword}}&begin_time={{ search_data.begin_time}}&end_time={{ search_data.end_time}}&status={{ search_data.status }}&searchtype={{ search_data.searchtype }}'>尾页></a></li>
+                                <li><a href='/admin/user_list/?p=1&keyword={{ search_data.keyword}}&begin_time={{ search_data.begin_time}}&end_time={{ search_data.end_time}}&status={{ search_data.status }}&searchtype={{ search_data.searchtype }}&priority={{ search_data.priority }}'>尾页></a></li>
                             {% else %}
-                                <li><a href='/admin/user_list/?p={{ page_total }}&keyword={{ search_data.keyword}}&begin_time={{ search_data.begin_time}}&end_time={{ search_data.end_time}}&status={{ search_data.status }}&searchtype={{ search_data.searchtype }}'>尾页></a></li>
+                                <li><a href='/admin/user_list/?p={{ page_total }}&keyword={{ search_data.keyword}}&begin_time={{ search_data.begin_time}}&end_time={{ search_data.end_time}}&status={{ search_data.status }}&searchtype={{ search_data.searchtype }}&priority={{ search_data.priority }}'>尾页></a></li>
                             {% endif %}
                                 <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
                             </ul>

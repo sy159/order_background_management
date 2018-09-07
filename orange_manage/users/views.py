@@ -5,6 +5,7 @@ from django.db.models import Sum
 
 def user_list(request):
     if request.method == 'GET':
+        get_priority = request.GET.get('priority', 'user_id')
         get_keyword = request.GET.get('keyword', '')
         get_searchtype = request.GET.get('searchtype')
         get_begin_time = request.GET.get('begin_time', '')
@@ -16,6 +17,7 @@ def user_list(request):
             'begin_time': get_begin_time,
             'end_time': get_end_time,
             'status': get_status,
+            'priority': get_priority,
         }
         get_pagesize = 15
         get_page = request.GET.get('p', '1')
@@ -63,7 +65,7 @@ def user_list(request):
         page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
             get_pagesize)
         data_list = []
-        for i in all_obj.order_by('-balance')[start_nun:end_num]:
+        for i in all_obj.order_by('-'+get_priority)[start_nun:end_num]:
             data_dict = {
                 'user_id': i.user_id,
                 'nickname': i.nickname,

@@ -110,13 +110,13 @@
                     <option id="province"></option>
                 </select>
                 <select id="choose_city_hide" name="city_idss">
-                    <option id="city">{{ data.city_name }}</option>
+                    <option id="city" value="{{ data.city_id }}">{{ data.city_name }}</option>
                 </select>
                 <select id="choose_areass" name="area_id">
-                    <option id="area">{{ data.area_name }}</option>
+                    <option id="area"  value="{{ data.area_id }}">{{ data.area_name }}</option>
                 </select>
                 <select id="choose_region" name="region_id">
-                    <option id="region">{{ data.region_name }}</option>
+                    <option id="region"  value="{{ data.region_id }}">{{ data.region_name }}</option>
                 </select>
             </td>
         </tr>
@@ -140,11 +140,11 @@
 </form>
 <script>
 
-    function choose() {
+    function choose(data) {
         $("#choose_province_hide").html(province);
         $("#choose_province_hide").change(function () {
             num = parseInt($("#choose_province_hide option:selected").val());
-            city = "<option value=\"0\">请选择市</option>"
+            city = "<option value=\"0\">请选择市</option>";
             $.each(data.data[1][num], function (i, e) {
                 city += "<option value=" + "\"" + e.city_id + "\"" + ">" + e.city_name + "</option>";
             });
@@ -171,6 +171,7 @@
     var level = parseInt($('input:radio[name="level"]:checked').val());
     if (level == 1) {
         $("#choose_reg").css("display", "table-row");
+
         var province,
             city = "<option selected>" + $("#city").html() + "</option>",
             area = "<option selected>" + $("#area").html() + "</option>",
@@ -181,7 +182,7 @@
                 province += "<option value=" + "\"" + e.province_id + "\"" + ">" + e.province_name + "</option>";
             });
             province += "<option value=\"0\">请选择省</option>"
-            choose();
+            choose(data);
         });
 
     } else {
