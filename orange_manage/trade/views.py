@@ -24,7 +24,7 @@ def order_list(request):
     }
     if request.operator_region:
         all_obj = models.Orders.objects.exclude(order_status__isnull=True).filter(
-                                               region_id=request.operator_region).order_by("-create_time").all()
+            region_id=request.operator_region).order_by("-create_time").all()
     else:
         all_obj = models.Orders.objects.exclude(order_status__isnull=True).order_by("-create_time").all()
     if get_keyword:
@@ -44,6 +44,7 @@ def order_list(request):
     page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
         get_pagesize)
     data_list = []
+    all_money = all_obj.values('total_price').aggregate(all_money=Sum('total_price'))['all_money']
     for i in all_obj[start_nun:end_num]:
         data_dict = {
             'order_id': i.order_id,
@@ -94,7 +95,7 @@ def order_list(request):
     if page_total == 0: page_total = 1
     return render(request, 'Trade/order_list.html',
                   {'data': data_list, 'search_data': search_data, 'get_page': int(get_page), 'page_total': page_total,
-                   'num': num_dict})
+                   'num': num_dict, 'all_money': all_money})
 
 
 def order_detail(requst):
@@ -115,7 +116,7 @@ def order_detail(requst):
             specification_values = ''
             if j.specification_values:
                 for val in eval(j.specification_values):
-                   specification_values += val + ' '
+                    specification_values += val + ' '
             attribute_values = ''
             if j.attribute_values:
                 values = ''
@@ -123,7 +124,7 @@ def order_detail(requst):
                     values += val['attribute_name'] + ':'
                     values_end = ''
                     for i in val['attribute_values']:
-                       values_end += i + ' '
+                        values_end += i + ' '
                     values += values_end
                     attribute_values += values + ' '
             goods_dict = {
