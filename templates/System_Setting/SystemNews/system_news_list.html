@@ -48,8 +48,8 @@
                         {#                        <input type="hidden" name="region_id" id="region_id" value="{{ region_id }}">#}
                         <td>{{ i.id }}</td>
                         <td>{{ i.title }}</td>
-                        <td>{{ i.create_time }}</td>
-                        <td>{{ i.last_update_time }}</td>
+                        <td>{{ i.create_time|date:'Y-m-d H:i:s' }}</td>
+                        <td>{{ i.last_update_time|date:'Y-m-d H:i:s' }}</td>
                         <td>{{ i.sort }}</td>
                         {% if i.status %}
                             <td><span style="color: green; ">开启</span></td>

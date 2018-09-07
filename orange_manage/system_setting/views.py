@@ -458,7 +458,7 @@ def edit_system_news(request):
             news.category_id = request.POST.get("category_id")
             news.content = request.POST.get("content")
             news.status = request.POST.get("status")
-            news.last_update_time = time.time()
+            news.last_update_time = timezone.now()
             news.save()
         else:
             region_id = request.operator_region
@@ -468,7 +468,7 @@ def edit_system_news(request):
             content = request.POST.get("content")
             status = request.POST.get("status")
             models.SystemNews.objects.create(region_id=region_id, category_id=category_id, title=title, content=content,
-                                             create_time=time.time(), last_update_time=time.time(), sort=sort,
+                                             create_time=time.time(), last_update_time=timezone.now(), sort=sort,
                                              status=status)
 
         return HttpResponse(1)
