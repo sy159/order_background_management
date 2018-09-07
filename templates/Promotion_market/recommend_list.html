@@ -34,7 +34,7 @@
                         <th>排序</th>
                         <th>编号</th>
                         <th>名称</th>
-                        <th>图片(以下为强制小图，点击图片查看大图)</th>
+{#                        <th>图片(以下为强制小图，点击图片查看大图)</th>#}
                         <th class="textcenter">操作者</th>
                         <th class="textcenter">最后操作时间</th>
                         <th>状态</th>
@@ -47,9 +47,9 @@
                         <td>{{ i.priority }}</td>
                         <td>{{ i.id }}</td>
                         <td>{{ i.shop_name }}</td>
-                        <td>
-                            <img src="{{ i.img }}"  style="width:300px;height:80px;" class="view_msg"/>
-                        </td>
+{#                        <td>#}
+{#                            <img src="{{ i.img }}"  style="width:300px;height:80px;" class="view_msg"/>#}
+{#                        </td>#}
                         <td class="textcenter">{{ i.operator }}</td>
                         <td class="textcenter">{{ i.last_time|date:'Y-m-d H:i:s' }}</td>
                         <td>
@@ -101,10 +101,10 @@
                 }else{
                     return false;
                 }
-            }else if(clsn=='view_msg'){
+            }/*else if(clsn=='view_msg'){
             var src=$(this).attr("src");
             window.parent.showbigimg("<img src="+src+" style=\"width:600px;height:400px;\">");
-        }  //点击图片放大
+        }  //点击图片放大*/
     });
 
 </script>

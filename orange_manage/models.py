@@ -603,7 +603,7 @@ class RecommendShops(models.Model):
     operator_name = models.CharField(max_length=255)
     last_time = models.DateTimeField(blank=True, null=True)
     status = models.IntegerField()
-    img = models.CharField(max_length=255)
+    img = models.CharField(max_length=255, blank=True, null=True)
     region_id = models.IntegerField()
     operator_id = models.IntegerField()
 

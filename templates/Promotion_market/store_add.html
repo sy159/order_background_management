@@ -17,15 +17,15 @@
                 <strong class='high url'>*</strong>
             </td>
         </tr>
-        <tr>
-            <th width="80">上传店铺图片</th>
-            <td>
-                <input  type="file" id="pic" accept="image/png,image/jpeg,image/gif" value=""  class="input fl" name="pic" style="width:200px;" placeholder="请上传图片" />
-                <strong class='high position pic'>*</strong>
-            </td>
-            <td><input  type="hidden" id="pic1"  value=""   name="img" style="width:200px;"/></td>
-            <td><input  type="hidden" id="pic2"  value=""   name="img2" style="width:200px;"/></td>
-        </tr>
+{#        <tr>#}
+{#            <th width="80">上传店铺图片</th>#}
+{#            <td>#}
+{#                <input  type="file" id="pic" accept="image/png,image/jpeg,image/gif" value=""  class="input fl" name="pic" style="width:200px;" placeholder="请上传图片" />#}
+{#                <strong class='high position pic'>*</strong>#}
+{#            </td>#}
+{#            <td><input  type="hidden" id="pic1"  value=""   name="img" style="width:200px;"/></td>#}
+{#            <td><input  type="hidden" id="pic2"  value=""   name="img2" style="width:200px;"/></td>#}
+{#        </tr>#}
         <tr>
             <th width="80">店铺排序</th>
             <td>
@@ -63,14 +63,14 @@
             return false;
         }else{
             $(".url").html(" ");
-            if($("#pic").val().length == 0)
+            /*if($("#pic").val().length == 0)
             {
                 $(".pic").html("店铺图片不能为空！");
                 return false;
-            }else{
-                $(".pic").html(" ");
+            }else{  $(".pic").html(" "); }*/
+
                 $.ajax({
-                        url:"/admin/store_add?",
+                        url:"/admin/store_add/",
                         type:"post",
                         dataType:"json",
                         data: $("#myform").serialize(),
@@ -87,7 +87,7 @@
                         }
                     });
                 return true;
-            }
+
         }
     }
 
@@ -120,7 +120,7 @@
         });
     }
 
-     $("#pic").change(function () {
+     /*$("#pic").change(function () {
         if($(this).val() != ""){
              var tmpPath = $("#pic").val();
              tmpPath=tmpPath.split(".")[1];
@@ -153,7 +153,7 @@
                 new_file_name += chars[parseInt(Math.random() * chars.length)];
             }
             return new_file_name;
-        }//生成随机数
+        }//生成随机数*/
 
      $("#close").click(function () {
 		 art.dialog.close();

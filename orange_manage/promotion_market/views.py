@@ -24,7 +24,7 @@ def recommend_list(request):
                 'operator': i.operator_name,
                 'last_time': i.last_time,
                 'status': i.status,
-                'img': request.FTP_HOST + request.recommend_shops_images + i.img,
+                # 'img': request.FTP_HOST + request.recommend_shops_images + i.img,
             }
             data_list.append(data_dict)
         if page_total == 0: page_total = 1
@@ -41,7 +41,7 @@ def store_add(request):
         return render(request, 'Promotion_market/store_add.html')
     elif request.method == 'POST':
         get_shop_id = request.POST.get('get_url').split('=')[1]
-        get_img = request.POST.get('img')
+        # get_img = request.POST.get('img')
         get_hiddenstore = request.POST.get('hiddenstore')
         get_sort = request.POST.get('sort')
         get_status = request.POST.get('status')
@@ -52,7 +52,7 @@ def store_add(request):
             'operator_name': request.operator_name,
             'status': get_status,
             'operator_id': request.operator_id,
-            'img': get_img,
+            # 'img': get_img,
             'region_id': request.operator_region,
             'last_time': timezone.now(),
         }
@@ -69,15 +69,15 @@ def store_edit(request):
             'shop_name': obj.shop_name,
             'priority': obj.priority,
             'status': obj.status,
-            'img': request.FTP_HOST + request.recommend_shops_images + obj.img,
+            # 'img': request.FTP_HOST + request.recommend_shops_images + obj.img,
         }
         return render(request, 'Promotion_market/store_edit.html', {'data': data_dict})
     elif request.method == 'POST':
         get_id = request.POST.get('store_id')
-        obj = models.RecommendShops.objects.get(id=get_id)
-        img = request.POST.get('img') if len(request.POST.get('img')) else obj.img
+        # obj = models.RecommendShops.objects.get(id=get_id)
+        # img = request.POST.get('img') if len(request.POST.get('img')) else obj.img
         data_dict = {
-            'img': img,
+            # 'img': img,
             'status': request.POST.get('status'),
             'priority': request.POST.get('sort'),
         }
