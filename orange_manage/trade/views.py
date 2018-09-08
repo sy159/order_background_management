@@ -41,7 +41,7 @@ def order_list(request):
         all_obj = all_obj.filter(order_status=get_order_status)
     if get_payment != '3':
         all_obj = all_obj.filter(pay_mode=get_payment)
-    page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+    page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
         get_pagesize)
     data_list = []
     all_money = all_obj.values('total_price').aggregate(all_money=Sum('total_price'))['all_money']

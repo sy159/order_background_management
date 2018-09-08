@@ -13,7 +13,7 @@ def recommend_list(request):
         get_pagesize = 15
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
-        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         for i in all_obj.order_by('-priority')[start_nun:end_num]:
@@ -98,7 +98,7 @@ def coupon_list(request):
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
         all_obj = models.Coupon.objects.all()
-        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         for i in all_obj[start_nun:end_num]:

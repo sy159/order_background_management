@@ -542,7 +542,7 @@ def wait_store(request):
         if request.operator_region: all_obj = all_obj.filter(region_id=request.operator_region)
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
-        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         for i in all_obj[start_nun:end_num]:
@@ -598,7 +598,7 @@ def wait_store2(request):
         if request.operator_region: all_obj = all_obj.filter(region_id=request.operator_region)
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
-        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         for i in all_obj[start_nun:end_num]:
@@ -654,7 +654,7 @@ def wait_store3(request):
         if request.operator_region: all_obj = all_obj.filter(region_id=request.operator_region)
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
-        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         for i in all_obj[start_nun:end_num]:
@@ -681,7 +681,7 @@ def category_list(request):
     all_obj = models.ShopSort.objects.filter(parent_id=0).all()
     start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
     end_num = start_nun + int(get_pagesize)  # 终止数据位置
-    page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+    page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
         get_pagesize)
     data_list = []
     for i in all_obj.order_by('-priority')[start_nun:end_num]:
@@ -751,7 +751,7 @@ def check_childlist(request):
     all_obj = models.ShopSort.objects.filter(parent_id=get_parent_id).all()
     start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
     end_num = start_nun + int(get_pagesize)  # 终止数据位置
-    page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+    page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
         get_pagesize)
     data_list = []
     for i in all_obj.order_by('priority')[start_nun:end_num]:
@@ -821,7 +821,7 @@ def circle_list(request):
     end_num = start_nun + int(get_pagesize)  # 终止数据位置
     get_region = request.operator_region
     all_obj = models.Circle.objects.all() if get_region == 0 else models.Circle.objects.filter(region_id=get_region)
-    page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+    page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
         get_pagesize)
     data_list = []
     all_obj.query.group_by = ['region_id']
@@ -895,7 +895,7 @@ def store_list(request):
         all_obj = models.Shop.objects.filter(auth=2, status=1, region_id=operator_region).all()  # 审核通过，状态开启
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
-        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         for i in all_obj[start_nun:end_num]:
@@ -917,6 +917,7 @@ def store_list(request):
         models.CircleShop.objects.filter(circle_id=get_circle_id).delete()
         for i in get_shop_list:
             models.CircleShop.objects.create(circle_id=get_circle_id, shop_id=i)
+            # models.CircleShop.objects.filter(circle_id=get_circle_id).update_or_create({'shop_id': i})
         return HttpResponse(1)
 
 
@@ -936,7 +937,7 @@ def wait_goods(request):
             filter_list = models.Shop.objects.filter(shop_name__contains=get_filter_content).values_list('shop_id',
                                                                                                          flat=True)
             all_obj = all_obj.filter(shop_id__in=filter_list)
-        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         for i in all_obj.order_by('shop_id')[start_nun:end_num]:
@@ -1035,7 +1036,7 @@ def nopass_goods(request):
             filter_list = models.Shop.objects.filter(shop_name__contains=get_filter_content).values_list('shop_id',
                                                                                                          flat=True)
             all_obj = all_obj.filter(shop_id__in=filter_list)
-        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         for i in all_obj.order_by('shop_id')[start_nun:end_num]:

@@ -149,7 +149,7 @@ def choice_stores(request):
                 all_obj = models.Shop.objects.filter(auth=2, status=1, region_id=operator_region).all()  # 审核通过，状态开启
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
-        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         for i in all_obj[start_nun:end_num]:
@@ -177,7 +177,7 @@ def choose_goods(request):
             all_obj = models.Goods.objects.filter(shop_id=get_shop_id).all()
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
-        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         for i in all_obj[start_nun:end_num]:
@@ -307,7 +307,7 @@ def withdraw_list(request):
         if request.GET.get('cash_account_type'): all_obj = all_obj.filter(
             cash_account_type=request.GET.get('cash_account_type'))
         if request.GET.get('identity'): all_obj = all_obj.filter(identity=request.GET.get('identity'))
-        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         for i in all_obj.order_by('-amount')[start_nun:end_num]:
@@ -370,7 +370,7 @@ def modify_status(request):
         if request.GET.get('cash_account_type'): all_obj = all_obj.filter(
             cash_account_type=request.GET.get('cash_account_type'))
         if request.GET.get('identity'): all_obj = all_obj.filter(identity=request.GET.get('identity'))
-        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         for i in all_obj.order_by('-amount')[start_nun:end_num]:

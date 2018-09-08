@@ -31,7 +31,7 @@ def marki_manage(request):
                 all_obj = all_obj.filter(name__contains=get_keyword)
             elif get_searchtype == 'phone_number':
                 all_obj = all_obj.filter(phone_number__contains=get_keyword)
-        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         all_obj.query.group_by = ['region_id']
@@ -165,7 +165,7 @@ def delivery_record(request):
     if begin_time and end_time:
         all_obj = all_obj.filter(complete_time__gte=begin_time)
         all_obj = all_obj.filter(complete_time__lte=end_time)
-    page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+    page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
         get_pagesize)
     for i in all_obj[start_nun:end_num]:
         try:
@@ -211,7 +211,7 @@ def deliver_list(request):
             distributor_phone_number__contains=get_user_phone_number))
     all_obj = all_obj.filter(
         distribution_status=get_distribution_status) if get_distribution_status else all_obj
-    page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+    page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
         get_pagesize)
     data_list = []
     for i in all_obj[start_nun:end_num]:
@@ -258,7 +258,7 @@ def marki_list(request):
             'searchtype': request.GET.get('searchtype'),
             'order_id': request.GET.get('order_id'),
         }
-        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         all_obj.query.group_by = ['campus_id']

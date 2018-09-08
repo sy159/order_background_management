@@ -52,7 +52,7 @@
                         <td>{{ i.address }}</td>
                         <td style="display: none">{{ i.circle_id }}</td>
                         <td class="textcenter">
-                            <input type="checkbox" name="{{ i.shop_id }}" value="{{ i.shop_id }}">
+                            <input type="checkbox" {% if i.shop_id in circle_list %} checked {% endif %} name="checkbox" value="{{ i.shop_id }}">
                         </td>
                     </tr>
                 {% endfor %}
@@ -93,17 +93,16 @@
 </body>
 <script src="/static/js/del_edit_post_get.js"></script>
 <script>
-    if($("#circle_list").html() == " "){
-        $("#circle_list").html("")
-    }else{
-        var arr=$("#circle_list").html().split(",");
-        arr[0]=arr[0].split("[")[1];
-        arr[arr.length-1]=arr[arr.length-1].split("]")[0];
-        arr.forEach(function (el) {
-            $('input[name='+el+']').prop('checked',true);
-        });
-    }//包装选中的复选框
-
+    {#if($("#circle_list").html() == " "){#}
+    {#    $("#circle_list").html("")#}
+    {#{else{#}
+    {#    var arr=$("#circle_list").html().split(",");#}
+    {#    arr[0]=arr[0].split("[")[1];#}
+    {#    arr[arr.length-1]=arr[arr.length-1].split("]")[0];#}
+    {#    arr.forEach(function (el) {#}
+    {#        $('input[name='+el+']').prop('checked',true);#}
+    {#    });#}
+    {#}//包装选中的复选框#}
 
    $("#submit").click(function () {
         $.ajax({

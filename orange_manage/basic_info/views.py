@@ -16,7 +16,7 @@ def account_list(request):
         all_obj = models.Admin.objects.filter(level__lt=2)
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
-        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         status = {
@@ -56,7 +56,7 @@ def account_list(request):
         all_obj = models.Admin.objects.filter(level=2, open_admin_region=request.operator_region).all()
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
-        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         status = {
@@ -384,7 +384,7 @@ def exist_region(request):
                 obj_list.append(i.id)
             all_obj = all_obj.filter(area_id__in=obj_list)
         data_list = []
-        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
             get_pagesize)
         for i in all_obj[start_nun:end_num]:
             p_obj = models.AddresLibrary.objects.get(id=i.province_id)

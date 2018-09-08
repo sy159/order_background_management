@@ -62,7 +62,7 @@ def user_list(request):
         if len(get_begin_time) and len(get_end_time):
             all_obj = all_obj.filter(register_time__gte=get_begin_time)
             all_obj = all_obj.filter(register_time__lte=get_end_time)
-        page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         for i in all_obj.order_by('-'+get_priority)[start_nun:end_num]:
