@@ -34,8 +34,9 @@
             <td>
                 <select id="url_type" style="height: 35px;vertical-align: middle;">
                     <option name="" value="0" selected>请选择对应功能</option>
-                    <option id="store" name="function" value="1">店铺或商品</option>
-                    <option id="web" name="function" value="2">web链接</option>
+                    <option id="store" name="function" value="storeOrGoods">店铺或商品</option>
+                    <option id="shop_category" name="function" value="shop_category" >店铺分类</option>
+                    <option id="web" name="function" value="webUrl">web链接</option>
                 </select>
                 <input type="hidden" name="function" value="" id="choose">
                 <input type="text" value="" class="input" name="url" id="url" style="width:200px;" placeholder="请填写链接地址"
@@ -80,8 +81,8 @@
             $("#url").val("");
             $("#url").show();
         } else {
-            if (val === 1) {
-                art.dialog.open('/admin/choice_stores/?flag=edit', {
+            if (val === "storeOrGoods") {
+                art.dialog.open('/admin/choice_stores?flag=edit', {
                     title: '选择商店或者商品',
                     lock: true,
                     width: 800,
@@ -95,7 +96,7 @@
                     }
                 });
             } else if (val === "shop_category") {
-                art.dialog.open('/admin/choice_stores/?flag=add', {
+                art.dialog.open('/admin/choose_shop_category?flag=edit', {
                     title: '选择商店或者商品',
                     lock: true,
                     width: 800,
