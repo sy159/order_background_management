@@ -44,7 +44,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',  # 允许跨域
     'django.middleware.common.CommonMiddleware',
-    'orange_manage.middleware.Login_session',  # 判断是否登陆
+    'orange_manage.middleware.LoginSession',  # 判断是否登陆
     'orange_manage.middleware.GlobalInfo',  # 操作者相关信息
     # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

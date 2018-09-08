@@ -1,10 +1,9 @@
 from django.shortcuts import HttpResponseRedirect
 from django.utils.deprecation import MiddlewareMixin
-
 from orange_manage import models
 
 
-class Login_session(MiddlewareMixin):
+class LoginSession(MiddlewareMixin):
     def process_request(self, request):
         white_list = ['/admin/login']  # 能够直接访问的url
         if request.path not in white_list:

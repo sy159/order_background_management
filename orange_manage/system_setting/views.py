@@ -2,7 +2,7 @@ import time
 
 from django.shortcuts import render, HttpResponse
 from django.utils import timezone
-
+from django.db.models import F
 from orange_manage import models
 
 
@@ -15,10 +15,10 @@ def adver_list(request):
         operator_region = request.operator_region
         get_id = request.GET.get('id')
         if get_id == '1':
-            if operator_region == 0:
-                all_obj = models.Banner.objects.all()
-            else:
-                all_obj = models.Banner.objects.filter(region_id=operator_region).all()
+            # if operator_region == 0:
+            #     all_obj = models.Banner.objects.all()
+            # else:
+            all_obj = models.Banner.objects.filter(region_id=operator_region).all()
             data_list = []
             for i in all_obj.order_by('-priority'):
                 try:
@@ -27,6 +27,9 @@ def adver_list(request):
                     if url_type == 'shop':
                         shop_obj = models.Shop.objects.filter(shop_id=url_id).first()
                         url_name = '店铺:' + shop_obj.shop_name if shop_obj else '店铺不存在'
+                    elif url_type == 'shop_category':
+                        obj = models.ShopCategory.objects.get(id=url_id)
+                        url_name = '店铺分类:' + obj.name if obj else '店铺分类不存在'
                     else:
                         goods_obj = models.Goods.objects.filter(goods_id=url_id).first()
                         if goods_obj:
@@ -52,10 +55,10 @@ def adver_list(request):
             return render(request, 'Adver/adver_list.html',
                           {'data': data_list, 'parent_title': 'App首页轮播图', 'parent_id': get_id})
         elif get_id == '2':
-            if operator_region == 0:
-                all_obj = models.AppMenu.objects.all()
-            else:
-                all_obj = models.AppMenu.objects.filter(region_id=operator_region).all()
+            # if operator_region == 0:
+            #     all_obj = models.AppMenu.objects.all()
+            # else:
+            all_obj = models.AppMenu.objects.filter(region_id=operator_region).all()
             data_list = []
             for i in all_obj.order_by('-priority'):
                 try:
@@ -253,16 +256,20 @@ def adver_edit(request):
         if not len(get_status): get_status = obj.state
         if not len(get_img): get_img = obj.img
         if not len(get_priority): get_priority = obj.priority
-        if request.POST.get('function') == '2':
+        if request.POST.get('function') == 'webUrl':
             url = request.POST.get('url')
             if 'http://' in url or 'https://' in url:
                 get_url = url
             else:
                 get_url = 'http://' + url
-        elif request.POST.get('function') == '1':
+        elif request.POST.get('function') == 'storeOrGoods':
             if not len(get_url): get_url = obj.url.split('=')[1].split('#')[0] + '=' + obj.url.split('=')[1].split('#')[
                 1]
             get_url = '?a=shop#' + get_url.split('=')[1] if 'shop' in get_url else '?a=goods#' + get_url.split('=')[1]
+        elif request.POST.get('function') == 'shop_category':
+            if not len(get_url): get_url = obj.url.split('=')[1].split('#')[0] + '=' + obj.url.split('=')[1].split('#')[
+                1]
+            get_url = '?a=shop_category#' + get_url.split('=')[1]
         else:
             get_url = obj.url
         if get_parent_id == '1':  # 轮播图
@@ -326,7 +333,15 @@ def withdraw_list(request):
     elif request.method == 'POST':
         get_id = request.POST.get('id')
         get_status = request.POST.get('status')
-        models.CashApplications.objects.filter(id=get_id).update(status=get_status)
+        obj = models.CashApplications.objects.filter(id=get_id)
+        obj.update(status=get_status)
+        if get_status == '3':  # 审核失败
+            if obj[0].identity == 1:  # user
+                models.User.objects.filter(user_id=obj[0].account_id).update(balance=(F('balance')+obj[0].amount))
+            elif obj[0].identity == 2:  # shopAssistant
+                models.Shop.objects.filter(shop_id=obj[0].account_id).update(money=(F('money')+obj[0].amount))
+            elif obj[0].identity == 3:  # distributor
+                models.Distributor.objects.filter(distributor_id=obj[0].account_id).update(balance=(F('balance')+obj[0].amount))
         return HttpResponse(1)
 
 
