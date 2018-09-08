@@ -17,6 +17,11 @@ def recommend_list(request):
             get_pagesize)
         data_list = []
         for i in all_obj.order_by('-priority')[start_nun:end_num]:
+            if i.region_id:
+                region_obj = models.Region.objects.get(region_id=i.region_id)
+                region_name = region_obj.region_name
+            else:
+                region_name = '平台所有'
             data_dict = {
                 'id': i.id,
                 'shop_name': i.shop_name,
@@ -24,6 +29,7 @@ def recommend_list(request):
                 'operator': i.operator_name,
                 'last_time': i.last_time,
                 'status': i.status,
+                'region_name': region_name,
                 # 'img': request.FTP_HOST + request.recommend_shops_images + i.img,
             }
             data_list.append(data_dict)
