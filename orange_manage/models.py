@@ -8,16 +8,6 @@
 from django.db import models
 
 
-class AddresLibrary(models.Model):
-    superior_id = models.IntegerField(blank=True, null=True)
-    site_name = models.CharField(max_length=255)
-    character = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'addres_library'
-
-
 class Address(models.Model):
     address_id = models.AutoField(primary_key=True)
     campus_id = models.IntegerField()
@@ -32,23 +22,33 @@ class Address(models.Model):
         db_table = 'address'
 
 
+class AddresLibrary(models.Model):
+    superior_id = models.IntegerField(blank=True, null=True)
+    site_name = models.CharField(max_length=255)
+    character = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'address_library'
+
+
 class Admin(models.Model):
     account = models.CharField(max_length=20)
     pwd = models.CharField(max_length=255)
     realname = models.CharField(max_length=20)
     phone = models.CharField(max_length=20)
-    email = models.CharField(max_length=20)
+    email = models.CharField(max_length=255)
     qq = models.CharField(max_length=20)
-    last_ip = models.CharField(max_length=20)
-    last_time = models.DateTimeField()
+    last_ip = models.CharField(max_length=20, blank=True, null=True)
+    last_time = models.DateTimeField(blank=True, null=True)
     login_count = models.IntegerField()
     status = models.IntegerField()
     level = models.PositiveIntegerField()
     menus = models.TextField()
     openid = models.CharField(max_length=100, blank=True, null=True)
-    nickname = models.CharField(max_length=50)
+    nickname = models.CharField(max_length=50, blank=True, null=True)
     permission_group = models.CharField(max_length=200, blank=True, null=True)
-    sort_menus = models.CharField(max_length=1000)
+    sort_menus = models.CharField(max_length=1000, blank=True, null=True)
     open_admin_region = models.IntegerField()
     authority_group_id = models.IntegerField(blank=True, null=True)
     admin_key = models.CharField(max_length=255, blank=True, null=True)
@@ -401,15 +401,14 @@ class GoodsComment(models.Model):
         db_table = 'goods_comment'
 
 
-class GoodsExamineLog(models.Model):
+class GoodsImage(models.Model):
+    record_id = models.AutoField(primary_key=True)
     goods_id = models.IntegerField()
-    reason = models.CharField(max_length=255, blank=True, null=True)
-    create_time = models.DateTimeField(blank=True, null=True)
-    operator = models.IntegerField(blank=True, null=True)
+    image = models.CharField(max_length=255)
 
     class Meta:
         managed = False
-        db_table = 'goods_examine_log'
+        db_table = 'goods_image'
 
 
 class GoodsInfo(models.Model):

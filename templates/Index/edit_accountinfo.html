@@ -55,7 +55,7 @@
         <tr>
             <th width="160">昵称</th>
             <td>
-                <input type="text" value="{{ data.nickname }}" name="nickname" id="nickname" class="input fl" size="25"
+                <input type="text" value="{{ data.nickname|default_if_none:'' }}" name="nickname" id="nickname" class="input fl" size="25"
                        validate="maxlength:20,required:true"/>
             </td>
         </tr>

@@ -16,7 +16,8 @@ def account_list(request):
         all_obj = models.Admin.objects.filter(level__lt=2)
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
-        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(
+            get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         status = {
@@ -56,7 +57,8 @@ def account_list(request):
         all_obj = models.Admin.objects.filter(level=2, open_admin_region=request.operator_region).all()
         start_nun = int(get_pagesize) * (int(get_page) - 1)  # 起始数据位置
         end_num = start_nun + int(get_pagesize)  # 终止数据位置
-        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(
+            get_pagesize) else all_obj.count() // int(
             get_pagesize)
         data_list = []
         status = {
@@ -108,6 +110,7 @@ def add_account(request):
         get_account = request.POST.get('account')
         get_pwd = pwd_encrypted(request.POST.get('pwd'))
         get_realname = request.POST.get('realname')
+        get_nickname = request.POST.get('nickname')
         get_phone = request.POST.get('phone')
         get_email = request.POST.get('email')
         get_qq = request.POST.get('qq')
@@ -137,7 +140,8 @@ def add_account(request):
             data_list.append(parent_dict)
         if not data_list: data_list = json.loads(request.operator_menus)
         data_list = json.dumps(data_list)
-        models.Admin.objects.create(account=get_account, pwd=get_pwd, realname=get_realname, phone=get_phone,
+        models.Admin.objects.create(account=get_account, pwd=get_pwd, realname=get_realname, nickname=get_nickname,
+                                    phone=get_phone,
                                     email=get_email, qq=get_qq, login_count=0, status=1, level=get_level,
                                     open_admin_region=get_region, menus=data_list, last_time=timezone.now())
         return HttpResponse(1)
@@ -221,6 +225,7 @@ def edit_accountinfo(request):
         get_account = request.POST.get('account')
         get_pwd = pwd_encrypted(request.POST.get('pwd'))
         get_realname = request.POST.get('realname')
+        get_nickname = request.POST.get('nickname')
         get_phone = request.POST.get('phone')
         get_email = request.POST.get('email')
         get_qq = request.POST.get('qq')
@@ -234,11 +239,13 @@ def edit_accountinfo(request):
         else:
             get_region = request.operator_region
         if get_pwd:
-            models.Admin.objects.filter(account=get_account).update(pwd=get_pwd, realname=get_realname, phone=get_phone,
+            models.Admin.objects.filter(account=get_account).update(pwd=get_pwd, realname=get_realname,
+                                                                    nickname=get_nickname, phone=get_phone,
                                                                     email=get_email, qq=get_qq, status=get_status,
                                                                     level=get_level, open_admin_region=get_region)
         else:
-            models.Admin.objects.filter(account=get_account).update(realname=get_realname, phone=get_phone,
+            models.Admin.objects.filter(account=get_account).update(realname=get_realname, nickname=get_nickname,
+                                                                    phone=get_phone,
                                                                     email=get_email, qq=get_qq, status=get_status,
                                                                     level=get_level, open_admin_region=get_region)
         return HttpResponse(1)
@@ -384,7 +391,8 @@ def exist_region(request):
                 obj_list.append(i.id)
             all_obj = all_obj.filter(area_id__in=obj_list)
         data_list = []
-        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(get_pagesize) else all_obj.count() // int(
+        page_total = all_obj.count() // int(get_pagesize) + 1 if all_obj.count() % int(
+            get_pagesize) else all_obj.count() // int(
             get_pagesize)
         for i in all_obj[start_nun:end_num]:
             p_obj = models.AddresLibrary.objects.get(id=i.province_id)

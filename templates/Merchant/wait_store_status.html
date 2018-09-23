@@ -76,19 +76,19 @@
                             <tr>
                                 <td class="textcenter pagebar" colspan="12">
                                     <ul class="pages">
-                                        <li id="first_page"><a href='/admin/wait_store2/?p=1&filter_content={{ filter_content }}'>首页</a></li>
+                                        <li id="first_page"><a href='/admin/wait_store2/?p=1&filter_content={{ filter_content|default_if_none:'' }}'>首页</a></li>
                                         {% if  get_page  == 1 %}
                                             <li><a href='#'>&lt;上一页</a></li>
                                         {% else %}
-                                            <li><a href='/admin/wait_store2/?p={{ get_page |add:-1}}&filter_content={{ filter_content }}'>&lt;上一页</a></li>
+                                            <li><a href='/admin/wait_store2/?p={{ get_page |add:-1}}&filter_content={{ filter_content|default_if_none:'' }}'>&lt;上一页</a></li>
 
                                         {% endif %}
                                         {% if  get_page  >=  page_total  %}
                                             <li><a href='#'>下一页&gt;</a></li>
                                         {% else %}
-                                            <li><a href='/admin/wait_store2/?p={{ get_page |add:1}}&filter_content={{ filter_content }}'>下一页&gt;</a></li>
+                                            <li><a href='/admin/wait_store2/?p={{ get_page |add:1}}&filter_content={{ filter_content|default_if_none:'' }}'>下一页&gt;</a></li>
                                         {% endif %}
-                                        <li><a href='/admin/wait_store2/?p={{ page_total }}&filter_content={{ filter_content }}'>尾页></a></li>
+                                        <li><a href='/admin/wait_store2/?p={{ page_total }}&filter_content={{ filter_content|default_if_none:'' }}'>尾页></a></li>
                                         <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
                                     </ul>
                                 </td>

@@ -79,22 +79,22 @@ WSGI_APPLICATION = 'orange_web.wsgi.application'
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'test',  # 数据库名字
-#         'HOST': '127.0.0.1',  # 数据库地址
+#         'NAME': 'college_circle',  # 数据库名字
+#         'HOST': '120.77.42.209',  # 数据库地址
 #         'PORT': 3306,  # 端口号
-#         'USER': 'root',  # 用户名
-#         'PASSWORD': 'wq1997qw',  # 密码
+#         'USER': 'college_circle',  # 用户名
+#         'PASSWORD': 'sF8h3P4&[~_F@P=sbzxag;m:/v&[-Ew4',  # 密码
 #         'CONN_MAX_AGE': None,  # 持久化
 #     }
 # }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'test',  # 数据库名字
-        'HOST': '120.77.42.209',  # 数据库地址
+        'NAME': 'zzq',  # 数据库名字
+        'HOST': '127.0.0.1',  # 数据库地址
         'PORT': 3306,  # 端口号
         'USER': 'root',  # 用户名
-        'PASSWORD': '7#0S~,p_9yKo/NXCUX{V.1Pt4$a#EYd9',  # 密码
+        'PASSWORD': '123456',  # 密码
         'CONN_MAX_AGE': None,  # 持久化
     }
 }

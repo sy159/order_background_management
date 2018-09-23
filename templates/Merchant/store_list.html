@@ -61,19 +61,19 @@
                 <tr>
                     <td class="textcenter pagebar" colspan="12">
                         <ul class="pages">
-                            <li id="first_page"><a href='/admin/store_list/?p=1&circle_id={{ i.circle_id }}&region_id={{ region_id }}'>首页</a></li>
+                            <li id="first_page"><a href='/admin/store_list/?p=1&circle_id={{ circle_id }}&region_id={{ region_id }}'>首页</a></li>
                             {% if  get_page  == 1 %}
                                 <li><a href='#'>&lt;上一页</a></li>
                             {% else %}
-                                <li><a href='/admin/store_list/?p={{ get_page |add:-1}}&circle_id={{ i.circle_id }}&region_id={{ region_id }}'>&lt;上一页</a></li>
+                                <li><a href='/admin/store_list/?p={{ get_page |add:-1}}&circle_id={{ circle_id }}&region_id={{ region_id }}'>&lt;上一页</a></li>
 
                             {% endif %}
                             {% if  get_page  >=  page_total  %}
                                 <li><a href='#'>下一页&gt;</a></li>
                             {% else %}
-                                <li><a href='/admin/store_list/?p={{ get_page |add:1}}&circle_id={{ i.circle_id }}&region_id={{ region_id }}'>下一页&gt;</a></li>
+                                <li><a href='/admin/store_list/?p={{ get_page |add:1}}&circle_id={{ circle_id }}&region_id={{ region_id }}'>下一页&gt;</a></li>
                             {% endif %}
-                            <li><a href='/admin/store_list/?p={{ page_total }}&circle_id={{ i.circle_id }}&region_id={{ region_id }}'>尾页></a></li>
+                            <li><a href='/admin/store_list/?p={{ page_total }}&circle_id={{ circle_id }}&region_id={{ region_id }}'>尾页></a></li>
                             <li class='disabled'><a href='##' id='show_info'>{{ get_page }}/{{ page_total }}</a></li>
                         </ul>
 
