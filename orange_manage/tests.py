@@ -6,3 +6,5 @@ from django.test import TestCase
 # Create your tests here.
 # page_total = len(all_obj) // int(get_pagesize) + 1 if len(all_obj) % int(get_pagesize) else len(all_obj) // int(
 #             get_pagesize)
+
+

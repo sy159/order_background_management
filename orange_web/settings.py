@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '!r^l+m$7i=(%#%8*rssy6t!=b=8f!!6w6m#06ekpjh3n$lh@#*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*", ]
 
@@ -76,17 +76,7 @@ WSGI_APPLICATION = 'orange_web.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'college_circle',  # 数据库名字
-#         'HOST': '120.77.42.209',  # 数据库地址
-#         'PORT': 3306,  # 端口号
-#         'USER': 'college_circle',  # 用户名
-#         'PASSWORD': 'sF8h3P4&[~_F@P=sbzxag;m:/v&[-Ew4',  # 密码
-#         'CONN_MAX_AGE': None,  # 持久化
-#     }
-# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -156,3 +146,22 @@ CACHES = {
         },
     }
 }
+
+
+# 打印orm执行的sql语句
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG' if DEBUG else 'INFO',
+        },
+    },
+}
+

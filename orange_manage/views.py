@@ -113,7 +113,6 @@ def index(request):
 
 def account_unique(request):
     get_account = request.GET.get('account')
-
     if models.Admin.objects.filter(account=get_account):
         return JsonResponse({'state': 1})
     else:
