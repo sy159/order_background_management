@@ -114,7 +114,7 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Shanghai'  # 设置默认时间为本地时间
 
-USE_I18N = True
+USE_I18N = False  # 国际化(关闭可提高性能)
 
 USE_L10N = True
 

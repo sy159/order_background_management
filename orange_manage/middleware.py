@@ -1,6 +1,11 @@
 from django.shortcuts import HttpResponseRedirect
-from django.utils.deprecation import MiddlewareMixin
+# 兼容新旧版本的django
 from orange_manage import models
+
+try:
+    from django.utils.deprecation import MiddlewareMixin  # Django 1.10.x
+except ImportError:
+    MiddlewareMixin = object  # Django 1.4.x - Django 1.9.x
 
 
 class LoginSession(MiddlewareMixin):
@@ -33,4 +38,3 @@ class GlobalInfo(MiddlewareMixin):
         request.recommend_shops_images = '/static/recommend_shops_images/'
         request.distributor_image = '/static/distributor_images/'
         request.coupon_images = '/static/coupon_images/'
-
