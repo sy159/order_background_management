@@ -94,7 +94,7 @@
                             type: 'value',
                             name: '男生人数',
                             min: 0,
-                            max: 250,
+                            {#max: 300,#}
                             position: 'right',
                             axisLine: {
                                 lineStyle: {
@@ -109,7 +109,7 @@
                             type: 'value',
                             name: '女生人数',
                             min: 0,
-                            max: 250,
+                            {#max: 300,#}
                             position: 'right',
                             offset: 80,
                             axisLine: {
@@ -125,7 +125,7 @@
                             type: 'value',
                             name: '订单数',
                             min: 0,
-                            max: 25,
+                            {#max: 300,#}
                             position: 'left',
                             axisLine: {
                                 lineStyle: {
@@ -153,7 +153,7 @@
                             name:'平均订单数',
                             type:'line',
                             yAxisIndex: 2,
-                            data:{{ days }}
+                            data:[275, 294, 221, 126, 101, 246, 280]
                         }
                     ]
                 };

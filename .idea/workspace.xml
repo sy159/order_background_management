@@ -1,33 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b964552f-c852-4660-bd8c-1747e35b939e" name="Default" comment="中间件导入模块适应新旧版本">
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/09d2c3a7a3b40f87a6da26201a046efb.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/337df2835a4cc54eae8f2b89b521264a.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/409dee309e74958fbf8f8a040e14accf.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/5916624d8909b9bff471fa87b212d14b.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/653ae9c1e5fb81ffd7e41310d23ab428.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/68e9e4d5ac5f4f41d8b14ab29d4751af.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/8972a336e60edc8289b398043ecb4616.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/9d719b1608c70c448cd85f9c3deaef53.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/cc49265783b5a405480c277672b4f0b6.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/d5903d0400aea1687fa73e3338d3a99d.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/efe40723fc621e0b2f030e0334639496.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/echarts.common.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/watch_data.html" afterDir="false" />
+    <list default="true" id="b964552f-c852-4660-bd8c-1747e35b939e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/fb3be94e-fa73-432f-a024-b790943f7493.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fb3be94e-fa73-432f-a024-b790943f7493.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CQGY-ZZQ/86c44c38572c7630de1c8728f81d2f7e.djcache" beforeDir="false" afterPath="$PROJECT_DIR$/CQGY-ZZQ/86c44c38572c7630de1c8728f81d2f7e.djcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orange_manage/basic_info/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/basic_info/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/orange_manage/migrations/0006_auto_20181008_1703.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/migrations/0006_auto_20181008_1703.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orange_manage/orm测试脚本.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/orm测试脚本.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orange_manage/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/orange_manage/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orange_web/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_web/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/Index/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bind_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bind_account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/watch_data.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/watch_data.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -129,8 +109,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/orange_manage/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="836">
-              <caret line="204" lean-forward="true" selection-start-line="204" selection-end-line="204" />
+            <state relative-caret-position="134">
+              <caret line="203" column="13" selection-start-line="203" selection-start-column="12" selection-end-line="203" selection-end-column="13" />
               <folding>
                 <element signature="e#537#580#0" />
                 <element signature="e#621#2500#0" />
@@ -157,11 +137,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="724">
-              <caret line="152" column="35" lean-forward="true" selection-start-line="152" selection-start-column="35" selection-end-line="152" selection-end-column="35" />
+            <state relative-caret-position="133">
+              <caret line="238" lean-forward="true" selection-start-line="238" selection-end-line="238" />
               <folding>
                 <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#div#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -181,14 +161,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="watch_data.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="watch_data.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/watch_data.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+            <state relative-caret-position="77">
+              <caret line="128" column="39" lean-forward="true" selection-start-line="128" selection-start-column="39" selection-end-line="128" selection-end-column="39" />
               <folding>
+                <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#script#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="e#446#1738#0#HTML" />
               </folding>
             </state>
@@ -257,11 +237,11 @@
       <find>Sum</find>
       <find>flat=True</find>
       <find>django_admin_log</find>
-      <find>USE_I18N =</find>
+      <find />
       <find>timezone</find>
       <find>index</find>
-      <find>Main</find>
       <find>D</find>
+      <find>Main</find>
     </findStrings>
     <replaceStrings>
       <replace>LoginSession</replace>
@@ -333,8 +313,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="10" />
-    <option name="y" value="1" />
+    <option name="x" value="33" />
+    <option name="y" value="3" />
     <option name="width" value="1319" />
     <option name="height" value="723" />
   </component>
@@ -612,7 +592,14 @@
       <option name="project" value="LOCAL" />
       <updated>1539087185639</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="首页echart图">
+      <created>1541756558299</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1541756558299</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TodoView">
@@ -625,7 +612,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="12" weight="0.32857144" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.5015129" side_tool="true" weight="0.4500846" />
@@ -633,8 +620,8 @@
       <window_info anchor="bottom" id="Version Control" order="3" weight="0.32857144" />
       <window_info anchor="bottom" id="Python Console" order="4" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4988086" weight="0.065989845" />
-      <window_info anchor="bottom" id="Terminal" order="5" sideWeight="0.49848714" visible="true" weight="0.30964467" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21482602" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="5" sideWeight="0.49848714" visible="true" weight="0.5397631" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21482602" />
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.21763304" />
       <window_info anchor="bottom" id="Find" order="8" />
@@ -673,7 +660,8 @@
     <MESSAGE value="优化计算总页数" />
     <MESSAGE value="orm对应sql语句可视化" />
     <MESSAGE value="中间件导入模块适应新旧版本" />
-    <option name="LAST_COMMIT_MESSAGE" value="中间件导入模块适应新旧版本" />
+    <MESSAGE value="首页echart图" />
+    <option name="LAST_COMMIT_MESSAGE" value="首页echart图" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1101,10 +1089,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/orange_manage/utils/area_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1014" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Adver/adver_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="74" column="22" selection-start-line="74" selection-start-column="22" selection-end-line="74" selection-end-column="22" />
+          <folding>
+            <element signature="n#form#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="e#3177#4997#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="238" lean-forward="true" selection-start-line="238" selection-end-line="238" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#div#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#style#0;n#li#3;n#ul#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#1;n#tbody#0;n#table#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#style#0;n#div#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#script#2;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/orange_manage/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="204" lean-forward="true" selection-start-line="204" selection-end-line="204" />
+        <state relative-caret-position="134">
+          <caret line="203" column="13" selection-start-line="203" selection-start-column="12" selection-end-line="203" selection-end-column="13" />
           <folding>
             <element signature="e#537#580#0" />
             <element signature="e#621#2500#0" />
@@ -1130,52 +1156,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/orange_manage/utils/area_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1014" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/watch_data.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+        <state relative-caret-position="77">
+          <caret line="128" column="39" lean-forward="true" selection-start-line="128" selection-start-column="39" selection-end-line="128" selection-end-column="39" />
           <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" />
             <element signature="e#446#1738#0#HTML" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Adver/adver_add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="74" column="22" selection-start-line="74" selection-start-column="22" selection-end-line="74" selection-end-column="22" />
-          <folding>
-            <element signature="n#form#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="e#3177#4997#0#HTML" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="724">
-          <caret line="152" column="35" lean-forward="true" selection-start-line="152" selection-start-column="35" selection-end-line="152" selection-end-column="35" />
-          <folding>
-            <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#0;n#div#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#li#3;n#ul#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#tr#1;n#tbody#0;n#table#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#div#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#script#2;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
