@@ -33,6 +33,7 @@ urlpatterns = [
     path('admin/logout', views.logout),  # 注销
     path('admin/bind_account', views.bind_account),  # 两步验证,绑定用户
     path('admin/index/', views.index),  # 主页面
+    path('admin/watch_data/', views.watch_data),  # 主页面数据显示
     path('admin/account_unique/', views.account_unique),  # 账号唯一性
     path('admin/image_upload/', views.image_upload),  # 上传图片
     path('admin/good_sort/', views.good_sort),  # 获取goods子集
@@ -130,5 +131,4 @@ urlpatterns = [
     path('admin/marki_api/', deliver.marki_api),  # 未接点单api
     path('admin/order_api/', deliver.order_api),  # 在线配送员api
     path('admin/dispatching_console/', deliver.dispatching_console),  # 调度控制台
-
 ]

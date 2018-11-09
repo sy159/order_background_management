@@ -170,3 +170,35 @@ def upload_img(request):
         "url": "http://ftp.college.cqgynet.com" + url
     }
     return JsonResponse(resp)
+
+
+def watch_data(request):
+    no_user = models.User.objects.filter(gender=0).count()
+    man_user = models.User.objects.filter(gender=1).count()
+    woman_user = models.User.objects.filter(gender=2).count()
+    nums = [no_user, man_user, woman_user]
+    day1 = models.Orders.objects.filter(create_time__week_day=1).count()
+    day2 = models.Orders.objects.filter(create_time__week_day=2).count()
+    day3 = models.Orders.objects.filter(create_time__week_day=3).count()
+    day4 = models.Orders.objects.filter(create_time__week_day=4).count()
+    day5 = models.Orders.objects.filter(create_time__week_day=5).count()
+    day6 = models.Orders.objects.filter(create_time__week_day=6).count()
+    day7 = models.Orders.objects.filter(create_time__week_day=7).count()
+    man1 = models.Orders.objects.filter(create_time__week_day=1, user_gender=1).count()
+    man2 = models.Orders.objects.filter(create_time__week_day=2, user_gender=1).count()
+    man3 = models.Orders.objects.filter(create_time__week_day=3, user_gender=1).count()
+    man4 = models.Orders.objects.filter(create_time__week_day=4, user_gender=1).count()
+    man5 = models.Orders.objects.filter(create_time__week_day=5, user_gender=1).count()
+    man6 = models.Orders.objects.filter(create_time__week_day=6, user_gender=1).count()
+    man7 = models.Orders.objects.filter(create_time__week_day=7, user_gender=1).count()
+    woman1 = models.Orders.objects.filter(create_time__week_day=1, user_gender=2).count()
+    woman2 = models.Orders.objects.filter(create_time__week_day=2, user_gender=2).count()
+    woman3 = models.Orders.objects.filter(create_time__week_day=3, user_gender=2).count()
+    woman4 = models.Orders.objects.filter(create_time__week_day=4, user_gender=2).count()
+    woman5 = models.Orders.objects.filter(create_time__week_day=5, user_gender=2).count()
+    woman6 = models.Orders.objects.filter(create_time__week_day=6, user_gender=2).count()
+    woman7 = models.Orders.objects.filter(create_time__week_day=7, user_gender=2).count()
+    days = [day1, day2, day3, day4, day5, day6, day7]
+    mans = [man1, man2, man3, man4, man5, man6, man7]
+    womans = [woman1, woman2, woman3, woman4, woman5, woman6, woman7]
+    return render(request, 'watch_data.html', {'nums': nums, 'days': days, 'mans': mans, 'womans': womans})

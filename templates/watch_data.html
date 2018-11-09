@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <script src="/static/js/echarts.common.min.js"></script>
+</head>
+<body>
+<div id="main1" style="width: 35%;height:400px;margin-top: 100px;margin-left: 50px;float: left"></div>
+<div id="main2" style="width: 55%;height:400px;margin-top: 100px;float: left;"></div>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main1'));
+        var myChart2 = echarts.init(document.getElementById('main2'));
+
+        // 指定图表的配置项和数据
+        var option1 = {
+            {#color: ['#dd6b66','#759aa0','#e69d87','#8dc1a9','#ea7e53','#eedd78','#73a373','#73b9bc','#7289ab', '#91ca8c','#f49f42'],#}
+            color: ['#759aa0','#73b9bc','#dd6b66'],
+            title : {
+                text: '用户性别统计图',
+                subtext: 'zzq统计',
+                x:'center'
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['未知','男','女']
+            },
+            series : [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius : '55%',
+                    center: ['50%', '60%'],
+                    data:[
+                        {value:{{ nums.0 }}, name:'未知'},
+                        {value:{{ nums.1 }}, name:'男'},
+                        {value:{{ nums.2 }}, name:'女'},
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        var colors = ['#5793f3', '#d14a61', '#675bba'];
+        var option2 = {
+                    title : {
+                        text: '营业趋势图',
+                        {#subtext: 'zzq统计',#}
+                        {#x:'center'#}
+                    },
+                    color: colors,
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'cross'
+                        }
+                    },
+                    grid: {
+                        right: '20%'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {show: true, readOnly: false},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    legend: {
+                        data:['男生人数','女生人数','订单数']
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            axisTick: {
+                                alignWithLabel: true
+                            },
+                            data: ['周一','周二','周三','周四','周五','周六','周末']
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            name: '男生人数',
+                            min: 0,
+                            max: 250,
+                            position: 'right',
+                            axisLine: {
+                                lineStyle: {
+                                    color: colors[0]
+                                }
+                            },
+                            axisLabel: {
+                                formatter: '{value} 位'
+                            }
+                        },
+                        {
+                            type: 'value',
+                            name: '女生人数',
+                            min: 0,
+                            max: 250,
+                            position: 'right',
+                            offset: 80,
+                            axisLine: {
+                                lineStyle: {
+                                    color: colors[1]
+                                }
+                            },
+                            axisLabel: {
+                                formatter: '{value} 位'
+                            }
+                        },
+                        {
+                            type: 'value',
+                            name: '订单数',
+                            min: 0,
+                            max: 25,
+                            position: 'left',
+                            axisLine: {
+                                lineStyle: {
+                                    color: colors[2]
+                                }
+                            },
+                            axisLabel: {
+                                formatter: '{value} 单'
+                            }
+                        }
+                    ],
+                    series: [
+                        {
+                            name:'男生人数',
+                            type:'bar',
+                            data:{{ mans }},
+                        },
+                        {
+                            name:'女生人数',
+                            type:'bar',
+                            yAxisIndex: 1,
+                            data:{{ womans }}
+                        },
+                        {
+                            name:'平均订单数',
+                            type:'line',
+                            yAxisIndex: 2,
+                            data:{{ days }}
+                        }
+                    ]
+                };
+        myChart.setOption(option1);
+        myChart2.setOption(option2);
+    </script>
+</body>
+</html>

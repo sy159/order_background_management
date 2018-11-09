@@ -36,7 +36,7 @@
                     <p><span>会员组：</span>普通管理员</p>
                     {% endif %}
                     <p><span>最后登录时间：</span>{{ info.last_time|date:'Y-m-d H:i:s' }}</p>
-                    <p><span>最后登录IP/地址：</span>{{ info.ip }} / 重庆市璧山区 电信</p>
+                    <p><span>最后登录IP/地址：</span>{{ info.ip }} / 重庆市</p>
                     <p><span>登录次数：</span>{{ info.login_count }}</p>
                 </div>
                 <hr/>
@@ -147,7 +147,7 @@
         <div class="main_box">
             <div id="fullscreenBtn" title="全屏显示"><i class="fa fa-expand"></i><i class="fa fa-compress"></i></div>
             <div id="sx" onclick="main_refresh();" title="刷新框架"></div>
-            <iframe name="main" id="Main" src="" frameborder="false" scrolling="auto"  width="100%" height="auto" allowtransparency="true"></iframe>
+            <iframe name="main" id="Main" src="/admin/watch_data/" frameborder="false" scrolling="auto"  width="100%" height="auto" allowtransparency="true"></iframe>
         </div>
     </div>
     <div style="clear:both;"></div>
