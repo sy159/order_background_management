@@ -8,10 +8,14 @@
 <body>
 <div id="main1" style="width: 35%;height:400px;margin-top: 100px;margin-left: 50px;float: left"></div>
 <div id="main2" style="width: 55%;height:400px;margin-top: 100px;float: left;"></div>
+<div id="main3" style="width: 35%;height:400px;margin-top:100px;margin-left: 50px;float: left"></div>
+<div id="main4" style="width: 50%;height:400px;margin-top: 100px;float: left;"></div>
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main1'));
         var myChart2 = echarts.init(document.getElementById('main2'));
+        var myChart3 = echarts.init(document.getElementById('main3'));
+        var myChart4 = echarts.init(document.getElementById('main4'));
 
         // 指定图表的配置项和数据
         var option1 = {
@@ -157,8 +161,65 @@
                         }
                     ]
                 };
+        var option3 = {
+            {#color: ['#dd6b66','#759aa0','#e69d87','#8dc1a9','#ea7e53','#eedd78','#73a373','#73b9bc','#7289ab', '#91ca8c','#f49f42'],#}
+            color: ['#759aa0','#7289ab','#73b9bc'],
+            title : {
+                text: '管理员分类数量统计图',
+                subtext: 'zzq统计',
+                x:'center'
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['平台管理员','区域管理员','普通管理员']
+            },
+            series : [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius : '55%',
+                    center: ['50%', '60%'],
+                    data:[
+                        {value:{{ manages.0 }}, name:'平台管理员'},
+                        {value:{{ manages.1 }}, name:'区域管理员'},
+                        {value:{{ manages.2 }}, name:'普通管理员'},
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        var option4 = {
+            title : {
+                text: '配送员在线人数',
+                x:'center'
+            },
+                xAxis: {
+                    type: 'category',
+                    data: ['周一','周二','周三','周四','周五','周六','周末']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: {{ dis }},
+                    type: 'line'
+                }]
+            };
         myChart.setOption(option1);
         myChart2.setOption(option2);
+        myChart3.setOption(option3);
+        myChart4.setOption(option4);
     </script>
 </body>
 </html>

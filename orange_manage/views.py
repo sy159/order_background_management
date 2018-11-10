@@ -201,4 +201,17 @@ def watch_data(request):
     days = [day1, day2, day3, day4, day5, day6, day7]
     mans = [man1, man2, man3, man4, man5, man6, man7]
     womans = [woman1, woman2, woman3, woman4, woman5, woman6, woman7]
-    return render(request, 'watch_data.html', {'nums': nums, 'days': days, 'mans': mans, 'womans': womans})
+    manages1 = models.Admin.objects.filter(level=0).count()
+    manages2 = models.Admin.objects.filter(level=1).count()
+    manages3 = models.Admin.objects.filter(level=2).count()
+    manages = [manages1, manages2, manages3]
+    dis1 = models.Distributor.objects.filter(last_login__week_day=1, online=1).count()
+    dis2 = models.Distributor.objects.filter(last_login__week_day=2, online=1).count()
+    dis3 = models.Distributor.objects.filter(last_login__week_day=3, online=1).count()
+    dis4 = models.Distributor.objects.filter(last_login__week_day=4, online=1).count()
+    dis5 = models.Distributor.objects.filter(last_login__week_day=5, online=1).count()
+    dis6 = models.Distributor.objects.filter(last_login__week_day=6, online=1).count()
+    dis7 = models.Distributor.objects.filter(last_login__week_day=7, online=1).count()
+    dis = [dis1, dis2, dis3, dis4, dis5, dis6, dis7]
+    return render(request, 'watch_data.html',
+                  {'nums': nums, 'days': days, 'mans': mans, 'womans': womans, 'manages': manages, 'dis': dis})
