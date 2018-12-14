@@ -1,5 +1,6 @@
+{% load staticfiles %}
 {% include 'Public/header.html' %}
-<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css" />
+<link rel="stylesheet" type="text/css" href="{% static '/css/artdialog/skins/mydialog.css' %}" >
 <form id="myform" method="post" action="" frame="true" refresh="true">
         {% csrf_token %}
         <input type="hidden" name="circle_id" value="{{ data.circle_id }}"/>

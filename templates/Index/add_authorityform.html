@@ -1,11 +1,12 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
-    <script src="/static/js/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/artdialog/skins/mydialog.css' %}"/>
+    <script src="{% static '/js/jquery.js' %}"></script>
 </head>
 <body>
 <form method="post" id="myform" action="" frame="true" refresh="true" data-call_fun="1">

@@ -1,16 +1,17 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="/static/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}"/>
     <title>后台管理 - 橙子校园</title>
-    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon" />
-    <script type="text/javascript" src="/static/js/jquery.js"></script>
-    <script type="text/javascript" src="/static/js/artDialog/jquery.artDialog.js"></script>
-    <script type="text/javascript" src="/static/js/artDialog/plugins/iframeTools.js"></script>
-    <script type="text/javascript" src="/static/js/jquery.colorpicker.js"></script>
-    <script type="text/javascript" src="/static/js/screenfull.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/static/css/font-awesome/css/font-awesome.css"/>
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/artDialog/jquery.artDialog.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/artDialog/plugins/iframeTools.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.colorpicker.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/screenfull.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome/css/font-awesome.css' %}"/>
     <script type="text/javascript">
         if(self!=top){window.top.location.href = "index.html";}
         var selected_module="",selected_action="",selected_url="";
@@ -20,8 +21,8 @@
 <body style="background:#E2E9EA;overflow:hidden;">
 <div id="Main_content" >
     <div id="HelpBox" style="width:0px;position:relative;z-index:9999;right:-200px; height:100%; overflow:hidden">
-        <div id="right_open" style="position:fixed;right:0px;top:80px;cursor:pointer;"><img src="/static/images/jt_05.png" /></div>
-        <div id="right_close" style="position:fixed;right:200px;top:80px;display:none;cursor:pointer;"><img src="/static/images/jt_04.png" /></div>
+        <div id="right_open" style="position:fixed;right:0px;top:80px;cursor:pointer;"><img src="{% static 'images/jt_05.png' %}" /></div>
+        <div id="right_close" style="position:fixed;right:200px;top:80px;display:none;cursor:pointer;"><img src="{% static 'images/jt_04.png' %}" /></div>
         <div class="helpTitle">帮助中心&nbsp;&nbsp;<i class="fa fa-question-circle-o"></i></div>
         <div class="helpContent">
             <div id="indexProfile">
@@ -70,7 +71,7 @@
             <div class="profile-2-wrapper">
                 <div class="profile-2-details">
                     <div class="profile-2-img">
-                        <a href=""><img src="/static/images/logo_image.png"/></a>
+                        <a href=""><img src="{% static 'images/logo_image.png' %}"/></a>
                     </div>
                     <ul class="profile-2-info">
                         <li>
@@ -197,8 +198,8 @@
     </div>
 </div>
 
-<script type="text/javascript" src="/static/js/index.js"></script>
-<script type="text/javascript" src="/static/js/del_edit_post_get.js"></script>
+<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/del_edit_post_get.js' %}"></script>
 <script type="text/javascript">
 
     // 编辑弹窗关闭函数（由子页面引用）

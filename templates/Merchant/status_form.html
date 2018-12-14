@@ -1,6 +1,7 @@
+{% load staticfiles %}
 {% include 'Public/header.html' %}
-<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css" />
-<link rel="stylesheet" type="text/css" href="/static/css/zoomify.css" />
+<link rel="stylesheet" type="text/css" href="{% static '/css/artdialog/skins/mydialog.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static '/css/zoomify.css' %}" />
 <style>
      form img{
         width: 80px;
@@ -149,8 +150,8 @@
             </td>
         </div>
 	</form>
-<script src="/static/js/jquery.js"></script>
-<script src="/static/js/zoomify.js"></script>
+<script src="{% static '/js/jquery.js' %}"></script>
+<script src="{% static '/js/zoomify.js' %}"></script>
 <script>
     $("#close").click(function () {
          art.dialog.close();

@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -136,7 +137,7 @@
     </form>
 </div>
 
-<script type="text/javascript" src="/static/js/del_edit_post_get.js"></script>
+<script type="text/javascript" src="{% static '/js/del_edit_post_get.js' %}"></script>
 <script type="text/javascript">
     {% if level != 2 %}
     $(".tbody").on('click','a',function () {

@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,7 +92,7 @@
     </div>
 </div>
 </body>
-<script src="/static/js/del_edit_post_get.js"></script>
+<script src="{% static '/js/del_edit_post_get.js' %}"></script>
 <script>
     {#if($("#circle_list").html() == " "){#}
     {#    $("#circle_list").html("")#}

@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +53,7 @@
                         <td>{{ i.goods_classify }}</td>
                         <td>{{ i.publish_amount }}</td>
                         <td>{{ i.spare_amount|default_if_none:'' }}</td>
-                        <td>???</td>
+                        <td>10</td>
                         <td>{{ i.start_time|date:'Y-m-d H:i:s' }}<br/><br/>{{ i.end_time|date:'Y-m-d H:i:s' }}</td>
                         <td>{{ i.details }}</td>
                         {% if i.just_newuser == 1 %}

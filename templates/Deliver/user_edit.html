@@ -1,10 +1,11 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     {% include 'Public/header.html' %}
-    <link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/artdialog/skins/mydialog.css' %}"/>
     <style>
         form {
             margin-bottom: 50px;

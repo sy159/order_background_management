@@ -1,9 +1,10 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
-	<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
+	<link rel="stylesheet" type="text/css" href="{% static '/css/artdialog/skins/mydialog.css' %}"/>
     {% include 'Public/header.html' %}
     <style>
         .table_form tbody td, .table_form tbody th {
@@ -36,7 +37,7 @@
         </tbody>
     </table>
 </form>
-<script src="/static/js/set_authority.js"></script>
+<script src="{% static '/js/set_authority.js' %}"></script>
 <script>
     //添加管理员中设置管理员使用权限弹框
     var str="",str1="",str2="",n=0;

@@ -25,6 +25,9 @@ from orange_manage.shops import views as merchants
 from orange_manage.system_setting import views as system_setting
 from orange_manage.trade import views as trade
 from orange_manage.users import views as users
+from django.conf.urls import url
+from django.views import static
+from django.conf import settings
 
 urlpatterns = [
     path('', views.home),
@@ -131,4 +134,7 @@ urlpatterns = [
     path('admin/marki_api/', deliver.marki_api),  # 未接点单api
     path('admin/order_api/', deliver.order_api),  # 在线配送员api
     path('admin/dispatching_console/', deliver.dispatching_console),  # 调度控制台
+    url(r'^static/(?P<path>.*)$', static.serve,
+        {'document_root': settings.STATIC_ROOT}, name='static')  # 解决静态文件加载失败问题
+
 ]

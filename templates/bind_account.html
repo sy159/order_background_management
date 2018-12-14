@@ -1,13 +1,14 @@
-﻿<!DOCTYPE html>
+﻿{% load staticfiles %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>后台管理 - 橙子校园</title>
-    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon" />
-    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="/static/css/bind_account.css" rel="stylesheet" type="text/css">
-    <script src="/static/js/jquery.js"></script>
-    <script src="/static/js/jquery.qrcode.min.js" type="text/javascript" ></script>
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/bind_account.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/jquery.qrcode.min.js' %}" type="text/javascript" ></script>
 
 </head>
 <body>
@@ -28,7 +29,7 @@
                                     一、打开身份验证器
                                 </label>
                                 <p>没有安装身份验证器？扫码下方二维码下载或者<a href="">点我下载</a></p>
-                                <img src="/static/images/timg.jpg" style="width: 150px;height: 150px;">
+                                <img src="{% static 'images/timg.jpg' %}" style="width: 150px;height: 150px;">
 
                             </div>
                         </div>

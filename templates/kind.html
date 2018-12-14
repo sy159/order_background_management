@@ -1,10 +1,11 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>撰写推文</title>
     {% include 'Public/header.html' %}
-    <link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/artdialog/skins/mydialog.css' %}"/>
 </head>
 <body>
 <form action="/admin/kindeditor/" method="post">
@@ -68,9 +69,9 @@
         </td>
     </div>
 </form>
-<script src="/static/js/kindeditor/kindeditor-all-min.js"></script>
-<script src="/static/js/kindeditor/lang/zh-CN.js"></script>
-<script src="/static/js/kindeditor/themes/default/default.css"></script>
+<script src="{% static 'js/kindeditor/kindeditor-all-min.js' %}"></script>
+<script src="{% static 'js/kindeditor/lang/zh-CN.js' %}"></script>
+<script src="{% static 'js/kindeditor/themes/default/default.css' %}"></script>
 <script>
     KindEditor.ready(function (k) {
         window.editor = k.create('#editor_id', {

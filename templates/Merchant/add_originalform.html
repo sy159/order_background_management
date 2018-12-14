@@ -1,10 +1,11 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>网站后台管理</title>
     {% include 'Public/header.html' %}
-    <link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css" />
+    <link rel="stylesheet" type="text/css" href="{% static '/css/artdialog/skins/mydialog.css' %}" />
 </head>
 <body>
     <form id="myform" method="post" action="" frame="true" refresh="true">
@@ -45,7 +46,7 @@
     </form>
 </body>
 
-<script src="/static/js/jquery.js"></script>
+<script src="{% static '/js/jquery.js' %}"></script>
 <script>
     $("#close").click(function () {
         art.dialog.close()

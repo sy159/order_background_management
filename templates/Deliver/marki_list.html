@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -122,7 +123,7 @@
 
 </div>
 </body>
-<script src="/static/js/del_edit_post_get.js"></script>
+<script src="{% static 'js/del_edit_post_get.js' %}"></script>
 <script>
      $(".tbody").on('click','a',function () {
          var clsn=this.className;

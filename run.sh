@@ -4,4 +4,4 @@ python manage.py makemigrations
 python manage.py migrate
 pip freeze > requirements.tx   列出所有依赖包
 pip list > requirements.tx   列出所有依赖包
-pip install -r requirements.txt 安装所有的依赖包p
+pip install -r requirements.txt 安装所有的依赖包

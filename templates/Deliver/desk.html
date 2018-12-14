@@ -1,10 +1,11 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/static/desk/style.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'desk/style.css' %}">
     {% include 'Public/public.html' %}
     <style type="text/css">
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak],  .ng-hide:not (.ng-hide-animate ){
@@ -47,8 +48,8 @@
          }
     </style>
     <title>配送员|调度控制台</title>
-    <link href="/static/desk/commoncss.css" rel="stylesheet">
-    <link href="/static/desk/application.css" rel="stylesheet">
+    <link href="{% static 'desk/commoncss.css' %}" rel="stylesheet">
+    <link href="{% static 'desk/application.css' %}" rel="stylesheet">
 
 </head>
 <body class="embed-theme ng-scope">
@@ -146,8 +147,8 @@
 </div>
 
 </body>
-<script type="text/javascript" src="/static/js/jquery.js"></script>
-<script type="text/javascript" src="/static/desk/desk.js"></script>
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'desk/desk.js' %}"></script>
 <script type="text/javascript">
      //搜索骑手
     $('#searchUser').blur(function(){

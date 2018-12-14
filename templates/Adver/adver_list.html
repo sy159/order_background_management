@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,7 +77,7 @@
         </div>
     </form>
 </div>
-<script src="/static/js/del_edit_post_get.js"></script>
+<script src="{% static '/js/del_edit_post_get.js' %}"></script>
 <script>
     $(".tbody").on('click','a,img',function () {
         var clsn=this.className;

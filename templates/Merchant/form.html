@@ -1,5 +1,6 @@
-<link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
-<link rel="stylesheet" type="text/css" href="/static/css/artdialog/skins/mydialog.css"/>
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static '/css/artdialog/skins/mydialog.css' %}"/>
 {% include 'Public/header.html' %}
 <style>
     .btn{
@@ -107,7 +108,7 @@
         </div>
 
 	</form>
-<script src="/static/js/jquery.js"></script>
+<script src="{% static '/js/jquery.js' %}"></script>
 <script>
     $("#close").click(function () {
         art.dialog.close();
