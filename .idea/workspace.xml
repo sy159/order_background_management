@@ -2,80 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b964552f-c852-4660-bd8c-1747e35b939e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/0dbcab319db38649d678646792a91fd7.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/1a5eac2754e74121277c995b208889ba.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/4fe99cfa56bcefcc7a97986525bae3ec.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/8f5f895fa64ad4ff7d3844e7d571a1be.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/b2d95124141c06b489c17eb0e8feb60f.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/d156223de63209d1f8513de79e16d9e7.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/d8e218a213ff8225d499c556f6938518.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/e8827d5d59999c870d58931540bf98b2.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/ea6ddd0f6559ebb3d4db714961994d83.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/f6ef549e55a0cdbe440e5cfe36257848.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CQGY-ZZQ/fe36ba3938977b1d58b7882e1abd1a53.djcache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_trial_temp/_trial_marker" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_trial_temp/test.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/fb3be94e-fa73-432f-a024-b790943f7493.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fb3be94e-fa73-432f-a024-b790943f7493.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CQGY-ZZQ/409dee309e74958fbf8f8a040e14accf.djcache" beforeDir="false" afterPath="$PROJECT_DIR$/CQGY-ZZQ/409dee309e74958fbf8f8a040e14accf.djcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CQGY-ZZQ/8972a336e60edc8289b398043ecb4616.djcache" beforeDir="false" afterPath="$PROJECT_DIR$/CQGY-ZZQ/8972a336e60edc8289b398043ecb4616.djcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CQGY-ZZQ/9d719b1608c70c448cd85f9c3deaef53.djcache" beforeDir="false" afterPath="$PROJECT_DIR$/CQGY-ZZQ/9d719b1608c70c448cd85f9c3deaef53.djcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/orange_manage/migrations/0006_auto_20181008_1703.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_manage/migrations/0006_auto_20181008_1703.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orange_web/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_web/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orange_web/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/orange_web/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/404.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/500.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/500.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Adver/adver_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Adver/adver_add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Adver/adver_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Adver/adver_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Deliver/desk.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Deliver/desk.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Deliver/marki_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Deliver/marki_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Deliver/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Deliver/user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Deliver/user_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Deliver/user_add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Deliver/user_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Deliver/user_edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Index/AddressList.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/AddressList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Index/CampusList.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/CampusList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Index/ExistingAreaList.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/ExistingAreaList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Index/RegionList.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/RegionList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Index/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Index/add_accountform.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/add_accountform.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Index/add_address.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/add_address.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Index/add_authorityform.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/add_authorityform.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Index/add_campus.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/add_campus.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Index/add_region.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/add_region.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Index/edit_accountinfo.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/edit_accountinfo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Index/edit_address.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/edit_address.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Index/edit_authorityform.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/edit_authorityform.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Index/edit_campus.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/edit_campus.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Index/edit_region.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/edit_region.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Index/set_authority.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index/set_authority.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Merchant/add_childform.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Merchant/add_childform.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Merchant/add_circle.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Merchant/add_circle.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Merchant/add_originalform.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Merchant/add_originalform.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Merchant/category_childlist.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Merchant/category_childlist.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Merchant/edit_childlform.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Merchant/edit_childlform.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Merchant/edit_circle.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Merchant/edit_circle.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Merchant/edit_originalform.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Merchant/edit_originalform.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Merchant/fail_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Merchant/fail_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Merchant/form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Merchant/form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Merchant/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Merchant/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Merchant/status_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Merchant/status_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Merchant/store_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Merchant/store_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Merchant/store_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Merchant/store_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Merchant/wait_goods_fail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Merchant/wait_goods_fail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Promotion_market/PlatformCoupons.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Promotion_market/PlatformCoupons.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Promotion_market/coupons_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Promotion_market/coupons_edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Public/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Public/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Public/public.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Public/public.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/System_Setting/SystemNews/edit_news.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/System_Setting/SystemNews/edit_news.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/System_Setting/SystemNews/edit_news_category.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/System_Setting/SystemNews/edit_news_category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/User/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/User/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bind_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bind_account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/kind.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/kind.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/qcode.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/qcode.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -135,17 +66,17 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/orange_web/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="127" column="20" lean-forward="true" selection-start-line="127" selection-start-column="20" selection-end-line="127" selection-end-column="20" />
+            <state relative-caret-position="3302">
+              <caret line="127" column="20" selection-start-line="127" selection-start-column="20" selection-end-line="127" selection-end-column="20" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/orange_web/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="137" column="67" selection-start-line="137" selection-start-column="67" selection-end-line="137" selection-end-column="67" />
+            <state relative-caret-position="3224">
+              <caret line="137" selection-start-line="137" selection-end-line="137" />
               <folding>
                 <element signature="e#669#705#0" expanded="true" />
               </folding>
@@ -156,8 +87,17 @@
       <file leaf-file-name="run.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
+            <state relative-caret-position="26">
+              <caret line="1" column="40" selection-start-line="1" selection-start-column="40" selection-end-line="1" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="116" lean-forward="true" selection-start-line="116" selection-end-line="116" />
             </state>
           </provider>
         </entry>
@@ -226,7 +166,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/orange_web/settings.py" />
         <option value="$PROJECT_DIR$/templates/Adver/adver_add.html" />
         <option value="$PROJECT_DIR$/templates/Adver/adver_edit.html" />
         <option value="$PROJECT_DIR$/templates/Adver/adver_list.html" />
@@ -277,6 +216,7 @@
         <option value="$PROJECT_DIR$/templates/login.html" />
         <option value="$PROJECT_DIR$/templates/qcode.html" />
         <option value="$PROJECT_DIR$/orange_web/urls.py" />
+        <option value="$PROJECT_DIR$/run.sh" />
       </list>
     </option>
   </component>
@@ -301,7 +241,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -371,6 +310,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -642,7 +582,14 @@
       <option name="project" value="LOCAL" />
       <updated>1541821755715</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="静态文件加载问题">
+      <created>1544788565029</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1544788565029</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -695,11 +642,10 @@
       <window_info anchor="bottom" id="Version Control" order="3" weight="0.32857144" />
       <window_info anchor="bottom" id="Python Console" order="4" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4988086" weight="0.57360405" />
-      <window_info anchor="bottom" id="Terminal" order="5" sideWeight="0.49848714" visible="true" weight="0.14890017" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2677761" />
+      <window_info anchor="bottom" id="Terminal" order="5" sideWeight="0.49848714" visible="true" weight="0.3790186" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27155825" />
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.21763304" />
-      <window_info anchor="bottom" id="Find" order="8" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -711,6 +657,7 @@
       <window_info anchor="bottom" id="Message" order="7" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.4232143" />
+      <window_info anchor="bottom" id="Find" order="8" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -736,7 +683,8 @@
     <MESSAGE value="orm对应sql语句可视化" />
     <MESSAGE value="中间件导入模块适应新旧版本" />
     <MESSAGE value="首页echart图" />
-    <option name="LAST_COMMIT_MESSAGE" value="首页echart图" />
+    <MESSAGE value="静态文件加载问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="静态文件加载问题" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -744,9 +692,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/Adver/stores.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/Deliver/desk.html">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1045,9 +990,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="17" selection-start-column="17" selection-end-column="17" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1079,27 +1021,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/orange_web/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="127" column="20" lean-forward="true" selection-start-line="127" selection-start-column="20" selection-end-line="127" selection-end-column="20" />
+        <state relative-caret-position="3302">
+          <caret line="127" column="20" selection-start-line="127" selection-start-column="20" selection-end-line="127" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/orange_web/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="137" column="67" selection-start-line="137" selection-start-column="67" selection-end-line="137" selection-end-column="67" />
+        <state relative-caret-position="3224">
+          <caret line="137" selection-start-line="137" selection-end-line="137" />
           <folding>
             <element signature="e#669#705#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="1" column="40" selection-start-line="1" selection-start-column="40" selection-end-line="1" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="116" lean-forward="true" selection-start-line="116" selection-end-line="116" />
         </state>
       </provider>
     </entry>
