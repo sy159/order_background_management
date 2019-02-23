@@ -49,7 +49,7 @@ def marki_manage(request):
                 'is_part_time': i.is_part_time,
             }
             data_list.append(data_dict)
-        if page_total == 0: page_total = 1
+        page_total = 1 if page_total == 0 else page_total
         return render(request, 'Deliver/user.html',
                       {'data': data_list, 'get_page': int(get_page), 'page_total': page_total,
                        'data_status': data_status})
@@ -186,7 +186,7 @@ def delivery_record(request):
             'distribution_status': i.distribution_status,
         }
         data_list.append(data_dict)
-    if page_total == 0: page_total = 1
+    page_total = 1 if page_total == 0 else page_total
     return render(request, 'Deliver/Delivery_record.html',
                   {'data': data_list, 'distributor_name': distributor_obj.name, 'distributor_id': get_distributor_id,
                    'status_data': status_data, 'get_page': int(get_page), 'page_total': page_total})
@@ -230,7 +230,7 @@ def deliver_list(request):
             'distributor_phone_number': i.distributor_phone_number,
         }
         data_list.append(data_dict)
-    if page_total == 0: page_total = 1
+    page_total = 1 if page_total == 0 else page_total
     return render(request, 'Deliver/deliverList.html',
                   {'data': data_list, 'get_page': int(get_page), 'page_total': page_total, 'status': status})
 
@@ -273,7 +273,7 @@ def marki_list(request):
                 'campus': obj.campus,
             }
             data_list.append(data_dict)
-        if page_total == 0: page_total = 1
+        page_total = 1 if page_total == 0 else page_total
         return render(request, 'Deliver/marki_list.html',
                       {'data': data_list, 'get_page': int(get_page), 'page_total': page_total, 'status': status})
     elif request.method == 'POST':

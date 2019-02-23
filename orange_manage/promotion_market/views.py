@@ -33,7 +33,7 @@ def recommend_list(request):
                 # 'img': request.FTP_HOST + request.recommend_shops_images + i.img,
             }
             data_list.append(data_dict)
-        if page_total == 0: page_total = 1
+        page_total = 1 if page_total == 0 else page_total
         return render(request, 'Promotion_market/recommend_list.html',
                       {'data': data_list, 'get_page': int(get_page), 'page_total': page_total})
     elif request.method == 'DELETE':
@@ -139,7 +139,7 @@ def coupon_list(request):
                 'just_newuser': i.just_newuser,  # 是否新用户
             }
             data_list.append(data_dict)
-        if page_total == 0: page_total = 1
+        page_total = 1 if page_total == 0 else page_total
         return render(request, 'Promotion_market/PlatformCoupons.html',
                       {'data': data_list, 'get_page': int(get_page), 'page_total': page_total})
 

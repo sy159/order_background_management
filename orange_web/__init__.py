@@ -1,4 +1,9 @@
 import pymysql
-import django.db
+from django.db import connections
+
 pymysql.install_as_MySQLdb()
-django.db.close_old_connections()
+
+
+def close_old_connections():
+    for conn in connections.all():
+        conn.close_if_unusable_or_obsolete()

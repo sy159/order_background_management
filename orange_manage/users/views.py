@@ -78,7 +78,7 @@ def user_list(request):
                 'integral': i.integral,
             }
             data_list.append(data_dict)
-        if page_total == 0: page_total = 1
+        page_total = 1 if page_total == 0 else page_total
         return render(request, 'User/index.html',
                       {'data': data_list, 'money_data': money_dict, 'get_page': int(get_page), 'page_total': page_total,
                        'search_data': search_data})

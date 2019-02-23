@@ -92,7 +92,7 @@ def account_list(request):
                 'open_admin_region': region_obj.region_name,
             }
             data_list.append(data_dict)
-    if page_total == 0: page_total = 1
+    page_total = 1 if page_total == 0 else page_total
     return render(request, 'Index/account.html',
                   {'level': request.operator_level, 'data': data_list, 'get_page': int(get_page),
                    'page_total': page_total, 'status': status})
@@ -405,7 +405,7 @@ def exist_region(request):
                 'area_name': a_obj.site_name,
             }
             data_list.append(data_dict)
-        if page_total == 0: page_total = 1
+        page_total = 1 if page_total == 0 else page_total
         return render(request, 'Index/ExistingAreaList.html',
                       {'data': data_list, 'get_page': int(get_page), 'page_total': page_total,
                        'operator_region': request.operator_region})
