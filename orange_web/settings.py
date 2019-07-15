@@ -85,7 +85,7 @@ DATABASES = {
         'PORT': 3306,  # 端口号
         'USER': 'root',  # 用户名
         'PASSWORD': '123456',  # 密码
-        'CONN_MAX_AGE': None,  # 持久化
+        'CONN_MAX_AGE': 10,  # 持久化（数据库连接的存活时间，以秒为单位。0表示在每个请求结束时关闭数据库连接，None表示无限的持久连接）
     }
 }
 
