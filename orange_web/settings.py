@@ -149,20 +149,144 @@ CACHES = {
 }
 
 
-# 打印orm执行的sql语句
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
+    'disable_existing_loggers': False,  # 是否禁用logger
+    # formatters(日志格式，可以自己根据需求配置)，提供给handler格式化日志输出使用(默认打印传入的消息体)
+    'formatters': {
+        # ================format参数中可能用到的格式化字符串=================
+        # %(name)s  Logger的名字
+        # %(levelno)s   数字形式的日志级别
+        # %(levelname)s 文本形式的日志级别
+        # %(pathname)s  调用日志输出函数的模块的完整路径名，可能没有
+        # %(filename)s  调用日志输出函数的模块的文件名
+        # %(module)s    调用日志输出函数的模块名
+        # %(funcName)s  调用日志输出函数的函数名
+        # %(lineno)d    调用日志输出函数的语句所在的代码行
+        # %(created)f   当前时间，用UNIX标准的表示时间的浮 点数表示
+        # %(relativeCreated)d   输出日志信息时的，自Logger创建以 来的毫秒数
+        # %(asctime)s   字符串形式的当前时间。默认格式是 “2003-07-08 16:49:45,896”。逗号后面的是毫秒
+        # %(thread)d    线程ID。可能没有
+        # %(threadName)s    线程名。可能没有
+        # %(process)d   进程ID。可能没有
+        # %(message)s   用户输出的消息
+
+        'simple': {'format': '%(asctime)s %(message)s'},  # 输出时间跟消息体（简单日志格式）
+        'standard': {
+            'format': '%(asctime)s [%(threadName)s:%(thread)d] [%(name)s:%(lineno)d] [%(module)s:%(funcName)s] [%(levelname)s]- %(message)s'  # 标准日志输出
         },
     },
-    'loggers': {
-        'django.db.backends': {
+
+    # 过滤器，提供给handler使用(可以不使用)，也可以自定义过滤函数（https://docs.python.org/3/library/logging.html#filter-objects）
+    'filters': {
+        # 过滤debug为True
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+        # 过滤debug为True
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        # 'special': {
+        #     '()': 'project.logging.SpecialFilter',
+        #     'foo': 'bar',
+        # },
+    },
+    # 处理器，设置日志记录方式
+    'handlers': {
+        # =================class设置分类（根据需求设置）=================
+        # 'logging.StreamHandler'  # 控制台打印
+        # 'logging.FileHandler'  # 保存到文件
+        # 'logging.handlers.RotatingFileHandler'  # 保存到文件，根据文件大小自动切
+        # 'logging.handlers.TimedRotatingFileHandler'  # 保存到文件，根据时间自动切
+        # 'django.utils.log.AdminEmailHandler'  # 管理员发送错误电子邮件（）
+
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],  # 设置过滤器，多个用逗号分割
+            'class': 'logging.StreamHandler',  # 控制台打印
+            'formatter': 'simple'  # 选用格式化样式
+        },
+        'error': {
+            'level': 'ERROR',
+            'class': 'logging.handlers.RotatingFileHandler',  # 保存到文件，根据文件大小自动切
+            'filename': 'logs/error.log',  # 日志文件名
+            'maxBytes': 1024 * 1024 * 20,  # 日志大小 20M
+            'backupCount': 5,  # 保留的日志份数，默认为0表示都保存
+            'formatter': 'simple',  # 选用格式化样式
+            'encoding': 'utf-8'
+        },
+        'search': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'logs/search.log',
+            'maxBytes': 1024 * 1024 * 50,
+            'backupCount': 10,
+            'formatter': 'simple',
+            'encoding': 'utf-8'
+        },
+        'push': {
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',  # 按时间切割日志
+            'filename': 'logs/push.log',  # 日志输出文件
+            'when': 'D',  # 按天分割(S/秒 M/分 H/小时 D/天 W0-W6/(周一到周天) midnight/如果没指定时间就默认在午夜)
+            'backupCount': 7,
+            'formatter': 'standard',
+        },
+        'request': {
+            'level': 'ERROR',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'logs/request_error.log',
+            'maxBytes': 1024 * 1024 * 20,
+            'backupCount': 5,
+            'formatter': 'simple',
+            'encoding': 'utf-8'
+        },
+        # 给管理员发送邮件
+        # 'mail_admins': {
+        #     'level': 'ERROR',
+        #     'class': 'django.utils.log.AdminEmailHandler',
+        #     'filters': ['special']
+        # }
+    },
+
+    'loggers': {  # 日志记录器
+        # 默认的logging应用
+        '': {
             'handlers': ['console'],
-            'level': 'DEBUG' if DEBUG else 'INFO',
+            'propagate': True,
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),  # 只有设置DEBUG为True时，该配置才会打印sql信息
+        },
+        # 内置logger,与请求处理有关的日志消息(可用作监控使用)，5XX响应作为ERROR消息引发，出现4XX响应作为WARNING消息
+        'django.request': {
+            '''
+            status_code：与请求关联的HTTP响应代码。
+            request：生成日志消息的请求对象。
+            '''
+            'handlers': ['request'],  # 可配置为mail_admins
+            'level': 'WARNING',
+            'propagate': False,
+        },
+        # 内置logger，数据库orm语句执行情况
+        'django.db.backends': {
+            '''
+            duration：执行SQL语句所花费的时间。
+            sql：执行的SQL语句。
+            params：SQL调用中使用的参数
+            '''
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+        # 创建logger对象，logging.getLogger('my_logger')
+        'my_logger': {
+            'handlers': ['error', 'search'],
+            'level': 'INFO',  # 设置对象的最低等级，不能高于handlers设置的日志级别
+            'propagate': False  # propagate是设定是否向父logger传播信息。必须设置为False，否则会打印两次
+        },
+        'push': {
+            'handlers': ['push'],
+            'level': 'INFO',
+            'propagate': False
         },
     },
 }
-
